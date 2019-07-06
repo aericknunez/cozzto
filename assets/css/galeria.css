@@ -1,0 +1,49 @@
+/* ---------- gallery styles start here ----------------------- */
+.gallery {
+	list-style: none;
+	margin: 0;
+	padding-left: 0px;
+	font-size:0.6em; /* tama;o de las letras */
+}
+.gallery li {
+	border: solid 1px #fff;  /* borde de la imagen quitar si se ve feo*/
+	padding: 10px;
+	margin: 10;
+	float: left;
+	position: relative;
+	width: 120px;
+	height: 110px;
+}
+.gallery li:hover input {
+	border-color: #000;
+}
+.gallery li:active input {
+     position: relative;
+	 opacity: 0.5;
+     top: 10px;
+}
+}
+.gallery input {
+	border: solid 1px #fff;
+	padding: 5px;
+}
+.gallery em {
+	background: #fff url(../img/grey-gradient.gif) repeat-y;
+	color: #000;
+	font-style: normal;
+	padding: 1px 5px;
+	display: block;
+	position: relative;
+	top: 97px;
+
+	/*border: 1px solid #999; */
+	border-left-color: #888;
+	
+}
+.gallery a {
+	text-decoration: none;
+}
+.gallery a:hover em {
+	background: #ffdb01 url(../img/orange-gradient.gif) repeat-y;
+	border-color: #c25b08;
+}
