@@ -27,9 +27,15 @@ $r = $db->select("*", "config_root", "where td = ".$_SESSION['td']."")
        <td><small id="expira" class="form-text text-muted mb-1">
         Expira
     </small><input type="text" id="expira" name="expira" class="form-control mb-1" placeholder="Expira" value="<? echo Encrypt::Decrypt($r["expira"],$_SESSION['secret_key']); ?>"></td>
-       <td><small id="pantallas" class="form-text text-muted mb-1">
-       Numero de Pantallas
-    </small><input type="number" id="pantallas" name="pantallas" class="form-control mb-1" placeholder="pantallas" value="<? echo Encrypt::Decrypt($r["pantallas"],$_SESSION['secret_key']); ?>"></td>
+    
+    <td><small id="plataforma" class="form-text text-muted mb-1">
+        Plataforma
+    </small>
+    <select class="browser-default custom-select" id="plataforma" name="plataforma">
+  <option <? if(Encrypt::Decrypt($r["plataforma"],$_SESSION['secret_key']) == 1) echo "selected"; ?> value="1">Web</option>
+  <option <? if(Encrypt::Decrypt($r["plataforma"],$_SESSION['secret_key']) == 0) echo "selected"; ?> value="0">Local</option>
+  </select></td>
+     
   </tr>
 
 
@@ -68,15 +74,7 @@ $r = $db->select("*", "config_root", "where td = ".$_SESSION['td']."")
   </tr>
 
   <tr>
-       <td><small id="plataforma" class="form-text text-muted mb-1">
-        Plataforma
-    </small>
-    <select class="browser-default custom-select" id="plataforma" name="plataforma">
-  <option <? if(Encrypt::Decrypt($r["plataforma"],$_SESSION['secret_key']) == 1) echo "selected"; ?> value="1">Web</option>
-  <option <? if(Encrypt::Decrypt($r["plataforma"],$_SESSION['secret_key']) == 0) echo "selected"; ?> value="0">Local</option>
-  </select></td>
-
-       <td><button class="btn btn-info my-4" type="submit" id="btn-root" name="btn-root">Realizar Cambios</button></td>
+        <td><button class="btn btn-info my-4" type="submit" id="btn-root" name="btn-root">Realizar Cambios</button></td>
   </tr>
 
   

@@ -128,7 +128,7 @@ class Usuarios{
         		if ( $db->delete("login_userdata", "WHERE user='$username'")) {
 	        	
 	        	$this->VerUsuarios();
-	     	Alerts::Alerta("success","Usuario Eliminado","Usuario eliminado correctamente!");
+	     		Alerts::Alerta("success","Usuario Eliminado","Usuario eliminado correctamente! Inicie nuevamente");
 	    		} 
     		} 
 	}
@@ -171,7 +171,7 @@ class Usuarios{
 		      <td>'.Helpers::UserName($tipo).'</td>';
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a id="deluser" op="2" iden="'.$b["id"].'" username="'.$user.'" class="btn-floating btn-sm"><i class="fa fa-trash red-text"></i></a></td>';
+				echo '<td><a id="deluser" op="5" iden="'.$b["id"].'" username="'.$user.'" class="btn-floating btn-sm"><i class="fa fa-trash red-text"></i></a></td>';
 			} else {
 				echo '<td><a class="btn-floating btn-sm"><i class="fa fa-trash grey-text"></i></a></td>';
 			}

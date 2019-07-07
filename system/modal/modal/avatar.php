@@ -27,7 +27,7 @@ $images = glob("assets/img/avatar/*.*");
       foreach($images as $image)  
       { 
     $image = str_replace("assets/img/avatar/", "", $image);
-    $opciones='id="cambiar-avatar" op="0y" iden="'.$image.'" user="'.$usuario.'"';
+    $opciones='id="cambiar-avatar" op="4" iden="'.$image.'" user="'.$usuario.'"';
 
     $output .= '<a ' . $opciones .'><img src="assets/img/avatar/' . $image .'" alt="thumbnail" class="img-thumbnail"
   style="width: 75px"></a>';

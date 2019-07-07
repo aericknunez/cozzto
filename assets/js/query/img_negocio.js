@@ -13,7 +13,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
-            url: "application/src/routes.php?op=163",
+            url: "application/src/routes.php?op=12",
             data: data,
             processData: false,
             contentType: false,

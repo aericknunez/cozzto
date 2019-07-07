@@ -82,9 +82,7 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
   </tr>
 
   <tr>
-       <td><small id="propiana" class="form-text text-muted mb-1">
-        Propina
-    </small><input type="text" id="propina" name="propina" class="form-control mb-1" placeholder="Propina" value="<? echo $r["propina"]; ?>"></td>
+
     <td><small id="imp" class="form-text text-muted mb-1">
         Impuestos
     </small><input type="text" id="imp" name="imp" class="form-control mb-1" placeholder="Impuestos" value="<? echo $r["imp"]; ?>"></td>

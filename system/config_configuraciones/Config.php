@@ -5,7 +5,7 @@ class Config{
      } 
 
 
-	public function Configuraciones($sistema,$cliente,$slogan,$propietario,$telefono,$direccion,$email,$pais,$giro,$nit,$imp,$propina,$nombre_impuesto,$nombre_documento,$moneda,$moneda_simbolo,$tipo_inicio,$skin,$inicio_tx,$otras_ventas,$venta_especial,$imprimir_antes,$cambio_tx){
+	public function Configuraciones($sistema,$cliente,$slogan,$propietario,$telefono,$direccion,$email,$pais,$giro,$nit,$imp,$nombre_impuesto,$nombre_documento,$moneda,$moneda_simbolo,$tipo_inicio,$skin,$inicio_tx,$otras_ventas,$venta_especial,$imprimir_antes,$cambio_tx){
 		$db = new dbConn();
 
 		$cambio = array();
@@ -20,7 +20,6 @@ class Config{
 	    $cambio["giro"] = $giro;
 	    $cambio["nit"] = $nit;
 	    $cambio["imp"] = $imp;
-	    $cambio["propina"] = $propina;
 	    $cambio["nombre_impuesto"] = $nombre_impuesto;
 	    $cambio["nombre_documento"] = $nombre_documento;
 	    $cambio["moneda"] = $moneda;
@@ -44,13 +43,12 @@ class Config{
 
 
 
-	public function Root($expira,$expiracion,$pantallas,$ftp_servidor,$ftp_path,$ftp_ruta,$ftp_user,$ftp_password,$tipo_sistema,$plataforma){
+	public function Root($expira,$expiracion,$ftp_servidor,$ftp_path,$ftp_ruta,$ftp_user,$ftp_password,$tipo_sistema,$plataforma){
 		$db = new dbConn();
 
 		$cambio = array();
 	    $cambio["expira"] = $expira;
 	    $cambio["expiracion"] = $expiracion;
-	    $cambio["pantallas"] = $pantallas;
 	    $cambio["ftp_servidor"] = $ftp_servidor;
 	    $cambio["ftp_path"] = $ftp_path;
 	    $cambio["ftp_ruta"] = $ftp_ruta;
@@ -70,355 +68,7 @@ class Config{
 	
 
 
-	public function CrearIconos($url, $msj){
-		$db = new dbConn();
-//ESTE ARCHIVO CREA ICONOS CADA VES QUE ES NECESARIO AL INICIO DE SESION
-// CONSULTA TODOS LOS ICONOS Y LOS GUARDA EN UN ARCHIVO LLAMADO iconos.php 
-$countico = $db->query("SELECT * FROM images WHERE td = ".$_SESSION["td"]."");
-if($countico->num_rows > 0){ // si hay iconos prosigo. sino voy hasta el final
-
-
-
-$return.= "<div class=\"row text-center portfolio\"> 
-   <ul class=\"gallery\"> \n\n";
-
- $a = $db->query("Select * from images where popup='0' and td = ".$_SESSION["td"]." order by img_order asc");
-    foreach ($a as $b) {
-    	$img=$b['img_name'];
-		  $cod=$b["cod"];
-
-// antes que todo verifico si tiene panel o pantalla activado el producto
-if ($r = $db->select("panel", "control_panel_mostrar", "WHERE producto = '$cod' and td = ".$_SESSION["td"]."")) { $panel = $r["panel"]; } unset($r); 
-//
-       if($cod <= 9900){
-
- $x = $db->select("nombre, cat", "precios", "WHERE cod='$cod' and td = ".$_SESSION["td"].""); 
-        
-////////////// aqui compruebo si tiene una opcion activada
-$d = $db->selectGroup("*", "opciones_asig", "where producto='$cod' and td = ".$_SESSION["td"]."");
-    if ($d->num_rows > 0) {
-        while($r = $d->fetch_assoc() ) { // aqui van los que tienen opcion activada
-
-$return.= '<li><a href="';
-$return.= '?modal=opciones';
-$return.= '&op='.$r["opcion"].'&cod=';
-$return.= $cod;
-
-$return.= '&mesa='; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["mesa"]'; 
-$return.= ' ?>'; 
-
-$return.= '&cliente=';
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["clientselect"]'; 
-$return.= ' ?>'; 
-
-$return.= '&panel=';
-$return.= $panel; 
-
-$return.= '&view=';  
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["view"]'; 
-$return.= ' ?>'; 
-
-$return.= '"><em>';
-$return.= $x['nombre'];
-$return.= '</em><img src="';
-$return.= $b['img_name'];
-$return.= '" alt="image" class="img-fluid img-responsive wow fadeIn" /></a></li>';
-$return.= "\n";
-
-        }
-    } else { // aqui van los que no tienenopcion activada
-        
-$return.= '<li><em>'; $return.= $x['nombre']; $return.= '</em>';
-$return.= '<input type='; $return.= '"'; $return.= 'image'; $return.= '" ';
-$return.= 'id='; $return.= '"'; $return.= 'venta'; $return.= '" ';
-$return.= 'op='; $return.= '"'; $return.= '20'; $return.= '" ';
-$return.= 'cod='; $return.= '"'; $return.= $b["cod"]; $return.= '" ';
-
-$return.= 'mesa='; $return.= '"'; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["mesa"]'; 
-$return.= ' ?>'; 
-$return.= '" ';
-
-$return.= 'cliente='; $return.= '"'; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["clientselect"]'; 
-$return.= ' ?>'; 
-$return.= '" ';
-
-$return.= 'panel='; $return.= '"'; 
-$return.= $panel; 
-$return.= '" ';
-
-$return.= 'view='; $return.= '"'; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["view"]'; 
-$return.= ' ?>'; 
-$return.= '" ';
-
-$return.= 'src='; $return.= '"'; $return.= $b['img_name']; $return.= '" ';
-$return.= 'alt='; $return.= '"'; $return.= 'image'; $return.= '"';
-$return.= ' class='; $return.= '"'; $return.= 'img-fluid img-responsive wow fadeIn';
-$return.= '" />';
-$return.= '</li>'; $return.= "\n";
-
-   } 
-
-    $d->close(); //termina opcion activada
-
-
-
- 
-}
-else{
-$x = $db->select("categoria", "categorias", "WHERE cod='$cod' and td = ".$_SESSION["td"]."");
-
- 
-$return.= '<li><a data-target='; $return.= '"'; 
-$return.= '#a'; $return.= $b["cod"]; 
-$return.= '"';
-$return.= ' data-toggle='; $return.= '"'; $return.= 'modal'; 
-$return.= '"';
-$return.= '><em>'; $return.= $x['categoria']; $return.= '</em>';
-$return.= '<img src='; $return.= '"'; $return.= $b['img_name']; $return.= '" ';
-$return.= 'alt='; $return.= '"'; $return.= 'image'; $return.= '"';
-$return.= ' class='; $return.= '"'; $return.= 'img-fluid img-responsive wow fadeIn'; $return.= '" />'; 
-$return.= '</a></li>';
-$return.= "\n";
- 
-}
-unset($x);
-unset($panel);
-
-    } // aqui termina el as del inicio ///////////////////
-    $a->close();
-
-$return.= " \n \n";
-
-
-if($_SESSION['config_otras_ventas'] == 1){
-$return.= '<li><a href="?modal=otras_ventas&mesa=<? echo $_SESSION["mesa"]; ?>&cliente=<? echo $_SESSION["clientselect"] ?>&view=<? echo $_SESSION["view"]; ?>"><em>Otras Ventas</em><img src="assets/img/ico/dfs.png" alt="image" class="img-fluid img-responsive wow fadeIn" /></a></li>';
-$return.= " \n \n";	
-}
-
-if($_SESSION['config_venta_especial'] == 1){
-$return.= '<li><a href="?modal=venta_especial&mesa=<? echo $_SESSION["mesa"]; ?>&cliente=<? echo $_SESSION["clientselect"] ?>&view=<? echo $_SESSION["view"]; ?>"><em>Venta Especial</em><img src="assets/img/ico/as.png" alt="image" class="img-fluid img-responsive wow fadeIn" /></a></li>';	
-}
-
-
-$return.= " </ul> \n </div> \n \n";
-
-
-
-
-
-////////////////////// para los popup  ///////////////////////////////
-
-		
-/////////////////  
-$a = $db->query("Select * from categorias WHERE td = ".$_SESSION["td"]." order by id asc");
-    foreach ($a as $b) {
-    	$name=$b['categoria'];
-		  $cod=$b["cod"];
-
-
-$ar = $db->query("SELECT * FROM producto WHERE categoria = '".$b["cod"]."' and td = ".$_SESSION["td"]."");
-$numerom=$ar->num_rows;
-$ar->close();
-
-if($numerom > 24) $large="modal-fluid";
-if($numerom < 25 and $numerom > 12) $large="modal-lg";
-if($numerom < 13 and $numerom > 6) $large="modal-md";
-if($numerom < 7 and $numerom > 0) $large="modal-sm";
-
-$return.= '<!-- POPUP CON EL CODIGO '; $return.= $b["cod"]; $return.= ' ';  $return.= $b["categoria"]; $return.= " --> \n \n \n";
-
-$return.= '<div class="modal" id="a';
-$return.= $b["cod"];
-$return.= '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog '; $return.= $large; $return.='" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">'; $return.= $b["categoria"]; $return.= '</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">';
-
-$return.= "\n <div class=\"row text-center portfolio\"> 
-   <ul class=\"gallery\"> \n\n";
-   
-////////////////////////////////
- $a = $db->query("Select * from images where popup='$cod' and td = ".$_SESSION["td"]." order by img_order asc");
-    foreach ($a as $b) {
-    	$img=$b['img_name'];
-		  $cod=$b["cod"];
-      // antes que todo verifico si tiene panel o pantalla activado el producto
-      if ($r = $db->select("panel", "control_panel_mostrar", "WHERE producto = '$cod' and td = ".$_SESSION["td"]."")) { $panel = $r["panel"]; } unset($r); 
-      //
-
-       if($cod <= 9900){
-
-      $x = $db->select("nombre, cat", "precios", "WHERE cod='$cod' and td = ".$_SESSION["td"].""); 
-
-
-////////////// aqui compruebo si tiene una opcion activada
-$d = $db->selectGroup("*", "opciones_asig", "where producto='$cod' and td = ".$_SESSION["td"]."");
-    if ($d->num_rows > 0) {
-        while($r = $d->fetch_assoc() ) { // aqui van los que tienen opcion activada
-$return.= '<li><a href="';
-$return.= '?modal=opciones';
-$return.= '&op='.$r["opcion"].'&cod=';
-$return.= $cod;
-
-$return.= '&mesa='; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["mesa"]'; 
-$return.= ' ?>'; 
-
-$return.= '&cliente=';
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["clientselect"]'; 
-$return.= ' ?>'; 
-
-$return.= '&panel=';
-$return.= $panel; 
-
-$return.= '&view=';  
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["view"]'; 
-$return.= ' ?>'; 
-
-
-$return.= '"><em>';
-$return.= $x['nombre'];
-$return.= '</em><img src="';
-$return.= $b['img_name'];
-$return.= '" alt="image" class="img-fluid img-responsive wow fadeIn" /></a></li>';
-
-
-        }
-    } else { // aqui van los que no tienenopcion activada
-        
-$return.= '<li><em>'; $return.= $x['nombre']; $return.= '</em>';
-$return.= '<input type='; $return.= '"'; $return.= 'image'; $return.= '" ';
-$return.= 'id='; $return.= '"'; $return.= 'venta'; $return.= '" ';
-$return.= 'op='; $return.= '"'; $return.= '20'; $return.= '" ';
-$return.= 'cod='; $return.= '"'; $return.= $b["cod"]; $return.= '" ';
-
-$return.= 'mesa='; $return.= '"'; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["mesa"]'; 
-$return.= ' ?>'; 
-$return.= '" ';
-
-$return.= 'cliente='; $return.= '"'; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["clientselect"]'; 
-$return.= ' ?>'; 
-$return.= '" ';
-
-$return.= 'panel='; $return.= '"'; 
-$return.= $panel; 
-$return.= '" ';
-
-$return.= 'view='; $return.= '"'; 
-$return.= '<? '; 
-$return.= 'echo ';
-$return.= '$_SESSION["view"]'; 
-$return.= ' ?>'; 
-$return.= '" ';
-
-
-$return.= 'src='; $return.= '"'; $return.= $b['img_name']; $return.= '" ';
-$return.= 'alt='; $return.= '"'; $return.= 'image'; $return.= '"';
-$return.= ' class='; $return.= '"'; $return.= 'img-fluid img-responsive wow fadeIn';
-$return.= '" />';
-$return.= '</li>'; $return.= "\n";
-
-    } 
-    
-    $d->close(); //termina opcion activada
-
-
-} 
-unset($panel);
-}
-
-///////////////////////////////////////////////	
-	$return.= "\n  
-</ul> 
- </div> ";
-
-  
-
- $return.= "</div>
-      <div class=\"modal-footer\">
-        <button type=\"button\" class=\"btn btn-primary btn-rounded\" data-dismiss=\"modal\">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>";   
-		
-
-} 
-// aqui termina el as del inocio del pop up
-    $a->close();
-
-
-    ///
-//save
-   if($handle = fopen($url . "iconos_".$_SESSION["td"].".php",'w+')){
-
-   		if($msj != NULL){
-   			$alert = new Alerts;
-    		$alert->Alerta("success","Echo!","Iconos creados correctamente");
-   		}
-   	
-   }
-   fwrite($handle,$return);
-   fclose($handle);
 	
-
-
-} else { /// termina si hay iconos 
-	//save
-$return.= '<? '; 
-$return.= 'Alerts::Mensaje("No hay iconos que mostrar, por favor ingrese sus productos para poder realizar sus ventas","danger","<a href=\"?iconos\" class=\"btn btn-success\">CREAR ICONOS</a>","<a href=\"https://pizto.com/help#iconos\" class=\"btn btn-primary\" target=\"_blank\"><i class=\"fa fa-info-circle \"></i> VER COMO HACERLO </a>");'; 
-$return.= ' ?>'; 
-
-   if($handle = fopen($url . "iconos_".$_SESSION["td"].".php",'w+')){
-
-   		if($msj != NULL){
-   			$alert = new Alerts;
-    		$alert->Alerta("success","Echo!","Aun no hay iconos para crear");
-   		}
-   	
-   }
-   fwrite($handle,$return);
-   fclose($handle);
-
-} $countico->close(); // cierro si no hay iconos
-
-
-
-} // fin de la funcion
 
 
 
@@ -436,7 +86,6 @@ $return.= ' ?>';
 			$_SESSION['config_giro'] = $r["giro"];
 			$_SESSION['config_nit'] = $r["nit"];
 			$_SESSION['config_imp'] = $r["imp"];
-			$_SESSION['config_propina'] = $r["propina"];
 			$_SESSION['config_direccion'] = $r["direccion"];
 			$_SESSION['config_email'] = $r["email"];
 			$_SESSION['config_imagen'] = $r["imagen"];

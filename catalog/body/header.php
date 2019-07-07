@@ -2,7 +2,7 @@
     
 <!-- preloader -->
 
-<div id="mdb-preloader" class="flex-center">
+<!-- <div id="mdb-preloader" class="flex-center">
     <div class="preloader-wrapper big active crazy">
         <div class="spinner-layer spinner-blue-only">
           <div class="circle-clipper left">
@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-</div>
+</div> -->
 <!-- white-skin , mdb-skin , grey-skin , pink-skin ,  light-blue-skin , black-skin  cyan-skin, navy-blue-skin -->
 <!--Double navigation-->
 <header>
@@ -66,27 +66,13 @@
 
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
                 
-            <?php if($_SESSION["tipo_cuenta"] == 4) { ?>
-                <li class="nav-item">
-                    <a class="nav-link"><i class="<?php if($_SESSION["tipo_inicio"] == 1) echo "fa fa-tv"; else { echo "fa fa-coffee"; } ?>"></i></a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"><i class="<?php if( $_SESSION["tx"] == 0) echo "fa fa-battery-0"; else { echo "fa fa-battery"; } ?>"></i></a>
-                </li> 
-                <?php } else { 
-
-                if($_SESSION['root_tipo_sistema'] != 1){ ?>    
+            <?  if($_SESSION['root_tipo_sistema'] != 1){ ?>    
                     <li class="nav-item">
-                    <a id="cambiar-pantalla-inicio" op="26" class="nav-link"><i class="<?php if($_SESSION["tipo_inicio"] == 1) echo "fa fa-tv"; else { echo "fa fa-coffee"; } ?>"></i></a>
+                    <a id="cambiar" op="27" class="nav-link"><i class="<?php if( $_SESSION["tx"] == 0) echo "fa fa-battery-0"; else { echo "fa fa-battery"; } ?>"></i></a>
                 </li>
-                <?php }
-                if($_SESSION['config_cambio_tx'] != NULL){ ?>
-                <li class="nav-item">
-                    <a id="cambiar-pantalla-inicio" op="27" class="nav-link"><i class="<?php if( $_SESSION["tx"] == 0) echo "fa fa-battery-0"; else { echo "fa fa-battery"; } ?>"></i></a>
-                </li>
-                <?php } 
-                } ?>
+                <?php } ?>
+
                 <li class="nav-item">
                     <a href="?" class="nav-link"><i class="fa fa-home"></i> <span class="clearfix d-none d-sm-inline-block">Inicio</span></a>
                 </li> 

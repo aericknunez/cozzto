@@ -6,51 +6,6 @@ class Inicio{
 	}
 
 
-	public function CompruebaIconos($url, $msj){
-		$db = new dbConn();
-
-		// si la tabla no tiene nada le agrego un registro vacio
-		$veri = $db->query("SELECT * FROM alter_opciones WHERE td = ".$_SESSION["td"]."");
-		if($veri->num_rows == 0){
-			$datos = array();
-		    $datos["td"] = $_SESSION["td"];
-		    $db->insert("alter_opciones", $datos); 
-		} $veri->close();
-
-		////
-		$nombre_fichero = $url . 'iconos_'.$_SESSION["td"] . '.php';
-		
-		if (file_exists($nombre_fichero)) {
-		    
-		    $size = filesize($nombre_fichero);
-
-			if ($r = $db->select("icono", "alter_opciones", "WHERE td = ".$_SESSION["td"]."")) { 
-			    $icono = $r["icono"];
-			} unset($r); 
-
-			    if($size != $icono){
-			    	$configuracion = new Config;
-        			$configuracion->CrearIconos($url, $msj);
-
-	    	    $cambio = array();
-			    $cambio["icono"] = $size;
-			    $db->update("alter_opciones", $cambio, "WHERE td = ".$_SESSION["td"]."");
-			} 
-
-		} else {
-			$configuracion = new Config;
-        	$configuracion->CrearIconos($url, $msj);
-			
-			$size = filesize($nombre_fichero);
-				$cambio = array();
-			    $cambio["icono"] = $size;
-			    $db->update("alter_opciones", $cambio, "WHERE td = ".$_SESSION["td"]."");
-			} 
-
-		      
-	}
-
-
 
 
 	public function CreaCodigos($fecha){

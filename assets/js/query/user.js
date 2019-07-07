@@ -29,7 +29,7 @@ $(document).ready(function()
 	$('#btn-user').click(function(e){ /// para el formulario
 		e.preventDefault();
 		$.ajax({
-			url: "application/src/routes.php?op=0",
+			url: "application/src/routes.php?op=2",
 			method: "POST",
 			data: $("#form-user").serialize(),
 			success: function(data){
@@ -50,7 +50,7 @@ return false;
 	$('#btn-actualizar').click(function(e){ /// para el formulario
 		e.preventDefault();
 		$.ajax({
-			url: "application/src/routes.php?op=0x",
+			url: "application/src/routes.php?op=3",
 			method: "POST",
 			data: $("#form-actualizar").serialize(),
 			success: function(data){

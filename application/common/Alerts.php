@@ -74,7 +74,7 @@ class Alerts{
     Esta seguro que desea eliminar este usuario? Es posible que se pierda informaci&oacuten relacionada a este. 
     <br>
     
-    <a id="deluser" op="3" iden="'.$iden.'" username="'.$user.'" class="btn btn-default waves-effect waves-light" >Eliminar</a>
+    <a id="deluser" op="6" iden="'.$iden.'" username="'.$user.'" class="btn btn-default waves-effect waves-light" >Eliminar</a>
     
     <a href="?user" class="btn btn-danger waves-effect waves-light">Cancelar</a>
 

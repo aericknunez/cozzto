@@ -85,7 +85,7 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
             } else {
                  //header('Location: ./?modal=register_success&user=' . $_POST['username']);
                echo '<script>
-                        window.location.href="application/src/routes.php?op=0z&user=' . $_POST['username'] . '";
+                        window.location.href="application/src/routes.php?op=0&user=' . $_POST['username'] . '";
                     </script>';
             }
         }

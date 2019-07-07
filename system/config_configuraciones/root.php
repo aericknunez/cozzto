@@ -65,11 +65,7 @@ $r = $db->select("*", "config_root", "where td = ".$_SESSION['td']."");
        <td><? if(Encrypt::Decrypt($r["plataforma"],$_SESSION['secret_key']) == 1) echo "Web"; else echo "Local"; ?></td>
     
      </tr>
-     <tr>
-       <td>Numero de Pantallas</td>
-       <td><? echo Encrypt::Decrypt($r["pantallas"],$_SESSION['secret_key']); ?></td>
-    
-     </tr>
+
 <?
  unset($r);  
    ?>
