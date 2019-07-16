@@ -8,13 +8,14 @@ class Alerts{
 
        public function Alerta($tipo,$encabezado,$texto){ 
        //tipo = warning , success , error , info , danger
+       // md-toast-top-right / md-toast-top-left / md-toast-bottom-right /md-toast-bottom-left
         echo '<script>
         toastr.'.$tipo.'("'.$texto.'", "'.$encabezado.'", {
               "closeButton": true,
               "debug": false,
               "newestOnTop": true,
               "progressBar": false,
-              "positionClass": "toast-top-center",
+              "positionClass": "md-toast-top-right", 
               "preventDuplicates": true,
               "onclick": null,
               "showDuration": 100,
@@ -29,15 +30,6 @@ class Alerts{
         </script>';
         }
 
-        public function Cambios($return){
-        echo '<div class="alert alert-info alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            
-         Se han realizado los cambios exitosamente. 
-        <br>
-        <a href="index.php?'.$return.'" class="btn btn-danger waves-effect waves-light">Aceptar</a>
-        </div>';
-    }
 
 
     public function Eliminado(){
@@ -135,23 +127,6 @@ Existe un corte realizado este dia, ya no se puede seguir agregando '.$tipo.' a 
 </div><div align="center"><img src="assets/img/imagenes/error'.$num.'.png" class="img-fluid" alt="Responsive image"></div>';
     }
 
-
-
-    public function RealizarRespaldo($texto){
-      echo '<div class="alert alert-danger alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      '.$texto.'
-      <br>
-      </div>';
-    }
-
-    public function RealizadoRespaldo($texto){
-      echo '<div class="alert alert-success alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      '.$texto.'
-      <br>
-      </div>';
-    }
 
 
     public function Mensaje($texto,$style,$boton,$boton2){

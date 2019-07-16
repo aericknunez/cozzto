@@ -41,6 +41,8 @@
     </li>
     <!--/.Search Form-->
     <!-- Side navigation links -->
+<ul class="collapsible collapsible-accordion">
+
 <?php include_once 'menu.php'; ?>
     <hr>
     <small> Powered By</small>  

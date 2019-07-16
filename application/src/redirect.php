@@ -11,6 +11,11 @@ elseif(isset($_GET["configuraciones"])) include_once 'system/config_configuracio
 
 elseif(isset($_GET["root"])) include_once 'system/config_configuraciones/root.php';
 
+// producto
+elseif(isset($_GET["proadd"])) include_once 'system/producto/proadd.php'; // agregar
+elseif(isset($_GET["proopciones"])) include_once 'system/producto/proopciones.php'; //opciones
+elseif(isset($_GET["proup"])) include_once 'system/producto/proup.php'; // actualizar
+
 
 else{
 include_once 'system/index/index.php';

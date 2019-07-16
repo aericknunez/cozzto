@@ -19,3 +19,8 @@ if($_REQUEST["modal"]=="conf_root") include_once 'system/modal/modal/conf_root.p
 
 if($_REQUEST["modal"]=="img_negocio") include_once 'system/modal/modal/imagen_negocio.php';
 
+
+
+// producto
+if($_REQUEST["modal"]=="proadd") include_once 'system/modal/modal/proadd.php';
+

@@ -30,11 +30,27 @@ echo '
 	echo '<script type="text/javascript" src="assets/js/query/img_negocio.js?v='.$numero.'"></script>';
 	}
 
+	/// producto
+	if($_GET["modal"] == "proadd"){
+	echo '<script type="text/javascript" src="assets/js/query/modal.producto.js?v='.$numero.'"></script>';
+	}
+
 } // termina modal
 
 
 elseif(isset($_GET["user"])) {
 echo '<script type="text/javascript" src="assets/js/query/user.js?v='.$numero.'"></script>';
+} 
+
+/// producto
+elseif(isset($_GET["proadd"])) {
+echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["proopciones"])) {
+echo '<script type="text/javascript" src="assets/js/query/proopciones.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["proup"])) {
+echo '<script type="text/javascript" src="assets/js/query/proup.js?v='.$numero.'"></script>';
 } 
 
 else{

@@ -230,6 +230,16 @@ class Helpers{
             }
 
 
+public static function UpdateIden($tabla, $iden){
+  $db = new dbConn();
+    $cambio = array();
+    $cambio["iden"] = $iden;
+    if($db->update($tabla, $cambio, "WHERE id='$iden'")){
+      return true;
+    } else {
+      return false;
+    }
+}
 
 
 

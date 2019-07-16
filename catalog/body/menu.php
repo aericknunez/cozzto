@@ -1,13 +1,31 @@
-<ul class="collapsible collapsible-accordion">
 
 
-<li><a href="?configuraciones" class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Configuraciones </a></li>
+<li><a href="?configuraciones" class="waves-effect arrow-r"><i class="fa fa-user"></i> Configuraciones </a></li>
 
-<li><a href="?root" class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Configuraciones Root </a></li>
+<li><a href="?root" class="waves-effect arrow-r"><i class="fa fa-user"></i> Configuraciones Root </a></li>
 
 
 
-<li><a href="?user" class="collapsible-header waves-effect arrow-r"><i class="fa fa-user"></i> Usuarios </a></li>
+
+<li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-table"></i> Productos<i class="fa fa-angle-down rotate-icon"></i></a>
+<div class="collapsible-body">
+<ul class="list-unstyled">
+
+<li><a href="?proadd" class="waves-effect"><i class="fa fa-upload"></i> Nuevo Producto</a></li>
+<li><a href="?proup" class="waves-effect"><i class="fa fa-exchange"></i> Actualizar Producto</a></li>
+<li><a href="?" class="waves-effect"><i class="fa fa-database"></i> Averias</a></li>
+<li><a href="?" class="waves-effect"><i class="fa fa-file-archive-o"></i> Cambios</a></li>
+<li><a href="?" class="waves-effect arrow-r"><i class="fa fa-refresh"></i> Devoluciones</a></li>
+<li><a href="?proopciones" class="waves-effect arrow-r"><i class="fa fa-handshake-o"></i> Opciones</a></li>
+
+
+</ul>
+</div>
+</li>
+
+
+
+<li><a href="?user" class="waves-effect arrow-r"><i class="fa fa-user"></i> Usuarios </a></li>
 
 
 

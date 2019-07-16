@@ -17,7 +17,7 @@ $db = new dbConn();
 // filtros para cuando no hay session abierta
 if($_SESSION["user"] == NULL and $_SESSION["td"] == NULL){
 echo '<script>
-	window.location.href="application/includes/logout.php"
+	window.location.href="../includes/logout.php"
 </script>';
 exit();
 }
@@ -36,7 +36,7 @@ echo '<script>
 }
 
 
-if($_REQUEST["op"]=="1"){
+if($_REQUEST["op"]=="1"){ // cambia el password
 include_once '../../system/user/Usuarios.php';
 $usuarios = new Usuarios;
 $passw1 = filter_input(INPUT_POST, 'pass1', FILTER_SANITIZE_STRING);
@@ -76,7 +76,7 @@ include_once '../../system/user/Usuarios.php';
 
 
 
-if($_REQUEST["op"]=="5"){
+if($_REQUEST["op"]=="5"){ // pregunta si elimina el usuario
 include_once '../../system/user/Usuarios.php';
 $usuarios = new Usuarios;
 $alert->EliminarUsuario($_REQUEST["iden"], $_REQUEST["username"]);
@@ -84,7 +84,7 @@ $alert->EliminarUsuario($_REQUEST["iden"], $_REQUEST["username"]);
 }
 
 
-if($_REQUEST["op"]=="6"){
+if($_REQUEST["op"]=="6"){ // elimina el usuario
 include_once '../../system/user/Usuarios.php';
 $usuarios = new Usuarios;
 $usuarios->EliminarUsuario($_REQUEST["iden"], $_REQUEST["username"]);
@@ -93,7 +93,7 @@ $usuarios->EliminarUsuario($_REQUEST["iden"], $_REQUEST["username"]);
 
 
 // confiuraciones
-if($_REQUEST["op"]=="10"){ 
+if($_REQUEST["op"]=="10"){ // agregar datos de configuracion
 	include_once '../../system/config_configuraciones/Config.php';
 	$configuracion = new Config;
 
@@ -130,7 +130,7 @@ if($_REQUEST["op"]=="10"){
 	Helpers::ActivaActualizar();
 }
 
-if($_REQUEST["op"]=="11"){ 
+if($_REQUEST["op"]=="11"){  // agregar datos de root
 include_once '../../system/config_configuraciones/Config.php';
 	$configuracion = new Config;
 
@@ -172,9 +172,184 @@ if($_REQUEST["op"]=="12"){ // Subir imagen negocio
 
 
 
+/// productos
+if($_REQUEST["op"]=="20"){ // agrega primeros datos del producto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddProducto($_POST);
+}
 
 
 
+if($_REQUEST["op"]=="21"){ // agrega mas productos al inventario
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->IngresarProducto($_POST);
+}
+
+
+
+if($_REQUEST["op"]=="22"){ // formulario add categoria
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddCategoria($_POST);
+
+}
+
+if($_REQUEST["op"]=="23"){ // borrar categoria
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelCategoria($_REQUEST["iden"]);
+}
+
+
+
+if($_REQUEST["op"]=="24"){ // formulario Unidad de medida
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddUnidad($_POST);
+
+}
+
+if($_REQUEST["op"]=="25"){ // borrar unidad de medida
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelUnidad($_REQUEST["iden"]);
+}
+
+
+if($_REQUEST["op"]=="26"){ // formulario caracteristicas
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddCaracteristica($_POST);
+
+}
+
+if($_REQUEST["op"]=="27"){ // borrar caracteristicas
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelCaracteristica($_REQUEST["iden"]);
+}
+
+
+
+
+if($_REQUEST["op"]=="28"){ // formulario ubicacion
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddUbicacion($_POST);
+
+}
+
+if($_REQUEST["op"]=="29"){ // borrar ubicacion
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelUbicacion($_REQUEST["iden"]);
+}
+
+
+
+if($_REQUEST["op"]=="30"){ // agrega los precios de cada producto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddPrecios($_POST);
+}
+
+if($_REQUEST["op"]=="31"){ // elimina los precios de cada producto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelPrecios($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+
+if($_REQUEST["op"]=="32"){ // busqueda de productos para compuestos
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->CompuestoBusqueda($_POST);
+}
+
+if($_REQUEST["op"]=="33"){ // agrega los compuesto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddCompuesto($_POST);
+}
+
+if($_REQUEST["op"]=="34"){ // elimina compuesto del producto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelCompuesto($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+
+if($_REQUEST["op"]=="35"){ // agrega los dependiente
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddDependiente($_POST);
+}
+
+if($_REQUEST["op"]=="36"){ // elimina dependiente del producto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelDependiente($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+//////////etiquetas
+if($_REQUEST["op"]=="37"){ // busqueda de productos para compuestos
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->TagsBusqueda($_POST["keyword"]);
+}
+
+
+if($_REQUEST["op"]=="38"){ // agrega nueva tag
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddTag($_POST);
+}
+
+if($_REQUEST["op"]=="39"){ // elimina tag
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelTag($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+if($_REQUEST["op"]=="40"){ // asigna ubicacion
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddUbicacionAsig($_POST);
+}
+
+if($_REQUEST["op"]=="41"){ // elimina ubicacion
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelUbicacionAsig($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+if($_REQUEST["op"]=="42"){ // Para select de ubicacion
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->SelectUbicacion();
+}
+
+
+
+if($_REQUEST["op"]=="43"){ // asigna caracteristica
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->AddCaracteristicaAsig($_POST);
+}
+
+if($_REQUEST["op"]=="44"){ // elimina caracteristica
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DelCaracteristicaAsig($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+if($_REQUEST["op"]=="45"){ // Para select de caracteristica
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->SelectCaracteristica();
+}
 
 
 

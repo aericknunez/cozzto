@@ -2,13 +2,12 @@ $(document).ready(function()
 {
 
 	$("body").on("click","#deluser",function(){
-	var op = $(this).attr('op');
-	var username = $(this).attr('username');
-	var iden = $(this).attr('iden');
-    $.post("application/src/routes.php", {op:op, iden:iden, username:username}, function(htmlexterno){
-	$("#userinfo").html(htmlexterno);
-   	 });
-
+		var op = $(this).attr('op');
+		var username = $(this).attr('username');
+		var iden = $(this).attr('iden');
+	    $.post("application/src/routes.php", {op:op, iden:iden, username:username}, function(htmlexterno){
+		$("#userinfo").html(htmlexterno);
+	   	 });
 	});
 
 
@@ -73,10 +72,9 @@ return false;
 	var op = $(this).attr('op');
 	var iden = $(this).attr('iden');
 	var user = $(this).attr('user');
-    $.post("application/src/routes.php", {op:op, iden:iden, user:user}, function(data){
-	$("#avatar-select").html(data);
-   	 });
-
+	    $.post("application/src/routes.php", {op:op, iden:iden, user:user}, function(data){
+		$("#avatar-select").html(data);
+	   	 });
 	});
 
 
