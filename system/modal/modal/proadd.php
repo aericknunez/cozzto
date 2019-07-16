@@ -95,7 +95,8 @@ $dep = $_REQUEST["dep"];
                 </div>
               </div> <!-- termina primer formulario -->
               <?php }
-              if($_REQUEST["step"] == 2) { ?>
+              if($_REQUEST["step"] == 2) {                 
+                ?>
 
               <div class="row d-flex justify-content-center text-center" id="precios"> 
                 <div class="col-sm-12">
@@ -124,6 +125,7 @@ $dep = $_REQUEST["dep"];
 
 
               <div id="muestraprecios"><?php 
+              if(isset($_GET["msj"])) echo "<h3>Debe Agregar un precio!</h3>";
              $productos->VerPrecios($_REQUEST["key"]); 
               ?></div>
          <?php $url = "application/src/routes.php?op=47&key=$key&step=2&com=$com&dep=$dep"; ?>
@@ -352,7 +354,7 @@ $dep = $_REQUEST["dep"];
           <?php // aparece hasta terminar el ingreso
               if($_REQUEST["step"] == 5) {  ?>
                <div class="modal-footer">
-                  <a href="?proadd" class="btn btn-primary btn-rounded">TERMINAR</a>
+                  <a href="?" class="btn btn-primary btn-rounded">TERMINAR</a>
               </div>
             <?php }  ?>
           

@@ -366,6 +366,47 @@ include_once '../../system/producto/ProUpdate.php';
 }
 
 
+/// agrega productos
+if($_REQUEST["op"]=="48"){ 
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->ProAgrega($_POST);
+}
+
+if($_REQUEST["op"]=="49"){ // elimina producto
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->DelProAgrega($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+// busqueda agregar pro
+if($_REQUEST["op"]=="50"){ // busqueda de productos para compuestos
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->AgregaBusqueda($_POST);
+}
+
+
+/// agrega Averias
+if($_REQUEST["op"]=="51"){ 
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->AddAveria($_POST);
+}
+
+if($_REQUEST["op"]=="52"){ // elimina averias
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->DelAveria($_REQUEST["iden"], $_REQUEST["producto"]);
+}
+
+if($_REQUEST["op"]=="53"){ // busqueda de productos para compuestos
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->AveriaBusqueda($_POST);
+}
+
+
 
 
 

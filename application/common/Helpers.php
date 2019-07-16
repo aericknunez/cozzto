@@ -230,7 +230,7 @@ class Helpers{
             }
 
 
-public static function UpdateIden($tabla, $iden){
+public static function UpdateIden($tabla, $iden){ // para actualizar el iden con el valor de id
   $db = new dbConn();
     $cambio = array();
     $cambio["iden"] = $iden;

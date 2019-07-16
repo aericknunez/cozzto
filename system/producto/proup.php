@@ -4,23 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include_once 'application/common/Mysqli.php';
 $db = new dbConn();
 
-
-  if ($r = $db->select("*", "producto", "WHERE cod = ".$_REQUEST["key"]." and td = ".$_SESSION["td"]."")) { 
-
-$cod = $r["cod"];
-$descripcion = $r["descripcion"];  
-$cantidad = $r["cantidad"];
-$existencia_minima = $r["existencia_minima"]; 
-$gravado = $r["gravado"];
-$servicio = $r["servicio"]; 
-$compuesto = $r["compuesto"];
-$caduca = $r["caduca"]; 
-$dependiente = $r["dependiente"];
-$informacion = $r["informacion"]; 
-$proveedor = $r["proveedor"]; 
-$categoria = $r["categoria"];
-$medida = $r["medida"]; 
-  }  unset($r); 
 ?>
 
 
@@ -37,7 +20,24 @@ $medida = $r["medida"];
 
 <div id="contenido">
 <?php if($_REQUEST["key"] != NULL){ 
+  if ($r = $db->select("*", "producto", "WHERE cod = ".$_REQUEST["key"]." and td = ".$_SESSION["td"]."")) { 
 
+$cod = $r["cod"];
+$descripcion = $r["descripcion"];  
+$cantidad = $r["cantidad"];
+$existencia_minima = $r["existencia_minima"]; 
+$gravado = $r["gravado"];
+$servicio = $r["servicio"]; 
+$compuesto = $r["compuesto"];
+$caduca = $r["caduca"]; 
+$dependiente = $r["dependiente"];
+$informacion = $r["informacion"]; 
+$proveedor = $r["proveedor"]; 
+$categoria = $r["categoria"];
+$medida = $r["medida"]; 
+  }  unset($r); 
+
+  
 if($cod != NULL){
   ?>
   <div id="msj"></div>

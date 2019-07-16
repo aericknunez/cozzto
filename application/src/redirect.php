@@ -15,6 +15,8 @@ elseif(isset($_GET["root"])) include_once 'system/config_configuraciones/root.ph
 elseif(isset($_GET["proadd"])) include_once 'system/producto/proadd.php'; // agregar
 elseif(isset($_GET["proopciones"])) include_once 'system/producto/proopciones.php'; //opciones
 elseif(isset($_GET["proup"])) include_once 'system/producto/proup.php'; // actualizar
+elseif(isset($_GET["proagregar"])) include_once 'system/producto/proagregar.php'; // agregar producto
+elseif(isset($_GET["proaverias"])) include_once 'system/producto/proaverias.php'; // agregar producto
 
 
 else{

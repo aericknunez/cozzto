@@ -52,10 +52,17 @@ echo '<script type="text/javascript" src="assets/js/query/proopciones.js?v='.$nu
 elseif(isset($_GET["proup"])) {
 echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
 } 
+elseif(isset($_GET["proagregar"])) {
+echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
+}
+elseif(isset($_GET["proaverias"])) {
+echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
+} 
+
 
 else{
 /// lo que llevara index
-echo '<script type="text/javascript" src="assets/js/query/ventas.js?v='.$numero.'"></script>';
+//echo '<script type="text/javascript" src="assets/js/query/ventas.js?v='.$numero.'"></script>';
 }
 	
 ?>

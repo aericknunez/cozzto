@@ -49,8 +49,15 @@ class Productos{
   public function IngresarProducto($datox){ // ingresa un nuevo lote de productos
       $db = new dbConn();
           if($datox["precio_costo"] != NULL){
+
+            // debo actualizar el total (cantidad) de producto
+                    if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$datox["producto"]." and td = ".$_SESSION["td"]."")) { 
+                        $canti = $r["cantidad"];
+                    } unset($r); 
+                                          
               $datos = array();
               $datos["producto"] = $datox["producto"];
+              $datos["cant"] = $canti;
               $datos["precio_costo"] = $datox["precio_costo"];
               $datos["caduca"] = $datox["caduca_submit"];
               $datos["caducaF"] = Fechas::Format($datox["caduca_submit"]);
