@@ -50,7 +50,7 @@ elseif(isset($_GET["proopciones"])) {
 echo '<script type="text/javascript" src="assets/js/query/proopciones.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["proup"])) {
-echo '<script type="text/javascript" src="assets/js/query/proup.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
 } 
 
 else{

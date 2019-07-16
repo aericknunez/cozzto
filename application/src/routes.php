@@ -351,7 +351,19 @@ include_once '../../system/producto/Productos.php';
 	$productos->SelectCaracteristica();
 }
 
+/// Actualizar productos
+if($_REQUEST["op"]=="46"){ // actualiza el producto
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->UpProducto($_POST);
+}
 
+/// redireccionar a la url correcta para evitar el logout
+if($_REQUEST["op"]=="47"){ 
+include_once '../../system/producto/ProUpdate.php';
+	$productos = new ProUpdate;
+	$productos->UrlNext($_REQUEST["key"], $_REQUEST["step"],$_REQUEST["cad"],$_REQUEST["com"],$_REQUEST["dep"]);
+}
 
 
 

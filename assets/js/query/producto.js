@@ -57,6 +57,63 @@ $(function() { // activar y desactivar los checked despues de darle clic a servi
 });
 
 
+// busqueda actualizar
+	$("#producto-busqueda").keyup(function(){ /// para la caja de busqueda
+		$.ajax({
+		type: "POST",
+		url: "application/src/routes.php?op=32",
+		data:'keyword='+$(this).val(),
+		beforeSend: function(){
+			$("#muestra-busqueda").css("background","#FFF url(images/LoaderIcon.gif) no-repeat 165px");
+		},
+		success: function(data){
+			$("#muestra-busqueda").show();
+			$("#muestra-busqueda").html(data);
+			$("#producto-busqueda").css("background","#FFF");
+		}
+		});
+	});
+
+
+	$("body").on("click","#select-p",function(){
+		var cod = $(this).attr('cod');
+		var descripcion = $(this).attr('descripcion');
+		$("#muestra-busqueda").hide();
+		window.location.href="?proup&key=" + cod;
+	});
+
+
+// formulario actualizar
+	$('#btn-proup').click(function(e){ /// para el formulario
+	$('#btn-proup').addClass('disabled');
+	e.preventDefault();
+	$.ajax({
+			url: "application/src/routes.php?op=46",
+			method: "POST",
+			data: $("#form-proup").serialize(),
+			success: function(data){
+				$("#msj").html(data);			
+				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
+			}
+		})
+	})
+    
+
+    function BotonEnable(){
+        $('#btn-proup').removeClass("disabled");
+    }
+
+
+	$("#form-proup").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
+	if (e.which == 13) {
+	return false;
+	}
+	});
+
+
+
+
+
 
 
 

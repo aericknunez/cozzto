@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 
 	$('#btn-precios').click(function(e){ /// para el formulario
-	$('#btn-precios').addClass('disabled');
+
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=30",
@@ -55,15 +55,11 @@ $(document).ready(function(){
 			success: function(data){
 				$("#form-precios").trigger("reset");
 				$("#muestraprecios").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
 
-    function BotonEnable(){
-        $('#btn-precios').removeClass("disabled");
-    }
 
 
 	$("#form-precios").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
@@ -113,7 +109,6 @@ $(document).ready(function(){
 
 
 	$('#btn-compuesto').click(function(e){ /// para el formulario
-	$('#btn-compuesto').addClass('disabled');
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=33",
@@ -122,15 +117,10 @@ $(document).ready(function(){
 			success: function(data){
 				$("#form-compuesto").trigger("reset");
 				$("#muestraproductos").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
-
-    function BotonEnable(){
-        $('#btn-compuesto').removeClass("disabled");
-    }
 
 
 	$("#form-compuesto").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
@@ -153,7 +143,6 @@ $(document).ready(function(){
 
 
 	$('#btn-dependiente').click(function(e){ /// para el formulario
-	$('#btn-dependiente').addClass('disabled');
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=35",
@@ -162,15 +151,10 @@ $(document).ready(function(){
 			success: function(data){
 				$("#form-dependiente").trigger("reset");
 				$("#muestradependiente").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
-
-    function BotonEnable(){
-        $('#btn-dependiente').removeClass("disabled");
-    }
 
 
 	$("#form-dependiente").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
@@ -301,7 +285,6 @@ $(document).ready(function(){
 // asignar opciones a producto
 
 	$('#btn-ubicacionasig').click(function(e){ /// para el formulario
-	$('#btn-ubicacionasig').addClass('disabled');
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=40",
@@ -310,15 +293,10 @@ $(document).ready(function(){
 			success: function(data){
 				$("#form-ubicacionasig").trigger("reset");
 				$("#muestraubicacionasig").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
-
-    function BotonEnable(){
-        $('#btn-ubicacionasig').removeClass("disabled");
-    }
 
 
 	$("#form-ubicacionasig").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
@@ -375,7 +353,6 @@ $(document).ready(function(){
 // asignar caracteristicass a producto
 
 	$('#btn-caracteristicasasig').click(function(e){ /// para el formulario
-	$('#btn-caracteristicasasig').addClass('disabled');
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=43",
@@ -384,15 +361,11 @@ $(document).ready(function(){
 			success: function(data){
 				$("#form-caracteristicasasig").trigger("reset");
 				$("#muestracaracteristicaasig").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
 
-    function BotonEnable(){
-        $('#btn-caracteristicasasig').removeClass("disabled");
-    }
 
 
 	$("#form-caracteristicasasig").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"

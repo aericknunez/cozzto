@@ -13,7 +13,8 @@
 
 <li><a href="?proadd" class="waves-effect"><i class="fa fa-upload"></i> Nuevo Producto</a></li>
 <li><a href="?proup" class="waves-effect"><i class="fa fa-exchange"></i> Actualizar Producto</a></li>
-<li><a href="?" class="waves-effect"><i class="fa fa-database"></i> Averias</a></li>
+<li><a href="?" class="waves-effect"><i class="fa fa-database"></i> Agregar Productos</a></li>
+<li><a href="?" class="waves-effect"><i class="fa fa-database"></i> Descontar Averias</a></li>
 <li><a href="?" class="waves-effect"><i class="fa fa-file-archive-o"></i> Cambios</a></li>
 <li><a href="?" class="waves-effect arrow-r"><i class="fa fa-refresh"></i> Devoluciones</a></li>
 <li><a href="?proopciones" class="waves-effect arrow-r"><i class="fa fa-handshake-o"></i> Opciones</a></li>

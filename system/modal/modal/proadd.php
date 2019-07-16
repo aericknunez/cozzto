@@ -4,6 +4,10 @@ include_once 'application/common/Mysqli.php';
 $db = new dbConn();
 include_once 'system/producto/Productos.php';
   $productos = new Productos;
+
+$key =  $_REQUEST["key"];
+$com = $_REQUEST["com"];
+$dep = $_REQUEST["dep"];
  ?>
 
 <div class="modal" id="<? echo $_GET["modal"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="false">
@@ -122,7 +126,7 @@ include_once 'system/producto/Productos.php';
               <div id="muestraprecios"><?php 
              $productos->VerPrecios($_REQUEST["key"]); 
               ?></div>
-         <?php $url = '?modal=proadd&key='.$_REQUEST["key"].'&step=3&com='.$_REQUEST["com"].'&dep='.$_REQUEST["dep"]; ?>
+         <?php $url = "application/src/routes.php?op=47&key=$key&step=2&com=$com&dep=$dep"; ?>
               <a href="<?php echo $url; ?>" class="btn btn-info my-1" type="submit" id="btn-preciosdone"><i class="fa fa-floppy-o mr-1"></i> Continuar</a>
               </div>
               </div>
@@ -130,11 +134,6 @@ include_once 'system/producto/Productos.php';
     <!-- termina precios formulario -->
             <?php }
               if($_REQUEST["step"] == 3) { 
-                    if($_REQUEST["com"] != "on"){
-                      echo '<script>
-                          window.location.href="?modal=proadd&key='.$_REQUEST["key"].'&step=4&cad='.$_REQUEST["cad"].'&com='.$_REQUEST["com"].'&dep='.$_REQUEST["dep"].'"
-                        </script>';
-                    }
                 ?>
 
           <div class="row d-flex justify-content-center text-center" id="compuesto"> 
@@ -168,19 +167,13 @@ include_once 'system/producto/Productos.php';
                       <?php 
                $productos->VerCompuesto($_REQUEST["key"]); 
                 ?></div>
-          <?php $url = '?modal=proadd&key='.$_REQUEST["key"].'&step=4&com='.$_REQUEST["com"].'&dep='.$_REQUEST["dep"]; ?>
+          <?php $url = "application/src/routes.php?op=47&key=$key&step=3&com=$com&dep=$dep"; ?>
               <a href="<?php echo $url; ?>" class="btn btn-info my-1" type="submit" id="btn-preciosdone"><i class="fa fa-floppy-o mr-1"></i> Continuar</a>
               </div>
                </div>
     <!-- termina compuesto formulario -->
             <?php }
               if($_REQUEST["step"] == 4) { 
-
-                if($_REQUEST["dep"] != "on"){
-                      echo '<script>
-                          window.location.href="?modal=proadd&key='.$_REQUEST["key"].'&step=5&cad='.$_REQUEST["cad"].'&com='.$_REQUEST["com"].'&dep='.$_REQUEST["dep"].'"
-                        </script>';
-                    }
                     ?>
 
           <div class="row d-flex justify-content-center text-center" id="dependiente"> 
@@ -211,7 +204,7 @@ include_once 'system/producto/Productos.php';
                     <div id="muestradependiente"><?php 
                   $productos->VerDependiente($_REQUEST["key"]); 
                 ?></div>
-          <?php $url = '?modal=proadd&key='.$_REQUEST["key"].'&step=5&com='.$_REQUEST["com"].'&dep='.$_REQUEST["dep"]; ?>
+          <?php $url = "application/src/routes.php?op=47&key=$key&step=4&com=$com&dep=$dep"; ?>
               <a href="<?php echo $url; ?>" class="btn btn-info my-1" type="submit" id="btn-preciosdone"><i class="fa fa-floppy-o mr-1"></i> Continuar</a>
               </div>
                </div>
