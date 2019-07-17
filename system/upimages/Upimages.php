@@ -124,7 +124,7 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 
             $cambio = array();
             $cambio["imagen"] = $img;
-            $db->update("config_master", $cambio, "WHERE td = ".$_SESSION["td"]."");
+            Helpers::UpdateId("config_master", $cambio, "td = ".$_SESSION["td"]."");
     }
 
 

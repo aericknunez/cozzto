@@ -42,7 +42,7 @@ class Clientes {
 
               $datos["time"] = Helpers::TimeId();
               $hash = $datos["hash"];
-              if ($db->update("clientes", $datos, "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) {
+              if (Helpers::UpdateId("clientes", $datos, "hash = '$hash' and td = ".$_SESSION["td"]."")) {
                   Alerts::Alerta("success","Realizado!","Cambio realizado exitsamente!");
                   echo '<script>
                         window.location.href="?clientever"
@@ -95,7 +95,7 @@ class Clientes {
 
   public function DelCliente($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("clientes", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("clientes", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Cliente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -105,7 +105,7 @@ class Clientes {
 
   public function DelClientex($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("clientes", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("clientes", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Cliente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");

@@ -32,7 +32,7 @@ class Config{
 	    $cambio["imprimir_antes"] = $imprimir_antes;
 	    $cambio["cambio_tx"] = $cambio_tx;
 	    $cambio["time"] = Helpers::TimeId();
-	    if ($db->update("config_master", $cambio, "WHERE td = ".$_SESSION["td"]."")) {
+	    if (Helpers::UpdateId("config_master", $cambio, "td = ".$_SESSION["td"]."")) {
 	    	$this->CrearVariables();
 	        Alerts::Alerta("success","Echo!","Registros actualizados correctamente");
 	    } else {
@@ -58,7 +58,7 @@ class Config{
 	    $cambio["tipo_sistema"] = $tipo_sistema;
 	    $cambio["plataforma"] = $plataforma;
 	    $cambio["time"] = Helpers::TimeId();
-	    if ($db->update("config_root", $cambio, "WHERE td = ".$_SESSION["td"]."")) {
+	    if (Helpers::UpdateId("config_root", $cambio, "td = ".$_SESSION["td"]."")) {
 	    	$this->CrearVariables();
 	        Alerts::Alerta("success","Echo!","Registros actualizados correctamente");
 	    } else {

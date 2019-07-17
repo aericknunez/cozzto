@@ -42,7 +42,7 @@ class Proveedores{
 
                 $datos["time"] = Helpers::TimeId();
                 $hash = $datos["hash"];
-              if ($db->update("proveedores", $datos, "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) {
+              if (Helpers::UpdateId("proveedores", $datos, "hash = '$hash' and td = ".$_SESSION["td"]."")) {
                   Alerts::Alerta("success","Realizado!","Cambio realizado exitsamente!");
                   echo '<script>
                         window.location.href="?proveedorver"
@@ -95,7 +95,7 @@ class Proveedores{
 
   public function DelProveedor($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("proveedores", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("proveedores", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Proveedor eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -105,7 +105,7 @@ class Proveedores{
 
   public function DelProveedorx($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("proveedores", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("proveedores", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Proveedor eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");

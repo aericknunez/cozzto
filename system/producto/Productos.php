@@ -140,7 +140,7 @@ class Productos{
 
   public function DelPrecios($hash, $producto){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("producto_precio", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_precio", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Precio eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -232,7 +232,7 @@ class Productos{
 
   public function DelCompuesto($hash, $producto){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("producto_compuestos", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_compuestos", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Compuesto eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -300,7 +300,7 @@ class Productos{
 
   public function DelDependiente($hash, $producto){ // elimina dependiente
     $db = new dbConn();
-        if ( $db->delete("producto_dependiente", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_dependiente", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Dependiente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -371,7 +371,7 @@ class Productos{
 
   public function DelTag($hash, $producto){ // elimina dependiente
     $db = new dbConn();
-        if ( $db->delete("producto_tags", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_tags", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Etiqueta eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -455,7 +455,7 @@ class Productos{
 
   public function DelUbicacionAsig($hash, $producto){ // elimina ubicacion asig
     $db = new dbConn();
-        if ( $db->delete("ubicacion_asig", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("ubicacion_asig", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Ubicacion eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -560,7 +560,7 @@ class Productos{
 
   public function DelCaracteristicaAsig($hash, $producto){ // elimina ubicacion asig
     $db = new dbConn();
-        if ( $db->delete("caracteristicas_asig", "WHERE id=" . $hash)) {
+        if (Helpers::DeleteId("caracteristicas_asig", "caracteristica='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Caracteristica eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -647,7 +647,7 @@ class Productos{
 
   public function DelCategoria($hash){ // elimina categoria
     $db = new dbConn();
-        if ( $db->delete("producto_categoria", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_categoria", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Categoria eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -721,7 +721,7 @@ class Productos{
 
   public function DelUnidad($hash){ // elimina Unidad
     $db = new dbConn();
-        if ( $db->delete("producto_unidades", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_unidades", "hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Categoria eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -790,8 +790,8 @@ class Productos{
 
   public function DelCaracteristica($hash){ // elimina caracteristica
     $db = new dbConn();
-        if ( $db->delete("caracteristicas", "WHERE hash='$hash'")) {
-          $db->delete("caracteristicas_asig", "WHERE caracteristica='$hash' and td = " . $_SESSION["td"] );
+        if (Helpers::DeleteId("caracteristicas", "hash='$hash'")) {
+            Helpers::DeleteId("caracteristicas_asig", "caracteristica='$hash' and td = " . $_SESSION["td"]);
            Alerts::Alerta("success","Eliminado!","Caracteristica eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -863,8 +863,8 @@ class Productos{
 
   public function DelUbicacion($hash){ // elimina categoria
     $db = new dbConn();
-        if ( $db->delete("ubicacion", "WHERE hash='$hash'")) {
-            $db->delete("ubicacion_asig", "WHERE ubicacion='$hash' and td = " . $_SESSION["td"] );  
+        if (Helpers::DeleteId("ubicacion", "hash='$hash'")) {
+          Helpers::DeleteId("ubicacion_asig", "ubicacion='$hash' and td = " . $_SESSION["td"] );  
            Alerts::Alerta("success","Eliminado!","Ubicacion eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
