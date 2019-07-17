@@ -408,6 +408,33 @@ include_once '../../system/producto/ProUpdate.php';
 
 
 
+/////////////////////// proveedor
+
+if($_REQUEST["op"]=="60"){ // agregar proveedor
+include_once '../../system/proveedor/Proveedor.php';
+	$proveedor = new Proveedores;
+	$proveedor->AddProveedor($_POST);
+}
+
+if($_REQUEST["op"]=="61"){ // elimina proveedor
+include_once '../../system/proveedor/Proveedor.php';
+	$proveedor = new Proveedores;
+	$proveedor->DelProveedor($_REQUEST["iden"]);
+}
+
+if($_REQUEST["op"]=="62"){ // elimina proveedor desde liasta completa
+include_once '../../system/proveedor/Proveedor.php';
+	$proveedor = new Proveedores;
+	$proveedor->DelProveedorx($_REQUEST["iden"]);
+}
+
+if($_REQUEST["op"]=="63"){ // actualizar proveedor
+include_once '../../system/proveedor/Proveedor.php';
+	$proveedor = new Proveedores;
+	$proveedor->UpProveedor($_POST);
+}
+
+
 
 
 /////////

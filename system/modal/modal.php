@@ -19,6 +19,7 @@ if($_REQUEST["modal"]=="conf_root") include_once 'system/modal/modal/conf_root.p
 
 if($_REQUEST["modal"]=="img_negocio") include_once 'system/modal/modal/imagen_negocio.php';
 
+if($_REQUEST["modal"]=="editproveedor") include_once 'system/modal/modal/editar-proveedor.php';
 
 
 // producto

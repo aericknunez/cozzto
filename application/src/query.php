@@ -35,6 +35,11 @@ echo '
 	echo '<script type="text/javascript" src="assets/js/query/modal.producto.js?v='.$numero.'"></script>';
 	}
 
+	/// proveedor
+	if($_GET["modal"] == "editproveedor"){
+	echo '<script type="text/javascript" src="assets/js/query/proveedor.js?v='.$numero.'"></script>';
+	}
+
 } // termina modal
 
 
@@ -57,6 +62,17 @@ echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numer
 }
 elseif(isset($_GET["proaverias"])) {
 echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
+} 
+
+
+//////////////// proveedor
+elseif(isset($_GET["proveedoradd"])) {
+echo '<script type="text/javascript" src="assets/js/query/proveedor.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["proveedorver"])) {
+echo '
+<script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
+<script type="text/javascript" src="assets/js/query/proveedordatatable.js?v='.$numero.'"></script>';
 } 
 
 

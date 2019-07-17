@@ -50,13 +50,13 @@ $dep = $_REQUEST["dep"];
   <div class="tab-content border-right border-bottom border-left rounded-bottom" id="myClassicTabContent">
     <div class="tab-pane fade active show" id="steps-classic" role="tabpanel" aria-labelledby="steps-tab-classic">
 
-      <?php Alerts::Mensaje("Los datos siguientes son de extrema importancia","danger",$boton,$boton2); ?>
+       <?php // Alerts::Mensaje("Los datos siguientes son de extrema importancia","danger",$boton,$boton2); ?>
 
 
           <?php if($_REQUEST["step"] == 1) { ?>
+            <p class="note note-secondary"><strong>Precio de Costo:</strong> El precio de costo es de suma importantancia para que el sistema calcule sus margenes de ganancias</p>
               <div class="row d-flex justify-content-center text-center" id="preciocosto"> 
                 <div class="col-sm-6">
-                PRECIO DE COSTO
                 <div id="msj"></div>
                       <form id="form-preciocosto">
   
@@ -97,10 +97,10 @@ $dep = $_REQUEST["dep"];
               <?php }
               if($_REQUEST["step"] == 2) {                 
                 ?>
-
+            <p class="note note-secondary"><strong>Precio de Venta:</strong> Es necesario que agregue al menos un precio de venta, el precio por unidad equivale a cantidad 1 y precio x</p>
               <div class="row d-flex justify-content-center text-center" id="precios"> 
                 <div class="col-sm-12">
-               Debe agregar almenos un precio al producto
+
                 <form id="form-precios">
   
                   <div class="form-row">
@@ -137,10 +137,11 @@ $dep = $_REQUEST["dep"];
             <?php }
               if($_REQUEST["step"] == 3) { 
                 ?>
+              <p class="note note-secondary"><strong>Producto Compuesto:</strong> Este producto se compone de uno o mas productos, inserte la cantidad de productos que comprenden este producto</p>
 
           <div class="row d-flex justify-content-center text-center" id="compuesto"> 
                 <div class="col-sm-12">
-                Este producto se compone de otros productos. Seleccione los productos que lo componen
+
                 <form id="form-compuesto">
   
                   <div class="form-row">
@@ -177,10 +178,10 @@ $dep = $_REQUEST["dep"];
             <?php }
               if($_REQUEST["step"] == 4) { 
                     ?>
-
+            <p class="note note-secondary"><strong>Producto Dependiente:</strong> Este producto depende de otro producto, ingrese la cantidad y e l producto que este lo comprende</p>
           <div class="row d-flex justify-content-center text-center" id="dependiente"> 
                 <div class="col-sm-12">
-                Asigne la cantidad del producto que depende
+
                 <form id="form-dependiente">
   
                   <div class="form-row">
@@ -213,19 +214,21 @@ $dep = $_REQUEST["dep"];
     <!-- termina compuesto formulario -->
             <?php }
               if($_REQUEST["step"] == 5) { ?>
-                  Termino de lo requerido
+                  <blockquote class="blockquote bq-success">
+                  <p class="bq-title">Realizado</p>
+                  <p>Se han ingresado con &eacutexito todos los datos importantes requeridos por el sistema.</p>
+                </blockquote>
             <?php }  ?>
     </div> <!-- termina tab -->
 
 
     <div class="tab-pane fade" id="imagenes-classic" role="tabpanel" aria-labelledby="imagenes-tab-classic">
-      <?php Alerts::Mensaje("Ingrese las imagenes de su producto","success",$boton,$boton2); ?>
-      <p>Agregar im&aacutegenes para su producto</p>
+      <p class="note note-primary"><strong>Imagenes:</strong> Ingrese una o mas imagenes del producto, estas serviran pra identificarlo mejor</p>
     </div> <!-- termina tab -->
 
 
     <div class="tab-pane fade" id="etiquetas-classic" role="tabpanel" aria-labelledby="etiquetas-tab-classic">
-      <?php Alerts::Mensaje("Ingrese etiquetas para la busqueda rapida de su producto","success",$boton,$boton2); ?>
+      <p class="note note-primary"><strong>Etiquetas:</strong> Ingrese palabras claves que identifican a su produto, estas serviran para hacer una busqueda mas adecuada</p>
 
                 <div class="row d-flex justify-content-center text-center" id="etiqueta"> 
                 <div class="col-sm-12">
@@ -256,7 +259,7 @@ $dep = $_REQUEST["dep"];
     </div> <!-- termina tab -->
 
     <div class="tab-pane fade" id="ubicacion-classic" role="tabpanel" aria-labelledby="ubicacion-tab-classic">
-      <?php Alerts::Mensaje("Ingrese la ubicacion de sus productos","success",$boton,$boton2); ?>
+      <p class="note note-primary"><strong>Ubicaci&oacute:</strong> La ubicaci&oacuten del producto es donde se encuentra fisicamente.</p>
       
       <div class="row d-flex justify-content-center text-center" id="ubicacion"> 
                 <div class="col-sm-12">
@@ -297,7 +300,7 @@ $dep = $_REQUEST["dep"];
 
 
     <div class="tab-pane fade" id="caracteristicas-classic" role="tabpanel" aria-labelledby="caracteristicas-tab-classic">
-      <?php Alerts::Mensaje("Ingrese las caracteristicas de sus producto","success",$boton,$boton2); ?>
+      <p class="note note-primary"><strong>Caracteristicas:</strong> Ingrese caracteristicas independientes que poseen su producto</p>
             
             <div class="row d-flex justify-content-center text-center" id="caracteristicas"> 
                 <div class="col-sm-12">
