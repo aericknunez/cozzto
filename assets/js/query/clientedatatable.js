@@ -24,8 +24,8 @@ $(document).ready(function(){
 
 	$("body").on("click","#delcliente",function(){ // borrar categoria
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
-	    $.post("application/src/routes.php", {op:op, iden:iden}, function(data){
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinocliente").html(data);
 	   	 });
 	});

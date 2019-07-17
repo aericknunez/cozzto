@@ -13,9 +13,10 @@ $db = new dbConn();
       <div class="modal-body">
 <!-- ./  content -->
 <?php if($_REQUEST["key"] != NULL){ 
-  if ($r = $db->select("*", "proveedores", "WHERE iden = ".$_REQUEST["key"]." and td = ".$_SESSION["td"]."")) { 
+  $key = $_REQUEST["key"];
+  if ($r = $db->select("*", "proveedores", "WHERE hash = '$key' and td = ".$_SESSION["td"]."")) { 
 
-$iden = $r["iden"];
+$hash = $r["hash"];
 $nombre = $r["nombre"];
 $documento = $r["documento"];  
 $registro = $r["registro"];
@@ -37,7 +38,7 @@ $comentarios = $r["comentarios"];
   
   <div class="form-row">
 
-<input type="hidden" id="iden" name="iden" value="<?php echo $iden; ?>">
+<input type="hidden" id="hash" name="hash" value="<?php echo $hash; ?>">
   <div class="col-md-8 mb-2 md-form">
       <label for="descripcion">* Nombre</label>
       <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $nombre; ?>">

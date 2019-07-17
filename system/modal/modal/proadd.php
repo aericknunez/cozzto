@@ -50,9 +50,6 @@ $dep = $_REQUEST["dep"];
   <div class="tab-content border-right border-bottom border-left rounded-bottom" id="myClassicTabContent">
     <div class="tab-pane fade active show" id="steps-classic" role="tabpanel" aria-labelledby="steps-tab-classic">
 
-       <?php // Alerts::Mensaje("Los datos siguientes son de extrema importancia","danger",$boton,$boton2); ?>
-
-
           <?php if($_REQUEST["step"] == 1) { ?>
             <p class="note note-secondary"><strong>Precio de Costo:</strong> El precio de costo es de suma importantancia para que el sistema calcule sus margenes de ganancias</p>
               <div class="row d-flex justify-content-center text-center" id="preciocosto"> 
@@ -125,7 +122,7 @@ $dep = $_REQUEST["dep"];
 
 
               <div id="muestraprecios"><?php 
-              if(isset($_GET["msj"])) echo "<h3>Debe Agregar un precio!</h3>";
+              if(isset($_GET["msj"])) Alerts::Mensaje("Debe agregar un precio del producto","danger",$boton,$boton2);
              $productos->VerPrecios($_REQUEST["key"]); 
               ?></div>
          <?php $url = "application/src/routes.php?op=47&key=$key&step=2&com=$com&dep=$dep"; ?>

@@ -31,6 +31,7 @@ class Config{
 	    $cambio["venta_especial"] = $venta_especial;
 	    $cambio["imprimir_antes"] = $imprimir_antes;
 	    $cambio["cambio_tx"] = $cambio_tx;
+	    $cambio["time"] = Helpers::TimeId();
 	    if ($db->update("config_master", $cambio, "WHERE td = ".$_SESSION["td"]."")) {
 	    	$this->CrearVariables();
 	        Alerts::Alerta("success","Echo!","Registros actualizados correctamente");
@@ -56,6 +57,7 @@ class Config{
 	    $cambio["ftp_password"] = $ftp_password;
 	    $cambio["tipo_sistema"] = $tipo_sistema;
 	    $cambio["plataforma"] = $plataforma;
+	    $cambio["time"] = Helpers::TimeId();
 	    if ($db->update("config_root", $cambio, "WHERE td = ".$_SESSION["td"]."")) {
 	    	$this->CrearVariables();
 	        Alerts::Alerta("success","Echo!","Registros actualizados correctamente");

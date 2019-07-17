@@ -100,7 +100,6 @@ $(function() { // activar y desactivar los checked despues de darle clic a servi
 
 // formulario actualizar
 	$('#btn-proup').click(function(e){ /// para el formulario
-	$('#btn-proup').addClass('disabled');
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=46",
@@ -108,15 +107,10 @@ $(function() { // activar y desactivar los checked despues de darle clic a servi
 			data: $("#form-proup").serialize(),
 			success: function(data){
 				$("#msj").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
-
-    function BotonEnable(){
-        $('#btn-proup').removeClass("disabled");
-    }
 
 
 	$("#form-proup").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
@@ -183,9 +177,9 @@ $(function() { // activar y desactivar los checked despues de darle clic a servi
 
 	$("body").on("click","#delproagrega",function(){ // borrar producto
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
+	var hash = $(this).attr('hash');
 	var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#destinoproductoagrega").html(data);
 	   	 });
 	});
@@ -252,9 +246,9 @@ $(function() { // activar y desactivar los checked despues de darle clic a servi
 
 	$("body").on("click","#delaveria",function(){ // borrar producto
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
+	var hash = $(this).attr('hash');
 	var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#destinoaverias").html(data);
 	   	 });
 	});

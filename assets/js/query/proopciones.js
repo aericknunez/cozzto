@@ -23,8 +23,8 @@ $(document).ready(function(){
 
 	$("body").on("click","#delcategoria",function(){ // borrar categoria
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
-	    $.post("application/src/routes.php", {op:op, iden:iden}, function(data){
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinocategoria").html(data);
 	   	 });
 	});
@@ -57,8 +57,8 @@ $(document).ready(function(){
 
 	$("body").on("click","#delunidad",function(){ // borrar categoria
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
-	    $.post("application/src/routes.php", {op:op, iden:iden}, function(data){
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinounidad").html(data);
 	   	 });
 	});
@@ -90,8 +90,8 @@ $(document).ready(function(){
 
 	$("body").on("click","#delcaracteristica",function(){ // borrar categoria
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
-	    $.post("application/src/routes.php", {op:op, iden:iden}, function(data){
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinocaracteristica").html(data);
 	   	 });
 	});
@@ -125,8 +125,8 @@ $(document).ready(function(){
 
 	$("body").on("click","#delubicacion",function(){ // borrar ubicacion
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
-	    $.post("application/src/routes.php", {op:op, iden:iden}, function(data){
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinoubicacion").html(data);
 	   	 });
 	});

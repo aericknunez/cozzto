@@ -1,6 +1,5 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-echo "aqui va el lateral";
 ?>
+<img src="assets/img/logo/default.png" alt="">

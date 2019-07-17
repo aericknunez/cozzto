@@ -8,7 +8,14 @@ class Productos{
 	public function AddProducto($datos){ // lo que viede del formulario principal
 		$db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
-
+                if($datos["gravado"] == NULL) $datos["gravado"] = 0;
+                if($datos["receta"] == NULL) $datos["receta"] = 0;
+                if($datos["servicio"] == NULL) $datos["servicio"] = 0;
+                if($datos["compuesto"] == NULL) $datos["compuesto"] = 0;
+                if($datos["caduca"] == NULL) $datos["caduca"] = 0;
+                if($datos["dependiente"] == NULL) $datos["dependiente"] = 0;
+                $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
               $datos["td"] = $_SESSION["td"];
               if ($db->insert("producto", $datos)) {
                   $this->Redirect($datos);
@@ -65,6 +72,8 @@ class Productos{
               $datos["fecha"] = date("d-m-Y");
               $datos["hora"] = date("H:i:s");
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+              $datos["time"] = Helpers::TimeId();
               if ($db->insert("producto_ingresado", $datos)) {
                  echo '<script>
                   window.location.href="?modal=proadd&key='. $datox["producto"] .'&step=2&com='. $datox["com"] .'&dep='. $datox["dep"] .'";
@@ -86,12 +95,11 @@ class Productos{
               $datos["cant"] = $datox["cantidad"];
               $datos["precio"] = $datox["precio"];
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+              $datos["time"] = Helpers::TimeId();
               if ($db->insert("producto_precio", $datos)) {
 
-                 $i = $db->insert_id();
-                 if(Helpers::UpdateIden("producto_precio", $i)){
-                   Alerts::Alerta("success","Realizado!","Precio agregado correctamente!");
-                }
+                 Alerts::Alerta("success","Realizado!","Precio agregado correctamente!");
                 
               }
           } else {
@@ -120,7 +128,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$b["precio"].'</td>
-                      <td><a id="delprecio" iden="'.$b["iden"].'" op="31" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delprecio" hash="'.$b["hash"].'" op="31" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -130,9 +138,9 @@ class Productos{
   }
 
 
-  public function DelPrecios($iden, $producto){ // elimina precio
+  public function DelPrecios($hash, $producto){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("producto_precio", "WHERE iden=" . $iden)) {
+        if ( $db->delete("producto_precio", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Precio eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -174,12 +182,11 @@ class Productos{
               $datos["cant"] = $datox["cantidad"];
               $datos["agregado"] = $datox["producto-codigo"];
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+               $datos["time"] = Helpers::TimeId();
               if ($db->insert("producto_compuestos", $datos)) {
 
-                 $i = $db->insert_id();
-                 if(Helpers::UpdateIden("producto_compuestos", $i)){
-                    Alerts::Alerta("success","Realizado!","Compuesto agregado correctamente!");
-                }
+                 Alerts::Alerta("success","Realizado!","Compuesto agregado correctamente!");
                 
               }
           } else {
@@ -214,7 +221,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="delcompuesto" iden="'.$b["iden"].'" op="34" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcompuesto" hash="'.$b["hash"].'" op="34" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -223,9 +230,9 @@ class Productos{
           } $a->close();  
   }
 
-  public function DelCompuesto($iden, $producto){ // elimina precio
+  public function DelCompuesto($hash, $producto){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("producto_compuestos", "WHERE iden=" . $iden)) {
+        if ( $db->delete("producto_compuestos", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Compuesto eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -243,13 +250,11 @@ class Productos{
               $datos["dependiente"] = $datox["producto-codigo"];
               $datos["cant"] = $datox["cantidad"];
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+              $datos["time"] = Helpers::TimeId();
               if ($db->insert("producto_dependiente", $datos)) {
 
-                 $i = $db->insert_id();
-                 if(Helpers::UpdateIden("producto_dependiente", $i)){
                   Alerts::Alerta("success","Realizado!","Dependiente agregado correctamente!");
-                }
-                
               }
           } else {
               Alerts::Alerta("error","Error!","Faltan Datos!");
@@ -283,7 +288,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="deldependiente" iden="'.$b["iden"].'" op="36" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="deldependiente" hash="'.$b["hash"].'" op="36" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -293,9 +298,9 @@ class Productos{
   }
 
 
-  public function DelDependiente($iden, $producto){ // elimina dependiente
+  public function DelDependiente($hash, $producto){ // elimina dependiente
     $db = new dbConn();
-        if ( $db->delete("producto_dependiente", "WHERE iden=" . $iden)) {
+        if ( $db->delete("producto_dependiente", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Dependiente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -333,13 +338,11 @@ class Productos{
               $datos["producto"] = $datox["producto"];              
               $datos["tag"] = $datox["etiquetas"];
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
               if ($db->insert("producto_tags", $datos)) {
 
-                 $i = $db->insert_id();
-                 if(Helpers::UpdateIden("producto_tags", $i)){
                   $this->VerTag($datox["producto"]);
-                }
-                
               }
           } else {
               Alerts::Alerta("error","Error!","Faltan Datos!");
@@ -355,7 +358,7 @@ class Productos{
               foreach ($a as $b) {  
                 echo '<div class="chip cyan lighten-4">
                         '.$b["tag"].'
-                       <a id="deltag" iden="'.$b["iden"].'" op="39" producto="'.$producto.'"> 
+                       <a id="deltag" hash="'.$b["hash"].'" op="39" producto="'.$producto.'"> 
                        <i class="close fa fa-times"></i>
                        </a>
                      </div>';
@@ -366,9 +369,9 @@ class Productos{
 
 
 
-  public function DelTag($iden, $producto){ // elimina dependiente
+  public function DelTag($hash, $producto){ // elimina dependiente
     $db = new dbConn();
-        if ( $db->delete("producto_tags", "WHERE iden=" . $iden)) {
+        if ( $db->delete("producto_tags", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Etiqueta eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -392,6 +395,8 @@ class Productos{
               $datos["producto"] = $datox["producto"];
               $datos["cant"] = $datox["cantidad"];
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
               if ($db->insert("ubicacion_asig", $datos)) {
                   Alerts::Alerta("success","Agregado!","Agregado correctamente!");
               }
@@ -402,6 +407,7 @@ class Productos{
         Alerts::Alerta("error","Error!","La cantidad disponible es menor a la que desea asignar!");
       }
       $this->VerUbicacionAsig($datox["producto"]);
+
     }
 
 
@@ -425,14 +431,15 @@ class Productos{
           $n = 1;
           $canta = 0;
               foreach ($a as $b) { 
-                if ($r = $db->select("ubicacion", "ubicacion", "WHERE iden = ".$b["ubicacion"]." and td = ".$_SESSION["td"]."")) { 
+                $ubica = $b["ubicacion"];
+                if ($r = $db->select("ubicacion", "ubicacion", "WHERE hash = '$ubica' and td = ".$_SESSION["td"]."")) { 
                         $nombre = $r["ubicacion"];
                       }  unset($r); 
                 echo '<tr>
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="delubicacionasig" iden="'.$b["id"].'" op="41" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delubicacionasig" hash="'.$b["hash"].'" op="41" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';
                     $canta =  $canta + $b["cant"];          
               }
@@ -446,10 +453,10 @@ class Productos{
 
 
 
-  public function DelUbicacionAsig($iden, $producto){ // elimina ubicacion asig
+  public function DelUbicacionAsig($hash, $producto){ // elimina ubicacion asig
     $db = new dbConn();
-        if ( $db->delete("ubicacion_asig", "WHERE id=" . $iden)) {
-           Alerts::Alerta("success","Eliminado!","Etiqueta eliminada correctamente!");
+        if ( $db->delete("ubicacion_asig", "WHERE hash='$hash'")) {
+           Alerts::Alerta("success","Eliminado!","Ubicacion eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
         } 
@@ -459,12 +466,12 @@ class Productos{
 
   public function SelectUbicacion(){ // Es el Select de la Ubicacion Para poder Recargarlo
     $db = new dbConn();
-    $a = $db->query("SELECT iden, ubicacion FROM ubicacion WHERE td = ".$_SESSION["td"].""); 
+    $a = $db->query("SELECT hash, ubicacion FROM ubicacion WHERE td = ".$_SESSION["td"].""); 
            echo '<select class="browser-default custom-select" id="ubicacion" name="ubicacion">
                   <option selected disabled>Ubicaci&oacuten</option>';
 
              foreach ($a as $b) {
-              echo '<option value="'. $b["iden"] .'">'. $b["ubicacion"] .'</option>'; 
+              echo '<option value="'. $b["hash"] .'">'. $b["ubicacion"] .'</option>'; 
                 } $a->close();
           echo '</select>';          
 
@@ -495,6 +502,8 @@ class Productos{
               $datos["producto"] = $datox["producto"];
               $datos["cant"] = $datox["cantidad"];
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
               if ($db->insert("caracteristicas_asig", $datos)) {
                   Alerts::Alerta("success","Agregado!","Agregado correctamente!");
               }
@@ -528,14 +537,14 @@ class Productos{
           $n = 1;
           $canta = 0;
               foreach ($a as $b) { 
-                if ($r = $db->select("caracteristica", "caracteristicas", "WHERE iden = ".$b["caracteristica"]." and td = ".$_SESSION["td"]."")) { 
+                if ($r = $db->select("caracteristica", "caracteristicas", "WHERE hash = ".$b["caracteristica"]." and td = ".$_SESSION["td"]."")) { 
                         $nombre = $r["caracteristica"];
                       }  unset($r); 
                 echo '<tr>
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="delcaracteristicaasig" iden="'.$b["id"].'" op="44" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcaracteristicaasig" hash="'.$b["id"].'" op="44" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';
                     $canta =  $canta + $b["cant"];          
               }
@@ -549,9 +558,9 @@ class Productos{
 
 
 
-  public function DelCaracteristicaAsig($iden, $producto){ // elimina ubicacion asig
+  public function DelCaracteristicaAsig($hash, $producto){ // elimina ubicacion asig
     $db = new dbConn();
-        if ( $db->delete("caracteristicas_asig", "WHERE id=" . $iden)) {
+        if ( $db->delete("caracteristicas_asig", "WHERE id=" . $hash)) {
            Alerts::Alerta("success","Eliminado!","Caracteristica eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -561,12 +570,12 @@ class Productos{
 
   public function SelectCaracteristica(){ // Es el Select de la Ubicacion Para poder Recargarlo
     $db = new dbConn();
-    $a = $db->query("SELECT iden, caracteristica FROM caracteristicas WHERE td = ".$_SESSION["td"].""); 
+    $a = $db->query("SELECT hash, caracteristica FROM caracteristicas WHERE td = ".$_SESSION["td"].""); 
            echo '<select class="browser-default custom-select" id="caracteristica" name="caracteristica">
                   <option selected disabled>Caracteristica</option>';
 
              foreach ($a as $b) {
-              echo '<option value="'. $b["iden"] .'">'. $b["caracteristica"] .'</option>'; 
+              echo '<option value="'. $b["hash"] .'">'. $b["caracteristica"] .'</option>'; 
                 } $a->close();
           echo '</select>';          
 
@@ -575,19 +584,24 @@ class Productos{
 
 
 
-// categorias
+// /////////////////  categorias
+
+
+
+
+
+
+
 
   public function AddCategoria($datos){ // agrega una categoria para ponersela al producto
     $db = new dbConn();
 
       if($datos["categoria"] != NULL){
-
+              $datos["hash"] = Helpers::HashId();
+              $datos["time"] = Helpers::TimeId();
               $datos["td"] = $_SESSION["td"];
               if ($db->insert("producto_categoria", $datos)) {
-                  $i = $db->insert_id();
-                     if(Helpers::UpdateIden("producto_categoria", $i)){
-                       Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
-                    }
+                   Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
                   
               }else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -620,7 +634,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["categoria"].'</td>
-                  <td><a id="delcategoria" iden="'.$b["id"].'" op="23" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delcategoria" hash="'.$b["hash"].'" op="23" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -631,9 +645,9 @@ class Productos{
 
 
 
-  public function DelCategoria($iden){ // elimina categoria
+  public function DelCategoria($hash){ // elimina categoria
     $db = new dbConn();
-        if ( $db->delete("producto_categoria", "WHERE iden=" . $iden)) {
+        if ( $db->delete("producto_categoria", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Categoria eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -654,13 +668,12 @@ class Productos{
     $db = new dbConn();
 
       if($datos["nombre"] != NULL and $datos["abreviacion"] != NULL){
-
+              $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
               $datos["td"] = $_SESSION["td"];
               if ($db->insert("producto_unidades", $datos)) {
-                  $i = $db->insert_id();
-                     if(Helpers::UpdateIden("producto_unidades", $i)){
-                       Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
-                    }
+                  
+                  Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
                   
               }else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -695,7 +708,7 @@ class Productos{
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["nombre"].'</td>
                   <td>'.$b["abreviacion"].'</td>
-                  <td><a id="delunidad" iden="'.$b["id"].'" op="25" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delunidad" hash="'.$b["hash"].'" op="25" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -706,9 +719,9 @@ class Productos{
 
 
 
-  public function DelUnidad($iden){ // elimina Unidad
+  public function DelUnidad($hash){ // elimina Unidad
     $db = new dbConn();
-        if ( $db->delete("producto_unidades", "WHERE iden=" . $iden)) {
+        if ( $db->delete("producto_unidades", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Categoria eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -726,13 +739,12 @@ class Productos{
     $db = new dbConn();
 
       if($datos["caracteristica"] != NULL){
-
+              $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
               $datos["td"] = $_SESSION["td"];
               if ($db->insert("caracteristicas", $datos)) {
-                  $i = $db->insert_id();
-                     if(Helpers::UpdateIden("caracteristicas", $i)){
-                       Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
-                    }
+                  
+                  Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
                   
               }else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -765,7 +777,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["caracteristica"].'</td>
-                  <td><a id="delcaracteristica" iden="'.$b["id"].'" op="27" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delcaracteristica" hash="'.$b["hash"].'" op="27" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -776,10 +788,10 @@ class Productos{
 
 
 
-  public function DelCaracteristica($iden){ // elimina caracteristica
+  public function DelCaracteristica($hash){ // elimina caracteristica
     $db = new dbConn();
-        if ( $db->delete("caracteristicas", "WHERE iden=" . $iden)) {
-          $db->delete("caracteristicas_asig", "WHERE caracteristica=" . $iden . " and td = " . $_SESSION["td"] );
+        if ( $db->delete("caracteristicas", "WHERE hash='$hash'")) {
+          $db->delete("caracteristicas_asig", "WHERE caracteristica='$hash' and td = " . $_SESSION["td"] );
            Alerts::Alerta("success","Eliminado!","Caracteristica eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -800,13 +812,12 @@ class Productos{
     $db = new dbConn();
 
       if($datos["ubicacion"] != NULL){
-
+              $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
               $datos["td"] = $_SESSION["td"];
               if ($db->insert("ubicacion", $datos)) {
-                  $i = $db->insert_id();
-                     if(Helpers::UpdateIden("ubicacion", $i)){
-                       Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
-                    }
+                  
+                  Alerts::Alerta("success","Agregado!","Agregado Correctamente!");
                   
               }else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -839,7 +850,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["ubicacion"].'</td>
-                  <td><a id="delubicacion" iden="'.$b["id"].'" op="29" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delubicacion" hash="'.$b["hash"].'" op="29" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -850,10 +861,10 @@ class Productos{
 
 
 
-  public function DelUbicacion($iden){ // elimina categoria
+  public function DelUbicacion($hash){ // elimina categoria
     $db = new dbConn();
-        if ( $db->delete("ubicacion", "WHERE iden=" . $iden)) {
-            $db->delete("ubicacion_asig", "WHERE ubicacion=" . $iden . " and td = " . $_SESSION["td"] );  
+        if ( $db->delete("ubicacion", "WHERE hash='$hash'")) {
+            $db->delete("ubicacion_asig", "WHERE ubicacion='$hash' and td = " . $_SESSION["td"] );  
            Alerts::Alerta("success","Eliminado!","Ubicacion eliminada correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");

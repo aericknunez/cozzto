@@ -8,7 +8,13 @@ class ProUpdate{
   public function UpProducto($datos){ // lo que viede del formulario principal
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
-
+                if($datos["gravado"] == NULL) $datos["gravado"] = 0;
+                if($datos["receta"] == NULL) $datos["receta"] = 0;
+                if($datos["servicio"] == NULL) $datos["servicio"] = 0;
+                if($datos["compuesto"] == NULL) $datos["compuesto"] = 0;
+                if($datos["caduca"] == NULL) $datos["caduca"] = 0;
+                if($datos["dependiente"] == NULL) $datos["dependiente"] = 0;
+                $datos["time"] = Helpers::TimeId();
               if ($db->update("producto", $datos, "WHERE cod = ".$datos["cod"]." and td = ".$_SESSION["td"]."")) {
                   $this->Redirect($datos);
               }           
@@ -16,9 +22,8 @@ class ProUpdate{
       } else {
         Alerts::Alerta("error","Error!","Faltan Datos!");
       }
-  
-  }
 
+  }
 
   public function CompruebaForm($datos){
         if($datos["cod"] == NULL or
@@ -34,15 +39,10 @@ class ProUpdate{
   }
 
   public function Redirect($datos){
-      if($datos["servicio"] == "on"){
-        echo '<script>
-        window.location.href="?modal=proadd&key='. $datos["cod"] .'&step=2&cad=0&com=0&dep=0";
-        </script>';
-      } else {
         echo '<script>
         window.location.href="?modal=proadd&key='. $datos["cod"] .'&step=2&cad='. $datos["caduca"] .'&com='. $datos["compuesto"] .'&dep='. $datos["dependiente"] .'";
         </script>';
-      }
+
   }
 
 
@@ -97,6 +97,8 @@ class ProUpdate{
               $datos["fecha"] = date("d-m-Y");
               $datos["hora"] = date("H:i:s");
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+              $datos["time"] = Helpers::TimeId();
               if ($db->insert("producto_ingresado", $datos)) {
                 // debo actualizar el total (cantidad) de producto
                     if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$datox["cod"]." and td = ".$_SESSION["td"]."")) { 
@@ -141,7 +143,7 @@ class ProUpdate{
                       <td>'.$cad.'</td>
                       <td>'.$b["fecha"]. ' | ' .$b["hora"] .'</td>';
                 if($n == 1 and $b["fecha"] == date("d-m-Y")){
-                  echo '<td><a id="delproagrega" iden="'.$b["id"].'" op="49" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>';
+                  echo '<td><a id="delproagrega" hash="'.$b["hash"].'" op="49" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>';
                 } else {
                   echo '<td><a class="btn-floating btn-sm btn-green"><i class="fa fa-ban"></i></a></td>';
                 }
@@ -155,20 +157,20 @@ class ProUpdate{
   }
 
 
-  public function DelProAgrega($iden, $producto){ // elimina precio
+  public function DelProAgrega($hash, $producto){ // elimina precio
     $db = new dbConn();
     // debo actualizar el total (cantidad) de producto
                     if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$producto." and td = ".$_SESSION["td"]."")) { 
                         $canti = $r["cantidad"];
                     } unset($r); 
-                    if ($r = $db->select("cant, fecha", "producto_ingresado", "WHERE id = ".$iden." and td = ".$_SESSION["td"]."")) { 
+                    if ($r = $db->select("cant, fecha", "producto_ingresado", "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) { 
                         $cantix = $r["cant"];
                         $fechai = $r["fecha"];
                     } unset($r);
                         
                     //////////// 
       if($fechai == date("d-m-Y")){
-        if ( $db->delete("producto_ingresado", "WHERE id=" . $iden)) {
+        if ( $db->delete("producto_ingresado", "WHERE hash='$hash'")) {
           //
                 $cambio = array();
                 $cambio["cantidad"] = $canti - $cantix;
@@ -218,6 +220,8 @@ class ProUpdate{
               $datos["hora"] = date("H:i:s");
               $datos["usuario"] = $_SESSION["user"];
               $datos["td"] = $_SESSION["td"];
+              $datos["hash"] = Helpers::HashId();
+              $datos["time"] = Helpers::TimeId();
               if ($db->insert("producto_averias", $datos)) {
                 // debo actualizar el total (cantidad) de producto
                     if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$datox["cod"]." and td = ".$_SESSION["td"]."")) { 
@@ -260,7 +264,7 @@ class ProUpdate{
                       <td>'.$b["comentarios"].'</td>
                       <td>'.$b["fecha"]. ' | ' .$b["hora"] .'</td>';
                 if($n == 1 and $b["fecha"] == date("d-m-Y")){
-                  echo '<td><a id="delaveria" iden="'.$b["id"].'" op="52" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>';
+                  echo '<td><a id="delaveria" hash="'.$b["hash"].'" op="52" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>';
                 } else {
                   echo '<td><a class="btn-floating btn-sm btn-green"><i class="fa fa-ban"></i></a></td>';
                 }
@@ -275,20 +279,20 @@ class ProUpdate{
 
 
 
-  public function DelAveria($iden, $producto){ // elimina precio
+  public function DelAveria($hash, $producto){ // elimina precio
     $db = new dbConn();
     // debo actualizar el total (cantidad) de producto
                     if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$producto." and td = ".$_SESSION["td"]."")) { 
                         $canti = $r["cantidad"];
                     } unset($r); 
-                    if ($r = $db->select("cant, fecha", "producto_averias", "WHERE id = ".$iden." and td = ".$_SESSION["td"]."")) { 
+                    if ($r = $db->select("cant, fecha", "producto_averias", "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) { 
                         $cantix = $r["cant"];
                         $fechai = $r["fecha"];
                     } unset($r);
                         
                     //////////// 
       if($fechai == date("d-m-Y")){
-        if ( $db->delete("producto_averias", "WHERE id=" . $iden)) {
+        if ( $db->delete("producto_averias", "WHERE hash='$hash'")) {
           //
                 $cambio = array();
                 $cambio["cantidad"] = $canti + $cantix;

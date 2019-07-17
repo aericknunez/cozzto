@@ -5,9 +5,9 @@ include_once 'application/common/Mysqli.php';
 $db = new dbConn();
 
 // realizo las consultas de los select aqui
-    $a = $db->query("SELECT iden, nombre FROM proveedores WHERE td = ".$_SESSION["td"]."");
-    $c = $db->query("SELECT iden, categoria FROM producto_categoria WHERE td = ".$_SESSION["td"]."");
-    $e = $db->query("SELECT iden, nombre FROM producto_unidades WHERE td = ".$_SESSION["td"]."");
+    $a = $db->query("SELECT hash, nombre FROM proveedores WHERE td = ".$_SESSION["td"]."");
+    $c = $db->query("SELECT hash, categoria FROM producto_categoria WHERE td = ".$_SESSION["td"]."");
+    $e = $db->query("SELECT hash, nombre FROM producto_unidades WHERE td = ".$_SESSION["td"]."");
 
 ?>
 
@@ -37,7 +37,7 @@ $db = new dbConn();
       <select class="browser-default custom-select" id="proveedor" name="proveedor">
         <option selected disabled>Proveedor</option>
         <?php foreach ($a as $b) {
-        echo '<option value="'. $b["iden"] .'">'. $b["nombre"] .'</option>'; 
+        echo '<option value="'. $b["hash"] .'">'. $b["nombre"] .'</option>'; 
         } $a->close(); ?>
       </select>
     </div>
@@ -47,7 +47,7 @@ $db = new dbConn();
       <select class="browser-default custom-select" id="categoria" name="categoria">
         <option selected disabled>* Categorias</option>
         <?php foreach ($c as $d) {
-        echo '<option value="'. $d["iden"] .'">'. $d["categoria"] .'</option>'; 
+        echo '<option value="'. $d["hash"] .'">'. $d["categoria"] .'</option>'; 
         } $c->close(); ?>
       </select>
     </div>
@@ -56,7 +56,7 @@ $db = new dbConn();
         <select class="browser-default custom-select" id="medida" name="medida">
         <option selected disabled>* Unidad de Medida</option>
         <?php foreach ($e as $f) {
-        echo '<option value="'. $f["iden"] .'">'. $f["nombre"] .'</option>'; 
+        echo '<option value="'. $f["hash"] .'">'. $f["nombre"] .'</option>'; 
         } $e->close();
          ?>
       </select>
@@ -76,12 +76,22 @@ $db = new dbConn();
       <input type="number" class="form-control" id="existencia_minima" name="existencia_minima" required>
     </div>
 	
-	<div class="col-md-4 mb-1 md-form">
+	<div class="col-md-2 mb-1 md-form">
       	<div class="switch">
             <label>
-            * Gravado ||  Off
+            * Gravado
               <input type="checkbox" id="gravado" name="gravado">
-              <span class="lever"></span> On 
+              <span class="lever"></span>
+            </label>
+          </div>
+    </div>
+
+  <div class="col-md-2 mb-1 md-form">
+        <div class="switch">
+            <label>
+            * Receta
+              <input type="checkbox" id="receta" name="receta">
+              <span class="lever"></span>
             </label>
           </div>
     </div>

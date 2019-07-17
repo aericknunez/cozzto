@@ -230,19 +230,19 @@ class Helpers{
             }
 
 
-public static function UpdateIden($tabla, $iden){ // para actualizar el iden con el valor de id
-  $db = new dbConn();
-    $cambio = array();
-    $cambio["iden"] = $iden;
-    if($db->update($tabla, $cambio, "WHERE id='$iden'")){
-      return true;
-    } else {
-      return false;
-    }
+////////////////////////////// Nuevos Hash
+public static function HashId(){
+  $id = $_SESSION["td"] . "-" . date("d-m-Y-H:i:s") . rand(1,999999999);
+  $iden = sha1($id);
+  $hash = substr($iden,0,10);
+  return $hash;
 }
 
 
-
+public static function TimeId(){
+  $id = strtotime(date("H:i:s"));
+  return $id;
+}
 
 
 

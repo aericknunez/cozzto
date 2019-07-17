@@ -10,13 +10,12 @@ class Proveedores{
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
+                $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
                 $datos["td"] = $_SESSION["td"];
                 if ($db->insert("proveedores", $datos)) {
 
-                    $i = $db->insert_id();
-                   if(Helpers::UpdateIden("proveedores", $i)){
-                    Alerts::Alerta("success","Realizado!","Registro realizado correctamente!");
-                  }  
+                       Alerts::Alerta("success","Realizado!","Registro realizado correctamente!");  
                 }
 
         } else {
@@ -41,7 +40,9 @@ class Proveedores{
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
-              if ($db->update("proveedores", $datos, "WHERE iden = ".$datos["iden"]." and td = ".$_SESSION["td"]."")) {
+                $datos["time"] = Helpers::TimeId();
+                $hash = $datos["hash"];
+              if ($db->update("proveedores", $datos, "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) {
                   Alerts::Alerta("success","Realizado!","Cambio realizado exitsamente!");
                   echo '<script>
                         window.location.href="?proveedorver"
@@ -81,7 +82,7 @@ class Proveedores{
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a id="delproveedor" iden="'.$b["iden"].'" op="61" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="61" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -92,9 +93,9 @@ class Proveedores{
   }
 
 
-  public function DelProveedor($iden){ // elimina precio
+  public function DelProveedor($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("proveedores", "WHERE iden=" . $iden)) {
+        if ( $db->delete("proveedores", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Proveedor eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -102,9 +103,9 @@ class Proveedores{
       $this->VerProveedores();
   }
 
-  public function DelProveedorx($iden){ // elimina precio
+  public function DelProveedorx($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("proveedores", "WHERE iden=" . $iden)) {
+        if ( $db->delete("proveedores", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Proveedor eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -140,8 +141,8 @@ class Proveedores{
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a href="?modal=editproveedor&key='.$b["iden"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
-                      <td><a id="delproveedor" iden="'.$b["iden"].'" op="62" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a href="?modal=editproveedor&key='.$b["hash"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
+                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="62" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>

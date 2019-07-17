@@ -85,7 +85,7 @@ class Inicio{
                                 $_SESSION["caduca"] = 0;
                             } if($ahora > $key1 - 432000 and $ahora <= $key1){ // entre los 5
                                 $_SESSION["caduca"] = 1;
-                            } if($ahora > $key1 and $ahora <= $key1 + 432000){ // 
+                            } if($ahora > $key1 and $ahora <= $key1 + 432000){ // faltan 5
                                 $_SESSION["caduca"] = 2;
                             }if($ahora > $key1 + 432000){ // se paso
                                 $_SESSION["caduca"] = 3;

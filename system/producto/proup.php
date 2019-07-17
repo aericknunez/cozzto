@@ -27,6 +27,7 @@ $descripcion = $r["descripcion"];
 $cantidad = $r["cantidad"];
 $existencia_minima = $r["existencia_minima"]; 
 $gravado = $r["gravado"];
+$receta = $r["receta"];
 $servicio = $r["servicio"]; 
 $compuesto = $r["compuesto"];
 $caduca = $r["caduca"]; 
@@ -62,35 +63,35 @@ if($cod != NULL){
 
 
     <div class="col-md-4 mb-1 md-form">
-      <?php $a = $db->query("SELECT iden, nombre FROM proveedores WHERE td = ".$_SESSION["td"].""); ?>
+      <?php $a = $db->query("SELECT hash, nombre FROM proveedores WHERE td = ".$_SESSION["td"].""); ?>
       <select class="browser-default custom-select" id="proveedor" name="proveedor">
         <option selected disabled>Proveedor</option>
         <?php foreach ($a as $b) {
-          if($proveedor == $b["iden"]) $pro = "selected"; else $pro = "";
-        echo '<option value="'. $b["iden"] .'"'.$pro.'>'. $b["nombre"] .'</option>'; 
+          if($proveedor == $b["hash"]) $pro = "selected"; else $pro = "";
+        echo '<option value="'. $b["hash"] .'"'.$pro.'>'. $b["nombre"] .'</option>'; 
         } $a->close(); ?>
       </select>
     </div>
 
 
     <div class="col-md-4 mb-1 md-form">
-      <?php $c = $db->query("SELECT iden, categoria FROM producto_categoria WHERE td = ".$_SESSION["td"].""); ?>
+      <?php $c = $db->query("SELECT hash, categoria FROM producto_categoria WHERE td = ".$_SESSION["td"].""); ?>
       <select class="browser-default custom-select" id="categoria" name="categoria">
         <option selected disabled>* Categorias</option>
         <?php foreach ($c as $d) {
-          if($categoria == $d["iden"]) $pro = "selected"; else $pro = "";
-        echo '<option value="'. $d["iden"] .'"'.$pro.'>'. $d["categoria"] .'</option>'; 
+          if($categoria == $d["hash"]) $pro = "selected"; else $pro = "";
+        echo '<option value="'. $d["hash"] .'"'.$pro.'>'. $d["categoria"] .'</option>'; 
         } $c->close(); ?>
       </select>
     </div>
 
     <div class="col-md-4 mb-1 md-form">
-      <?php  $e = $db->query("SELECT iden, nombre FROM producto_unidades WHERE td = ".$_SESSION["td"].""); ?>
+      <?php  $e = $db->query("SELECT hash, nombre FROM producto_unidades WHERE td = ".$_SESSION["td"].""); ?>
         <select class="browser-default custom-select" id="medida" name="medida">
         <option selected disabled>* Unidad de Medida</option>
         <?php foreach ($e as $f) {
-          if($medida == $f["iden"]) $pro = "selected"; else $pro = "";
-        echo '<option value="'. $f["iden"] .'" '.$pro.'>'. $f["nombre"] .'</option>'; 
+          if($medida == $f["hash"]) $pro = "selected"; else $pro = "";
+        echo '<option value="'. $f["hash"] .'" '.$pro.'>'. $f["nombre"] .'</option>'; 
         } $e->close();
          ?>
       </select>
@@ -110,12 +111,22 @@ if($cod != NULL){
       <input type="number" class="form-control" id="existencia_minima" name="existencia_minima" required value="<?php echo $existencia_minima; ?>">
     </div>
   
-  <div class="col-md-4 mb-1 md-form">
+  <div class="col-md-2 mb-1 md-form">
         <div class="switch">
             <label>
-            * Gravado ||  Off
+            * Gravado
               <input type="checkbox" id="gravado" <?php if($gravado == "on") echo "checked"; ?> name="gravado">
-              <span class="lever"></span> On 
+              <span class="lever"></span>
+            </label>
+          </div>
+    </div>
+
+  <div class="col-md-2 mb-1 md-form">
+        <div class="switch">
+            <label>
+            * Receta
+              <input type="checkbox" id="receta" <?php if($receta == "on") echo "checked"; ?> name="receta">
+              <span class="lever"></span>
             </label>
           </div>
     </div>
@@ -191,10 +202,10 @@ if($cod != NULL){
 </form>
 
 <!-- TERMINA FORMULARIO PRINCIPAL -->
-<? } 
-
-} else {
+<? } else {
  echo "No se ha encontrado este producto";
 }
+
+} 
 ?>
 </div> <!-- TERMINA CONTENIDO -->

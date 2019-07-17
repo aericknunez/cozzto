@@ -15,7 +15,7 @@ class Fechas{
 	    } unset($r);  
 
 	    $consumo = $fpago - $activacion; 
-	    $consumo = $consumo / 86400;
+	    $consumo = $consumo / 86400; //86400 equivale a un dia
         return $consumo;
     }
 

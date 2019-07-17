@@ -72,9 +72,9 @@ $(document).ready(function(){
 // borrar un precio de producto
 	$("body").on("click","#delprecio",function(){
 		var op = $(this).attr('op');
-		var iden = $(this).attr('iden');
+		var hash = $(this).attr('hash');
 		var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#muestraprecios").html(data);
 	   	 });
 	});
@@ -133,9 +133,9 @@ $(document).ready(function(){
 // borrar producto compuesto
 	$("body").on("click","#delcompuesto",function(){
 		var op = $(this).attr('op');
-		var iden = $(this).attr('iden');
+		var hash = $(this).attr('hash');
 		var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#muestraproductos").html(data);
 	   	 });
 	});
@@ -167,9 +167,9 @@ $(document).ready(function(){
 // borrar producto dependiente
 	$("body").on("click","#deldependiente",function(){
 		var op = $(this).attr('op');
-		var iden = $(this).attr('iden');
+		var hash = $(this).attr('hash');
 		var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#muestradependiente").html(data);
 	   	 });
 	});
@@ -241,9 +241,9 @@ $(document).ready(function(){
 
 	$("body").on("click","#deltag",function(){
 		var op = $(this).attr('op');
-		var iden = $(this).attr('iden');
+		var hash = $(this).attr('hash');
 		var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#muestraetiqueta").html(data);
 	   	 });
 	});
@@ -275,8 +275,8 @@ $(document).ready(function(){
 
 	$("body").on("click","#delubicacion",function(){ // borrar ubicacion
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
-	    $.post("application/src/routes.php", {op:op, iden:iden}, function(data){
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinoubicacion").html(data);
 		$("#select-ubicacion").load('application/src/routes.php?op=42');
 	   	 });
@@ -307,9 +307,9 @@ $(document).ready(function(){
 
 	$("body").on("click","#delubicacionasig",function(){
 		var op = $(this).attr('op');
-		var iden = $(this).attr('iden');
+		var hash = $(this).attr('hash');
 		var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#muestraubicacionasig").html(data);
 	   	 });
 	});
@@ -342,8 +342,8 @@ $(document).ready(function(){
 
 	$("body").on("click","#delcaracteristica",function(){ // borrar categoria
 	var op = $(this).attr('op');
-	var iden = $(this).attr('iden');
-	    $.post("application/src/routes.php", {op:op, iden:iden}, function(data){
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinocaracteristica").html(data);
 		$("#select-caracteristica").load('application/src/routes.php?op=45');
 	   	 });
@@ -376,9 +376,9 @@ $(document).ready(function(){
 
 	$("body").on("click","#delcaracteristicaasig",function(){
 		var op = $(this).attr('op');
-		var iden = $(this).attr('iden');
+		var hash = $(this).attr('hash');
 		var producto = $(this).attr('producto');
-	    $.post("application/src/routes.php", {op:op, iden:iden, producto:producto}, function(data){
+	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#muestracaracteristicaasig").html(data);
 	   	 });
 	});

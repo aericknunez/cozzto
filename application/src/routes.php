@@ -199,7 +199,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="23"){ // borrar categoria
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelCategoria($_REQUEST["iden"]);
+	$productos->DelCategoria($_REQUEST["hash"]);
 }
 
 
@@ -214,7 +214,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="25"){ // borrar unidad de medida
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelUnidad($_REQUEST["iden"]);
+	$productos->DelUnidad($_REQUEST["hash"]);
 }
 
 
@@ -228,7 +228,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="27"){ // borrar caracteristicas
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelCaracteristica($_REQUEST["iden"]);
+	$productos->DelCaracteristica($_REQUEST["hash"]);
 }
 
 
@@ -244,7 +244,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="29"){ // borrar ubicacion
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelUbicacion($_REQUEST["iden"]);
+	$productos->DelUbicacion($_REQUEST["hash"]);
 }
 
 
@@ -258,7 +258,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="31"){ // elimina los precios de cada producto
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelPrecios($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelPrecios($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 
@@ -277,7 +277,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="34"){ // elimina compuesto del producto
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelCompuesto($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelCompuesto($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 
@@ -290,7 +290,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="36"){ // elimina dependiente del producto
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelDependiente($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelDependiente($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 //////////etiquetas
@@ -310,7 +310,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="39"){ // elimina tag
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelTag($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelTag($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 if($_REQUEST["op"]=="40"){ // asigna ubicacion
@@ -322,7 +322,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="41"){ // elimina ubicacion
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelUbicacionAsig($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelUbicacionAsig($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 if($_REQUEST["op"]=="42"){ // Para select de ubicacion
@@ -342,7 +342,7 @@ include_once '../../system/producto/Productos.php';
 if($_REQUEST["op"]=="44"){ // elimina caracteristica
 include_once '../../system/producto/Productos.php';
 	$productos = new Productos;
-	$productos->DelCaracteristicaAsig($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelCaracteristicaAsig($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 if($_REQUEST["op"]=="45"){ // Para select de caracteristica
@@ -376,7 +376,7 @@ include_once '../../system/producto/ProUpdate.php';
 if($_REQUEST["op"]=="49"){ // elimina producto
 include_once '../../system/producto/ProUpdate.php';
 	$productos = new ProUpdate;
-	$productos->DelProAgrega($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelProAgrega($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 // busqueda agregar pro
@@ -397,7 +397,7 @@ include_once '../../system/producto/ProUpdate.php';
 if($_REQUEST["op"]=="52"){ // elimina averias
 include_once '../../system/producto/ProUpdate.php';
 	$productos = new ProUpdate;
-	$productos->DelAveria($_REQUEST["iden"], $_REQUEST["producto"]);
+	$productos->DelAveria($_REQUEST["hash"], $_REQUEST["producto"]);
 }
 
 if($_REQUEST["op"]=="53"){ // busqueda de productos para compuestos
@@ -419,13 +419,13 @@ include_once '../../system/proveedor/Proveedor.php';
 if($_REQUEST["op"]=="61"){ // elimina proveedor
 include_once '../../system/proveedor/Proveedor.php';
 	$proveedor = new Proveedores;
-	$proveedor->DelProveedor($_REQUEST["iden"]);
+	$proveedor->DelProveedor($_REQUEST["hash"]);
 }
 
 if($_REQUEST["op"]=="62"){ // elimina proveedor desde liasta completa
 include_once '../../system/proveedor/Proveedor.php';
 	$proveedor = new Proveedores;
-	$proveedor->DelProveedorx($_REQUEST["iden"]);
+	$proveedor->DelProveedorx($_REQUEST["hash"]);
 }
 
 if($_REQUEST["op"]=="63"){ // actualizar proveedor
@@ -447,13 +447,13 @@ include_once '../../system/cliente/Cliente.php';
 if($_REQUEST["op"]=="65"){ // elimina proveedor
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
-	$cliente->DelCliente($_REQUEST["iden"]);
+	$cliente->DelCliente($_REQUEST["hash"]);
 }
 
 if($_REQUEST["op"]=="66"){ // elimina proveedor desde liasta completa
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
-	$cliente->DelClientex($_REQUEST["iden"]);
+	$cliente->DelClientex($_REQUEST["hash"]);
 }
 
 if($_REQUEST["op"]=="67"){ // actualizar proveedor

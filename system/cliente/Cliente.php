@@ -10,13 +10,12 @@ class Clientes {
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
+                $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
                 $datos["td"] = $_SESSION["td"];
                 if ($db->insert("clientes", $datos)) {
 
-                    $i = $db->insert_id();
-                   if(Helpers::UpdateIden("clientes", $i)){
-                    Alerts::Alerta("success","Realizado!","Registro realizado correctamente!");
-                  }  
+                    Alerts::Alerta("success","Realizado!","Registro realizado correctamente!");  
                 }
 
         } else {
@@ -41,7 +40,9 @@ class Clientes {
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
-              if ($db->update("clientes", $datos, "WHERE iden = ".$datos["iden"]." and td = ".$_SESSION["td"]."")) {
+              $datos["time"] = Helpers::TimeId();
+              $hash = $datos["hash"];
+              if ($db->update("clientes", $datos, "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) {
                   Alerts::Alerta("success","Realizado!","Cambio realizado exitsamente!");
                   echo '<script>
                         window.location.href="?clientever"
@@ -81,7 +82,7 @@ class Clientes {
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a id="delcliente" iden="'.$b["iden"].'" op="65" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcliente" hash="'.$b["hash"].'" op="65" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -92,9 +93,9 @@ class Clientes {
   }
 
 
-  public function DelCliente($iden){ // elimina precio
+  public function DelCliente($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("clientes", "WHERE iden=" . $iden)) {
+        if ( $db->delete("clientes", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Cliente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -102,9 +103,9 @@ class Clientes {
       $this->VerClientes();
   }
 
-  public function DelClientex($iden){ // elimina precio
+  public function DelClientex($hash){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("clientes", "WHERE iden=" . $iden)) {
+        if ( $db->delete("clientes", "WHERE hash='$hash'")) {
            Alerts::Alerta("success","Eliminado!","Cliente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
@@ -140,8 +141,8 @@ class Clientes {
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a href="?modal=editcliente&key='.$b["iden"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
-                      <td><a id="delcliente" iden="'.$b["iden"].'" op="66" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a href="?modal=editcliente&key='.$b["hash"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
+                      <td><a id="delcliente" hash="'.$b["hash"].'" op="66" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
