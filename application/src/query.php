@@ -39,6 +39,10 @@ echo '
 	if($_GET["modal"] == "editproveedor"){
 	echo '<script type="text/javascript" src="assets/js/query/proveedor.js?v='.$numero.'"></script>';
 	}
+	/// Cliente
+	if($_GET["modal"] == "editcliente"){
+	echo '<script type="text/javascript" src="assets/js/query/cliente.js?v='.$numero.'"></script>';
+	}
 
 } // termina modal
 
@@ -73,6 +77,16 @@ elseif(isset($_GET["proveedorver"])) {
 echo '
 <script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
 <script type="text/javascript" src="assets/js/query/proveedordatatable.js?v='.$numero.'"></script>';
+} 
+
+//////////////// cliente
+elseif(isset($_GET["clienteadd"])) {
+echo '<script type="text/javascript" src="assets/js/query/cliente.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["clientever"])) {
+echo '
+<script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
+<script type="text/javascript" src="assets/js/query/clientedatatable.js?v='.$numero.'"></script>';
 } 
 
 

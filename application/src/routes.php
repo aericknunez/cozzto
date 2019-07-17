@@ -436,6 +436,44 @@ include_once '../../system/proveedor/Proveedor.php';
 
 
 
+/////////////////////// cliente
+
+if($_REQUEST["op"]=="64"){ // agregar proveedor
+include_once '../../system/cliente/Cliente.php';
+	$cliente = new Clientes;
+	$cliente->AddCliente($_POST);
+}
+
+if($_REQUEST["op"]=="65"){ // elimina proveedor
+include_once '../../system/cliente/Cliente.php';
+	$cliente = new Clientes;
+	$cliente->DelCliente($_REQUEST["iden"]);
+}
+
+if($_REQUEST["op"]=="66"){ // elimina proveedor desde liasta completa
+include_once '../../system/cliente/Cliente.php';
+	$cliente = new Clientes;
+	$cliente->DelClientex($_REQUEST["iden"]);
+}
+
+if($_REQUEST["op"]=="67"){ // actualizar proveedor
+include_once '../../system/cliente/Cliente.php';
+	$cliente = new Clientes;
+	$cliente->UpCliente($_POST);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /////////
 $db->close();

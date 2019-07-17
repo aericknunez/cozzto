@@ -23,6 +23,11 @@ elseif(isset($_GET["proveedoradd"])) include_once 'system/proveedor/proveedores.
 elseif(isset($_GET["proveedorver"])) include_once 'system/proveedor/proveedorver.php'; // agregar averias
 
 
+// clientes
+elseif(isset($_GET["clienteadd"])) include_once 'system/cliente/clientes.php'; // agregar averias
+elseif(isset($_GET["clientever"])) include_once 'system/cliente/clientever.php'; // agregar averias
+
+
 else{
 include_once 'system/index/index.php';
 }

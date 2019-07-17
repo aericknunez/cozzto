@@ -1,20 +1,20 @@
 <?php 
-class Proveedores{
+class Clientes {
 
 		public function __construct() { 
      	} 
 
 
 
-  public function AddProveedor($datos){
+  public function AddCliente($datos){
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
                 $datos["td"] = $_SESSION["td"];
-                if ($db->insert("proveedores", $datos)) {
+                if ($db->insert("clientes", $datos)) {
 
                     $i = $db->insert_id();
-                   if(Helpers::UpdateIden("proveedores", $i)){
+                   if(Helpers::UpdateIden("clientes", $i)){
                     Alerts::Alerta("success","Realizado!","Registro realizado correctamente!");
                   }  
                 }
@@ -22,7 +22,7 @@ class Proveedores{
         } else {
           Alerts::Alerta("error","Error!","Faltan Datos!");
         }
-      $this->VerProveedores();
+      $this->VerClientes();
   }
 
 
@@ -37,14 +37,14 @@ class Proveedores{
         }
   }
 
-  public function UpProveedor($datos){ // lo que viede del formulario principal
+  public function UpCliente($datos){ // lo que viede del formulario principal
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
-              if ($db->update("proveedores", $datos, "WHERE iden = ".$datos["iden"]." and td = ".$_SESSION["td"]."")) {
+              if ($db->update("clientes", $datos, "WHERE iden = ".$datos["iden"]." and td = ".$_SESSION["td"]."")) {
                   Alerts::Alerta("success","Realizado!","Cambio realizado exitsamente!");
                   echo '<script>
-                        window.location.href="?proveedorver"
+                        window.location.href="?clientever"
                       </script>';
               }           
 
@@ -55,9 +55,9 @@ class Proveedores{
 
 
 
-  public function VerProveedores(){
+  public function VerClientes(){
       $db = new dbConn();
-          $a = $db->query("SELECT * FROM proveedores WHERE td = ".$_SESSION["td"]." order by id desc limit 10");
+          $a = $db->query("SELECT * FROM clientes WHERE td = ".$_SESSION["td"]." order by id desc limit 10");
           if($a->num_rows > 0){
         echo '<table class="table table-sm table-hover">
           <thead>
@@ -81,41 +81,41 @@ class Proveedores{
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a id="delproveedor" iden="'.$b["iden"].'" op="61" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcliente" iden="'.$b["iden"].'" op="65" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
         </table>';
-            echo '<div class="text-center"><a href="?proveedorver" class="btn btn-outline-info btn-rounded waves-effect btn-sm">Ver Todos</a></div>';
+            echo '<div class="text-center"><a href="?clientever" class="btn btn-outline-info btn-rounded waves-effect btn-sm">Ver Todos</a></div>';
           } $a->close();  
       
   }
 
 
-  public function DelProveedor($iden){ // elimina precio
+  public function DelCliente($iden){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("proveedores", "WHERE iden=" . $iden)) {
-           Alerts::Alerta("success","Eliminado!","Proveedor eliminado correctamente!");
+        if ( $db->delete("clientes", "WHERE iden=" . $iden)) {
+           Alerts::Alerta("success","Eliminado!","Cliente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
         } 
-      $this->VerProveedores();
+      $this->VerClientes();
   }
 
-  public function DelProveedorx($iden){ // elimina precio
+  public function DelClientex($iden){ // elimina precio
     $db = new dbConn();
-        if ( $db->delete("proveedores", "WHERE iden=" . $iden)) {
-           Alerts::Alerta("success","Eliminado!","Proveedor eliminado correctamente!");
+        if ( $db->delete("clientes", "WHERE iden=" . $iden)) {
+           Alerts::Alerta("success","Eliminado!","Cliente eliminado correctamente!");
         } else {
             Alerts::Alerta("error","Error!","Algo Ocurrio!");
         } 
-      $this->VerTodosProveedores();
+      $this->VerTodosClientes();
   }
 
 
-  public function VerTodosProveedores(){
+  public function VerTodosClientes(){
       $db = new dbConn();
-          $a = $db->query("SELECT * FROM proveedores WHERE td = ".$_SESSION["td"]." order by id desc");
+          $a = $db->query("SELECT * FROM clientes WHERE td = ".$_SESSION["td"]." order by id desc");
           if($a->num_rows > 0){
         echo '<table id="dtMaterialDesignExample" class="table table-striped" table-sm cellspacing="0" width="100%">
                 <thead>
@@ -140,8 +140,8 @@ class Proveedores{
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a href="?modal=editproveedor&key='.$b["iden"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
-                      <td><a id="delproveedor" iden="'.$b["iden"].'" op="62" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a href="?modal=editcliente&key='.$b["iden"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
+                      <td><a id="delcliente" iden="'.$b["iden"].'" op="66" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
