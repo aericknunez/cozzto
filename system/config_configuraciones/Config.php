@@ -246,6 +246,100 @@ class Config{
 
 
 
+
+
+/// para las tablas a sync
+
+
+	public function VerTablas(){
+		$db = new dbConn();
+
+	$tables = $db->listTables();
+    $arrlength = count($tables);
+
+		echo '<table class="table table-sm table-striped">
+	   <thead>
+	     <tr>
+	       <th>Nombre de la Tabla</th>
+	       <th>Estado</th>
+	       <th>Acci&oacuten</th>
+	     </tr>
+	   </thead>
+	   <tbody>';
+			for($x = 0; $x < $arrlength; $x++) {     
+	
+		echo '<tr>
+		       <td>' . $tables[$x] . '</td>';
+		       if($this->VerificaTabla($tables[$x]) == TRUE){
+		       	echo '<td>Existe</td>
+		       	<td><a id="tablemod" op="13" tabla="'.$tables[$x].'" accion="2" class="btn-floating btn-sm"><i class="fas fa-trash red-text"></i></a></td>';
+		       } else {
+		       	echo '<td>No existe</td>
+		       	<td><a id="tablemod" op="13" tabla="'.$tables[$x].'" accion="1"  class="btn-floating btn-sm"><i class="fas fa-check-circle green-text"></i></a></td>';
+		       }
+		echo '</tr>';
+
+		    } 
+		echo '</tbody>
+		</table>';
+ 
+ }
+
+
+
+	public function VerificaTabla($tabla){
+		$db = new dbConn();
+
+		$a = $db->query("SELECT tabla FROM sync_tabla WHERE tabla = '$tabla' and td =  ".$_SESSION["td"]."");
+		if($a->num_rows > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		} $a->close();
+ }
+
+
+	public function ModTabla($datos){
+		$db = new dbConn();
+
+		if($datos["accion"] == "1"){
+
+			    $inserta = array();
+			    $inserta["tabla"] = $datos["tabla"];
+			    $inserta["hash"] = Helpers::HashId();
+			    $inserta["time"] = Helpers::TimeId();
+			    $inserta["td"] = $_SESSION["td"];
+			    if ($db->insert("sync_tabla", $inserta)) {
+			        Alerts::Alerta("success","Agregado Correctamente","Se Agrego esta tabla");
+			    } 
+
+		} else {
+			    if (Helpers::DeleteId("sync_tabla","tabla = '".$datos["tabla"]."' and td = ".$_SESSION["td"]."")) {
+			         Alerts::Alerta("warning","Eliminado Correctamente","Se elimino esta tabla");
+			    }
+		}
+	
+	$this->VerTablas();
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 } // fin de la clase
 
  ?>

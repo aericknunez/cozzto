@@ -18,7 +18,14 @@ $db = new dbConn();
 
 // $dato = array();
 // $dato["cant"] = "15";
-// Helpers::UdatadeId("producto_ingresado", $dato, "producto='1' and td = ".$_SESSION["td"]."");
+// Helpers::UpdateId("producto_ingresado", $dato, "producto='1' and td = ".$_SESSION["td"]."");
 
 echo '<div id="ventana"></div>';
+
+if($_SESSION["tipo_inicio"] == 1){
+include_once 'system/ventas/venta_lenta.php';
+} else {
+include_once 'system/ventas/venta_rapida.php';
+}
+
 ?>

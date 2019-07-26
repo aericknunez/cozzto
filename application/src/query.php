@@ -46,6 +46,11 @@ echo '
 
 } // termina modal
 
+//config
+elseif(isset($_GET["tablas"])) {
+echo '<script type="text/javascript" src="assets/js/query/conf_config.js?v='.$numero.'"></script>';
+} 
+
 
 elseif(isset($_GET["user"])) {
 echo '<script type="text/javascript" src="assets/js/query/user.js?v='.$numero.'"></script>';
@@ -93,6 +98,11 @@ echo '
 else{
 /// lo que llevara index
 //echo '<script type="text/javascript" src="assets/js/query/ventas.js?v='.$numero.'"></script>';
+
+	if($venta == TRUE){ // si es en venta
+	echo '<script type="text/javascript" src="assets/js/query/venta.js?v='.$numero.'"></script>';
+	}
+
 }
 	
 ?>

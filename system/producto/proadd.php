@@ -34,7 +34,7 @@ $db = new dbConn();
 
 
     <div class="col-md-4 mb-1 md-form">
-      <select class="browser-default custom-select" id="proveedor" name="proveedor">
+      <select class="mdb-select md-form colorful-select dropdown-dark" id="proveedor" name="proveedor">
         <option selected disabled>Proveedor</option>
         <?php foreach ($a as $b) {
         echo '<option value="'. $b["hash"] .'">'. $b["nombre"] .'</option>'; 
@@ -44,7 +44,7 @@ $db = new dbConn();
 
 
     <div class="col-md-4 mb-1 md-form">
-      <select class="browser-default custom-select" id="categoria" name="categoria">
+      <select class="mdb-select md-form colorful-select dropdown-dark" id="categoria" name="categoria">
         <option selected disabled>* Categorias</option>
         <?php foreach ($c as $d) {
         echo '<option value="'. $d["hash"] .'">'. $d["categoria"] .'</option>'; 
@@ -53,7 +53,7 @@ $db = new dbConn();
     </div>
 
     <div class="col-md-4 mb-1 md-form">
-        <select class="browser-default custom-select" id="medida" name="medida">
+        <select class="mdb-select md-form colorful-select dropdown-dark" id="medida" name="medida">
         <option selected disabled>* Unidad de Medida</option>
         <?php foreach ($e as $f) {
         echo '<option value="'. $f["hash"] .'">'. $f["nombre"] .'</option>'; 

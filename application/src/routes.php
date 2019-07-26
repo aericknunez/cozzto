@@ -168,6 +168,13 @@ if($_REQUEST["op"]=="12"){ // Subir imagen negocio
 }
 
 
+///////////// modifica las tablas del sync
+if($_REQUEST["op"]=="13"){
+	include_once '../../system/config_configuraciones/Config.php';
+	$configuracion = new Config;
+	$configuracion->ModTabla($_POST);
+}
+
 
 
 
@@ -465,8 +472,33 @@ include_once '../../system/cliente/Cliente.php';
 
 
 
+// ventas////////////////////
+
+if($_REQUEST["op"]=="75"){ // busca producto
+include_once '../../system/ventas/Productos.php';
+	$productos = new Productos;
+	$productos->Busqueda($_POST);
+}
+
+if($_REQUEST["op"]=="76"){ // temp prodcutos (el producto encontrado despues de la busqueda)
+include_once '../../system/ventas/Productos.php';
+	$productos = new Productos;
+	$productos->TempProducto($_REQUEST);
+}
 
 
+
+if($_REQUEST["op"]=="80"){ // recibe el formulario para agregar los productos (va a ventas)
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->AddVenta($_POST);
+}
+
+if($_REQUEST["op"]=="81"){ // borrar venta  de la venta lenta
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->DelVenta($_REQUEST["hash"]);
+}
 
 
 

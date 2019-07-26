@@ -38,6 +38,16 @@ return false;
 
 
 
+	$("body").on("click","#tablemod",function(){ // borrar categoria
+	var op = $(this).attr('op');
+	var tabla = $(this).attr('tabla');
+	var accion = $(this).attr('accion');
+	    $.post("application/src/routes.php", {op:op, tabla:tabla, accion:accion}, function(data){
+		$("#contenido").html(data);
+	   	 });
+	});
+
+
 
 
 });

@@ -537,14 +537,14 @@ class Productos{
           $n = 1;
           $canta = 0;
               foreach ($a as $b) { 
-                if ($r = $db->select("caracteristica", "caracteristicas", "WHERE hash = ".$b["caracteristica"]." and td = ".$_SESSION["td"]."")) { 
+                if ($r = $db->select("caracteristica", "caracteristicas", "WHERE hash = '".$b["caracteristica"]."' and td = ".$_SESSION["td"]."")) { 
                         $nombre = $r["caracteristica"];
                       }  unset($r); 
                 echo '<tr>
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="delcaracteristicaasig" hash="'.$b["id"].'" op="44" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcaracteristicaasig" hash="'.$b["caracteristica"].'" op="44" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
                     </tr>';
                     $canta =  $canta + $b["cant"];          
               }

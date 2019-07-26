@@ -15,7 +15,7 @@ class ProUpdate{
                 if($datos["caduca"] == NULL) $datos["caduca"] = 0;
                 if($datos["dependiente"] == NULL) $datos["dependiente"] = 0;
                 $datos["time"] = Helpers::TimeId();
-              if ($db->update("producto", $datos, "WHERE cod = ".$datos["cod"]." and td = ".$_SESSION["td"]."")) {
+              if (Helpers::UpdateId("producto", $datos, "cod = ".$datos["cod"]." and td = ".$_SESSION["td"]."")) {
                   $this->Redirect($datos);
               }           
 
@@ -106,7 +106,7 @@ class ProUpdate{
                     } unset($r); 
                         $cambio = array();
                         $cambio["cantidad"] = $datox["cantidad"] + $canti;
-                        $db->update("producto", $cambio, "WHERE cod = ".$datox["cod"]." and td = ".$_SESSION["td"].""); 
+                        Helpers::UpdateId("producto", $cambio, "cod = ".$datox["cod"]." and td = ".$_SESSION["td"].""); 
                     //////////// 
                 Alerts::Alerta("success","Realizado!","Registro creado exitosamente!");
                 }
@@ -170,11 +170,11 @@ class ProUpdate{
                         
                     //////////// 
       if($fechai == date("d-m-Y")){
-        if ( $db->delete("producto_ingresado", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_ingresado", "hash='$hash'")) {
           //
                 $cambio = array();
                 $cambio["cantidad"] = $canti - $cantix;
-                $db->update("producto", $cambio, "WHERE cod = ".$producto." and td = ".$_SESSION["td"].""); 
+                Helpers::UpdateId("producto", $cambio, "cod = '$producto' and td = ".$_SESSION["td"].""); 
           //
            Alerts::Alerta("success","Eliminado!","Productos eliminados correctamente!");
         } else {
@@ -185,6 +185,8 @@ class ProUpdate{
       }
       $this->VerAgrega($producto);
   }
+
+
 
   public function AgregaBusqueda($dato){ // Busqueda para compuestos
     $db = new dbConn();
@@ -229,7 +231,7 @@ class ProUpdate{
                     } unset($r); 
                         $cambio = array();
                         $cambio["cantidad"] = $canti - $datox["cantidad"];
-                        $db->update("producto", $cambio, "WHERE cod = ".$datox["cod"]." and td = ".$_SESSION["td"].""); 
+                        Helpers::UpdateId("producto", $cambio, "cod = ".$datox["cod"]." and td = ".$_SESSION["td"].""); 
                     //////////// 
                 Alerts::Alerta("success","Realizado!","Registro creado exitosamente!");
                 }
@@ -292,11 +294,11 @@ class ProUpdate{
                         
                     //////////// 
       if($fechai == date("d-m-Y")){
-        if ( $db->delete("producto_averias", "WHERE hash='$hash'")) {
+        if (Helpers::DeleteId("producto_averias", "hash='$hash'")) {
           //
                 $cambio = array();
                 $cambio["cantidad"] = $canti + $cantix;
-                $db->update("producto", $cambio, "WHERE cod = ".$producto." and td = ".$_SESSION["td"].""); 
+                Helpers::UpdateId("producto", $cambio, "cod = ".$producto." and td = ".$_SESSION["td"].""); 
           //
            Alerts::Alerta("success","Eliminado!","Averia eliminada correctamente!");
         } else {

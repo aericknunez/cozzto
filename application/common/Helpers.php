@@ -285,7 +285,18 @@ public static function UpdateId($tabla, $dato, $condicion){
               $datos["time"] = self::TimeId();
               $datos["action"] = 2;
               $datos["td"] = $_SESSION["td"];
-              $db->insert("sync_tables", $datos);
+
+              /// verifico si hay registro, lo actualizao, sino  lo agrego
+              $reg = $db->query("SELECT * FROM sync_tables WHERE tabla = '$tabla' and hash = '".$b["hash"]."' and td = ".$_SESSION["td"]."");
+              if($reg->num_rows == 0){
+                $db->insert("sync_tables", $datos);
+              } else {
+                $datopre["time"] = self::TimeId();
+                $db->update("sync_tables", $datopre, "WHERE tabla = '$tabla' and hash = '".$b["hash"]."' and td = ".$_SESSION["td"]."");
+              } $reg->close();
+               /// con esto nada mas se registra una vez           
+
+
               $dato["time"] = self::TimeId();
               if($db->update($tabla, $dato, "WHERE {$condicion}")){
                 return TRUE;
@@ -293,7 +304,8 @@ public static function UpdateId($tabla, $dato, $condicion){
                 return FALSE;
               }
           unset($datos);
-        } $a->close();
+        } $a->close(); // foreach
+
       } else { // si es web solo actualizo y ya
             $dato["time"] = self::TimeId();
             if($db->update($tabla, $dato, "WHERE {$condicion}")){

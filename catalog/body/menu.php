@@ -97,7 +97,7 @@
 
 <li><a href="?configuraciones" class="waves-effect"><i class="fas fa-cog"></i> Configuraciones</a></li>
 <li><a href="?root" class="waves-effect"><i class="fas fa-cogs"></i> Configuraciones Root</a></li>
-<li><a href="?root" class="waves-effect"><i class="fas fa-cogs"></i> Respaldos</a></li>
+<li><a href="?tablas" class="waves-effect"><i class="fas fa-cogs"></i> Tablas a respaldar</a></li>
 
 </ul>
 </div>

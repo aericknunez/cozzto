@@ -11,13 +11,15 @@ $(document).ready(function(){
 		  formatSubmit: 'dd-mm-yyyy',
 		  close: 'Cancel'
 		})
+    
 
-
+    $(document).ready(function() {
+    $('.mdb-select').materialSelect();
+    });
 
 
 
 	$('#btn-proadd').click(function(e){ /// para el formulario
-	$('#btn-proadd').addClass('disabled');
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=20",
@@ -27,15 +29,11 @@ $(document).ready(function(){
 				// $("#form-proadd").trigger("reset");
 				$("#msj").html(data);			
 				// window.location.href="?modal=proadd&key=0000";
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
 
-    function BotonEnable(){
-        $('#btn-proadd').removeClass("disabled");
-    }
 
 
 	$("#form-proadd").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
@@ -148,7 +146,6 @@ $(function() { // activar y desactivar los checked despues de darle clic a servi
 
 // agrega
 	$('#btn-productoagrega').click(function(e){ /// para el formulario
-	$('#btn-productoagrega').addClass('disabled');
 	e.preventDefault();
 	$.ajax({
 			url: "application/src/routes.php?op=48",
@@ -157,15 +154,11 @@ $(function() { // activar y desactivar los checked despues de darle clic a servi
 			success: function(data){
 				$("#form-productoagrega").trigger("reset");
 				$("#destinoproductoagrega").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
 
-    function BotonEnable(){
-        $('#btn-productoagrega').removeClass("disabled");
-    }
 
 
 	$("#form-productoagrega").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
