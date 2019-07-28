@@ -256,7 +256,7 @@ public static function DeleteId($tabla, $condicion){
               $datos["time"] = self::TimeId();
               $datos["action"] = 1;
               $datos["td"] = $_SESSION["td"];
-              $db->insert("sync_tables", $datos);
+              $db->insert("sync_tables_updates", $datos);
               if($db->delete($tabla, "WHERE {$condicion}")){
                 return TRUE;
               } else {
@@ -287,12 +287,12 @@ public static function UpdateId($tabla, $dato, $condicion){
               $datos["td"] = $_SESSION["td"];
 
               /// verifico si hay registro, lo actualizao, sino  lo agrego
-              $reg = $db->query("SELECT * FROM sync_tables WHERE tabla = '$tabla' and hash = '".$b["hash"]."' and td = ".$_SESSION["td"]."");
+              $reg = $db->query("SELECT * FROM sync_tables_updates WHERE tabla = '$tabla' and hash = '".$b["hash"]."' and td = ".$_SESSION["td"]."");
               if($reg->num_rows == 0){
-                $db->insert("sync_tables", $datos);
+                $db->insert("sync_tables_updates", $datos);
               } else {
                 $datopre["time"] = self::TimeId();
-                $db->update("sync_tables", $datopre, "WHERE tabla = '$tabla' and hash = '".$b["hash"]."' and td = ".$_SESSION["td"]."");
+                $db->update("sync_tables_updates", $datopre, "WHERE tabla = '$tabla' and hash = '".$b["hash"]."' and td = ".$_SESSION["td"]."");
               } $reg->close();
                /// con esto nada mas se registra una vez           
 

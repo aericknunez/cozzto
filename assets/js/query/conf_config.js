@@ -42,7 +42,8 @@ return false;
 	var op = $(this).attr('op');
 	var tabla = $(this).attr('tabla');
 	var accion = $(this).attr('accion');
-	    $.post("application/src/routes.php", {op:op, tabla:tabla, accion:accion}, function(data){
+	var edo = $(this).attr('edo');
+	    $.post("application/src/routes.php", {op:op, tabla:tabla, accion:accion, edo:edo}, function(data){
 		$("#contenido").html(data);
 	   	 });
 	});
