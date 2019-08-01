@@ -7,12 +7,13 @@ $(document).ready(function(){
 		url: "application/src/routes.php?op=75",
 		data:'keyword='+$(this).val(),
 		beforeSend: function(){
-			$("#muestra-busqueda").css("background","#FFF url(assets/img/LoaderIcon.gif) no-repeat 520px");
+			$("#muestra-busqueda").css("background","#FFF url(assets/img/LoaderIcon.gif) no-repeat 550px");
 		},
 		success: function(data){
 			$("#muestra-busqueda").show();
 			$("#muestra-busqueda").html(data);
 			$("#producto-busqueda").css("background","#FFF");
+			Esconder();
 		}
 		});
 	});
@@ -25,7 +26,21 @@ $(document).ready(function(){
 	// 	$("#temp-productos").load('application/src/routes.php?op=76&key=' + cod);
 	// });
 
+//////// cancel 
+	$("body").on("click","#cancel-p",function(){
+		$("#muestra-busqueda").hide();
+		Esconder();
+		$("#p-busqueda").trigger("reset"); 
+	});
 
+	$("body").on("click","#cancel-x",function(){
+		$("#muestra-busqueda").hide();
+		Esconder();
+		$("#p-busqueda").trigger("reset"); 
+	});
+
+
+////////////////
 
 	$("body").on("click","#select-p",function(){
 	Mostrar();
@@ -36,7 +51,7 @@ $(document).ready(function(){
     		$("#muestra-busqueda").hide();
     		$("#temp-productos").html(data); // lo que regresa de la busquea 
 		    $("#btn-addform").show();
-		    $("#producto-busqueda").trigger("reset"); // no funciona
+		    $("#p-busqueda").trigger("reset"); // no funciona
    	 	});
 	});
 
@@ -49,6 +64,9 @@ $(document).ready(function(){
 			url: "application/src/routes.php?op=80",
 			method: "POST",
 			data: $("#form-addform").serialize(),
+			beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
 			success: function(data){
 				$("#form-addform").trigger("reset");
 				$("#ver").html(data);						
@@ -67,11 +85,13 @@ $(document).ready(function(){
 
 function Mostrar(){
 	$("#btn-addform").show();
+	$("#cancel-x").show();
 	$("#temp-productos").show();
 }
 
 function Esconder(){
 	$("#btn-addform").hide();
+	$("#cancel-x").hide();
 	$("#temp-productos").hide();
 }
 
@@ -80,16 +100,33 @@ Esconder();
 
 
 
-	$("body").on("click","#borrar-ticket",function(){
-	var op = $(this).attr('op');
-	var hash = $(this).attr('hash');
-    	$.post("application/src/routes.php", {op:op, hash:hash}, 
-    	function(data){
-    		$("#ver").html(data); // lo que regresa de la busquea 
-   	 	});
-	});
+	// $("body").on("click","#borrar-ticket",function(){
+	// var op = $(this).attr('op');
+	// var hash = $(this).attr('hash');
+ //    	$.post("application/src/routes.php", {op:op, hash:hash}, 
+ //    	function(data){
+ //    		$("#ver").html(data); // lo que regresa de la busquea 
+ //   	 	});
+	// });
 
 
+    $("body").on("click","#borrar-ticket",function(){
+        var op = $(this).attr('op');
+		var hash = $(this).attr('hash');
+        var dataString = 'op='+op+'&hash='+hash;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#ver").html(data); // lo que regresa de la busquea 
+            }
+        });
+    });                 
 
 
 

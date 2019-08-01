@@ -11,7 +11,9 @@ $db = new dbConn();
 <div align="center">
   <div class="col-md-6 z-depth-2 justify-content-center">
       <div class="md-form mt-0">
+      	<form id="p-busqueda">
         <input class="form-control" type="text" placeholder="Buscar Producto" aria-label="Search" id="producto-busqueda" name="producto-busqueda" autofocus>
+        </form>
       </div>
   </div>
   <div class="col-md-6 z-depth-2 justify-content-center" id="muestra-busqueda"></div>
@@ -25,7 +27,10 @@ $db = new dbConn();
 <div id="temp-productos"></div> <!--  producto que viende despues de la busqueda -->
 
 
-<div align="center"><button class="btn btn-info my-0" type="submit" id="btn-addform"><i class="fa fa-floppy-o mr-1"></i> Guardar</button></div>
+<div align="center"><button class="btn btn-info my-0" type="submit" id="btn-addform"><i class="fas fa-save mr-1"></i> Guardar</button>
+
+<a id="cancel-x" class="btn btn-danger my-0" type="submit" id="btn-addform"><i class="fas fa-ban mr-1"></i> Cancelar</a>
+</div>
 
 </form>
 

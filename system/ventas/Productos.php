@@ -10,19 +10,30 @@ class Productos{
       if($dato["keyword"] != NULL){
              $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
                 if($a->num_rows > 0){
-                    echo '<table class="table table-sm table-hover">';
+                    echo '<table class="table table-striped table-sm table-hover">';
             foreach ($a as $b) {
                        echo '<tr>
                               <td scope="row"><a id="select-p" cod="'. $b["cod"] .'" descripcion="'. $b["descripcion"] .'">
                               '. $b["cod"] .'  || '. $b["descripcion"] .'</a></td>
                             </tr>'; 
-            }  $a->close();
+            }  
+                        echo '<tr>
+                              <td scope="row"><a id="cancel-p">CANCELAR</a></td>
+                            </tr>'; 
+                $a->close();
 
-                echo '
-                </table>';
+                
               } else {
-                    echo "El criterio de busqueda no corresponde a un producto";
+                 echo '<table class="table table-sm table-hover">';
+                    echo '<tr>
+                              <td scope="row">El criterio de busqueda no corresponde a un producto</td>
+                            </tr>';
+                    echo '<tr>
+                              <td scope="row"><a id="cancel-p">CANCELAR</a></td>
+                            </tr>';
              }
+
+          echo '</table>';
       }
 
   }
