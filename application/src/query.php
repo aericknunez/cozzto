@@ -44,6 +44,12 @@ echo '
 	echo '<script type="text/javascript" src="assets/js/query/cliente.js?v='.$numero.'"></script>';
 	}
 
+
+	/// facturar
+	if($_GET["modal"] == "facturar"){
+	echo '<script type="text/javascript" src="assets/js/query/facturar.js?v='.$numero.'"></script>';
+	}
+
 } // termina modal
 
 //config

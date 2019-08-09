@@ -38,7 +38,7 @@ return false;
 
 
 
-	$("body").on("click","#tablemod",function(){ // borrar categoria
+	$("body").on("click","#tablemod",function(){ // modificar tablas
 	var op = $(this).attr('op');
 	var tabla = $(this).attr('tabla');
 	var accion = $(this).attr('accion');

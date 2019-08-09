@@ -469,8 +469,15 @@ include_once '../../system/cliente/Cliente.php';
 	$cliente->UpCliente($_POST);
 }
 
+/// ver Lateral
 
 
+
+if($_REQUEST["op"]=="70"){ // busca producto
+include_once '../../system/ventas/Laterales.php';
+	$lateral = new Laterales;
+	$lateral->VerLateral($_SESSION["orden"]);
+}
 
 // ventas////////////////////
 
@@ -501,7 +508,28 @@ include_once '../../system/ventas/Ventas.php';
 }
 
 
+if($_REQUEST["op"]=="82"){ // guardar la venta
+unset($_SESSION["orden"]);
+}
 
+if($_REQUEST["op"]=="83"){ // select orden
+$_SESSION["orden"] = $_POST["orden"];
+}
+
+if($_REQUEST["op"]=="84"){ // ver producto
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->VerProducto();
+}
+
+
+
+if($_REQUEST["op"]=="85"){ // facturar
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->Facturar($_POST);
+
+}
 
 
 

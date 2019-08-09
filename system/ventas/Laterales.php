@@ -1,0 +1,117 @@
+<?php 
+class Laterales{
+
+	public function __construct() { 
+ 	} 
+
+
+
+ 	public function VerLateral($orden){
+ 		$db = new dbConn();
+
+ 		if($orden != NULL){
+ 			$this->MostrarTotal($orden);
+ 			$this->MostrarBotones($orden);
+ 		} else {
+ 			$this->MostrarOrdenes();
+ 		}
+
+ 	}
+
+
+
+
+ 	public function MostrarTotal($orden){ // totales de la orden
+ 		$db = new dbConn();
+
+
+ 		echo '<div class="card-deck text-center">
+			    <!--Panel-->
+			    <div class="card">
+			        <div class="card-body">
+			            <h4 class="card-title">TOTAL '. $_SESSION['config_moneda_simbolo'] .'</h4>
+			            <p class="black-text display-3"> '. $this->ObtenerTotal($orden) .'</p>
+			        </div>
+			    </div>
+			</div>';
+			echo '<hr>';
+
+
+ 	}
+
+
+ 	public function MostrarOrdenes(){ // listado de ordenes pendientes
+ 		$db = new dbConn();
+
+ 		    if ($r = $db->select("count(correlativo)", "ticket_orden", "WHERE estado = 1 and td = ".$_SESSION["td"]."")) {if($r["count(correlativo)"] > 0){
+ 		    		$this->ObtenerOrdenes();
+	 		    } else {
+	 		    	echo '<img src="assets/img/logo/default.png" alt="">';
+	 		    }
+		    }  unset($r);  
+ 		
+ 	}
+
+
+
+ 	public function MostrarBotones($orden){ // botones de funcion para la venta
+ 		echo '<div align="center" class="justify-content-center">';
+ 		echo '<button id="guardar" orden="'.$orden.'" op="82" class="btn btn-outline-primary btn-rounded waves-effect"><i class="fas fa-save mr-1"></i> Guardar</button>';
+ 		if($_SESSION['tipo_cuenta'] != 4){
+ 			echo '<a href="?modal=facturar" class="btn btn-outline-secondary btn-rounded waves-effect"><i class="fas fa-money-bill-alt mr-1"></i> Cobrar</a>';
+ 		}
+ 		//echo '<button class="btn btn-outline-danger btn-rounded waves-effect"><i class="fas fa-ban mr-1"></i> Cancelar</button>';
+ 		echo '<button class="btn btn-outline-blue-grey btn-rounded waves-effect"><i class="fas fa-cog mr-1"></i> Opciones</button>';
+
+ 		echo '</div>';
+ 	}
+
+
+
+ 	public function ObtenerTotal($orden){ // listado de ordenes pendientes
+ 		$db = new dbConn();
+
+ 		    if ($r = $db->select("sum(total)", "ticket", "WHERE orden = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."")) { 
+		        return $r["sum(total)"];
+		    }  unset($r);  
+ 		
+ 	}
+
+
+ 	public function ObtenerOrdenes(){ // listado de ordenes
+ 		$db = new dbConn();
+
+ 		    $a = $db->query("SELECT * FROM ticket_orden WHERE estado = 1 and td = ".$_SESSION["td"]."");
+
+	 		    if($a->num_rows > 0){
+	 		    	echo '<ul class="list-group">
+					  <li class="list-group-item d-flex justify-content-between align-items-center active">
+					    ORDENES PENDIENTES A COBRAR
+					    <span class="badge badge-danger badge-pill">'.$a->num_rows.'</span>
+					  </li>';
+	 		    	foreach ($a as $b) {
+	 		    	echo '<a id="select-orden" orden="'. $b["correlativo"].'" op="83" class="list-group-item list-group-item-action"> <span class="badge badge-danger badge-pill"><i class="fas fa-reply"></i></span> '. $b["empleado"].'</a>';
+			    }
+			    	echo '</ul>';
+ 		    } $a->close();
+ 		
+ 	}
+
+
+
+ 	public function ContarProducto($orden){ // listado de ordenes pendientes
+ 		$db = new dbConn();
+
+ 			$a = $db->query("SELECT producto FROM ticket WHERE num_fac = 0 and orden = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+			return $a->num_rows;
+			$a->close();
+ 		
+ 	}
+
+
+
+
+
+
+
+} // Termina la lcase

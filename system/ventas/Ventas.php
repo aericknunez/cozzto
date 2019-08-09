@@ -331,6 +331,90 @@ class Ventas{
    }
 
 
+///////////////////////////////// facturar
+
+
+	public function AddTicketNum($efectivo) { //leva el control del autoincremento de los clientes
+		$db = new dbConn();
+
+	    if ($r = $db->select("num_fac", "ticket_num", "WHERE td = ".$_SESSION["td"]." and tx = ".$_SESSION["tx"]." order by orden desc limit 1")) { 
+	        $ultimoorden = $r["num_fac"];
+	    } unset($r);  
+
+			$datos = array();
+		    $datos["fecha"] = date("d-m-Y");
+		    $datos["hora"] = date("H:i:s");
+		    $datos["num_fac"] = $ultimoorden + 1;
+		    $datos["orden"] = $_SESSION["orden"];
+		    $datos["efectivo"] = $efectivo;
+		    $datos["estado"] = 1;
+		    $datos["tx"] = $_SESSION["tx"];
+		    $datos["hash"] = Helpers::HashId();
+		    $datos["time"] = Helpers::TimeId();
+		    $datos["td"] = $_SESSION["td"];
+		    $db->insert("ticket_num", $datos); 
+		
+ 		return $ultimoorden + 1;
+	}
+
+
+
+
+   public function Facturar($datos){
+  		$db = new dbConn();
+
+  		$factura = $this->AddTicketNum($datos["efectivo"]);
+ 
+	    $cambio = array();
+	   	$cambio["num_fac"] = $factura;
+	   	$cambio["tipo_pago"] = 1;
+	   	Helpers::UpdateId("ticket", $cambio, "orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");  
+
+	   	$cambios = array();
+	   	$cambios["estado"] = 2;
+	   	Helpers::UpdateId("ticket_orden", $cambios, "correlativo = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");  
+
+	   	$this->FacturaResult($factura, $datos["efectivo"]);
+
+	   	unset($_SESSION["orden"]);
+   }
+
+
+
+
+
+   public function FacturaResult($factura, $efectivo){
+  		$db = new dbConn();
+
+    $a = $db->query("SELECT sum(stotal), sum(imp), sum(total) FROM ticket WHERE num_fac = '$factura' and orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+		    foreach ($a as $b) {
+		     $stotal=$b["sum(stotal)"]; $imp=$b["sum(imp)"]; $total=$b["sum(total)"];
+		    } $a->close();
+
+if($efectivo == NULL){
+	$efectivo = $total;
+}
+
+$cambio = $efectivo - $total;
+echo '<p class="text-center">Sub Total: '. Helpers::Dinero($stotal) .' ||  Impuestos: '. Helpers::Dinero($imp) . '</p>';
+
+echo '<p class="text-center font-weight-bold">TOTAL:</p>';
+echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($total) .'</div> <hr>';
+
+echo '<p class="text-center font-weight-bold">EFECTIVO:</p>';
+echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($efectivo) .'</div> <hr>';
+
+echo '<p class="text-center font-weight-bold">CAMBIO:</p>'; 
+echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($cambio) . '</div>'; 
+
+
+   }
+
+
+
+
+
+
 
 
 

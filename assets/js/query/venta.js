@@ -52,6 +52,7 @@ $(document).ready(function(){
     		$("#temp-productos").html(data); // lo que regresa de la busquea 
 		    $("#btn-addform").show();
 		    $("#p-busqueda").trigger("reset"); // no funciona
+		    $("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
    	 	});
 	});
 
@@ -69,7 +70,8 @@ $(document).ready(function(){
             },
 			success: function(data){
 				$("#form-addform").trigger("reset");
-				$("#ver").html(data);						
+				$("#ver").html(data);	
+		    	$("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral					
 			}
 		})
 	});
@@ -124,10 +126,53 @@ Esconder();
             },
             success: function(data) {            
                 $("#ver").html(data); // lo que regresa de la busquea 
+                $("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
             }
         });
     });                 
 
+
+
+    $("body").on("click","#guardar",function(){
+        var op = $(this).attr('op');
+		var orden = $(this).attr('orden');
+        var dataString = 'op='+op+'&orden='+orden;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#ver").html(data); // lo que regresa de la busquea 
+                $("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
+            }
+        });
+    });                 
+
+
+
+
+    $("body").on("click","#select-orden",function(){
+        var op = $(this).attr('op');
+		var orden = $(this).attr('orden');
+        var dataString = 'op='+op+'&orden='+orden;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#ver").load('application/src/routes.php?op=84'); // ver productos de la orden 
+                $("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
+            }
+        });
+    });                 
 
 
 

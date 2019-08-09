@@ -23,6 +23,8 @@ if($_REQUEST["modal"]=="editproveedor") include_once 'system/modal/modal/editar-
 
 if($_REQUEST["modal"]=="editcliente") include_once 'system/modal/modal/editar-cliente.php';
 
+// facturar
+if($_REQUEST["modal"]=="facturar") include_once 'system/modal/modal/facturar.php';
 
 
 // producto
