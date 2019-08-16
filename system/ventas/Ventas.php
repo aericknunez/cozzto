@@ -7,7 +7,8 @@ class Ventas{
 
 
 
-   public function AddVenta($datos){
+   public function AddVenta($datos){ // lento
+	if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
   	$this->Agregar($datos);
 
   	$this->VerProducto();
@@ -15,14 +16,33 @@ class Ventas{
 
 
 
+   public function SumaVenta($datos){ // Rapida
 
-	public function Agregar($datos) {
+  		if($this->ObtenerCantidad($datos["cod"]) > 0){
+  			if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
+  			
+  			/// aqui determino si agrego o actualizo
+  			$product = $this->ObtenerCantidadTicket($datos["cod"]);
+  			if($product > 0){
+  				$datos["cantidad"] = $product + 1;
+  				$this->Actualiza($datos);
+  			} else {
+  				$datos["cantidad"] = 1;
+  				$this->Agregar($datos);
+  			}
+  		} else {
+  			 Alerts::Alerta("error","Error!","No se encontro el producto!");
+  		}
+  	$this->VerProducto();
+   }
+
+
+
+
+
+	public function Agregar($datos) { // agrega el producto
 		$db = new dbConn();
 
-		if($_SESSION["orden"] == NULL){
-			$this->AddOrden();
-		}
-	
 	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
 	$sumas = $pv * $datos["cantidad"];
 
@@ -54,8 +74,32 @@ class Ventas{
 	    if ($db->insert("ticket", $datox)) {
 	       $this->AgregaCaracteristicas($datos, $hash);
 	       $this->AgregaUbicacion($datos, $hash);
-	       $this->DescuetaProducto($datos["cod"], $datos["cantidad"]);
+	       $this->ActualizaProducto($datos["cod"], $datos["cantidad"], NULL);
 	    } 
+
+	}
+
+
+
+
+	public function Actualiza($datos) { // agrega el producto suma de uno n uno
+		$db = new dbConn();
+
+	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
+	$sumas = $pv * $datos["cantidad"];
+
+    $stot=Helpers::STotal($sumas, $_SESSION['config_imp']);
+    $im=Helpers::Impuesto($stot, $_SESSION['config_imp']);
+
+	    $cambio = array();
+	    $cambio["cant"] = $datos["cantidad"];
+	    $cambio["pv"] = $pv;
+	    $cambio["stotal"] = $stot;
+	    $cambio["imp"] = $im;
+	    $cambio["total"] = $stot + $im;
+	    if (Helpers::UpdateId("ticket", $cambio, "cod='".$datos["cod"]."' and orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."")) {
+	       $this->ActualizaProducto($datos["cod"], 1, NULL);
+	    }
 
 	}
 
@@ -102,10 +146,24 @@ class Ventas{
     }
 
 
-	public function DescuetaProducto($cod,$cant) { // descuenta los productos
+	public function ObtenerCantidadTicket($cod) { // obtine cantiad de productos
 		$db = new dbConn();
+
+	if ($r = $db->select("cant", "ticket", "WHERE cod = '$cod' and orden = ".$_SESSION["orden"]." and tx =  ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."")){ 
+        return $r["cant"];
+    	} unset($r); 
+    }
+
+
+	public function ActualizaProducto($cod,$cant,$funt) { // descuenta o regresa los productos
+		$db = new dbConn();
+			if($funt == NULL){ // $func null es resta
+				$cantidad = $this->ObtenerCantidad($cod) - $cant; 
+			} else {
+				$cantidad = $this->ObtenerCantidad($cod) + $cant; 
+			}
 		    $cambio = array();
-		    $cambio["cantidad"] = $this->ObtenerCantidad($cod) - $cant;
+		    $cambio["cantidad"] = $cantidad;
 		    Helpers::UpdateId("producto", $cambio, "cod='$cod' and td = ".$_SESSION["td"]."");
     }
 
@@ -260,16 +318,16 @@ class Ventas{
 
 //// borrar
 	
-	public function CuentaProductos($orden){
+	public function CuentaProductos($orden){ // productde  de la tabla ticket
 		$db = new dbConn();
 
-		$a = $db->query("SELECT * FROM ticket WHERE orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+		$a = $db->query("SELECT * FROM ticket WHERE orden = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
 		    
 		    return $a->num_rows;
 		    $a->close();
     }
 
-	
+
 	public function DelOrden($orden){ // elimina el registro de la orden
 		$db = new dbConn();
 
@@ -329,15 +387,40 @@ class Ventas{
 
   	$this->VerProducto();
    }
+/////// guardar la venta
 
 
-///////////////////////////////// facturar
+
+
+///////////////////////////////// ordenes
+	public function GuardarOrden() { //guarda la orden para poder facturar
+		$db = new dbConn();
+
+		$cambios = array();
+	   	$cambios["estado"] = 3;
+	   	Helpers::UpdateId("ticket_orden", $cambios, "correlativo = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"].""); 
+
+		unset($_SESSION["orden"]);
+	}
+
+	public function SelectOrden($orden) { //Seleccioa Orden
+		$db = new dbConn();
+
+		$cambios = array();
+	   	$cambios["estado"] = 1;
+	   	Helpers::UpdateId("ticket_orden", $cambios, "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"].""); 
+
+		$_SESSION["orden"] = $orden;
+	}
+
+
+
 
 
 	public function AddTicketNum($efectivo) { //leva el control del autoincremento de los clientes
 		$db = new dbConn();
 
-	    if ($r = $db->select("num_fac", "ticket_num", "WHERE td = ".$_SESSION["td"]." and tx = ".$_SESSION["tx"]." order by orden desc limit 1")) { 
+	    if ($r = $db->select("num_fac", "ticket_num", "WHERE td = ".$_SESSION["td"]." and tx = ".$_SESSION["tx"]." order by num_fac desc limit 1")) { 
 	        $ultimoorden = $r["num_fac"];
 	    } unset($r);  
 
@@ -347,7 +430,7 @@ class Ventas{
 		    $datos["num_fac"] = $ultimoorden + 1;
 		    $datos["orden"] = $_SESSION["orden"];
 		    $datos["efectivo"] = $efectivo;
-		    $datos["estado"] = 1;
+		    $datos["edo"] = 1;
 		    $datos["tx"] = $_SESSION["tx"];
 		    $datos["hash"] = Helpers::HashId();
 		    $datos["time"] = Helpers::TimeId();

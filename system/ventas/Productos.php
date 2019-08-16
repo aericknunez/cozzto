@@ -5,7 +5,7 @@ class Productos{
      	} 
 
 
-  public function Busqueda($dato){ // Busqueda para compuestos
+  public function Busqueda($dato){ // Busqueda para busqueda lenta
     $db = new dbConn();
       if($dato["keyword"] != NULL){
              $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
@@ -40,7 +40,7 @@ class Productos{
 
 
 
-  public function TempProducto($dato){ // revisa las propuedades del producto para mostrarlos
+  public function TempProducto($dato){ // revisa las propuedades del producto para mostrarlos (lento)
     $db = new dbConn();
 
   if ($r = $db->select("*", "producto", "WHERE cod = '". $dato["cod"] ."' and td = ".$_SESSION["td"]."")) {  $cantidad = $r["cantidad"];

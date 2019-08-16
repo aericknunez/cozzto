@@ -22,7 +22,7 @@ $db = new dbConn();
 
 echo '<div id="ventana"></div>';
 
-if($_SESSION["tipo_inicio"] == 1){
+if($_SESSION["tipo_inicio"] == 2){
 include_once 'system/ventas/venta_lenta.php';
 } else {
 include_once 'system/ventas/venta_rapida.php';

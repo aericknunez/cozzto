@@ -43,7 +43,7 @@ class Laterales{
  	public function MostrarOrdenes(){ // listado de ordenes pendientes
  		$db = new dbConn();
 
- 		    if ($r = $db->select("count(correlativo)", "ticket_orden", "WHERE estado = 1 and td = ".$_SESSION["td"]."")) {if($r["count(correlativo)"] > 0){
+ 		    if ($r = $db->select("count(correlativo)", "ticket_orden", "WHERE estado = 3 and td = ".$_SESSION["td"]."")) {if($r["count(correlativo)"] > 0){
  		    		$this->ObtenerOrdenes();
 	 		    } else {
 	 		    	echo '<img src="assets/img/logo/default.png" alt="">';
@@ -81,7 +81,7 @@ class Laterales{
  	public function ObtenerOrdenes(){ // listado de ordenes
  		$db = new dbConn();
 
- 		    $a = $db->query("SELECT * FROM ticket_orden WHERE estado = 1 and td = ".$_SESSION["td"]."");
+ 		    $a = $db->query("SELECT * FROM ticket_orden WHERE estado = 3 and td = ".$_SESSION["td"]."");
 
 	 		    if($a->num_rows > 0){
 	 		    	echo '<ul class="list-group">

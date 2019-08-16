@@ -509,11 +509,15 @@ include_once '../../system/ventas/Ventas.php';
 
 
 if($_REQUEST["op"]=="82"){ // guardar la venta
-unset($_SESSION["orden"]);
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->GuardarOrden();
 }
 
 if($_REQUEST["op"]=="83"){ // select orden
-$_SESSION["orden"] = $_POST["orden"];
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->SelectOrden($_POST["orden"]);
 }
 
 if($_REQUEST["op"]=="84"){ // ver producto
@@ -530,6 +534,23 @@ include_once '../../system/ventas/Ventas.php';
 	$venta->Facturar($_POST);
 
 }
+
+
+
+////////////////// para venta lenta
+
+if($_REQUEST["op"]=="90"){ // recibe el formulario para agregar los productos (va a ventas)
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->SumaVenta($_POST);
+}
+
+
+
+
+
+
+
 
 
 
