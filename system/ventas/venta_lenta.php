@@ -1,8 +1,9 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 $venta = TRUE;
+$tventa = 2;
 
-include_once 'system/ventas/Ventas.php';
+include_once 'system/ventas/VentasL.php';
 $ventas = new Ventas(); 
 include_once 'application/common/Mysqli.php';
 $db = new dbConn();

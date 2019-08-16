@@ -507,40 +507,44 @@ include_once '../../system/ventas/Productos.php';
 
 
 if($_REQUEST["op"]=="80"){ // recibe el formulario para agregar los productos (va a ventas)
-include_once '../../system/ventas/Ventas.php';
+include_once '../../system/ventas/VentasL.php';
 	$venta = new Ventas();
 	$venta->AddVenta($_POST);
 }
 
 if($_REQUEST["op"]=="81"){ // borrar venta  de la venta lenta
-include_once '../../system/ventas/Ventas.php';
+include_once '../../system/ventas/VentasL.php';
 	$venta = new Ventas();
 	$venta->DelVenta($_REQUEST["hash"]);
 }
 
 
 if($_REQUEST["op"]=="82"){ // guardar la venta
-include_once '../../system/ventas/Ventas.php';
+include_once '../../system/ventas/VentasL.php';
 	$venta = new Ventas();
 	$venta->GuardarOrden();
 }
 
 if($_REQUEST["op"]=="83"){ // select orden
-include_once '../../system/ventas/Ventas.php';
+include_once '../../system/ventas/VentasL.php';
 	$venta = new Ventas();
 	$venta->SelectOrden($_POST["orden"]);
 }
 
 if($_REQUEST["op"]=="84"){ // ver producto
-include_once '../../system/ventas/Ventas.php';
+include_once '../../system/ventas/VentasL.php';
 	$venta = new Ventas();
 	$venta->VerProducto();
 }
 
 
 
-if($_REQUEST["op"]=="85"){ // facturar
-include_once '../../system/ventas/Ventas.php';
+if($_REQUEST["op"]=="85"){ // facturar determinar si es rapido o lento
+	if($_SESSION["tipo_inicio"] == 1){
+	include_once '../../system/ventas/VentasR.php';
+	} else {
+	include_once '../../system/ventas/VentasL.php';
+	}
 	$venta = new Ventas();
 	$venta->Facturar($_POST);
 
@@ -548,32 +552,33 @@ include_once '../../system/ventas/Ventas.php';
 
 
 
-////////////////// para venta lenta
+////////////////// para venta rapida
 
 if($_REQUEST["op"]=="90"){ // recibe el formulario para agregar los productos (va a ventas)
-include_once '../../system/ventas/Ventas.php';
+include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
 	$venta->SumaVenta($_POST);
 }
 
 // mod cantidad restar
 if($_REQUEST["op"]=="91"){ // recibe el formulario para agregar los productos (va a ventas)
-include_once '../../system/ventas/Ventas.php';
+include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
 	$venta->RestaVenta($_POST);
 }
 
-// mod cantidad sumar
-if($_REQUEST["op"]=="92"){ // recibe el formulario para agregar los productos (va a ventas)
-include_once '../../system/ventas/Ventas.php';
+
+if($_REQUEST["op"]=="92"){ // borrar venta  de la venta rapida
+include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
-	$venta->SumaVenta($_POST);
+	$venta->DelVenta($_REQUEST["hash"]);
 }
 
-
-
-
-
+if($_REQUEST["op"]=="93"){ // ver producto
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->VerProducto();
+}
 
 
 

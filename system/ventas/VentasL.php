@@ -16,7 +16,7 @@ class Ventas{
 
 
 
-   public function SumaVenta($datos){ // Rapida
+   public function SumaVenta($datos){ //  para agregar productos rapidamente
 
   		if($this->ObtenerCantidad($datos["cod"]) > 0){
   			if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
@@ -38,7 +38,7 @@ class Ventas{
 
 
 
-   public function RestaVenta($datos){ // Rapida
+   public function RestaVenta($datos){ // restar productos rapidamente
 
   		if($this->ObtenerCantidad($datos["cod"]) >= 0){
   			if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
@@ -311,12 +311,8 @@ class Ventas{
 					      <th scope="col">Precio</th>
 					      <th scope="col">Subtotal</th>
 					      <th scope="col">Impuesto</th>
-					      <th scope="col">Total</th>';
-					    
-					    if($_SESSION["tipo_inicio"] == 1){
-					    	echo '<th scope="col">OP</th>';
-					    }
-					    echo '<th scope="col">Borrar</th>
+					      <th scope="col">Total</th>
+					      <th scope="col">Borrar</th>
 					    </tr>
 					  </thead>
 					  <tbody>';
@@ -327,12 +323,8 @@ class Ventas{
 						      <td>'.$b["pv"].'</td>
 						      <td>'.$b["stotal"].'</td>
 						      <td>'.$b["imp"].'</td>
-						      <td>'.$b["total"].'</td>';
-						      if($_SESSION["tipo_inicio"] == 1){
-			    	echo '<td><a id="modcant" op="91" cod="'.$b["cod"].'"><i class="fas fa-minus-circle red-text fa-lg"></i></a>  <a id="modcant" op="92" cod="'.$b["cod"].'"><i class="fas fa-plus-circle green-text fa-lg"></i></a></td>';
-					    }
-				      
-					echo '<td><a id="borrar-ticket" op="81" hash="'.$b["hash"].'"><i class="fas fa-times-circle red-text fa-lg"></i></a></td>
+						      <td>'.$b["total"].'</td>
+						      <td><a id="borrar-ticket" op="81" hash="'.$b["hash"].'"><i class="fas fa-times-circle red-text fa-lg"></i></a></td>
 					</tr>';
 				    }
 				    	echo '</tbody>
