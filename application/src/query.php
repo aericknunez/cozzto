@@ -113,18 +113,20 @@ else{
 	
 ?>
 
-<!-- <script>
-$("body").on("click","#cambiar",function(){
+<script>
+	
+	$("body").on("click","#cambiar",function(){
         var op = $(this).attr('op');
         $.post("application/src/routes.php", {op:op}, 
-        function(htmlexterno){
+        	function(htmlexterno){
             window.location.href="?";
         });
     });	
 
-// preloader
-    $(window).on("load", function () {
-        $('#mdb-preloader').fadeOut('fast');
-    });
 
-</script> -->
+// preloader
+    // $(window).on("load", function () {
+    //     $('#mdb-preloader').fadeOut('fast');
+    // });
+
+</script>

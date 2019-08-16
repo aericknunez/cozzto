@@ -13,5 +13,4 @@ if(!isset($_GET["modal"])){
 		echo '<img src="assets/img/logo/default.png" alt="">';
 	}
 } 
-
 ?>

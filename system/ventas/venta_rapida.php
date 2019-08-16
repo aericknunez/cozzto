@@ -12,7 +12,7 @@ $db = new dbConn();
   <div class="col-md-6 z-depth-2 justify-content-center">
       <div class="md-form mt-0">
       	<form id="form-busquedaR">
-        <input class="form-control" type="text" placeholder="Buscar Producto" aria-label="Search" id="cod" name="cod" autofocus>
+        <input class="form-control" type="text" placeholder="Codigo del Producto" aria-label="Search" id="cod" name="cod" autofocus>
          <button class="btn aqua-gradient btn-rounded btn-sm" type="submit" id="btn-busquedaR" name="btn-busquedaR">Buscar</button>
         </form>
       </div>

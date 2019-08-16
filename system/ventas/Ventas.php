@@ -23,11 +23,11 @@ class Ventas{
   			
   			/// aqui determino si agrego o actualizo
   			$product = $this->ObtenerCantidadTicket($datos["cod"]);
+  			if($datos["cantidad"] == NULL) $datos["cantidad"] = 1;
   			if($product > 0){
-  				$datos["cantidad"] = $product + 1;
-  				$this->Actualiza($datos);
+  				$datos["cantidad"] = $product + $datos["cantidad"];
+  				$this->Actualiza($datos, null); // null es resta
   			} else {
-  				$datos["cantidad"] = 1;
   				$this->Agregar($datos);
   			}
   		} else {
@@ -37,6 +37,27 @@ class Ventas{
    }
 
 
+
+   public function RestaVenta($datos){ // Rapida
+
+  		if($this->ObtenerCantidad($datos["cod"]) >= 0){
+  			if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
+  			
+  			/// aqui determino si agrego o actualizo
+  			$product = $this->ObtenerCantidadTicket($datos["cod"]);
+  			if($datos["cantidad"] == NULL) $datos["cantidad"] = 1;
+  			
+  			if($product > 1){
+  				$datos["cantidad"] = $product - $datos["cantidad"];
+  				$this->Actualiza($datos, 1); // uno suma
+  			} else {
+  				Alerts::Alerta("error","Error!","No se encontro el producto!");
+  			}
+  		} else {
+  			 Alerts::Alerta("error","Error!","No se encontro el producto!");
+  		}
+  	$this->VerProducto();
+   }
 
 
 
@@ -82,7 +103,7 @@ class Ventas{
 
 
 
-	public function Actualiza($datos) { // agrega el producto suma de uno n uno
+	public function Actualiza($datos,$func) { // agrega el producto suma de uno n uno
 		$db = new dbConn();
 
 	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
@@ -98,7 +119,7 @@ class Ventas{
 	    $cambio["imp"] = $im;
 	    $cambio["total"] = $stot + $im;
 	    if (Helpers::UpdateId("ticket", $cambio, "cod='".$datos["cod"]."' and orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."")) {
-	       $this->ActualizaProducto($datos["cod"], 1, NULL);
+	       $this->ActualizaProducto($datos["cod"], 1, $func);
 	    }
 
 	}
@@ -250,6 +271,7 @@ class Ventas{
 	        $ultimoorden = $r["correlativo"];
 	    } unset($r);  
 
+	    	if($ultimoorden == NULL){ $ultimoorden = 0; }
 			$datos = array();
 		    $datos["nombre"] = NULL;
 		    $datos["correlativo"] = $ultimoorden + 1;
@@ -289,8 +311,12 @@ class Ventas{
 					      <th scope="col">Precio</th>
 					      <th scope="col">Subtotal</th>
 					      <th scope="col">Impuesto</th>
-					      <th scope="col">Total</th>
-					      <th scope="col">Borrar</th>
+					      <th scope="col">Total</th>';
+					    
+					    if($_SESSION["tipo_inicio"] == 1){
+					    	echo '<th scope="col">OP</th>';
+					    }
+					    echo '<th scope="col">Borrar</th>
 					    </tr>
 					  </thead>
 					  <tbody>';
@@ -301,9 +327,13 @@ class Ventas{
 						      <td>'.$b["pv"].'</td>
 						      <td>'.$b["stotal"].'</td>
 						      <td>'.$b["imp"].'</td>
-						      <td>'.$b["total"].'</td>
-						      <td><a id="borrar-ticket" op="81" hash="'.$b["hash"].'"><i class="fas fa-times-circle red-text fa-lg"></i></a></td>
-						    </tr>';
+						      <td>'.$b["total"].'</td>';
+						      if($_SESSION["tipo_inicio"] == 1){
+			    	echo '<td><a id="modcant" op="91" cod="'.$b["cod"].'"><i class="fas fa-minus-circle red-text fa-lg"></i></a>  <a id="modcant" op="92" cod="'.$b["cod"].'"><i class="fas fa-plus-circle green-text fa-lg"></i></a></td>';
+					    }
+				      
+					echo '<td><a id="borrar-ticket" op="81" hash="'.$b["hash"].'"><i class="fas fa-times-circle red-text fa-lg"></i></a></td>
+					</tr>';
 				    }
 				    	echo '</tbody>
 							</table>';
@@ -331,9 +361,9 @@ class Ventas{
 	public function DelOrden($orden){ // elimina el registro de la orden
 		$db = new dbConn();
 
-		if(Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."")){
-	  			unset($_SESSION["orden"]);
-	  		}
+		Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+		$_SESSION["orden"] = NULL;
+		unset($_SESSION["orden"]);
     }
 
 
@@ -381,6 +411,7 @@ class Ventas{
   	// borro caracteristica y ubicacion 
   	Helpers::DeleteId("ticket_descuenta", "producto_hash = '$hash' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
   	// compruebo si hay mas productos sino elimino orden
+	  	
 	  	if($this->CuentaProductos($_SESSION["orden"]) == 0){
 	  		$this->DelOrden($_SESSION["orden"]);
 	  	}

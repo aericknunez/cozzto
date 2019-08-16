@@ -177,6 +177,17 @@ if($_REQUEST["op"]=="13"){
 
 
 
+//////////// cambios de funcion
+if($_REQUEST["op"]=="15"){ /// cambia de rapido a lento
+
+	if($_SESSION["tipo_inicio"] == 1){
+		$_SESSION["tipo_inicio"] = 2;
+	} else {
+		$_SESSION["tipo_inicio"] = 1;
+	}
+}
+
+
 
 
 /// productos
@@ -544,6 +555,21 @@ include_once '../../system/ventas/Ventas.php';
 	$venta = new Ventas();
 	$venta->SumaVenta($_POST);
 }
+
+// mod cantidad restar
+if($_REQUEST["op"]=="91"){ // recibe el formulario para agregar los productos (va a ventas)
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->RestaVenta($_POST);
+}
+
+// mod cantidad sumar
+if($_REQUEST["op"]=="92"){ // recibe el formulario para agregar los productos (va a ventas)
+include_once '../../system/ventas/Ventas.php';
+	$venta = new Ventas();
+	$venta->SumaVenta($_POST);
+}
+
 
 
 
