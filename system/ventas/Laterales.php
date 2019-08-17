@@ -64,6 +64,13 @@ class Laterales{
  		echo '<button class="btn btn-outline-blue-grey btn-rounded waves-effect"><i class="fas fa-cog mr-1"></i> Opciones</button>';
 
  		echo '</div>';
+
+ 		echo '<div class="text-center">
+		<a class="btn-floating btn-default" title="Descuento"><i class="fas fa-search-dollar"></i></a>
+		<a class="btn-floating btn-primary"><i class="fab fa-cc-visa"></i></a>
+		<a class="btn-floating btn-secondary"><i class="fas fa-file-invoice-dollar"></i></a>
+		<a class="btn-floating btn-success"><i class="fas fa-donate"></i></a>
+		</div>';
  	}
 
 

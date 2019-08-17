@@ -93,19 +93,21 @@ setInterval(GetLateral, 3000);
 
 	$('#btn-busquedaR').click(function(e){ /// para el formulario
 		e.preventDefault();
-		$.ajax({
-			url: "application/src/routes.php?op=90",
-			method: "POST",
-			data: $("#form-busquedaR").serialize(),
-		// beforeSend: function(){
-		// 	$("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
-  //           },
-		success: function(data){
-			$("#ver").html(data);
-			$("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
-			$("#form-busquedaR").trigger("reset");
-		}
-		});
+        if($('#cod').val() != ""){
+    		$.ajax({
+    			url: "application/src/routes.php?op=90",
+    			method: "POST",
+    			data: $("#form-busquedaR").serialize(),
+    		// beforeSend: function(){
+    		// 	$("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+      //           },
+    		success: function(data){
+    			$("#ver").html(data);
+    			$("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
+    			$("#form-busquedaR").trigger("reset");
+    		}
+    		});
+        }
 	})
 
 
@@ -129,6 +131,55 @@ setInterval(GetLateral, 3000);
             }
         });
     });                 
+
+
+
+
+
+
+
+
+//// buscar productos
+
+    $("#producto-busqueda").keyup(function(){ /// para la caja de busqueda
+        $.ajax({
+        type: "POST",
+        url: "application/src/routes.php?op=75",
+        data:'keyword='+$(this).val(),
+        beforeSend: function(){
+            $("#muestra-busqueda").css("background","#FFF url(assets/img/LoaderIcon.gif) no-repeat 550px");
+        },
+        success: function(data){
+            $("#muestra-busqueda").show();
+            $("#muestra-busqueda").html(data);
+            $("#producto-busqueda").css("background","#FFF");
+        }
+        });
+    });
+
+
+
+    $("body").on("click","#cancel-p",function(){
+        $("#muestra-busqueda").hide();
+        $("#p-busqueda").trigger("reset"); 
+    });
+
+////////////////
+
+
+
+    $("body").on("click","#select-p",function(){
+    var cod = $(this).attr('cod');
+        $.post("application/src/routes.php?op=90", {cod:cod}, 
+        function(data){
+            $("#muestra-busqueda").hide();
+            $("#ver").html(data); // lo que regresa de la busquea 
+            $("#p-busqueda").trigger("reset"); // no funciona
+            $("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
+        });
+    });
+
+
 
 
 
