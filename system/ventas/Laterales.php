@@ -66,11 +66,20 @@ class Laterales{
  		echo '</div>';
 
  		echo '<div class="text-center">
-		<a class="btn-floating btn-default" title="Descuento"><i class="fas fa-search-dollar"></i></a>
-		<a class="btn-floating btn-primary"><i class="fab fa-cc-visa"></i></a>
-		<a class="btn-floating btn-secondary"><i class="fas fa-file-invoice-dollar"></i></a>
-		<a class="btn-floating btn-success"><i class="fas fa-donate"></i></a>
+		<a href="?modal=descuento" class="btn-floating btn-default" title="Descuento"><i class="fas fa-search-dollar"></i></a>
+		<a href="?modal=credito" class="btn-floating btn-primary" title="Asignar Credito"><i class="fab fa-cc-visa"></i></a>
+		<a href="?modal=dfactura" class="btn-floating btn-secondary" title="Datos Factura"><i class="fas fa-file-invoice-dollar"></i></a>
+		<a href="?modal=oventas" class="btn-floating btn-success" title="Venta Especial"><i class="fas fa-donate"></i></a>
 		</div>';
+
+		if($_SESSION["descuento"] != NULL){
+			$texto = 'Esta venta posee un descuento del: ' . $_SESSION["descuento"] . " %";
+			Alerts::Mensajex($texto,"danger",NULL,NULL);
+		}
+		if($_SESSION['cliente_credito']){
+			 $textos = 'Cliente asignado para credito: ' . $_SESSION['cliente_credito']. ".";
+			Alerts::Mensajex($textos,"success",NULL,NULL);
+		}
  	}
 
 

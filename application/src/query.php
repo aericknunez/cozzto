@@ -50,6 +50,20 @@ echo '
 	echo '<script type="text/javascript" src="assets/js/query/facturar.js?v='.$numero.'"></script>';
 	}
 
+
+	/// ventas
+	if($_GET["modal"] == "cantidad"){
+	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
+	}
+	if($_GET["modal"] == "descuento"){
+	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
+	}
+	if($_GET["modal"] == "credito"){
+	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
+	}
+
+
+
 } // termina modal
 
 //config

@@ -582,6 +582,47 @@ include_once '../../system/ventas/VentasR.php';
 
 
 
+/// descuento
+if($_REQUEST["op"]=="95"){ // aplicar descuento
+	$_SESSION["descuento"] = $_POST["descuento"];
+include_once '../../system/ventas/Laterales.php';
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->AplicarDescuento();
+}
+
+if($_REQUEST["op"]=="96"){ // quitar descuento
+	unset($_SESSION["descuento"]);
+include_once '../../system/ventas/Laterales.php';
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->AplicarDescuento();
+}
+
+
+/// credito
+if($_REQUEST["op"]=="97"){ // quitar descuento
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->ClienteBusqueda($_POST);
+}
+
+if($_REQUEST["op"]=="98"){ // quitar descuento
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->AgregaCliente($_POST);
+}
+
+
+if($_REQUEST["op"]=="99"){ // quitar descuento
+unset($_SESSION["cliente_credito"]);
+}
+
+
+
+
+
+
 
 
 

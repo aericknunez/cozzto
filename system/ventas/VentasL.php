@@ -356,6 +356,7 @@ class Ventas{
 		Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
 		$_SESSION["orden"] = NULL;
 		unset($_SESSION["orden"]);
+		unset($_SESSION["descuento"]);
     }
 
 
@@ -483,6 +484,7 @@ class Ventas{
 	   	$this->FacturaResult($factura, $datos["efectivo"]);
 
 	   	unset($_SESSION["orden"]);
+	   	unset($_SESSION["descuento"]);
    }
 
 

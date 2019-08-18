@@ -162,12 +162,28 @@ class Helpers{
         return $propina;
     }
 
+
     public function PropinaTotal($numero){ 
         $num = $_SESSION['config_propina'] / 100;
         $propina = $numero * $num;
         $numer = $propina + $numero;
         return $numer;
     }
+
+
+    public function Descuento($numero){ 
+        $num = $_SESSION['descuento'] / 100;
+        $descuento = $numero * $num;
+        return $descuento;
+    }
+
+    public function DescuentoTotal($numero){ 
+        $num = $_SESSION['descuento'] / 100;
+        $descuento = $numero * $num;
+        $numer = $numero - $descuento;
+        return $numer;
+    }
+
 
 
     public function NFactura($numero){ 

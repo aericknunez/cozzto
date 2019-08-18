@@ -1,0 +1,121 @@
+$(document).ready(function(){
+
+
+    $('#btn-Ccantidad').click(function(e){ /// cambia la cantidad de los productos
+        e.preventDefault();
+        $.ajax({
+            url: "application/src/routes.php?op=90",
+            method: "POST",
+            data: $("#form-Ccantidad").serialize(),
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data){
+                $("#form-Ccantidad").trigger("reset");
+                window.location.href="?"
+            }
+        })
+    })
+
+
+
+
+
+    $('#btn-descuento').click(function(e){ /// Aplicar descuento
+        e.preventDefault();
+        $.ajax({
+            url: "application/src/routes.php?op=95",
+            method: "POST",
+            data: $("#form-descuento").serialize(),
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data){
+                $("#form-descuento").trigger("reset");
+                 $("#ver").html(data); // lo que regresa de la busquea 
+            }
+        })
+    })
+
+
+    $("body").on("click","#quitar-descuento",function(){ // quita descuento
+        var op = $(this).attr('op');
+        var dataString = 'op='+op;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#ver").html(data); // lo que regresa de la busquea 
+            }
+        });
+    });                 
+
+
+
+
+
+
+//// agregar credito
+
+    $("#cliente-busqueda").keyup(function(){ /// para la caja de busqueda
+        $.ajax({
+        type: "POST",
+        url: "application/src/routes.php?op=97",
+        data:'keyword='+$(this).val(),
+        beforeSend: function(){
+            $("#muestra-busqueda").css("background","#FFF url(assets/img/LoaderIcon.gif) no-repeat 550px");
+        },
+        success: function(data){
+            $("#muestra-busqueda").show();
+            $("#muestra-busqueda").html(data);
+            $("#cliente-busqueda").css("background","#FFF");
+        }
+        });
+    });
+
+
+////////////////
+
+    $("body").on("click","#select-c",function(){
+    var hash = $(this).attr('hash');
+    var nombre = $(this).attr('nombre');
+        $.post("application/src/routes.php?op=98", {hash:hash, nombre:nombre}, 
+        function(data){
+            $("#muestra-busqueda").hide();
+            $("#ver").html(data); // lo que regresa de la busquea 
+            $("#c-busqueda").trigger("reset"); // no funciona
+        });
+    });
+
+
+    $("body").on("click","#quitar-cliente",function(){ // quita descuento
+        var op = $(this).attr('op');
+        var dataString = 'op='+op;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#ver").html(data); // lo que regresa de la busquea 
+            }
+        });
+    });                 
+
+
+
+
+
+
+
+
+
+}); // termina query

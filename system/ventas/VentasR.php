@@ -6,19 +6,20 @@ class Ventas{
 
 
 
-
-
-
    public function SumaVenta($datos){ // Rapida
 
   		if($this->ObtenerCantidad($datos["cod"]) > 0){
   			if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
   			
   			/// aqui determino si agrego o actualizo
+  			if($datos["cantidad"] == NULL or $datos["cantidad"] == 0) $datos["cantidad"] = 1;
   			$product = $this->ObtenerCantidadTicket($datos["cod"]);
-  			if($datos["cantidad"] == NULL) $datos["cantidad"] = 1;
-  			if($product > 0){
-  				$datos["cantidad"] = $product + $datos["cantidad"];
+  			if($datos["cantidad"] == 1){
+	  			$datos["cantidad"] = $product + 1;
+  			}
+
+
+  			if($product > 0){  				
   				$this->Actualiza($datos, null); // null es resta
   			} else {
   				$this->Agregar($datos);
@@ -37,11 +38,13 @@ class Ventas{
   			if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
   			
   			/// aqui determino si agrego o actualizo
-  			$product = $this->ObtenerCantidadTicket($datos["cod"]);
-  			if($datos["cantidad"] == NULL) $datos["cantidad"] = 1;
+	  		if($datos["cantidad"] == NULL or $datos["cantidad"] == 0) $datos["cantidad"] = 1;
+	  		$product = $this->ObtenerCantidadTicket($datos["cod"]);
+  			if($datos["cantidad"] == 1){
+	  			$datos["cantidad"] = $product - 1;
+  			}
   			
-  			if($product > 1){
-  				$datos["cantidad"] = $product - $datos["cantidad"];
+  			if($product > 1){  				
   				$this->Actualiza($datos, 1); // uno suma
   			} 
   		} else {
@@ -52,11 +55,51 @@ class Ventas{
 
 
 
+	public function AplicarDescuento() { //Aplica el descuento a los productos
+		$db = new dbConn();
+				    
+		    $a = $db->query("SELECT * FROM ticket WHERE orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+
+		    if($a->num_rows > 0){
+		    	foreach ($a as $b) {
+		    		$datos["cantidad"] = $b["cant"];
+		    		$datos["cod"] = $b["cod"];
+		    		$this->Actualiza($datos, 1);
+		    	}
+		    } $a->close();
+
+		    if($_SESSION['descuento'] != NULL){
+		 $lateral = new Laterales(); 
+   		 $precio = $lateral->ObtenerTotal($_SESSION["orden"]);
+		  $texto = 'El total en esta venta es de: ' . $precio;
+		  Alerts::Mensajex($texto,"success",$boton,$boton2);
+
+
+
+		  $texto = 'Esta venta posee un descuento de : ' . $_SESSION['descuento']. " %";
+		  Alerts::Mensajex($texto,"danger",'<a id="quitar-descuento" op="96" class="btn btn-danger btn-rounded">Quitar Descuento</a>',$boton2);
+		} else {
+			$lateral = new Laterales();
+			    $precio = $lateral->ObtenerTotal($_SESSION["orden"]);
+			  $texto = 'El total en esta venta sin descuento es de: ' . $precio;
+			  Alerts::Mensajex($texto,"success",$boton,$boton2);
+			} 
+
+	}
+
+
+
+
 	public function Agregar($datos) { // agrega el producto
 		$db = new dbConn();
 
 	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
 	$sumas = $pv * $datos["cantidad"];
+
+	if($_SESSION['descuento'] != NULL){
+		$sumas = Helpers::Descuento($sumas);
+		$pv = Helpers::Descuento($pv);
+	}
 
     $stot=Helpers::STotal($sumas, $_SESSION['config_imp']);
     $im=Helpers::Impuesto($stot, $_SESSION['config_imp']);
@@ -95,6 +138,11 @@ class Ventas{
 
 	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
 	$sumas = $pv * $datos["cantidad"];
+
+	if($_SESSION['descuento'] != NULL){
+		$sumas = Helpers::DescuentoTotal($sumas);
+		$pv = Helpers::DescuentoTotal($pv);
+	}
 
     $stot=Helpers::STotal($sumas, $_SESSION['config_imp']);
     $im=Helpers::Impuesto($stot, $_SESSION['config_imp']);
@@ -221,7 +269,7 @@ class Ventas{
 					  <tbody>';
 		    		foreach ($a as $b) {
 		    		   echo '<tr>
-						      <th scope="row">'.$b["cant"].'</th>
+						      <th scope="row"><a href="?modal=cantidad&cant='.$b["cant"].'&cod='.$b["cod"].'">'.$b["cant"].'</a></th>
 						      <td>'.$b["producto"].'</td>
 						      <td>'.$b["pv"].'</td>
 						      <td>'.$b["stotal"].'</td>
@@ -262,6 +310,7 @@ class Ventas{
 		Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
 		$_SESSION["orden"] = NULL;
 		unset($_SESSION["orden"]);
+		unset($_SESSION["descuento"]);
     }
 
 
@@ -354,6 +403,7 @@ class Ventas{
 	   	$this->FacturaResult($factura, $datos["efectivo"]);
 
 	   	unset($_SESSION["orden"]);
+	   	unset($_SESSION["descuento"]);
    }
 
 
@@ -394,6 +444,51 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
 				  <source src="assets/sound/bleep.ogg" type="audio/ogg">
 				</audio>';
 	}
+
+
+
+///////////////////// agregar credito
+
+  public function ClienteBusqueda($dato){ // Busqueda para compuestos
+    $db = new dbConn();
+
+          $a = $db->query("SELECT * FROM clientes WHERE nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+           if($a->num_rows > 0){
+            echo '<table class="table table-sm table-hover">';
+    foreach ($a as $b) {
+               echo '<tr>
+                      <td scope="row"><a id="select-c" hash="'. $b["hash"] .'" nombre="'. $b["nombre"] .'">'. $b["nombre"] .'</a></td>
+                    </tr>'; 
+    }  $a->close();
+
+        echo '
+        </table>';
+          } else {
+            echo "El criterio de busqueda no corresponde a un producto";
+          }
+  }
+
+
+  public function AgregaCliente($dato){ // Busqueda para compuestos
+    $db = new dbConn();
+
+       	$_SESSION["cliente_c"] = $_POST["hash"];
+		$_SESSION["cliente_credito"] = $_POST["nombre"];
+  		
+  		$texto = 'Cliente asignado para credito: ' . $_SESSION['cliente_credito']. ".";
+		Alerts::Mensajex($texto,"danger",'<a id="quitar-cliente" op="99" class="btn btn-danger btn-rounded">Quitar Cliente</a>',$boton2);
+
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 
