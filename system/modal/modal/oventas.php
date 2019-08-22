@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          Titulo del modal</h5>
+          OTRAS VENTAS NO REGISTRADAS</h5>
       </div>
       <div class="modal-body">
 <!-- ./  content -->

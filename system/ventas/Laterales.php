@@ -10,14 +10,29 @@ class Laterales{
  		$db = new dbConn();
 
  		if($orden != NULL){
- 			$this->MostrarTotal($orden);
- 			$this->MostrarBotones($orden);
+ 			if($this->VerificaOrden($orden) == 0){
+					if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
+					if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
+					$this->MostrarOrdenes();
+ 			} else {
+ 				$this->MostrarTotal($orden);
+ 				$this->MostrarBotones($orden);
+ 			}
+ 			
  		} else {
  			$this->MostrarOrdenes();
  		}
 
  	}
 
+
+	public function VerificaOrden($orden){ // verifica si existe la orden para asegurar que se borro
+		$db = new dbConn();
+		$a = $db->query("SELECT * FROM ticket_orden WHERE correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+		    
+		    return $a->num_rows;
+		    $a->close();
+    }
 
 
 

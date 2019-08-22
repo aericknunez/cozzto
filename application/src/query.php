@@ -1,7 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$numero = rand(1,9999999999);
+if($_SESSION["td"] == 0){
+$numero = rand(1,9999999999);	
+} else {
+$numero = 1;	
+}
+
 //$numero = 1;
 
 if(isset($_GET["modal"])) { 
@@ -59,6 +64,9 @@ echo '
 	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
 	}
 	if($_GET["modal"] == "credito"){
+	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
+	}
+	if($_GET["modal"] == "dfactura"){
 	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
 	}
 

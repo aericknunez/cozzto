@@ -10,6 +10,7 @@ class Clientes {
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
+                $datos["nombre"] = strtoupper($datos["nombre"]);
                 $datos["hash"] = Helpers::HashId();
                 $datos["time"] = Helpers::TimeId();
                 $datos["td"] = $_SESSION["td"];
@@ -40,6 +41,7 @@ class Clientes {
     $db = new dbConn();
       if($this->CompruebaForm($datos) == TRUE){ // comprueba si todos los datos requeridos estan llenos
 
+              $datos["nombre"] = strtoupper($datos["nombre"]);
               $datos["time"] = Helpers::TimeId();
               $hash = $datos["hash"];
               if (Helpers::UpdateId("clientes", $datos, "hash = '$hash' and td = ".$_SESSION["td"]."")) {
@@ -163,6 +165,50 @@ class Clientes {
           } $a->close();  
 
   }
+
+
+
+
+////////////nuevo documento factura
+  public function NuevoDocumento($datos){
+    $db = new dbConn();
+    if($this->VerificaDocumento($datos["documento"]) > 0){
+        Alerts::Alerta("error","Error!","Ya se encuentra registro de este documento!");
+    } else {
+      if($datos["documento"] != NULL or $datos["cliente"] != NULL){ // comprueba datos
+
+        $datos["cliente"] = strtoupper($datos["cliente"]); // paso a mayusculas
+
+                $datos["hash"] = Helpers::HashId();
+                $datos["time"] = Helpers::TimeId();
+                $datos["td"] = $_SESSION["td"];
+                if ($db->insert("facturar_documento", $datos)) {
+
+                    Alerts::Alerta("success","Realizado!","Registro realizado correctamente!");  
+
+                            $_SESSION["factura_cliente"] = $datos["cliente"];
+                            $_SESSION["factura_documento"] = $datos["documento"];
+                              
+                              $texto = $_SESSION['config_nombre_documento']. ": " . $_SESSION["factura_documento"] . "<br> Cliente: " . $_SESSION["factura_cliente"];
+                            Alerts::Mensajex($texto,"danger",'<a id="quitar-documento" op="102" class="btn btn-danger btn-rounded">Quitar '.$_SESSION["config_nombre_documento"].'</a>',$boton2);
+                }
+
+        } else {
+          Alerts::Alerta("error","Error!","Faltan Datos!");
+        }
+  }
+
+  }
+
+/// verifica que no exista el numero de documento
+  public function VerificaDocumento($documento){ // productde  de la tabla ticket
+    $db = new dbConn();
+
+    $a = $db->query("SELECT * FROM facturar_documento WHERE documento = '$documento' and td = ".$_SESSION["td"]."");      
+        return $a->num_rows;
+        $a->close();
+    }
+
 
 
 

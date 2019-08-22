@@ -308,9 +308,9 @@ class Ventas{
 		$db = new dbConn();
 
 		Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
-		$_SESSION["orden"] = NULL;
-		unset($_SESSION["orden"]);
-		unset($_SESSION["descuento"]);
+		
+		if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
+		if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
     }
 
 
@@ -449,7 +449,7 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
 
 ///////////////////// agregar credito
 
-  public function ClienteBusqueda($dato){ // Busqueda para compuestos
+  public function ClienteBusqueda($dato){ // Busqueda para cliente
     $db = new dbConn();
 
           $a = $db->query("SELECT * FROM clientes WHERE nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
@@ -464,12 +464,12 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
         echo '
         </table>';
           } else {
-            echo "El criterio de busqueda no corresponde a un producto";
+            echo "El criterio de busqueda no corresponde a un cliente";
           }
   }
 
 
-  public function AgregaCliente($dato){ // Busqueda para compuestos
+  public function AgregaCliente($dato){ // Busqueda para cliente
     $db = new dbConn();
 
        	$_SESSION["cliente_c"] = $_POST["hash"];
@@ -480,6 +480,41 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
 
   }
 
+
+
+///////////////////// agregar Documento
+
+  public function DocumentoBusqueda($dato){ // Busqueda para documento
+    $db = new dbConn();
+
+          $a = $db->query("SELECT * FROM facturar_documento WHERE cliente like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+           if($a->num_rows > 0){
+            echo '<table class="table table-sm table-hover">';
+    foreach ($a as $b) {
+               echo '<tr>
+                      <td scope="row"><a id="select-d" documento="'. $b["documento"] .'" cliente="'. $b["cliente"] .'">'. $b["cliente"] .'</a></td>
+                    </tr>'; 
+    }  $a->close();
+
+        echo '
+        </table>';
+          } else {
+            echo "El criterio de busqueda no corresponde a un cliente";
+          }
+  }
+
+
+
+  public function AgregaDocumento($dato){ // Busqueda para documento
+    $db = new dbConn();
+
+       	$_SESSION["factura_cliente"] = $_POST["cliente"];
+		$_SESSION["factura_documento"] = $_POST["documento"];
+  		
+  		$texto = $_SESSION['config_nombre_documento']. ": " . $_SESSION["factura_documento"] . "<br> Cliente: " . $_SESSION["factura_cliente"];
+		Alerts::Mensajex($texto,"danger",'<a id="quitar-documento" op="102" class="btn btn-danger btn-rounded">Quitar '.$_SESSION["config_nombre_documento"].'</a>',$boton2);
+
+  }
 
 
 

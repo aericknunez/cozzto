@@ -456,25 +456,25 @@ include_once '../../system/proveedor/Proveedor.php';
 
 /////////////////////// cliente
 
-if($_REQUEST["op"]=="64"){ // agregar proveedor
+if($_REQUEST["op"]=="64"){ // agregar cliente
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
 	$cliente->AddCliente($_POST);
 }
 
-if($_REQUEST["op"]=="65"){ // elimina proveedor
+if($_REQUEST["op"]=="65"){ // elimina cliente
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
 	$cliente->DelCliente($_REQUEST["hash"]);
 }
 
-if($_REQUEST["op"]=="66"){ // elimina proveedor desde liasta completa
+if($_REQUEST["op"]=="66"){ // elimina cliente desde liasta completa
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
 	$cliente->DelClientex($_REQUEST["hash"]);
 }
 
-if($_REQUEST["op"]=="67"){ // actualizar proveedor
+if($_REQUEST["op"]=="67"){ // actualizar cliente
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
 	$cliente->UpCliente($_POST);
@@ -601,26 +601,48 @@ include_once '../../system/ventas/VentasR.php';
 
 
 /// credito
-if($_REQUEST["op"]=="97"){ // quitar descuento
+if($_REQUEST["op"]=="97"){ 
 include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
 	$venta->ClienteBusqueda($_POST);
 }
 
-if($_REQUEST["op"]=="98"){ // quitar descuento
+if($_REQUEST["op"]=="98"){ 
 include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
 	$venta->AgregaCliente($_POST);
 }
 
 
-if($_REQUEST["op"]=="99"){ // quitar descuento
+if($_REQUEST["op"]=="99"){ 
 unset($_SESSION["cliente_credito"]);
 }
 
 
+/// agrega documeton a la venta
+if($_REQUEST["op"]=="100"){ 
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->DocumentoBusqueda($_POST);
+}
+
+if($_REQUEST["op"]=="101"){ // add
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->AgregaDocumento($_POST);
+}
+
+if($_REQUEST["op"]=="102"){  // quitar documneto
+unset($_SESSION["factura_cliente"]);
+unset($_SESSION["factura_documento"]);
+}
 
 
+if($_REQUEST["op"]=="103"){ // nuevo ducumento
+include_once '../../system/cliente/Cliente.php';
+	$cliente = new Clientes;
+	$cliente->NuevoDocumento($_POST);
+}
 
 
 
