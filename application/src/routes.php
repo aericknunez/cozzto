@@ -545,6 +545,10 @@ if($_REQUEST["op"]=="85"){ // facturar determinar si es rapido o lento
 	} else {
 	include_once '../../system/ventas/VentasL.php';
 	}
+	   	if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   		include_once '../../system/ventas/Opciones.php';	
+	   	}
+
 	$venta = new Ventas();
 	$venta->Facturar($_POST);
 

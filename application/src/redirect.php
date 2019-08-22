@@ -20,13 +20,19 @@ elseif(isset($_GET["proagregar"])) include_once 'system/producto/proagregar.php'
 elseif(isset($_GET["proaverias"])) include_once 'system/producto/proaverias.php'; // agregar averias
 
 // proveedores
-elseif(isset($_GET["proveedoradd"])) include_once 'system/proveedor/proveedores.php'; // agregar averias
-elseif(isset($_GET["proveedorver"])) include_once 'system/proveedor/proveedorver.php'; // agregar averias
+elseif(isset($_GET["proveedoradd"])) include_once 'system/proveedor/proveedores.php'; // agregar proveedores
+elseif(isset($_GET["proveedorver"])) include_once 'system/proveedor/proveedorver.php'; // proveedores
 
 
 // clientes
-elseif(isset($_GET["clienteadd"])) include_once 'system/cliente/clientes.php'; // agregar averias
-elseif(isset($_GET["clientever"])) include_once 'system/cliente/clientever.php'; // agregar averias
+elseif(isset($_GET["clienteadd"])) include_once 'system/cliente/clientes.php'; // agregar cliente
+elseif(isset($_GET["clientever"])) include_once 'system/cliente/clientever.php'; // ver clientes
+
+// creditos
+elseif(isset($_GET["creditos"])) include_once 'system/credito/creditosver.php'; // ver todos los creditos
+
+
+
 
 
 else{

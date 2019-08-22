@@ -64,10 +64,10 @@ if($cod != NULL){
 
     <div class="col-md-4 mb-1 md-form">
       <?php $a = $db->query("SELECT hash, nombre FROM proveedores WHERE td = ".$_SESSION["td"].""); ?>
-      <select class="mdb-select md-form colorful-select dropdown-dark" id="proveedor" name="proveedor">
+      <select class="browser-default custom-select" id="proveedor" name="proveedor">
         <option selected disabled>Proveedor</option>
         <?php foreach ($a as $b) {
-          if($proveedor == $b["hash"]) $pro = "selected"; else $pro = "";
+          if($proveedor == $b["hash"]) $pro = " selected"; else $pro = "";
         echo '<option value="'. $b["hash"] .'"'.$pro.'>'. $b["nombre"] .'</option>'; 
         } $a->close(); ?>
       </select>
@@ -76,10 +76,10 @@ if($cod != NULL){
 
     <div class="col-md-4 mb-1 md-form">
       <?php $c = $db->query("SELECT hash, categoria FROM producto_categoria WHERE td = ".$_SESSION["td"].""); ?>
-      <select class="mdb-select md-form colorful-select dropdown-dark" id="categoria" name="categoria">
+      <select class="browser-default custom-select" id="categoria" name="categoria">
         <option selected disabled>* Categorias</option>
         <?php foreach ($c as $d) {
-          if($categoria == $d["hash"]) $pro = "selected"; else $pro = "";
+          if($categoria == $d["hash"]) $pro = " selected"; else $pro = "";
         echo '<option value="'. $d["hash"] .'"'.$pro.'>'. $d["categoria"] .'</option>'; 
         } $c->close(); ?>
       </select>
@@ -87,10 +87,10 @@ if($cod != NULL){
 
     <div class="col-md-4 mb-1 md-form">
       <?php  $e = $db->query("SELECT hash, nombre FROM producto_unidades WHERE td = ".$_SESSION["td"].""); ?>
-        <select class="mdb-select md-form colorful-select dropdown-dark" id="medida" name="medida">
+        <select class="browser-default custom-select" id="medida" name="medida">
         <option selected disabled>* Unidad de Medida</option>
         <?php foreach ($e as $f) {
-          if($medida == $f["hash"]) $pro = "selected"; else $pro = "";
+          if($medida == $f["hash"]) $pro = " selected"; else $pro = "";
         echo '<option value="'. $f["hash"] .'" '.$pro.'>'. $f["nombre"] .'</option>'; 
         } $e->close();
          ?>

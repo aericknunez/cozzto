@@ -355,8 +355,14 @@ class Ventas{
 
 		Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
 		$_SESSION["orden"] = NULL;
-		unset($_SESSION["orden"]);
-		unset($_SESSION["descuento"]);
+		
+		if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
+		if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
+
+			if(isset($_SESSION["cliente_c"])) unset($_SESSION["cliente_c"]);
+			if(isset($_SESSION["cliente_credito"])) unset($_SESSION["cliente_credito"]);
+
+
     }
 
 
@@ -487,10 +493,15 @@ class Ventas{
   		$db = new dbConn();
 
   		$factura = $this->AddTicketNum($datos["efectivo"]);
- 
+ 		
+ 		// configuro el tipo de pago
+ 		if(isset($_SESSION["cliente_c"])) $tpago = 3;
+ 		elseif(isset($_SESSION["tcredito"])) $tpago = 2;
+ 		else $tpago = 1;
+
 	    $cambio = array();
 	   	$cambio["num_fac"] = $factura;
-	   	$cambio["tipo_pago"] = 1;
+	   	$cambio["tipo_pago"] = $tpago;
 	   	Helpers::UpdateId("ticket", $cambio, "orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");  
 
 	   	$cambios = array();
@@ -499,8 +510,12 @@ class Ventas{
 
 	   	$this->FacturaResult($factura, $datos["efectivo"]);
 
-	   	unset($_SESSION["orden"]);
-	   	unset($_SESSION["descuento"]);
+	   	if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   		$opciones = new Opciones();
+	   		$opciones->AddCredito($factura);
+	   	}
+			if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
+			if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
    }
 
 

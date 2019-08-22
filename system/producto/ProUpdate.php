@@ -143,9 +143,9 @@ class ProUpdate{
                       <td>'.$cad.'</td>
                       <td>'.$b["fecha"]. ' | ' .$b["hora"] .'</td>';
                 if($n == 1 and $b["fecha"] == date("d-m-Y")){
-                  echo '<td><a id="delproagrega" hash="'.$b["hash"].'" op="49" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>';
+                  echo '<td><a id="delproagrega" hash="'.$b["hash"].'" op="49" producto="'.$producto.'"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>';
                 } else {
-                  echo '<td><a class="btn-floating btn-sm btn-green"><i class="fa fa-ban"></i></a></td>';
+                  echo '<td><a><i class="fa fa-ban fa-lg gren-text"></i></a></td>';
                 }
                 echo '</tr>'; 
                 $n ++ ;        
@@ -266,9 +266,9 @@ class ProUpdate{
                       <td>'.$b["comentarios"].'</td>
                       <td>'.$b["fecha"]. ' | ' .$b["hora"] .'</td>';
                 if($n == 1 and $b["fecha"] == date("d-m-Y")){
-                  echo '<td><a id="delaveria" hash="'.$b["hash"].'" op="52" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>';
+                  echo '<td><a id="delaveria" hash="'.$b["hash"].'" op="52" producto="'.$producto.'"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>';
                 } else {
-                  echo '<td><a class="btn-floating btn-sm btn-green"><i class="fa fa-ban"></i></a></td>';
+                  echo '<td><a ><i class="fa fa-ban fa-lg green-text"></i></a></td>';
                 }
                 echo '</tr>'; 
                 $n ++ ;        

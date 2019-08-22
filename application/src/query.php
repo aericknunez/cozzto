@@ -122,6 +122,15 @@ echo '
 <script type="text/javascript" src="assets/js/query/clientedatatable.js?v='.$numero.'"></script>';
 } 
 
+//////////////// creditos
+elseif(isset($_GET["creditos"])) {
+echo '
+<script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
+<script type="text/javascript" src="assets/js/query/creditodatatable.js?v='.$numero.'"></script>';
+} 
+
+
+
 
 else{
 /// lo que llevara index

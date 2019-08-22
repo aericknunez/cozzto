@@ -47,6 +47,18 @@
 </li>
 
 
+<li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-money-bill-alt"></i> Creditos<i class="fa fa-angle-down rotate-icon"></i></a>
+<div class="collapsible-body">
+<ul class="list-unstyled">
+
+<li><a href="?creditos" class="waves-effect"><i class="fas fa-money-bill-alt"></i> Buscar Credito</a></li>
+<li><a href="" class="waves-effect"><i class="fas fa-file-invoice-dollar"></i> Agregar Abono</a></li>
+
+</ul>
+</div>
+</li>
+
+
 
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-user-alt"></i> Proveedores<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">

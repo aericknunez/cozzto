@@ -82,7 +82,7 @@ class Proveedores{
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="61" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="61" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -141,8 +141,8 @@ class Proveedores{
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a href="?modal=editproveedor&key='.$b["hash"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
-                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="62" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a href="?modal=editproveedor&key='.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="62"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>

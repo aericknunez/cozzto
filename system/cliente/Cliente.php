@@ -84,7 +84,7 @@ class Clientes {
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a id="delcliente" hash="'.$b["hash"].'" op="65" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcliente" hash="'.$b["hash"].'" op="65"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -143,8 +143,8 @@ class Clientes {
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a href="?modal=editcliente&key='.$b["hash"].'" class="btn-floating btn-sm btn-green"><i class="fas fa-edit"></i></a></td>
-                      <td><a id="delcliente" hash="'.$b["hash"].'" op="66" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a href="?modal=editcliente&key='.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                      <td><a id="delcliente" hash="'.$b["hash"].'" op="66"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>

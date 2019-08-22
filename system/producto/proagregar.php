@@ -74,7 +74,7 @@ echo '<h2 class="h2-responsive">'.$descripcion .'</h2>';
 
 
   <div class="form-row">
-<?php if($caduca != NULL){ ?>
+<?php if($caduca == "on"){ ?>
     <div class="col-md-6 mb-1 md-form">
    <input placeholder="Fecha de Caducidad" type="text" id="caduca" name="caduca" class="form-control datepicker">
     </div>

@@ -128,7 +128,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$b["precio"].'</td>
-                      <td><a id="delprecio" hash="'.$b["hash"].'" op="31" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delprecio" hash="'.$b["hash"].'" op="31" producto="'.$producto.'" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -221,7 +221,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="delcompuesto" hash="'.$b["hash"].'" op="34" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcompuesto" hash="'.$b["hash"].'" op="34" producto="'.$producto.'"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -288,7 +288,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="deldependiente" hash="'.$b["hash"].'" op="36" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="deldependiente" hash="'.$b["hash"].'" op="36" producto="'.$producto.'" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -439,7 +439,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="delubicacionasig" hash="'.$b["hash"].'" op="41" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delubicacionasig" hash="'.$b["hash"].'" op="41" producto="'.$producto.'" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';
                     $canta =  $canta + $b["cant"];          
               }
@@ -544,7 +544,7 @@ class Productos{
                       <th scope="row">'. $n ++ .'</th>
                       <td>'.$b["cant"].'</td>
                       <td>'.$nombre.'</td>
-                      <td><a id="delcaracteristicaasig" hash="'.$b["caracteristica"].'" op="44" producto="'.$producto.'" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                      <td><a id="delcaracteristicaasig" hash="'.$b["caracteristica"].'" op="44" producto="'.$producto.'" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';
                     $canta =  $canta + $b["cant"];          
               }
@@ -634,7 +634,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["categoria"].'</td>
-                  <td><a id="delcategoria" hash="'.$b["hash"].'" op="23" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delcategoria" hash="'.$b["hash"].'" op="23" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -708,7 +708,7 @@ class Productos{
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["nombre"].'</td>
                   <td>'.$b["abreviacion"].'</td>
-                  <td><a id="delunidad" hash="'.$b["hash"].'" op="25" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delunidad" hash="'.$b["hash"].'" op="25"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -777,7 +777,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["caracteristica"].'</td>
-                  <td><a id="delcaracteristica" hash="'.$b["hash"].'" op="27" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delcaracteristica" hash="'.$b["hash"].'" op="27"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -850,7 +850,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["ubicacion"].'</td>
-                  <td><a id="delubicacion" hash="'.$b["hash"].'" op="29" class="btn-floating btn-sm btn-red"><i class="fa fa-trash"></i></a></td>
+                  <td><a id="delubicacion" hash="'.$b["hash"].'" op="29"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
