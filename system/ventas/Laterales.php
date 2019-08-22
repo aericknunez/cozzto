@@ -80,8 +80,14 @@ class Laterales{
 
  		echo '</div>';
 
+ 		if($_SESSION["tipo_inicio"] == 1){ // para buscar producto
+ 			$btnaux = '<a data-toggle="modal" data-target="#ModalBusqueda" class="btn-floating btn-info" title="Buscar Producto"><i class="fas fa-search"></i></a>';
+ 		} else {
+ 			$btnaux = NUll;
+ 		}
  		echo '<div class="text-center">
-		<a href="?modal=descuento" class="btn-floating btn-default" title="Descuento"><i class="fas fa-search-dollar"></i></a>
+ 		'.$btnaux.'
+		<a href="?modal=descuento" class="btn-floating btn-default" title="Descuento"><i class="fas fa-money-bill"></i></a>
 		<a href="?modal=credito" class="btn-floating btn-primary" title="Asignar Credito"><i class="fab fa-cc-visa"></i></a>
 		<a href="?modal=dfactura" class="btn-floating btn-secondary" title="Datos Factura"><i class="fas fa-file-invoice-dollar"></i></a>
 		<a href="?modal=oventas" class="btn-floating btn-success" title="Venta Especial"><i class="fas fa-donate"></i></a>
