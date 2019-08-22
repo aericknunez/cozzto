@@ -76,7 +76,7 @@ class Laterales{
  			echo '<a href="?modal=facturar" class="btn btn-outline-secondary btn-rounded waves-effect"><i class="fas fa-money-bill-alt mr-1"></i> Cobrar</a>';
  		}
  		//echo '<button class="btn btn-outline-danger btn-rounded waves-effect"><i class="fas fa-ban mr-1"></i> Cancelar</button>';
- 		echo '<button class="btn btn-outline-blue-grey btn-rounded waves-effect"><i class="fas fa-cog mr-1"></i> Opciones</button>';
+ 		echo '<a id="cancelar" op="86" class="btn btn-outline-red btn-rounded waves-effect"><i class="fas fa-ban mr-1"></i> Cancelar</a>';
 
  		echo '</div>';
 

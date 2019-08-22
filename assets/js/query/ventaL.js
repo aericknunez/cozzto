@@ -198,6 +198,26 @@ setInterval(GetLateral, 3000);
 
 
 
+//////////////cancelar
+    $("body").on("click","#cancelar",function(){
+        var op = $(this).attr('op');
+        var dataString = 'op='+op;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#ver").html(data); // lo que regresa de la busquea 
+                $("#lateral").load('application/src/routes.php?op=70'); // caraga el lateral
+            }
+        });
+    });   
+
+
 
 
 

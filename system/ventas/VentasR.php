@@ -314,7 +314,7 @@ class Ventas{
     }
 
 
-   public function DelVenta($hash){
+   public function DelVenta($hash, $ver){
 	$db = new dbConn();
 
   	// borro el registro de ticket
@@ -325,11 +325,26 @@ class Ventas{
 	  		$this->DelOrden($_SESSION["orden"]);
 	  	}
 
-  	$this->VerProducto();
+	  	if($ver == NULL){
+	  		$this->VerProducto();
+	  	}
+	  	if($ver == 1 and $this->CuentaProductos($_SESSION["orden"]) == 0){
+	  		$this->VerProducto();
+	  	}
    }
 
 
 
+   	public function Cancelar() { //cancela toda la orden
+		$db = new dbConn();
+
+			$can = $db->query("SELECT * FROM ticket WHERE orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+		    
+		    foreach ($can as $cancel) {
+		    	$hash = $cancel["hash"];	    
+		    	$this->DelVenta($hash, 1);
+		    } $can->close();
+	}
 
 
 

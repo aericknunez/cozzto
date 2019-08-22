@@ -515,7 +515,7 @@ include_once '../../system/ventas/VentasL.php';
 if($_REQUEST["op"]=="81"){ // borrar venta  de la venta lenta
 include_once '../../system/ventas/VentasL.php';
 	$venta = new Ventas();
-	$venta->DelVenta($_REQUEST["hash"]);
+	$venta->DelVenta($_REQUEST["hash"], NULL);
 }
 
 
@@ -551,6 +551,17 @@ if($_REQUEST["op"]=="85"){ // facturar determinar si es rapido o lento
 }
 
 
+if($_REQUEST["op"]=="86"){ // cancelar toda la orden
+	if($_SESSION["tipo_inicio"] == 1){
+	include_once '../../system/ventas/VentasR.php';
+	} else {
+	include_once '../../system/ventas/VentasL.php';
+	}
+	$venta = new Ventas();
+	$venta->Cancelar();
+
+}
+
 
 ////////////////// para venta rapida
 
@@ -571,7 +582,7 @@ include_once '../../system/ventas/VentasR.php';
 if($_REQUEST["op"]=="92"){ // borrar venta  de la venta rapida
 include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
-	$venta->DelVenta($_REQUEST["hash"]);
+	$venta->DelVenta($_REQUEST["hash"], NULL);
 }
 
 if($_REQUEST["op"]=="93"){ // ver producto
