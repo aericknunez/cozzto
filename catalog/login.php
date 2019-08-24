@@ -10,10 +10,6 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/mdb.min.css" rel="stylesheet">
     <link href="assets/css/galeria.css" rel="stylesheet">
-<!-- PARA LOGIN -->
-		<script type="text/JavaScript" src="assets/login/sha512.js"></script> 
-        <script type="text/JavaScript" src="assets/login/forms.js"></script> 
-
 
     <style>/* Required for full background image */
 
@@ -77,7 +73,6 @@ body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
 </head>
 <body class="hidden-sn navy-blue-skin">
 
-<div id="result"></div>
 <!-- Main navigation -->
 <header>
 
@@ -110,7 +105,7 @@ body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
           <!--Grid column-->
           <div class="col-md-6 col-xl-5 mb-4">
             <!--Form-->
-			<form action="application/includes/process_login.php" method="post" name="login_form" > 
+			<form id="form-login" name="form-login" > 
             <div class="card wow fadeInRight" data-wow-delay="0.3s">
               <div class="card-body">
                 <!--Header-->
@@ -139,19 +134,16 @@ body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
                 </div>
 
                 <div class="text-center mt-4">
-                	<input type="button" 
+                	
+                  <input type="button" 
                    value="Ingresar" class="btn btn-indigo"
-                   onclick="formhash(this.form, this.form.password);" />
+                   id="btn-login" name="btn-login" />
 
                   
                   <hr class="hr-light mb-3 mt-4">                
                   <div class="inline-ul text-center d-flex justify-content-center">
 
-                  	<?php
-				        if (isset($_GET['error'])) {
-				            echo '<p class="text-danger">Error al Ingresar!</p>';
-				        }
-				        ?>
+                  	<div id="msj"></div>
                     <!-- <a class="p-2 m-2 tw-ic">
                       <i class="fa fa-twitter white-text"></i>
                     </a>
@@ -206,7 +198,9 @@ body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
         new WOW().init();
 
        </script>
-       	<script src="login/js/main.js"></script>
+
+<script type="text/javascript" src="assets/js/query/login.js"></script>
+
 </body>
 
 </html>

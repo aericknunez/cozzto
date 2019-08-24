@@ -19,6 +19,16 @@ echo '
 	</script>
 	';
 
+
+	if($_GET["modal"] == "registrar"){
+	echo '<script type="text/javascript" src="assets/js/query/login.js?v='.$numero.'"></script>';
+	}
+	if($_GET["modal"] == "newpass"){
+	echo '<script type="text/javascript" src="assets/js/query/user.js?v='.$numero.'"></script>';
+	}
+	if($_GET["modal"] == "userupdate"){
+	echo '<script type="text/javascript" src="assets/js/query/user.js?v='.$numero.'"></script>';
+	}
 	if($_GET["modal"] == "register_success"){
 	echo '<script type="text/javascript" src="assets/js/query/user.js?v='.$numero.'"></script>';
 	}

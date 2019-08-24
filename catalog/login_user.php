@@ -17,9 +17,6 @@ $db = new dbConn();
     <link href="assets/css/galeria.css" rel="stylesheet">
 
     <style>body { overflow-x: hidden; padding-left: 15px; }</style>
-
-    <script type="text/JavaScript" src="assets/login/sha512.js"></script> 
-    <script type="text/JavaScript" src="assets/login/forms.js"></script> 
 </head>
 
 <body class="hidden-sn <?php echo SKIN; ?>">
@@ -98,7 +95,7 @@ if (isset($_GET['error'])) {
 <!--Body-->
 <div class="modal-body text-center mb-1">
 
-  <form action="application/includes/process_login.php" method="post" name="login_form"> 
+  <form name="form-login" id="form-login"> 
    <input type="hidden" name="email"
   <?php if($_REQUEST["user"] != null) echo 'value="'.$_REQUEST["user"].'"'; ?> 
   />
@@ -111,9 +108,10 @@ if (isset($_GET['error'])) {
 </div>
 
 
- <input type="button" value="Login" class="btn btn-primary" onclick="formhash(this.form, this.form.password);" />
+ <input type="button" id="btn-login" name="btn-login" value="Login" class="btn btn-primary" />
 </form>
 
+<div id="msj"></div>
 
 </div>
 <div class="modal-footer">
@@ -155,18 +153,13 @@ $(document).ready(function()
                 $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
             });
 
-
-
-
-
-
-
 });
 </script>
 <?
 }
 ?>
 
+<script type="text/javascript" src="assets/js/query/login.js"></script>
 
 </body>
 </html>

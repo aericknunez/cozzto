@@ -1,12 +1,12 @@
 <?php
-include_once '../common/Helpers.php';
-include_once 'variables_db.php';
-include_once 'db_connect.php';
-include_once 'functions.php';
-sec_session_start();
-
+include_once '../common/Helpers.php'; // [Para todo]
+include_once '../includes/variables_db.php';
 include_once '../common/Mysqli.php';
 $db = new dbConn();
+include_once '../includes/DataLogin.php';
+$seslog = new Login();
+$seslog->sec_session_start();
+
 include_once '../common/Fechas.php';
 include_once '../../system/index/Inicio.php';
 

@@ -11,15 +11,15 @@ $(document).ready(function()
 	});
 
 
-	$('#btn-pass-usuarios').click(function(e){ /// para el formulario
+	$('#btn-changepass').click(function(e){ /// para el formulario
 		e.preventDefault();
 		$.ajax({
 			url: "application/src/routes.php?op=1",
 			method: "POST",
-			data: $("#form-pass-usuarios").serialize(),
+			data: $("#form-changepass").serialize(),
 			success: function(data){
-				$("#caja_user").html(data);
-				$("#form-pass-usuarios").trigger("reset");
+				$("#msj").html(data);
+				$("#form-changepass").trigger("reset");
 			}
 		})
 	})

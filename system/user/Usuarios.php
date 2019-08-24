@@ -22,6 +22,7 @@ class Usuarios{
 		$db->close();
 	}
 
+
 	function ActualizarUsuario($nombre,$tipo,$user){
 	    $db = new dbConn();
 
@@ -80,8 +81,8 @@ class Usuarios{
         		Alerts::Alerta("error","Error!","Error desconocido!");
         	}
 
-
 	}
+
 
 	public function CompararPass($pass1, $pass2) {
 		if($pass1 == $pass2){
@@ -171,21 +172,23 @@ class Usuarios{
 		      <td>'.Helpers::UserName($tipo).'</td>';
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a id="deluser" op="5" iden="'.$b["id"].'" username="'.$user.'" class="btn-floating btn-sm"><i class="fa fa-trash red-text"></i></a></td>';
+				echo '<td><a id="deluser" op="5" iden="'.$b["id"].'" username="'.$user.'" ><i class="fa fa-trash red-text fa-lg"></i></a></td>';
 			} else {
 				echo '<td><a class="btn-floating btn-sm"><i class="fa fa-trash grey-text"></i></a></td>';
 			}
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a href="?modal=register_success&user='.$b["username"].'&op=actualizar" class="btn-floating btn-sm"><i class="fa fa-edit red-text"></i></a></td>';
+				echo '<td><a href="?modal=newpass&user='.$b["username"].'&op=actualizar"><i class="fa fa-edit red-text fa-lg"></i></a>
+				<a href="?modal=userupdate&user='.$b["username"].'&op=actualizar"><i class="fa fa-edit red-text fa-lg"></i></a></td>';
 			} else {
-				echo '<td><a class="btn-floating btn-sm"><i class="fa fa-edit grey-text"></i></a></td>';
+				echo '<td><a ><i class="fa fa-edit grey-text fa-lg"></i></a>
+				<a ><i class="fa fa-edit grey-text fa-lg"></i></a></td>';
 			}
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a href="?modal=avatar&user='.$b["username"].'" class="btn-floating btn-sm"><i class="fa fa-user red-text"></i></a></td>';
+				echo '<td><a href="?modal=avatar&user='.$b["username"].'" ><i class="fa fa-user red-text fa-lg"></i></a></td>';
 			} else {
-				echo '<td><a class="btn-floating btn-sm"><i class="fa fa-user grey-text"></i></a></td>';
+				echo '<td><a ><i class="fa fa-user grey-text fa-lg"></i></a></td>';
 			}
 
 		echo '</tr>';  
