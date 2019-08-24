@@ -18,7 +18,7 @@ class Login {
 					$email = $this->ValidaEmail($data["email"]);
 					$password = $this->ValidaPass($data["password"]);
 
-			if($email != FALSE and $password != FALSE){
+			if($email != FALSE and $password != FALSE and $this->VerificarEmail($data["email"]) == TRUE){
 					$sal = $this->NuevaSal();
 					$passconsal = $this->SalarPass($password, $sal);
 					$user = $this->NewUser();
@@ -109,6 +109,18 @@ class Login {
 	}
 
 
+
+public function VerificarEmail($email){
+		$db = new dbConn();
+		// verifico si esta el usuario con este pass en la bd
+       $a = $db->query("SELECT email FROM login_members WHERE email = '$email'");
+		if($a->num_rows == 1){
+			return FALSE; // existe
+        } else {
+        	return TRUE; // No existe
+        }	
+	$a->close();
+}
 
 
 	public function CambiarPass($password) {
