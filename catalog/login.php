@@ -51,14 +51,14 @@ header,
   }
 }
 
-.rgba-gradient {
+/*.rgba-gradient {
   background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
   background: -webkit-gradient(linear, 45deg, from(rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%)));
   background: linear-gradient(to 45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
-}
+}*/
 
 .card {
-  background-color: rgba(126, 123, 215, 0.2);
+  background-color: rgba(100, 100, 100, 0.2);
 }
 
 .md-form label {
@@ -66,7 +66,7 @@ header,
 }
 
 h6 {
-  line-height: 1.7;
+  line-height: 9.7;
 }
 body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
 
@@ -77,7 +77,7 @@ body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
 <header>
 
   <!-- Full Page Intro -->
-  <div class="view" style="background-image: url('assets/img/Photos/fondo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+  <div class="view" style="background-image: url('assets/img/Photos/backgroundDefault.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <!-- Mask & flexbox options-->
     <div class="mask rgba-gradient d-flex justify-content-center">
       <!-- Content -->

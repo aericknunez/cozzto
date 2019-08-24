@@ -13,8 +13,6 @@ if($_REQUEST["modal"]=="newpass") include_once 'system/modal/modal/user_cambiar_
 
 if($_REQUEST["modal"]=="userupdate") include_once 'system/modal/modal/user_update.php';
 
-if($_REQUEST["modal"]=="register_success") include_once 'system/modal/modal/register_success.php';
-
 if($_REQUEST["modal"]=="avatar") include_once 'system/modal/modal/avatar.php';
 
 if($_REQUEST["modal"]=="conf_config") include_once 'system/modal/modal/conf_config.php';
