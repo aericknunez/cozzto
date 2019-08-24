@@ -42,3 +42,9 @@ if($_REQUEST["modal"]=="credito") include_once 'system/modal/modal/credito.php';
 if($_REQUEST["modal"]=="dfactura") include_once 'system/modal/modal/dfactura.php';
 
 if($_REQUEST["modal"]=="oventas") include_once 'system/modal/modal/oventas.php';
+
+
+// creditos
+if($_REQUEST["modal"]=="abonos") include_once 'system/modal/modal/creditos_abonos.php';
+
+if($_REQUEST["modal"]=="cre_prodcuto") include_once 'system/modal/modal/creditos_producto.php';

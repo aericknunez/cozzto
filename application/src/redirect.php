@@ -15,6 +15,7 @@ elseif(isset($_GET["tablas"])) include_once 'system/config_configuraciones/tabla
 // producto
 elseif(isset($_GET["proadd"])) include_once 'system/producto/proadd.php'; // agregar
 elseif(isset($_GET["proopciones"])) include_once 'system/producto/proopciones.php'; //opciones
+elseif(isset($_GET["productos"])) include_once 'system/producto/producto.php'; //todos los productos
 elseif(isset($_GET["proup"])) include_once 'system/producto/proup.php'; // actualizar
 elseif(isset($_GET["proagregar"])) include_once 'system/producto/proagregar.php'; // agregar producto
 elseif(isset($_GET["proaverias"])) include_once 'system/producto/proaverias.php'; // agregar averias
@@ -30,6 +31,10 @@ elseif(isset($_GET["clientever"])) include_once 'system/cliente/clientever.php';
 
 // creditos
 elseif(isset($_GET["creditos"])) include_once 'system/credito/creditosver.php'; // ver todos los creditos
+
+
+// Gastos y compras
+elseif(isset($_GET["gastos"])) include_once 'system/gastos/gastos.php'; 
 
 
 

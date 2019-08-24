@@ -1,5 +1,5 @@
 
-<li><a href="" class="waves-effect arrow-r"><i class="fas fa-user"></i> Clienes atendidos </a></li>
+<li><a href="" class="waves-effect arrow-r"><i class="fas fa-user"></i> Clienes Atendidos </a></li>
 
 <li><a href="" class="waves-effect arrow-r"><i class="fas fa-user"></i> Corte Diario </a></li>
 
@@ -20,8 +20,8 @@
 <div class="collapsible-body">
 <ul class="list-unstyled">
 
-<li><a href="" class="waves-effect"><i class="fas fa-cog"></i> Gastos y compras</a></li>
-<li><a href="" class="waves-effect"><i class="fas fa-cogs"></i> Salida y Entrada de Efectivo</a></li>
+<li><a href="?gastos" class="waves-effect"><i class="fas fa-cog"></i> Gastos y Compras</a></li>
+<li><a href="?entradas" class="waves-effect"><i class="fas fa-cogs"></i> Entrada de Efectivo</a></li>
 
 </ul>
 </div>
@@ -37,6 +37,7 @@
 
 <li><a href="?proadd" class="waves-effect"><i class="fas fa-plus"></i> Nuevo Producto</a></li>
 <li><a href="?proup" class="waves-effect"><i class="fas fa-pencil-alt"></i> Actualizar Producto</a></li>
+<li><a href="?productos" class="waves-effect"><i class="fas fa-address-book"></i> Todos los productos</a></li>
 <li><a href="?proagregar" class="waves-effect"><i class="fas fa-columns"></i> Agregar Productos</a></li>
 <li><a href="?proaverias" class="waves-effect"><i class="fas fa-database"></i> Descontar Averias</a></li>
 <li><a href="?" class="waves-effect"><i class="fas fa-database"></i> Cambios</a></li>
@@ -52,8 +53,6 @@
 <ul class="list-unstyled">
 
 <li><a href="?creditos" class="waves-effect"><i class="fas fa-money-bill-alt"></i> Buscar Credito</a></li>
-<li><a href="" class="waves-effect"><i class="fas fa-file-invoice-dollar"></i> Agregar Abono</a></li>
-
 </ul>
 </div>
 </li>

@@ -132,7 +132,7 @@ class Helpers{
      } 
 
 
-    public function format($numero){ 
+    public function Format($numero){ 
         $format=number_format($numero,2,'.',',');
         return $format;
      } 

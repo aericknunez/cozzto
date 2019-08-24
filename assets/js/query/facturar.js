@@ -7,12 +7,14 @@ $(document).ready(function(){
 			method: "POST",
 			data: $("#form-facturar").serialize(),
 			beforeSend: function () {
-				$("#formularios").hide();
+			   $("#formularios").hide();
+			   $("#btn-te").hide(); // esconde boton tarjeta y efectivo
                $("#resultado").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
             },
 			success: function(data){
 				$("#form-facturar").trigger("reset");
 				$("#formularios").hide();
+				$("#btn-te").hide(); // esconde boton tarjeta y efectivo 
 				$("#resultado").html(data);					
 			}
 		})

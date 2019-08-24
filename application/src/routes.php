@@ -425,7 +425,6 @@ include_once '../../system/producto/ProUpdate.php';
 }
 
 
-
 /////////////////////// proveedor
 
 if($_REQUEST["op"]=="60"){ // agregar proveedor
@@ -631,6 +630,7 @@ include_once '../../system/ventas/VentasR.php';
 
 if($_REQUEST["op"]=="99"){ 
 unset($_SESSION["cliente_credito"]);
+unset($_SESSION["cliente_c"]);
 }
 
 
@@ -658,6 +658,64 @@ include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
 	$cliente->NuevoDocumento($_POST);
 }
+
+
+
+/// credito
+if($_REQUEST["op"]=="105"){ // agrega abono
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$credito->AddAbono($_POST);
+}
+
+
+
+// total abonos
+if($_REQUEST["op"]=="106"){ 
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	echo Helpers::Dinero($credito->TotalAbono($_REQUEST["credito"]));
+}
+
+// restante de abonar
+if($_REQUEST["op"]=="107"){ 
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$abonos = $credito->TotalAbono($_REQUEST["credito"]);
+	$totales = $credito->ObtenerTotal($_REQUEST["factura"], $_REQUEST["tx"]);
+
+	echo Helpers::Dinero($totales - $abonos);
+}
+
+// borrar abono
+if($_REQUEST["op"]=="108"){ 
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$credito->DelAbono($_REQUEST["hash"], $_REQUEST["credito"]);
+}
+
+
+
+///////////////gastos
+if($_REQUEST["op"]=="110"){ 
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->AddGasto($_POST);
+}
+
+if($_REQUEST["op"]=="111"){ 
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->BorrarGasto($_POST["iden"]);
+
+}
+
+
+
+
+
+
+
 
 
 

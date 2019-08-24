@@ -358,6 +358,7 @@ class Ventas{
 		
 		if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 		if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
+		if(isset($_SESSION["tcredito"])) unset($_SESSION["tcredito"]);
 
 			if(isset($_SESSION["cliente_c"])) unset($_SESSION["cliente_c"]);
 			if(isset($_SESSION["cliente_credito"])) unset($_SESSION["cliente_credito"]);
@@ -516,6 +517,7 @@ class Ventas{
 	   	}
 			if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 			if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
+			if(isset($_SESSION["tcredito"])) unset($_SESSION["tcredito"]);
    }
 
 

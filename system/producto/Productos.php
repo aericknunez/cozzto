@@ -882,6 +882,54 @@ class Productos{
 
 
 
+  public function VerTodosProductos(){ 
+    $db = new dbConn();
+
+    $a = $db->query("SELECT producto.cod, producto.descripcion, producto.cantidad, producto.existencia_minima, producto_categoria.categoria FROM producto INNER JOIN producto_categoria ON producto.categoria = producto_categoria.hash and producto.td = ".$_SESSION["td"]." order by producto.id desc");
+          if($a->num_rows > 0){
+        echo '<table id="dtMaterialDesignExample" class="table table-striped" table-sm cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th class="th-sm">Cod</th>
+                    <th class="th-sm">Producto</th>
+                    <th class="th-sm">Cantidad</th>
+                    <th class="th-sm">Categoria</th>
+                    <th class="th-sm">Minimo</th>
+                    <th class="th-sm">Editar</th>
+                  </tr>
+                </thead>
+                <tbody>';
+          $n = 1;
+              foreach ($a as $b) { ;
+                echo '<tr>
+                      <td>'.$b["cod"].'</td>
+                      <td>'.$b["descripcion"].'</td>
+                      <td>'.$b["cantidad"].'</td>
+                      <td>'.$b["categoria"].'</td>
+                      <td>'.$b["existencia_minima"].'</td>
+                      <td><a href="?proup&key='.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                    </tr>';          
+              }
+        echo '</tbody>
+                <tfoot>
+                  <tr>
+                    <th>Cod</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Categoria</th>
+                    <th>Minimo</th>
+                    <th>Editar</th>
+                  </tr>
+                </tfoot>
+              </table>';
+
+          } $a->close();  
+
+  }
+
+
+
+
 
 
 

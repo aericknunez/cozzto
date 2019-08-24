@@ -4,6 +4,15 @@
     include_once 'system/ventas/Laterales.php';
     $lateral = new Laterales(); 
 
+if ($_REQUEST["t"] == 1) {
+  $_SESSION["tcredito"] = 2;
+  $dir = "?modal=facturar";
+  $txt = "Pago en Efectivo";
+} else {
+  if(isset($_SESSION["tcredito"])) unset($_SESSION["tcredito"]);
+  $dir = "?modal=facturar&t=1";
+  $txt = "Pago con tarjeta";
+}
  ?><div class="modal" id="<? echo $_GET["modal"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -28,6 +37,29 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($to
 <div align="center">
    <form id="form-facturar" name="form-facturar">
      
+     <?php if(isset($_SESSION["cliente_c"])) { ?>
+
+     <div class="form-group row justify-content-center align-items-center">
+      <div class="col-xs-2">
+        <label for="ex1">Efectuar nota de credito</label>
+        <input name="efectivo" type="hidden" id="efectivo" size="8" />
+      </div>
+    </div>
+    <input type="image" src="assets/img/imagenes/credito.png"  id="btn-facturar" name="btn-facturar" >
+    
+     <?php } elseif(isset($_SESSION["tcredito"])) { ?>
+
+     <div class="form-group row justify-content-center align-items-center">
+      <div class="col-xs-2">
+        <label for="ex1">Aplicar a Tarjeta</label>
+        <input name="efectivo" type="hidden" id="efectivo" size="8" />
+      </div>
+    </div>
+    <input type="image" src="assets/img/imagenes/tarjeta.png"  id="btn-facturar" name="btn-facturar" >
+    
+
+    <?php } else { ?>
+     
      <div class="form-group row justify-content-center align-items-center">
       <div class="col-xs-2">
         <label for="ex1">Efectivo</label>
@@ -35,6 +67,9 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($to
       </div>
     </div>
     <input type="image" src="assets/img/imagenes/print.png"  id="btn-facturar" name="btn-facturar" >
+    
+    <?php } ?>
+
     </form>
 </div>
 
@@ -49,7 +84,9 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($to
       </div>
     
       <div class="modal-footer">
-
+        <?php if(!isset($_SESSION["cliente_c"])) { ?>
+          <a href="<?php echo $dir; ?>" id="btn-te" class="btn btn-secondary btn-rounded"><?php echo $txt; ?></a>
+        <?php } ?>
           <a href="?" class="btn btn-primary btn-rounded">Regresar</a>
     
       </div>

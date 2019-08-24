@@ -69,6 +69,10 @@ echo '
 	if($_GET["modal"] == "dfactura"){
 	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
 	}
+// abono
+	if($_GET["modal"] == "abonos"){
+	echo '<script type="text/javascript" src="assets/js/query/credito.js?v='.$numero.'"></script>';
+	}
 
 
 
@@ -90,6 +94,12 @@ echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numer
 } 
 elseif(isset($_GET["proopciones"])) {
 echo '<script type="text/javascript" src="assets/js/query/proopciones.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["productos"])) {
+echo '
+<script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
+<script type="text/javascript" src="assets/js/query/tabla.js?v='.$numero.'"></script>
+<script type="text/javascript" src="assets/js/query/productos_all.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["proup"])) {
 echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
@@ -126,7 +136,12 @@ echo '
 elseif(isset($_GET["creditos"])) {
 echo '
 <script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
-<script type="text/javascript" src="assets/js/query/creditodatatable.js?v='.$numero.'"></script>';
+<script type="text/javascript" src="assets/js/query/tabla.js?v='.$numero.'"></script>';
+} 
+
+//// gastos
+elseif(isset($_GET["gastos"])) {
+echo '<script type="text/javascript" src="assets/js/query/gastos.js?v='.$numero.'"></script>';
 } 
 
 
