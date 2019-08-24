@@ -40,8 +40,8 @@
 <li><a href="?productos" class="waves-effect"><i class="fas fa-address-book"></i> Todos los productos</a></li>
 <li><a href="?proagregar" class="waves-effect"><i class="fas fa-columns"></i> Agregar Productos</a></li>
 <li><a href="?proaverias" class="waves-effect"><i class="fas fa-database"></i> Descontar Averias</a></li>
-<li><a href="?" class="waves-effect"><i class="fas fa-database"></i> Cambios</a></li>
-<li><a href="?" class="waves-effect arrow-r"><i class="fas fa-database"></i> Devoluciones</a></li>
+<!-- <li><a href="?" class="waves-effect"><i class="fas fa-database"></i> Cambios</a></li>
+<li><a href="?" class="waves-effect arrow-r"><i class="fas fa-database"></i> Devoluciones</a></li> -->
 <li><a href="?proopciones" class="waves-effect arrow-r"><i class="fas fa-handshake"></i> Opciones</a></li>
 </ul>
 </div>

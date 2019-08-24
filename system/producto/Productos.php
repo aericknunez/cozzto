@@ -879,53 +879,116 @@ class Productos{
 
 
 
+  public function VerTodosProductos($npagina, $orden, $dir){
+      $db = new dbConn();
 
+  $limit = 15;
+  $adjacents = 2;
+  if($npagina == NULL) $npagina = 1;
+  $a = $db->query("SELECT * FROM producto WHERE td = ". $_SESSION['td'] ."");
+  $total_rows = $a->num_rows;
+  $a->close();
 
+  $total_pages = ceil($total_rows / $limit);
+  
+  if(isset($npagina) && $npagina != NULL) {
+    $page = $npagina;
+    $offset = $limit * ($page-1);
+  } else {
+    $page = 1;
+    $offset = 0;
+  }
 
-  public function VerTodosProductos(){ 
-    $db = new dbConn();
+if($dir == "desc") $dir2 = "asc";
+if($dir == "asc") $dir2 = "desc";
 
-    $a = $db->query("SELECT producto.cod, producto.descripcion, producto.cantidad, producto.existencia_minima, producto_categoria.categoria FROM producto INNER JOIN producto_categoria ON producto.categoria = producto_categoria.hash and producto.td = ".$_SESSION["td"]." order by producto.id desc");
-          if($a->num_rows > 0){
-        echo '<table id="dtMaterialDesignExample" class="table table-striped" table-sm cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th class="th-sm">Cod</th>
-                    <th class="th-sm">Producto</th>
-                    <th class="th-sm">Cantidad</th>
-                    <th class="th-sm">Categoria</th>
-                    <th class="th-sm">Minimo</th>
-                    <th class="th-sm">Editar</th>
-                  </tr>
-                </thead>
-                <tbody>';
-          $n = 1;
-              foreach ($a as $b) { ;
-                echo '<tr>
+ $a = $db->query("SELECT producto.cod, producto.descripcion, producto.cantidad, producto.existencia_minima, producto_categoria.categoria FROM producto INNER JOIN producto_categoria ON producto.categoria = producto_categoria.hash and producto.td = ".$_SESSION["td"]." order by ".$orden." ".$dir." limit $offset, $limit");
+      
+      if($a->num_rows > 0){
+          echo '<table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.cod" dir="'.$dir2.'">Cod</a></th>
+            <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.descripcion" dir="'.$dir2.'">Producto</a></th>
+            <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.cantidad" dir="'.$dir2.'">Cantidad</a></th>
+            <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.categoria" dir="'.$dir2.'">Categoria</a></th>
+            <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.existencia_minima" dir="'.$dir2.'">Minimo</a></th>
+            <th class="th-sm">Editar</th>
+          </tr>
+        </thead>
+        <tbody>';
+        foreach ($a as $b) {
+        // obtener el nombre y detalles del producto
+    if ($r = $db->select("*", "pro_dependiente", "WHERE iden = ".$b["producto"]." and td = ". $_SESSION["td"] ."")) { 
+        $producto = $r["nombre"]; } unset($r); 
+
+          echo '<tr>
                       <td>'.$b["cod"].'</td>
                       <td>'.$b["descripcion"].'</td>
                       <td>'.$b["cantidad"].'</td>
                       <td>'.$b["categoria"].'</td>
                       <td>'.$b["existencia_minima"].'</td>
                       <td><a href="?proup&key='.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
-                    </tr>';          
-              }
+                    </tr>';
+        }
         echo '</tbody>
-                <tfoot>
-                  <tr>
-                    <th>Cod</th>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Categoria</th>
-                    <th>Minimo</th>
-                    <th>Editar</th>
-                  </tr>
-                </tfoot>
-              </table>';
+        </table>';
+      }
+        $a->close();
 
-          } $a->close();  
-
+  if($total_pages <= (1+($adjacents * 2))) {
+    $start = 1;
+    $end   = $total_pages;
+  } else {
+    if(($page - $adjacents) > 1) {  
+      if(($page + $adjacents) < $total_pages) {  
+        $start = ($page - $adjacents); 
+        $end   = ($page + $adjacents); 
+      } else {              
+        $start = ($total_pages - (1+($adjacents*2))); 
+        $end   = $total_pages; 
+      }
+    } else {
+      $start = 1; 
+      $end   = (1+($adjacents * 2));
+    }
   }
+
+   if($total_pages > 1) { 
+
+$page <= 1 ? $enable = 'disabled' : $enable = '';
+    echo '<ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="54" iden="1" orden="'.$orden.'" dir="'.$dir.'">&lt;&lt;</a>
+      </li>';
+    
+    $page>1 ? $pagina = $page-1 : $pagina = 1;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="54" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&lt;</a>
+      </li>';
+
+    for($i=$start; $i<=$end; $i++) {
+      $i == $page ? $pagina =  'active' : $pagina = '';
+      echo '<li class="page-item '.$pagina.'">
+        <a class="page-link" id="paginador" op="54" iden="'.$i.'" orden="'.$orden.'" dir="'.$dir.'">'.$i.'</a>
+      </li>';
+    }
+
+    $page >= $total_pages ? $enable = 'disabled' : $enable = '';
+    $page < $total_pages ? $pagina = ($page+1) : $pagina = $total_pages;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="54" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&gt;</a>
+      </li>';
+
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="54" iden="'.$total_pages.'" orden="'.$orden.'" dir="'.$dir.'">&gt;&gt;</a>
+      </li>
+
+      </ul>';
+     }  // end pagination 
+
+  } // termina productos
+
 
 
 

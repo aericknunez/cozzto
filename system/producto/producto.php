@@ -13,7 +13,7 @@ $db = new dbConn();
 
 
 <div id="contenido">
-   <?php $producto->VerTodosProductos(); ?>
+   <?php $producto->VerTodosProductos(1, "producto.id", "asc"); ?>
 </div>
 
 

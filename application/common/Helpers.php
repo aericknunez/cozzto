@@ -46,11 +46,16 @@ class Helpers{
     if($string == "1") return '<p class="text-danger font-weight-bold">Compra No Facturado</p>';
     if($string == "2") return '<p class="text-success font-weight-bold">Compra con Factura</p>';
     if($string == "3") return '<p class="text-info font-weight-bold">Remesas</p>';
-    
     if($string == "4") return '<p class="text-primary font-weight-bold">Adelanto a personal</p>';
     if($string == "5") return '<p class="text-warning font-weight-bold">Cheques</p>';
     }
 
+
+    static public function EstadoCredito($string) {
+    if($string == "1") return 'Activo';
+    if($string == "2") return 'Pagado';
+    if($string == "0") return 'Eliminado';
+    }
 
 
     static public function VerTipoSync($tipo) {

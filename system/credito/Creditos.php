@@ -8,7 +8,7 @@ class Creditos{
 
   public function VerCreditos(){
       $db = new dbConn();
-          $a = $db->query("SELECT * FROM creditos WHERE edo = 1 and td = ".$_SESSION["td"]." order by id desc");
+          $a = $db->query("SELECT * FROM creditos WHERE td = ".$_SESSION["td"]." order by id desc");
           if($a->num_rows > 0){
         echo '<table id="dtMaterialDesignExample" class="table table-striped" table-sm cellspacing="0" width="100%">
                 <thead>
@@ -17,6 +17,7 @@ class Creditos{
                     <th class="th-sm">Nombre</th>
                     <th class="th-sm">Factura</th>
                     <th class="th-sm">Fecha</th>
+                    <th class="th-sm">Estado</th>
                     <th class="th-sm">Ver</th>
                     <th class="th-sm">Abonos</th>
                   </tr>
@@ -29,6 +30,7 @@ class Creditos{
                       <td>'.$b["nombre"].'</td>
                       <td>'.$b["factura"].'</td>
                       <td>'.$b["fecha"] . ' | ' . $b["hora"] . '</td>
+                      <td>'.Helpers::EstadoCredito($b["edo"]) . '</td>
                       <td><a href="?modal=cre_prodcuto&cre='. $b["hash"] .'&factura='. $b["factura"] .'&tx='. $b["tx"] .'"><i class="fas fa-search fa-lg green-text"></i></a></td>
                       <td><a href="?modal=abonos&cre='. $b["hash"] .'&factura='. $b["factura"] .'&tx='. $b["tx"] .'"><i class="fas fa-money-bill-alt fa-lg red-text"></i></a></td>
                     </tr>';          

@@ -70,7 +70,6 @@ class Clientes {
               <th scope="col">Documento</th>
               <th scope="col">Direccion</th>
               <th scope="col">Telefono</th>
-              <th scope="col">Contacto</th>
               <th scope="col">Eliminar</th>
             </tr>
           </thead>
@@ -83,7 +82,6 @@ class Clientes {
                       <td>'.$b["documento"].'</td>
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
-                      <td>'.$b["contacto"].'</td>
                       <td><a id="delcliente" hash="'.$b["hash"].'" op="65"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
@@ -128,7 +126,6 @@ class Clientes {
                     <th class="th-sm">Documento</th>
                     <th class="th-sm">Direccion</th>
                     <th class="th-sm">Telefono</th>
-                    <th class="th-sm">Contacto</th>
                     <th class="th-sm">Editar</th>
                     <th class="th-sm">Eliminar</th>
                   </tr>
@@ -142,7 +139,6 @@ class Clientes {
                       <td>'.$b["documento"].'</td>
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
-                      <td>'.$b["contacto"].'</td>
                       <td><a href="?modal=editcliente&key='.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
                       <td><a id="delcliente" hash="'.$b["hash"].'" op="66"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
@@ -155,7 +151,6 @@ class Clientes {
                     <th>Documento</th>
                     <th>Direccion</th>
                     <th>Telefono</th>
-                    <th>Contacto</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                   </tr>

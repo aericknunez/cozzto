@@ -425,6 +425,16 @@ include_once '../../system/producto/ProUpdate.php';
 }
 
 
+
+
+if($_REQUEST["op"]=="54"){ // ver todos los producto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->VerTodosProductos($_POST["iden"], $_POST["orden"], $_POST["dir"]);
+}
+
+
+
 /////////////////////// proveedor
 
 if($_REQUEST["op"]=="60"){ // agregar proveedor
@@ -710,9 +720,19 @@ include_once '../../system/gastos/Gasto.php';
 
 }
 
+if($_REQUEST["op"]=="112"){  // entrada de efectivo
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->AddEfectivo($_POST);
+}
 
 
+if($_REQUEST["op"]=="113"){ 
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->BorrarEfectivo($_POST["iden"]);
 
+}
 
 
 

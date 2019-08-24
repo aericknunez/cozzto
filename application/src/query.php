@@ -96,10 +96,7 @@ elseif(isset($_GET["proopciones"])) {
 echo '<script type="text/javascript" src="assets/js/query/proopciones.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["productos"])) {
-echo '
-<script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
-<script type="text/javascript" src="assets/js/query/tabla.js?v='.$numero.'"></script>
-<script type="text/javascript" src="assets/js/query/productos_all.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["proup"])) {
 echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
@@ -143,7 +140,9 @@ echo '
 elseif(isset($_GET["gastos"])) {
 echo '<script type="text/javascript" src="assets/js/query/gastos.js?v='.$numero.'"></script>';
 } 
-
+elseif(isset($_GET["entradas"])) {
+echo '<script type="text/javascript" src="assets/js/query/gastos.js?v='.$numero.'"></script>';
+} 
 
 
 

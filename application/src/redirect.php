@@ -36,6 +36,9 @@ elseif(isset($_GET["creditos"])) include_once 'system/credito/creditosver.php'; 
 // Gastos y compras
 elseif(isset($_GET["gastos"])) include_once 'system/gastos/gastos.php'; 
 
+elseif(isset($_GET["entradas"])) include_once 'system/gastos/entradas.php'; 
+
+
 
 
 
