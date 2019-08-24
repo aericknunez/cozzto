@@ -18,7 +18,8 @@ class Login {
 					$email = $this->ValidaEmail($data["email"]);
 					$password = $this->ValidaPass($data["password"]);
 
-			if($email != FALSE and $password != FALSE and $this->VerificarEmail($data["email"]) == TRUE){
+			if($email != FALSE and $password != FALSE){
+				if($this->VerificarEmail($data["email"]) == TRUE){
 					$sal = $this->NuevaSal();
 					$passconsal = $this->SalarPass($password, $sal);
 					$user = $this->NewUser();
@@ -45,14 +46,15 @@ class Login {
 
 							}
 
-				   	} 
+				   	}
+				   } else {
+				   	echo "El Email ya esta vinculado a una cuenta!";
+				   }
+					 
 			} else {
 				echo "Faltan Datos!";
 			}
-
-
 		}
-
 
 	}
 
