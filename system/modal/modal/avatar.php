@@ -1,6 +1,4 @@
 <?php 
-include_once 'application/common/Mysqli.php';
-$db = new dbConn();
 $usuario = sha1($_REQUEST["user"]);
 
     if ($r = $db->select("avatar", "login_userdata", "WHERE user = '$usuario'")) { 

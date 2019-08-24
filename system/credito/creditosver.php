@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include_once 'application/common/Alerts.php';
 include_once 'system/credito/Creditos.php';
 $credito = new Creditos(); 
-include_once 'application/common/Mysqli.php';
-$db = new dbConn();
 ?>
 
 <div id="msj"></div>

@@ -1,8 +1,6 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once 'application/common/Mysqli.php';
-$db = new dbConn();
 
 // realizo las consultas de los select aqui
     $a = $db->query("SELECT hash, nombre FROM proveedores WHERE td = ".$_SESSION["td"]."");

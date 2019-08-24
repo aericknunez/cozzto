@@ -1,7 +1,5 @@
 <?php
     include_once 'application/common/Alerts.php'; 
-    include_once 'application/common/Mysqli.php';
-    $db = new dbConn();
     include_once 'system/ventas/Laterales.php';
     $lateral = new Laterales(); 
 

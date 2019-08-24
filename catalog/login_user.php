@@ -1,8 +1,3 @@
-<?php 
-include_once 'application/common/Mysqli.php';
-$db = new dbConn();
- ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

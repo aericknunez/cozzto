@@ -2,10 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 include_once 'application/common/Alerts.php';
-include_once 'application/common/Mysqli.php';
 include_once 'system/user/Usuarios.php';
 
-$db = new dbConn();
 ?>
 <h1>Usuarios
 <?php 

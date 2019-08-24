@@ -5,8 +5,6 @@ $tventa = 2;
 
 include_once 'system/ventas/VentasL.php';
 $ventas = new Ventas(); 
-include_once 'application/common/Mysqli.php';
-$db = new dbConn();
 
 ?>
 <div align="center">

@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include_once 'application/common/Alerts.php';
 include_once 'system/producto/ProUpdate.php';
 $producto = new ProUpdate(); 
-include_once 'application/common/Mysqli.php';
-$db = new dbConn();
 ?>
 
 
