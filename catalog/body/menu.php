@@ -1,7 +1,7 @@
 
-<li><a href="" class="waves-effect arrow-r"><i class="fas fa-user"></i> Clienes Atendidos </a></li>
+<li><a href="" class="waves-effect arrow-r"><i class="fas fa-tv"></i> Panel de Control </a></li>
 
-<li><a href="" class="waves-effect arrow-r"><i class="fas fa-user"></i> Corte Diario </a></li>
+<li><a href="?corte" class="waves-effect arrow-r"><i class="fas fa-user"></i> Corte Diario </a></li>
 
 
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Historial<i class="fa fa-angle-down rotate-icon"></i></a>

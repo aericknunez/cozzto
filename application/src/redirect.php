@@ -38,6 +38,11 @@ elseif(isset($_GET["gastos"])) include_once 'system/gastos/gastos.php';
 elseif(isset($_GET["entradas"])) include_once 'system/gastos/entradas.php'; 
 
 
+// Corte Diario
+elseif(isset($_GET["corte"])) include_once 'system/corte/cortes.php'; 
+
+
+
 
 
 

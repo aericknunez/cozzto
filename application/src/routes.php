@@ -746,6 +746,56 @@ include_once '../../system/gastos/Gasto.php';
 
 
 
+///////////////////////// corte /////////////////
+
+if($_REQUEST["op"]=="115"){ // corte preguntar
+	if($_POST["efectivo"] ==  NULL){
+		Alerts::Alerta("error","Error!","El Formulario esta vacio");
+	} else {
+		Alerts::RealizarCorte("ejecuta-corte","116",$_POST["efectivo"]);
+	}
+}
+
+if($_REQUEST["op"]=="116"){ // ejecuta corte
+include_once '../../system/corte/Corte.php';
+//include_once '../../system/sync/Sync.php';
+$cortes = new Corte;
+if($_POST["fecha"] == NULL){ $fecha = date("d-m-Y"); 
+} else {
+   $fecha = $_POST["fecha"];
+}
+$cortes->Execute($_POST["efectivo"], $fecha);
+}
+
+
+
+if($_REQUEST["op"]=="117"){ // ver el contenido
+	include_once '../../system/corte/Corte.php';
+	//include_once '../../system/sync/Sync.php';
+	$cortes = new Corte;
+	$cortes->Contenido(date("d-m-Y"));
+}
+
+
+if($_REQUEST["op"]=="118"){ // cancelar corte
+	include_once '../../system/corte/Corte.php';
+	$cortes = new Corte;
+	if($_POST["fecha"] == NULL){ $fecha = date("d-m-Y"); 
+	} else {
+	   $fecha = $_POST["fecha"];
+	}
+	$cortes->CancelarCorte($_POST["random"], $fecha);
+
+}
+
+
+
+
+
+
+
+
+
 
 
 
