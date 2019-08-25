@@ -189,8 +189,8 @@ else{
 
 
 // preloader
-    // $(window).on("load", function () {
-    //     $('#mdb-preloader').fadeOut('fast');
-    // });
+    $(window).on("load", function () {
+        $('#mdb-preloader').fadeOut('fast');
+    });
 
 </script>

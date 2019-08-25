@@ -4,6 +4,7 @@ include_once 'system/producto/Productos.php';
   $productos = new Productos;
 
 $key =  $_REQUEST["key"];
+$cad = $_REQUEST["cad"];
 $com = $_REQUEST["com"];
 $dep = $_REQUEST["dep"];
  ?>
@@ -83,6 +84,7 @@ $dep = $_REQUEST["dep"];
                           </div>
                         </div>
                       <input type="hidden" id="producto" name="producto" value="<?php echo $_REQUEST["key"] ?>" >
+                      <input type="hidden" id="cad" name="cad" value="<?php echo $_REQUEST["cad"] ?>" >
                       <input type="hidden" id="dep" name="dep" value="<?php echo $_REQUEST["dep"] ?>" >
                       <input type="hidden" id="com" name="com" value="<?php echo $_REQUEST["com"] ?>" >
                       </form>
@@ -114,6 +116,7 @@ $dep = $_REQUEST["dep"];
 
                   </div>
                       <input type="hidden" id="producto" name="producto" value="<?php echo $_REQUEST["key"] ?>" >
+                      <input type="hidden" id="cad" name="cad" value="<?php echo $_REQUEST["cad"] ?>" >
                       <input type="hidden" id="dep" name="dep" value="<?php echo $_REQUEST["dep"] ?>" >
                       <input type="hidden" id="com" name="com" value="<?php echo $_REQUEST["com"] ?>" >
               </form>
@@ -123,7 +126,7 @@ $dep = $_REQUEST["dep"];
               if(isset($_GET["msj"])) Alerts::Mensaje("Debe agregar un precio del producto","danger",$boton,$boton2);
              $productos->VerPrecios($_REQUEST["key"]); 
               ?></div>
-         <?php $url = "application/src/routes.php?op=47&key=$key&step=2&com=$com&dep=$dep"; ?>
+         <?php $url = "application/src/routes.php?op=47&key=$key&step=2&cad=$cad&com=$com&dep=$dep"; ?>
               <a href="<?php echo $url; ?>" class="btn btn-info my-1" type="submit" id="btn-preciosdone"><i class="fa fa-floppy-o mr-1"></i> Continuar</a>
               </div>
               </div>
@@ -157,6 +160,7 @@ $dep = $_REQUEST["dep"];
                   </div>
                   <div id="muestra-busqueda"></div>
                       <input type="hidden" id="producto" name="producto" value="<?php echo $_REQUEST["key"] ?>" >
+                      <input type="hidden" id="cad" name="cad" value="<?php echo $_REQUEST["cad"] ?>" >
                       <input type="hidden" id="dep" name="dep" value="<?php echo $_REQUEST["dep"] ?>" >
                       <input type="hidden" id="com" name="com" value="<?php echo $_REQUEST["com"] ?>" >
               </form>
@@ -196,6 +200,7 @@ $dep = $_REQUEST["dep"];
                   </div>
                   <div id="muestra-busqueda"></div>
                       <input type="hidden" id="producto" name="producto" value="<?php echo $_REQUEST["key"] ?>" >
+                      <input type="hidden" id="cad" name="cad" value="<?php echo $_REQUEST["cad"] ?>" >
                       <input type="hidden" id="dep" name="dep" value="<?php echo $_REQUEST["dep"] ?>" >
                       <input type="hidden" id="com" name="com" value="<?php echo $_REQUEST["com"] ?>" >
               </form>
@@ -254,7 +259,7 @@ $dep = $_REQUEST["dep"];
     </div> <!-- termina tab -->
 
     <div class="tab-pane fade" id="ubicacion-classic" role="tabpanel" aria-labelledby="ubicacion-tab-classic">
-      <p class="note note-primary"><strong>Ubicaci&oacute:</strong> La ubicaci&oacuten del producto es donde se encuentra fisicamente.</p>
+      <p class="note note-primary"><strong>Ubicaci&oacuten:</strong> La ubicaci&oacuten del producto es donde se encuentra fisicamente.</p>
       
       <div class="row d-flex justify-content-center text-center" id="ubicacion"> 
                 <div class="col-sm-12">

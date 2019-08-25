@@ -178,7 +178,7 @@ class Usuarios{
 			}
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a href="?modal=newpass&user='.$b["username"].'&op=actualizar"><i class="fa fa-edit red-text fa-lg"></i></a>
+				echo '<td><a href="?modal=newpass&user='.$b["username"].'&op=actualizar"><i class="fa fa-unlock-alt red-text fa-lg"></i></a>
 				<a href="?modal=userupdate&user='.$b["username"].'&op=actualizar"><i class="fa fa-edit red-text fa-lg"></i></a></td>';
 			} else {
 				echo '<td><a ><i class="fa fa-edit grey-text fa-lg"></i></a>
