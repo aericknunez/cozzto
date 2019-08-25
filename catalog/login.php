@@ -135,9 +135,7 @@ body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
 
                 <div class="text-center mt-4">
                 	
-                  <input type="button" 
-                   value="Ingresar" class="btn btn-indigo"
-                   id="btn-login" name="btn-login" />
+                  <button class="btn btn-info my-4" type="submit" id="btn-login" name="btn-login">Ingresar</button>
 
                   
                   <hr class="hr-light mb-3 mt-4">                

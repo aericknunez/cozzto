@@ -103,7 +103,7 @@ if (isset($_GET['error'])) {
 </div>
 
 
- <input type="button" id="btn-login" name="btn-login" value="Login" class="btn btn-primary" />
+<button class="btn btn-info my-4" type="submit" id="btn-login" name="btn-login">Ingresar</button>
 </form>
 
 <div id="msj"></div>

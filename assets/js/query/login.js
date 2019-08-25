@@ -12,7 +12,7 @@ $(document).ready(function()
 				$('#btn-login').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').addClass('disabled');
 	        },
 			success: function(data){
-				$('#btn-login').html('Login').removeClass('disabled');	      
+				$('#btn-login').html('Ingresar').removeClass('disabled');	      
 				$("#form-login").trigger("reset");
 				$("#msj").html(data);	
 			}
