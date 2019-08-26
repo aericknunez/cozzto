@@ -43,6 +43,19 @@ elseif(isset($_GET["corte"])) include_once 'system/corte/cortes.php';
 
 
 
+// Historia;
+elseif(isset($_GET["rdiario"])) include_once 'system/historial/rdiario.php';
+elseif(isset($_GET["vdiario"])) include_once 'system/historial/vdiario.php'; 
+elseif(isset($_GET["vmensual"])) include_once 'system/historial/vmensual.php'; 
+elseif(isset($_GET["hcortes"])) include_once 'system/historial/hcortes.php'; 
+elseif(isset($_GET["gdiario"])) include_once 'system/historial/gdiario.php'; 
+elseif(isset($_GET["gmensual"])) include_once 'system/historial/gmensual.php'; 
+// graficos;
+elseif(isset($_GET["gra_semanal"])) include_once 'system/historial/gra_semanal.php';
+elseif(isset($_GET["gra_mensual"])) include_once 'system/historial/gra_mensual.php';
+
+
+
 
 
 

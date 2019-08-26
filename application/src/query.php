@@ -155,7 +155,27 @@ elseif(isset($_GET["corte"])) {
 echo '<script type="text/javascript" src="assets/js/query/corte.js?v='.$numero.'"></script>';
 } 
 
-
+//// Historial
+elseif(isset($_GET["rdiario"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["vdiario"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["vmensual"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["hcortes"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["gdiario"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["gmensual"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["gra_semanal"])) include_once 'assets/js/query/gra_semanal.php';
+elseif(isset($_GET["gra_mensual"])) include_once 'assets/js/query/gra_mensual.php';
 
 
 
@@ -189,8 +209,8 @@ else{
 
 
 // preloader
-    $(window).on("load", function () {
-        $('#mdb-preloader').fadeOut('fast');
-    });
+    // $(window).on("load", function () {
+    //     $('#mdb-preloader').fadeOut('fast');
+    // });
 
 </script>

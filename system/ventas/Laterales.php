@@ -61,12 +61,11 @@ class Laterales{
  		    if ($r = $db->select("count(correlativo)", "ticket_orden", "WHERE estado = 3 and td = ".$_SESSION["td"]."")) {if($r["count(correlativo)"] > 0){
  		    		$this->ObtenerOrdenes();
 	 		    } else {
-	 		    	echo '<div class="text-center"><img src="assets/img/logo/'.$_SESSION['config_imagen'].'" alt=""></div>';
+	 		    	echo '<div class="text-center"><img src="assets/img/logo/'.$_SESSION['config_imagen'].'" class="img-fluid responsive" alt="Responsive image"></div>';
 	 		    }
 		    }  unset($r);  
  		
  	}
-
 
 
  	public function MostrarBotones($orden){ // botones de funcion para la venta

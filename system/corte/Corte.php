@@ -18,6 +18,7 @@ class Corte{
 			    $datos["fecha"] = $fecha;
 			    $datos["fecha_format"] = Fechas::Format($fecha);
 			    $datos["hora"] = date("H:i:s");
+			    $datos["productos"] = $this->ProductosHoy($fecha);
 			    $datos["clientes"] = $this->ClientesHoy($fecha);
 			    $datos["efectivo_ingresado"] = $efectivo;
 			    $datos["tx"] = $this->TotalTx($fecha);
@@ -62,6 +63,13 @@ class Corte{
 		    } $a->close();
 	}
 
+	public function ProductosHoy($fecha){
+		$db = new dbConn();
+	    $a = $db->query("SELECT sum(cant) FROM ticket WHERE edo = 1 and td = ".$_SESSION["td"]." and fecha = '$fecha'");
+		    foreach ($a as $b) {
+		     return $b["sum(cant)"];
+		    } $a->close();
+	}
 
 	public function GastoHoy($fecha){
 		$db = new dbConn();

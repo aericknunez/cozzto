@@ -882,7 +882,7 @@ class Productos{
   public function VerTodosProductos($npagina, $orden, $dir){
       $db = new dbConn();
 
-  $limit = 15;
+  $limit = 12;
   $adjacents = 2;
   if($npagina == NULL) $npagina = 1;
   $a = $db->query("SELECT * FROM producto WHERE td = ". $_SESSION['td'] ."");
@@ -912,7 +912,7 @@ if($dir == "asc") $dir2 = "desc";
             <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.descripcion" dir="'.$dir2.'">Producto</a></th>
             <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.cantidad" dir="'.$dir2.'">Cantidad</a></th>
             <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.categoria" dir="'.$dir2.'">Categoria</a></th>
-            <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.existencia_minima" dir="'.$dir2.'">Minimo</a></th>
+            <th class="th-sm d-none d-md-block"><a id="paginador" op="54" iden="1" orden="producto.existencia_minima" dir="'.$dir2.'">Minimo</a></th>
             <th class="th-sm">Editar</th>
           </tr>
         </thead>
@@ -927,7 +927,7 @@ if($dir == "asc") $dir2 = "desc";
                       <td>'.$b["descripcion"].'</td>
                       <td>'.$b["cantidad"].'</td>
                       <td>'.$b["categoria"].'</td>
-                      <td>'.$b["existencia_minima"].'</td>
+                      <td class="d-none d-md-block">'.$b["existencia_minima"].'</td>
                       <td><a href="?proup&key='.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
                     </tr>';
         }

@@ -791,6 +791,65 @@ if($_REQUEST["op"]=="118"){ // cancelar corte
 
 
 
+//// historial ///////////////////////////////////////////////
+if($_REQUEST["op"]=="125"){ // historial diario
+	include_once '../../system/historial/Historial.php';
+	$historial = new Historial;
+	
+	if($_POST["fecha_submit"] == NULL){ $fecha = date("d-m-Y"); 
+	} else { $fecha = $_POST["fecha_submit"]; }
+	
+	$historial->HistorialDiario($fecha);
+}
+
+
+
+if($_REQUEST["op"]=="126"){ // ventas mensual
+	include_once '../../system/historial/Historial.php';
+	$historial = new Historial;
+		$fecha=$_POST["mes"];
+		@$ano=$_POST["ano"];
+		$fechax="-$fecha-$ano";
+
+	$historial->HistorialMensual($fechax);
+}
+
+
+// cortes
+if($_REQUEST["op"]=="127"){ // historial cortes
+	include_once '../../system/historial/Historial.php';
+	$historial = new Historial;
+	if($_POST["fecha1_submit"]){
+		$inicio = $_POST["fecha1_submit"]; $fin=$_POST["fecha2_submit"];
+	} else {
+		$inicio = date("01-m-Y"); $fin=date("31-m-Y");
+	}
+	
+	$historial->HistorialCortes($inicio, $fin);
+}
+
+
+
+if($_REQUEST["op"]=="128"){ // gasto diario
+	include_once '../../system/historial/Historial.php';
+	$historial = new Historial;
+	if($_POST["fecha_submit"] == NULL){ $fecha = date("d-m-Y"); } 
+	else { 		$fecha = $_POST["fecha_submit"]; }
+	
+	$historial->HistorialGDiario($fecha);
+}
+
+
+
+if($_REQUEST["op"]=="129"){ // gastos mensual
+	include_once '../../system/historial/Historial.php';
+	$historial = new Historial;
+		$fecha=$_POST["mes"];
+		@$ano=$_POST["ano"];
+		$fechax="-$fecha-$ano";
+
+	$historial->HistorialGMensual($fechax);
+}
 
 
 

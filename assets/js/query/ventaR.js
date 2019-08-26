@@ -203,7 +203,9 @@ setInterval(GetLateral, 3000);
 
 
 
-
+$('#ModalBusqueda').on('shown.bs.modal', function() { // para autofocus en el modal
+  $(this).find('[autofocus]').focus();
+});
 
 
 
