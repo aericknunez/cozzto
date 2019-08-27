@@ -634,7 +634,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["categoria"].'</td>
-                  <td><a id="delcategoria" hash="'.$b["hash"].'" op="23" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                  <td><a id="xdelete" valor="1" hash="'.$b["hash"].'" op="23" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -708,7 +708,7 @@ class Productos{
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["nombre"].'</td>
                   <td>'.$b["abreviacion"].'</td>
-                  <td><a id="delunidad" hash="'.$b["hash"].'" op="25"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                  <td><a id="xdelete" valor="2" hash="'.$b["hash"].'" op="25"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -777,7 +777,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["caracteristica"].'</td>
-                  <td><a id="delcaracteristica" hash="'.$b["hash"].'" op="27"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                  <td><a id="xdelete" valor="3" hash="'.$b["hash"].'" op="27"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -850,7 +850,7 @@ class Productos{
             echo '<tr>
                   <th scope="row">'. $n ++ .'</th>
                   <td>'.$b["ubicacion"].'</td>
-                  <td><a id="delubicacion" hash="'.$b["hash"].'" op="29"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                  <td><a id="xdelete" valor="4" hash="'.$b["hash"].'" op="29"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                 </tr>';          
           }
     echo '</tbody>
@@ -928,7 +928,7 @@ if($dir == "asc") $dir2 = "desc";
                       <td>'.$b["cantidad"].'</td>
                       <td>'.$b["categoria"].'</td>
                       <td class="d-none d-md-block">'.$b["existencia_minima"].'</td>
-                      <td><a href="?proup&key='.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                      <td><a id="xver" op="55" key="'.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
                     </tr>';
         }
         echo '</tbody>
@@ -953,7 +953,7 @@ if($dir == "asc") $dir2 = "desc";
       $end   = (1+($adjacents * 2));
     }
   }
-
+echo $total_rows . " Registros encontrados";
    if($total_pages > 1) { 
 
 $page <= 1 ? $enable = 'disabled' : $enable = '';
@@ -987,6 +987,196 @@ $page <= 1 ? $enable = 'disabled' : $enable = '';
       </ul>';
      }  // end pagination 
 
+  } // termina productos
+
+
+
+
+  public function DetallesProducto($data){
+      $db = new dbConn();
+
+    $a = $db->query("SELECT producto.cod, producto.descripcion, producto.cantidad, producto.existencia_minima, producto.caduca, producto.compuesto, producto.gravado, producto.receta, producto.dependiente, producto.servicio, producto_categoria.categoria, producto_unidades.nombre, proveedores.nombre as proveedores FROM producto INNER JOIN producto_categoria ON producto.categoria = producto_categoria.hash INNER JOIN producto_unidades ON producto.medida = producto_unidades.hash INNER JOIN proveedores ON producto.proveedor = proveedores.hash WHERE producto.cod = '".$data["key"]."' AND producto.td = ".$_SESSION["td"]."");
+    
+    if($a->num_rows > 0){
+        foreach ($a as $b) {        
+          echo '<ul class="list-group">
+                    <li class="list-group-item active">'. $b["cod"] .' || '. $b["descripcion"].'</li>
+                    <li class="list-group-item">Cantidad: <strong>'. $b["cantidad"] .'</strong>  ||   Minima: <strong>'. $b["existencia_minima"] .'</strong></li>
+                    <li class="list-group-item">Caduca: <strong>'. $b["caduca"] .'</strong>  || Compuesto: <strong>'. $b["compuesto"] .'</strong>  || Gravado: <strong>'. $b["gravado"] .'</strong> </li>
+                    <li class="list-group-item">Receta: '. $b["receta"] .'  ||  Dependiente: <strong>'. $b["dependiente"] .'</strong>  || Servicio: '. $b["servicio"] .' </li>
+                    <li class="list-group-item">Categoria: <strong>'. $b["categoria"] .'</strong> || Unidad: <strong>'. $b["nombre"] .'</strong>  || Proveeedor: <strong>'. $b["proveedores"] .'</strong></li>
+                  </ul>'; 
+        }
+
+              $ap = $db->query("SELECT * FROM producto_precio WHERE producto = '".$data["key"]."' AND td = ".$_SESSION["td"]."");
+              if($ap->num_rows > 0){
+              echo '<h3>Precios Establecidos</h3>';
+              echo '<table class="table table-sm table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                      </tr>
+                    </thead>
+                    <tbody>';
+              foreach ($ap as $bp) {
+                 echo '<tr>
+                        <td>'.$bp["cant"].'</td>
+                        <td><strong>'.Helpers::Dinero($bp["precio"]).'</strong></td>';
+              } $ap->close();
+              echo '</tbody>
+                  </table>';
+              } else {
+                Alerts::Mensajex("No se he establecido un precio",'danger',$boton,$boton2);
+              }
+
+
+              $au = $db->query("SELECT ubicacion.ubicacion, ubicacion_asig.cant FROM ubicacion_asig, ubicacion WHERE ubicacion_asig.ubicacion = ubicacion.hash AND ubicacion_asig.producto = '".$data["key"]."' AND ubicacion_asig.td = ".$_SESSION["td"]."");
+              if($au->num_rows > 0){
+                  echo '<ul class="list-group">
+                        <li class="list-group-item active">Ubicacion del Producto</li>';
+                  foreach ($au as $bu) {
+                     echo '<li class="list-group-item d-flex justify-content-between align-items-center">'.$bu["ubicacion"].' 
+                     <span class="badge badge-primary badge-pill">'.Helpers::Format($bu["cant"]).'</span></li>';
+                  } $au->close();
+                  echo '</ul>';
+              } else {
+                Alerts::Mensajex("No hay ubicaci&oacuten asignada","warning",$boton,$boton2);
+              }
+
+              $ac = $db->query("SELECT caracteristicas.caracteristica, caracteristicas_asig.cant FROM caracteristicas_asig, caracteristicas WHERE caracteristicas_asig.caracteristica = caracteristicas.hash AND caracteristicas_asig.producto = '".$data["key"]."' AND caracteristicas_asig.td = ".$_SESSION["td"]."");
+              if($ac->num_rows > 0){
+              echo '<ul class="list-group">
+                    <li class="list-group-item list-group-item-success">Caracteristicas del Producto</li>';
+              foreach ($ac as $bc) {
+                 echo '<li class="list-group-item d-flex justify-content-between align-items-center">'.$bc["caracteristica"].'
+                 <span class="badge badge-secondary badge-pill">'.Helpers::Format($bc["cant"]).'</span></li>';
+              } $ac->close();
+              echo '</ul>';
+            } else {
+                Alerts::Mensajex("No hay caracteristica asignada","warning",$boton,$boton2);
+              }
+
+      } else {
+                Alerts::Mensajex("No se encuentra el producto","danger",$boton,$boton2);
+              } $a->close();
+
+          
+  }
+
+
+
+
+
+
+
+  public function BajasExistencias($npagina, $orden, $dir){
+      $db = new dbConn();
+
+  $limit = 12;
+  $adjacents = 2;
+  if($npagina == NULL) $npagina = 1;
+  $a = $db->query("SELECT * FROM producto WHERE cantidad <= existencia_minima and td = ". $_SESSION['td'] ."");
+  $total_rows = $a->num_rows;
+  $a->close();
+
+  $total_pages = ceil($total_rows / $limit);
+  
+  if(isset($npagina) && $npagina != NULL) {
+    $page = $npagina;
+    $offset = $limit * ($page-1);
+  } else {
+    $page = 1;
+    $offset = 0;
+  }
+
+if($dir == "desc") $dir2 = "asc";
+if($dir == "asc") $dir2 = "desc";
+
+ $a = $db->query("SELECT producto.cod, producto.descripcion, producto.cantidad, producto.existencia_minima, producto_categoria.categoria FROM producto INNER JOIN producto_categoria ON producto.categoria = producto_categoria.hash and producto.cantidad <= producto.existencia_minima and producto.td = ".$_SESSION["td"]." order by ".$orden." ".$dir." limit $offset, $limit");
+      
+      if($a->num_rows > 0){
+          echo '<table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th class="th-sm"><a id="paginador" op="56" iden="1" orden="producto.cod" dir="'.$dir2.'">Cod</a></th>
+            <th class="th-sm"><a id="paginador" op="56" iden="1" orden="producto.descripcion" dir="'.$dir2.'">Producto</a></th>
+            <th class="th-sm"><a id="paginador" op="56" iden="1" orden="producto.cantidad" dir="'.$dir2.'">Cantidad</a></th>
+            <th class="th-sm"><a id="paginador" op="56" iden="1" orden="producto.categoria" dir="'.$dir2.'">Categoria</a></th>
+            <th class="th-sm d-none d-md-block"><a id="paginador" op="56" iden="1" orden="producto.existencia_minima" dir="'.$dir2.'">Minimo</a></th>
+            <th class="th-sm">Editar</th>
+          </tr>
+        </thead>
+        <tbody>';
+        foreach ($a as $b) {
+        // obtener el nombre y detalles del producto
+    if ($r = $db->select("*", "pro_dependiente", "WHERE iden = ".$b["producto"]." and td = ". $_SESSION["td"] ."")) { 
+        $producto = $r["nombre"]; } unset($r); 
+
+          echo '<tr>
+                      <td>'.$b["cod"].'</td>
+                      <td>'.$b["descripcion"].'</td>
+                      <td>'.$b["cantidad"].'</td>
+                      <td>'.$b["categoria"].'</td>
+                      <td class="d-none d-md-block">'.$b["existencia_minima"].'</td>
+                      <td><a id="xver" op="55" key="'.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                    </tr>';
+        }
+        echo '</tbody>
+        </table>';
+      }
+        $a->close();
+
+  if($total_pages <= (1+($adjacents * 2))) {
+    $start = 1;
+    $end   = $total_pages;
+  } else {
+    if(($page - $adjacents) > 1) {  
+      if(($page + $adjacents) < $total_pages) {  
+        $start = ($page - $adjacents); 
+        $end   = ($page + $adjacents); 
+      } else {              
+        $start = ($total_pages - (1+($adjacents*2))); 
+        $end   = $total_pages; 
+      }
+    } else {
+      $start = 1; 
+      $end   = (1+($adjacents * 2));
+    }
+  }
+echo $total_rows . " Registros encontrados";
+   if($total_pages > 1) { 
+
+$page <= 1 ? $enable = 'disabled' : $enable = '';
+    echo '<ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="56" iden="1" orden="'.$orden.'" dir="'.$dir.'">&lt;&lt;</a>
+      </li>';
+    
+    $page>1 ? $pagina = $page-1 : $pagina = 1;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="56" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&lt;</a>
+      </li>';
+
+    for($i=$start; $i<=$end; $i++) {
+      $i == $page ? $pagina =  'active' : $pagina = '';
+      echo '<li class="page-item '.$pagina.'">
+        <a class="page-link" id="paginador" op="56" iden="'.$i.'" orden="'.$orden.'" dir="'.$dir.'">'.$i.'</a>
+      </li>';
+    }
+
+    $page >= $total_pages ? $enable = 'disabled' : $enable = '';
+    $page < $total_pages ? $pagina = ($page+1) : $pagina = $total_pages;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="56" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&gt;</a>
+      </li>';
+
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="56" iden="'.$total_pages.'" orden="'.$orden.'" dir="'.$dir.'">&gt;&gt;</a>
+      </li>
+
+      </ul>';
+     }  // end pagination 
   } // termina productos
 
 

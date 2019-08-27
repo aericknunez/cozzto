@@ -443,9 +443,28 @@ include_once '../../system/producto/Productos.php';
 	$productos->VerTodosProductos($_POST["iden"], $_POST["orden"], $_POST["dir"]);
 }
 
+if($_REQUEST["op"]=="55"){ // detalles del producto
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->DetallesProducto($_POST);
+}
+
+
+if($_REQUEST["op"]=="56"){ // Bajas Existancias
+include_once '../../system/producto/Productos.php';
+	$productos = new Productos;
+	$productos->BajasExistencias($_POST["iden"], $_POST["orden"], $_POST["dir"]);
+}
+
+
 
 
 /////////////////////// proveedor
+if($_REQUEST["op"]=="59"){ // ver detalles del proveedor modal
+include_once '../../system/proveedor/Proveedor.php';
+	$proveedor = new Proveedores;
+	$proveedor->VistaProveedor($_POST);
+}
 
 if($_REQUEST["op"]=="60"){ // agregar proveedor
 include_once '../../system/proveedor/Proveedor.php';
@@ -473,6 +492,8 @@ include_once '../../system/proveedor/Proveedor.php';
 
 
 
+
+
 /////////////////////// cliente
 
 if($_REQUEST["op"]=="64"){ // agregar cliente
@@ -497,6 +518,13 @@ if($_REQUEST["op"]=="67"){ // actualizar cliente
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
 	$cliente->UpCliente($_POST);
+}
+
+
+if($_REQUEST["op"]=="68"){ // ver cliente
+include_once '../../system/cliente/Cliente.php';
+	$cliente = new Clientes;
+	$cliente->VistaCliente($_POST);
 }
 
 /// ver Lateral
@@ -681,6 +709,19 @@ include_once '../../system/cliente/Cliente.php';
 
 
 
+/// CREDITOS PENDIENTES
+if($_REQUEST["op"]=="104"){ 
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$credito->CreditosPendientes($_POST["iden"], $_POST["orden"], $_POST["dir"]);
+}
+
+if($_REQUEST["op"]=="114"){ 
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$credito->VerCredito($_POST["iden"], $_POST["orden"], $_POST["dir"]);
+}
+
 /// credito
 if($_REQUEST["op"]=="105"){ // agrega abono
 include_once '../../system/credito/Creditos.php';
@@ -714,6 +755,12 @@ include_once '../../system/credito/Creditos.php';
 	$credito->DelAbono($_REQUEST["hash"], $_REQUEST["credito"]);
 }
 
+// Lllamar vista credito
+if($_REQUEST["op"]=="109"){ 
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$credito->LlamarVista($_REQUEST["credito"], $_REQUEST["factura"], $_REQUEST["tx"]);
+}
 
 
 ///////////////gastos

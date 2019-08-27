@@ -1,5 +1,5 @@
 
-<li><a href="" class="waves-effect arrow-r"><i class="fas fa-tv"></i> Panel de Control </a></li>
+<li><a href="?control" class="waves-effect arrow-r"><i class="fas fa-tv"></i> Panel de Control </a></li>
 
 <li><a href="?corte" class="waves-effect arrow-r"><i class="fas fa-user"></i> Corte Diario </a></li>
 
@@ -55,6 +55,7 @@
 <!-- <li><a href="?" class="waves-effect"><i class="fas fa-database"></i> Cambios</a></li>
 <li><a href="?" class="waves-effect arrow-r"><i class="fas fa-database"></i> Devoluciones</a></li> -->
 <li><a href="?proopciones" class="waves-effect arrow-r"><i class="fas fa-handshake"></i> Opciones</a></li>
+<li><a href="?bajasexistencias" class="waves-effect"><i class="fas fa-address-book"></i> Bajas Existencias</a></li>
 </ul>
 </div>
 </li>
@@ -65,6 +66,7 @@
 <ul class="list-unstyled">
 
 <li><a href="?creditos" class="waves-effect"><i class="fas fa-money-bill-alt"></i> Buscar Credito</a></li>
+<li><a href="?creditospendientes" class="waves-effect"><i class="fas fa-money-bill-alt"></i> Creditos Pendientes</a></li>
 </ul>
 </div>
 </li>
@@ -118,6 +120,7 @@
 <div class="collapsible-body">
 <ul class="list-unstyled">
 
+<li><a href="?user" class="waves-effect arrow-r"><i class="fas fa-user"></i> Usuarios </a></li>
 <li><a href="?configuraciones" class="waves-effect"><i class="fas fa-cog"></i> Configuraciones</a></li>
 <li><a href="?root" class="waves-effect"><i class="fas fa-cogs"></i> Configuraciones Root</a></li>
 <li><a href="?tablas" class="waves-effect"><i class="fas fa-cogs"></i> Tablas a respaldar</a></li>
@@ -146,7 +149,6 @@
 
 
 
-<li><a href="?user" class="waves-effect arrow-r"><i class="fas fa-user"></i> Usuarios </a></li>
 
 
 

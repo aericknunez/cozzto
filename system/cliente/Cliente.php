@@ -124,7 +124,6 @@ class Clientes {
                     <th class="th-sm">#</th>
                     <th class="th-sm">Nombre</th>
                     <th class="th-sm">Documento</th>
-                    <th class="th-sm">Direccion</th>
                     <th class="th-sm">Telefono</th>
                     <th class="th-sm">Editar</th>
                     <th class="th-sm">Eliminar</th>
@@ -137,9 +136,8 @@ class Clientes {
                       <td>'. $n ++ .'</td>
                       <td>'.$b["nombre"].'</td>
                       <td>'.$b["documento"].'</td>
-                      <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
-                      <td><a href="?modal=editcliente&key='.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                      <td><a id="xver" op="68" key="'.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
                       <td><a id="delcliente" hash="'.$b["hash"].'" op="66"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
@@ -149,7 +147,6 @@ class Clientes {
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Documento</th>
-                    <th>Direccion</th>
                     <th>Telefono</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -203,6 +200,49 @@ class Clientes {
         return $a->num_rows;
         $a->close();
     }
+
+
+
+
+
+
+
+  public function VistaCliente($data){
+      $db = new dbConn();
+     if ($r = $db->select("*", "clientes", "WHERE hash = '".$data["key"]."' and td = ".$_SESSION["td"]."")) { 
+
+              echo '<table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Documento: '.$r["nombre"].'</th>
+                    <td>Documento: '.$r["documento"].'</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th colspan="2">Direcci&oacuten: '.$r["direccion"].'</th>
+                  </tr>
+                  <tr>
+                    <td>Departamento: '.$r["departamento"].'</td>
+                    <td>Municipio: '.$r["municipio"].'</td>
+                  </tr>
+                  <tr>
+                    <td>Giro: '.$r["email"].'</td>
+                    <td>Telefono: '.$r["telefono"].'</td>
+                  </tr>
+                  <tr>
+                    <td>Contacto: '.$r["contacto"].'</td>
+                    <td>Comentarios: '.$r["comentarios"].'</td>
+                  </tr>
+                </tbody>
+              </table>'; 
+
+        }  unset($r); 
+
+  }
+
+
+
 
 
 

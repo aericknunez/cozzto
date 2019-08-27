@@ -19,6 +19,7 @@ elseif(isset($_GET["productos"])) include_once 'system/producto/producto.php'; /
 elseif(isset($_GET["proup"])) include_once 'system/producto/proup.php'; // actualizar
 elseif(isset($_GET["proagregar"])) include_once 'system/producto/proagregar.php'; // agregar producto
 elseif(isset($_GET["proaverias"])) include_once 'system/producto/proaverias.php'; // agregar averias
+elseif(isset($_GET["bajasexistencias"])) include_once 'system/producto/bajasexistencias.php'; 
 
 // proveedores
 elseif(isset($_GET["proveedoradd"])) include_once 'system/proveedor/proveedores.php'; // agregar proveedores
@@ -31,6 +32,7 @@ elseif(isset($_GET["clientever"])) include_once 'system/cliente/clientever.php';
 
 // creditos
 elseif(isset($_GET["creditos"])) include_once 'system/credito/creditosver.php'; // ver todos los creditos
+elseif(isset($_GET["creditospendientes"])) include_once 'system/credito/creditospendientes.php'; // pendientes
 
 
 // Gastos y compras
@@ -55,6 +57,9 @@ elseif(isset($_GET["gra_semanal"])) include_once 'system/historial/gra_semanal.p
 elseif(isset($_GET["gra_mensual"])) include_once 'system/historial/gra_mensual.php';
 
 
+
+// Panel de Control
+elseif(isset($_GET["control"])) include_once 'system/control/control.php';
 
 
 

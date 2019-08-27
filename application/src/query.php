@@ -104,6 +104,7 @@ echo '<script type="text/javascript" src="assets/js/query/proopciones.js?v='.$nu
 } 
 elseif(isset($_GET["productos"])) {
 echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/producto_vermodal.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["proup"])) {
 echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
@@ -114,6 +115,11 @@ echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numer
 elseif(isset($_GET["proaverias"])) {
 echo '<script type="text/javascript" src="assets/js/query/producto.js?v='.$numero.'"></script>';
 } 
+elseif(isset($_GET["bajasexistencias"])) {
+echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/producto_vermodal.js?v='.$numero.'"></script>';
+} 
+
 
 
 //////////////// proveedor
@@ -123,7 +129,8 @@ echo '<script type="text/javascript" src="assets/js/query/proveedor.js?v='.$nume
 elseif(isset($_GET["proveedorver"])) {
 echo '
 <script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
-<script type="text/javascript" src="assets/js/query/proveedordatatable.js?v='.$numero.'"></script>';
+<script type="text/javascript" src="assets/js/query/proveedordatatable.js?v='.$numero.'"></script>
+<script type="text/javascript" src="assets/js/query/proveedor.js?v='.$numero.'"></script>';
 } 
 
 //////////////// cliente
@@ -133,14 +140,19 @@ echo '<script type="text/javascript" src="assets/js/query/cliente.js?v='.$numero
 elseif(isset($_GET["clientever"])) {
 echo '
 <script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
-<script type="text/javascript" src="assets/js/query/clientedatatable.js?v='.$numero.'"></script>';
+<script type="text/javascript" src="assets/js/query/clientedatatable.js?v='.$numero.'"></script>
+<script type="text/javascript" src="assets/js/query/cliente.js?v='.$numero.'"></script>';
 } 
 
 //////////////// creditos
 elseif(isset($_GET["creditos"])) {
-echo '
-<script type="text/javascript" src="assets/js/addons/datatables.min.js?v='.$numero.'"></script>
-<script type="text/javascript" src="assets/js/query/tabla.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/credito.js?v='.$numero.'"></script>';
+} 
+
+elseif(isset($_GET["creditospendientes"])) {
+echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/credito.js?v='.$numero.'"></script>';
 } 
 
 //// gastos
@@ -178,6 +190,14 @@ elseif(isset($_GET["gra_semanal"])) include_once 'assets/js/query/gra_semanal.ph
 elseif(isset($_GET["gra_mensual"])) include_once 'assets/js/query/gra_mensual.php';
 
 
+// panel de control
+elseif(isset($_GET["control"])) {
+echo '<script type="text/javascript" src="assets/js/query/control.js?v='.$numero.'"></script>';
+include_once 'assets/js/query/gra_control.php';
+} 
+
+
+
 
 
 
@@ -212,5 +232,6 @@ else{
     // $(window).on("load", function () {
     //     $('#mdb-preloader').fadeOut('fast');
     // });
+
 
 </script>

@@ -2,26 +2,27 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 include_once 'application/common/Alerts.php';
-include_once 'system/proveedor/Proveedor.php';
-$proveedor = new Proveedores(); 
+include_once 'system/producto/Productos.php';
+$producto = new Productos(); 
 ?>
 
 <div id="msj"></div>
-<h2 class="h2-responsive">Todos los proveedores</h2>
+<h2 class="h2-responsive">PRODUCTOS CON BAJAS EXISTANCIAS</h2>
 
 
-<div id="destinoproveedor">
-   <?php $proveedor->VerTodosProveedores(); ?>
+<div id="contenido">
+   <?php $producto->BajasExistencias(1, "producto.id", "asc"); ?>
 </div>
 
 
-<!-- Ver proveedores -->
-<div class="modal" id="ModalVerProveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="false">
+
+<!-- Ver producto -->
+<div class="modal" id="ModalVer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="false">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-         DETALLES PROVEEDOR</h5>
+         DETALLES PRODUCTO</h5>
       </div>
       <div class="modal-body">
 <!-- ./  content -->

@@ -6,56 +6,116 @@ class Creditos{
 
 
 
-  public function VerCreditos(){
+  public function VerCredito($npagina, $orden, $dir){
       $db = new dbConn();
-          $a = $db->query("SELECT * FROM creditos WHERE td = ".$_SESSION["td"]." order by id desc");
-          if($a->num_rows > 0){
-        echo '<table id="dtMaterialDesignExample" class="table table-striped" table-sm cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th class="th-sm">#</th>
-                    <th class="th-sm">Nombre</th>
-                    <th class="th-sm">Factura</th>
-                    <th class="th-sm">Fecha</th>
-                    <th class="th-sm">Estado</th>
-                    <th class="th-sm">Ver</th>
-                    <th class="th-sm">Abonos</th>
-                  </tr>
-                </thead>
-                <tbody>';
-          $n = 1;
-              foreach ($a as $b) { ;
-                echo '<tr>
-                      <td>'. $n ++ .'</td>
-                      <td>'.$b["nombre"].'</td>
-                      <td>'.$b["factura"].'</td>
-                      <td>'.$b["fecha"] . ' | ' . $b["hora"] . '</td>
-                      <td>'.Helpers::EstadoCredito($b["edo"]) . '</td>
-                      <td><a href="?modal=cre_prodcuto&cre='. $b["hash"] .'&factura='. $b["factura"] .'&tx='. $b["tx"] .'"><i class="fas fa-search fa-lg green-text"></i></a></td>
-                      <td><a href="?modal=abonos&cre='. $b["hash"] .'&factura='. $b["factura"] .'&tx='. $b["tx"] .'"><i class="fas fa-money-bill-alt fa-lg red-text"></i></a></td>
-                    </tr>';          
-              }
-        echo '</tbody>
-                <tfoot>
-                  <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Factura</th>
-                    <th>Fecha</th>
-                    <th>Ver</th>
-                    <th>Abonos</th>
-                  </tr>
-                </tfoot>
-              </table>';
 
-          } else{
-          Alerts::Mensajex("<h3>No se encontraron creditos activos en este momento</h3>","info",$boton,$boton2);
-        }
-        $a->close();  
+  $limit = 12;
+  $adjacents = 2;
+  if($npagina == NULL) $npagina = 1;
+  $a = $db->query("SELECT * FROM creditos WHERE td = ". $_SESSION['td'] ."");
+  $total_rows = $a->num_rows;
+  $a->close();
 
+  $total_pages = ceil($total_rows / $limit);
+  
+  if(isset($npagina) && $npagina != NULL) {
+    $page = $npagina;
+    $offset = $limit * ($page-1);
+  } else {
+    $page = 1;
+    $offset = 0;
   }
 
+if($dir == "desc") $dir2 = "asc";
+if($dir == "asc") $dir2 = "desc";
 
+ $a = $db->query("SELECT * FROM creditos WHERE td = ".$_SESSION["td"]." order by ".$orden." ".$dir." limit $offset, $limit");
+      
+      if($a->num_rows > 0){
+          echo '<table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th class="th-sm"><a id="paginador" op="114" iden="1" orden="nombre" dir="'.$dir2.'">Nombre</a></th>
+            <th class="th-sm d-none d-md-block"><a id="paginador" op="114" iden="1" orden="factura" dir="'.$dir2.'">Factura</a></th>
+            <th class="th-sm"><a id="paginador" op="114" iden="1" orden="fecha" dir="'.$dir2.'">Fecha</a></th>
+            <th class="th-sm"><a id="paginador" op="114" iden="1" orden="edo" dir="'.$dir2.'">Estado</a></th>
+            <th class="th-sm">Editar</th>
+          </tr>
+        </thead>
+        <tbody>';
+        foreach ($a as $b) {
+        // obtener el nombre y detalles del producto
+    if ($r = $db->select("*", "pro_dependiente", "WHERE iden = ".$b["producto"]." and td = ". $_SESSION["td"] ."")) { 
+        $producto = $r["nombre"]; } unset($r); 
+
+          echo '<tr>
+                      <td>'.$b["nombre"].'</td>
+                      <td class="d-none d-md-block">'.$b["factura"].'</td>
+                      <td>'.$b["fecha"]. ' | ' . $b["hora"].'</td>
+                      <td>'.Helpers::EstadoCredito($b["edo"]) . '</td>
+                      <td><a id="xver" op="109" credito="'. $b["hash"] .'" factura="'. $b["factura"] .'" tx="'. $b["tx"] .'"><i class="fas fa-search fa-lg green-text"></i></a></td>
+                    </tr>';
+        }
+        echo '</tbody>
+        </table>';
+      }
+        $a->close();
+
+  if($total_pages <= (1+($adjacents * 2))) {
+    $start = 1;
+    $end   = $total_pages;
+  } else {
+    if(($page - $adjacents) > 1) {  
+      if(($page + $adjacents) < $total_pages) {  
+        $start = ($page - $adjacents); 
+        $end   = ($page + $adjacents); 
+      } else {              
+        $start = ($total_pages - (1+($adjacents*2))); 
+        $end   = $total_pages; 
+      }
+    } else {
+      $start = 1; 
+      $end   = (1+($adjacents * 2));
+    }
+  }
+echo $total_rows . " Registros encontrados";
+   if($total_pages > 1) { 
+
+$page <= 1 ? $enable = 'disabled' : $enable = '';
+    echo '<ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="114" iden="1" orden="'.$orden.'" dir="'.$dir.'">&lt;&lt;</a>
+      </li>';
+    
+    $page>1 ? $pagina = $page-1 : $pagina = 1;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="114" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&lt;</a>
+      </li>';
+
+    for($i=$start; $i<=$end; $i++) {
+      $i == $page ? $pagina =  'active' : $pagina = '';
+      echo '<li class="page-item '.$pagina.'">
+        <a class="page-link" id="paginador" op="114" iden="'.$i.'" orden="'.$orden.'" dir="'.$dir.'">'.$i.'</a>
+      </li>';
+    }
+
+    $page >= $total_pages ? $enable = 'disabled' : $enable = '';
+    $page < $total_pages ? $pagina = ($page+1) : $pagina = $total_pages;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="114" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&gt;</a>
+      </li>';
+
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="114" iden="'.$total_pages.'" orden="'.$orden.'" dir="'.$dir.'">&gt;&gt;</a>
+      </li>
+
+      </ul>';
+     }  // end pagination 
+  } // termina productos
+
+
+
+ 
   public function ObtenerTotal($factura, $tx){ // total del credito
     $db = new dbConn();
 
@@ -234,6 +294,152 @@ public function VerAbonos($credito) { //leva el control del autoincremento de lo
         } 
       $this->VerAbonos($credito);
   }
+
+
+
+
+
+  public function LlamarVista($credito, $factura, $tx){
+      $db = new dbConn();
+      $this->VerProducto($factura, $tx);
+ 
+      $creditos = $this->ObtenerTotal($factura, $tx);
+      $abonos = $this->TotalAbono($credito);
+
+      echo '<div class="form-group row justify-content-center align-items-center">
+        <div class="text-center border border-light mr-5">
+         Total Abonado:
+          <h1>'.Helpers::Dinero($abonos).'</h1>
+        </div>
+        <div class="text-center border border-light text-danger mr-5">
+         Total pendiente:
+          <h1>'.Helpers::Dinero($creditos - $abonos).'</h1>
+        </div>
+    </div>';
+    
+  }
+
+
+
+
+
+
+
+
+  public function CreditosPendientes($npagina, $orden, $dir){
+      $db = new dbConn();
+
+  $limit = 12;
+  $adjacents = 2;
+  if($npagina == NULL) $npagina = 1;
+  $a = $db->query("SELECT * FROM creditos WHERE edo = 1 and td = ". $_SESSION['td'] ."");
+  $total_rows = $a->num_rows;
+  $a->close();
+
+  $total_pages = ceil($total_rows / $limit);
+  
+  if(isset($npagina) && $npagina != NULL) {
+    $page = $npagina;
+    $offset = $limit * ($page-1);
+  } else {
+    $page = 1;
+    $offset = 0;
+  }
+
+if($dir == "desc") $dir2 = "asc";
+if($dir == "asc") $dir2 = "desc";
+
+ $a = $db->query("SELECT * FROM creditos WHERE edo = 1 and td = ".$_SESSION["td"]." order by ".$orden." ".$dir." limit $offset, $limit");
+      
+      if($a->num_rows > 0){
+          echo '<table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th class="th-sm"><a id="paginador" op="104" iden="1" orden="nombre" dir="'.$dir2.'">Nombre</a></th>
+            <th class="th-sm d-none d-md-block"><a id="paginador" op="104" iden="1" orden="factura" dir="'.$dir2.'">Factura</a></th>
+            <th class="th-sm"><a id="paginador" op="104" iden="1" orden="fecha" dir="'.$dir2.'">Fecha</a></th>
+            <th class="th-sm"><a id="paginador" op="104" iden="1" orden="edo" dir="'.$dir2.'">Estado</a></th>
+            <th class="th-sm">Editar</th>
+          </tr>
+        </thead>
+        <tbody>';
+        foreach ($a as $b) {
+        // obtener el nombre y detalles del producto
+    if ($r = $db->select("*", "pro_dependiente", "WHERE iden = ".$b["producto"]." and td = ". $_SESSION["td"] ."")) { 
+        $producto = $r["nombre"]; } unset($r); 
+
+          echo '<tr>
+                      <td>'.$b["nombre"].'</td>
+                      <td class="d-none d-md-block">'.$b["factura"].'</td>
+                      <td>'.$b["fecha"]. ' | ' . $b["hora"].'</td>
+                      <td>'.Helpers::EstadoCredito($b["edo"]) . '</td>
+                      <td><a id="xver" op="109" credito="'. $b["hash"] .'" factura="'. $b["factura"] .'" tx="'. $b["tx"] .'"><i class="fas fa-search fa-lg green-text"></i></a></td>
+                    </tr>';
+        }
+        echo '</tbody>
+        </table>';
+      }
+        $a->close();
+
+  if($total_pages <= (1+($adjacents * 2))) {
+    $start = 1;
+    $end   = $total_pages;
+  } else {
+    if(($page - $adjacents) > 1) {  
+      if(($page + $adjacents) < $total_pages) {  
+        $start = ($page - $adjacents); 
+        $end   = ($page + $adjacents); 
+      } else {              
+        $start = ($total_pages - (1+($adjacents*2))); 
+        $end   = $total_pages; 
+      }
+    } else {
+      $start = 1; 
+      $end   = (1+($adjacents * 2));
+    }
+  }
+echo $total_rows . " Registros encontrados";
+   if($total_pages > 1) { 
+
+$page <= 1 ? $enable = 'disabled' : $enable = '';
+    echo '<ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="104" iden="1" orden="'.$orden.'" dir="'.$dir.'">&lt;&lt;</a>
+      </li>';
+    
+    $page>1 ? $pagina = $page-1 : $pagina = 1;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="104" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&lt;</a>
+      </li>';
+
+    for($i=$start; $i<=$end; $i++) {
+      $i == $page ? $pagina =  'active' : $pagina = '';
+      echo '<li class="page-item '.$pagina.'">
+        <a class="page-link" id="paginador" op="104" iden="'.$i.'" orden="'.$orden.'" dir="'.$dir.'">'.$i.'</a>
+      </li>';
+    }
+
+    $page >= $total_pages ? $enable = 'disabled' : $enable = '';
+    $page < $total_pages ? $pagina = ($page+1) : $pagina = $total_pages;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="104" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&gt;</a>
+      </li>';
+
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="104" iden="'.$total_pages.'" orden="'.$orden.'" dir="'.$dir.'">&gt;&gt;</a>
+      </li>
+
+      </ul>';
+     }  // end pagination 
+  } // termina productos
+
+
+
+
+
+
+
+
 
 
 

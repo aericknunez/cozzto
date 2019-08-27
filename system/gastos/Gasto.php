@@ -166,11 +166,12 @@ class Gastos{
 			      <td>'. $b["fecha"] .' | '. $b["hora"] .'</td>
 			      <td>'. Helpers::Dinero($b["cantidad"]) .'</td>
 			      <td>';
-			      if($b["edo"] == 1){
-
+			      if($b["edo"] == 1 and $b["fecha"] == date("d-m-Y")){
 			      	echo '<a id="borrar-efectivo" op="113" iden="'. $b["id"] .'">
 				      <span class="badge red"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>
 				      </a>';
+			      } else {
+			      	echo '<span class="badge black"><i class="fas fa-ban" aria-hidden="true"></i></span>';
 			      }
 			      echo '</td>
 			    </tr>';

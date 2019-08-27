@@ -273,14 +273,7 @@ $(document).ready(function(){
 	}
 	});
 
-	$("body").on("click","#delubicacion",function(){ // borrar ubicacion
-	var op = $(this).attr('op');
-	var hash = $(this).attr('hash');
-	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
-		$("#destinoubicacion").html(data);
-		$("#select-ubicacion").load('application/src/routes.php?op=42');
-	   	 });
-	});
+
 
 // asignar opciones a producto
 
@@ -340,14 +333,6 @@ $(document).ready(function(){
 	}
 	});
 
-	$("body").on("click","#delcaracteristica",function(){ // borrar categoria
-	var op = $(this).attr('op');
-	var hash = $(this).attr('hash');
-	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
-		$("#destinocaracteristica").html(data);
-		$("#select-caracteristica").load('application/src/routes.php?op=45');
-	   	 });
-	});
 
 
 // asignar caracteristicass a producto
@@ -380,6 +365,41 @@ $(document).ready(function(){
 		var producto = $(this).attr('producto');
 	    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
 		$("#muestracaracteristicaasig").html(data);
+	   	 });
+	});
+
+
+
+
+
+///////////// llamar modal para eliminar elemento
+	$("body").on("click","#xdelete",function(){ 
+		
+		var op = $(this).attr('op');
+		var hash = $(this).attr('hash');
+		var valor = $(this).attr('valor');
+
+		
+		$('#btn-modal').attr("valor",valor).attr("op",op).attr("hash",hash);
+		$('#ConfirmDelete').modal('show');
+	});
+    
+
+
+
+	$("body").on("click","#btn-modal",function(){ // borrar el elemento
+	var op = $(this).attr('op');
+	var valor = $(this).attr('valor');
+	var hash = $(this).attr('hash');
+	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
+	    	
+	    	if(valor == '3'){ $("#destinocaracteristica").html(data); 
+	    	$("#select-caracteristica").load('application/src/routes.php?op=45');}
+	    	if(valor == '4'){ $("#destinoubicacion").html(data); 
+	    	$("#select-ubicacion").load('application/src/routes.php?op=42'); }
+			
+			
+			$('#ConfirmDelete').modal('hide');
 	   	 });
 	});
 

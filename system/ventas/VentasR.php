@@ -486,7 +486,7 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
             echo '<table class="table table-sm table-hover">';
     foreach ($a as $b) {
                echo '<tr>
-                      <td scope="row"><a id="select-c" hash="'. $b["hash"] .'" nombre="'. $b["nombre"] .'">'. $b["nombre"] .'</a></td>
+                      <td scope="row"><a id="select-c" hash="'. $b["hash"] .'" nombre="'. $b["nombre"] .'">'. $b["nombre"] .'   ||   '. $b["documento"].'</a></td>
                     </tr>'; 
     }  $a->close();
 

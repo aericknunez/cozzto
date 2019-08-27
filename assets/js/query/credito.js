@@ -54,8 +54,34 @@ $(document).ready(function(){
 
 
 
+/// llamar modal ver
+	$("body").on("click","#xver",function(){ 
+		
+		$("#btn-ra").remove();
+		$('#ModalVerCredito').modal('show');
+		
+		var factura = $(this).attr('factura');
+		var credito = $(this).attr('credito');
+		var tx = $(this).attr('tx');
+		var op = $(this).attr('op');
+		var dataString = 'op='+op+'&credito='+credito+'&factura='+factura+'&tx='+tx;
 
-
+		$.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#vista").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#vista").html(data); // lo que regresa de la busquea 		
+            }
+        });
+		//$('#btn-modal').attr("valor",valor).attr("op",op).attr("hash",hash);
+		$("#cerrarmodal").before('<a href="?modal=abonos&cre='+credito+'&factura='+factura+'&tx='+tx+'" id="btn-ra" class="btn btn-secondary btn-rounded">Realizar Abonos</a>');
+		
+	});
+    
 
 
 

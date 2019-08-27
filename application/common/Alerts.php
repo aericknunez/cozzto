@@ -89,7 +89,7 @@ class Alerts{
     public function RealizarCorte($id,$op,$efectivo){
     echo '<div class="alert alert-danger alert-dismissible">
     <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
-    Esta seguro que <strong>'. $efectivo .'</strong> es la cantidad correcta?
+    Esta seguro que <strong>'. Helpers::Dinero($efectivo) .'</strong> es la cantidad correcta?
     <br>
     
     <a id="'.$id.'" op="'.$op.'" efectivo="'.$efectivo.'" class="btn btn-default waves-effect waves-light" >Aceptar</a>

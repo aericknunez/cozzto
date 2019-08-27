@@ -71,7 +71,7 @@ class Inicio{
         $fechas = new Fechas;
 
 
-            if($_SESSION['tipo_cuenta'] != 1){
+            if($_SESSION['tipo_cuenta'] != 1){ // si no es root
 
                 $key1 = $encrypt->Decrypt($r["expira"],$_SESSION['secret_key']);
                 $key2 = $encrypt->Decrypt($r["expiracion"],$_SESSION['secret_key']);
@@ -91,12 +91,12 @@ class Inicio{
                                 $_SESSION["caduca"] = 3;
                             } 
 
-                        } else { // de una vez las declaro invalidas
+                        } else { //  No son iguales. de una vez las declaro invalidas
                             $_SESSION["caduca"] = 3;
                         }
             
-            } else {
-                $_SESSION["caduca"] = 0;
+            } else { // usuario root nunca vence
+                $_SESSION["caduca"] = 0; 
             }  
 
             unset($r);  
