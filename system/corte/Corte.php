@@ -184,6 +184,14 @@ class Corte{
 
 
 
+	public function EfectivoDebido($fecha){ //para reporte efectivo que debe haber
+		$db = new dbConn();
+	    
+	    $total_cc = $this->TVentasX($fecha, 1)+$this->GetEfectivo($fecha)+$this->TotalAbonos($fecha)+$this->EntradasEfectivo($fecha); //total ventas  mas caja chica de ayer
+		$total_debido = $total_cc-$this->GastoHoy($fecha); //dinero que deberia haber ()
+		return $total_debido;
+
+	}
 
 
 
@@ -307,10 +315,8 @@ public function CancelarCorte($ramdom,$fecha){
 	}
 
 	public function Form(){
-	echo '<p>Aun no se ha realizado el corte de este dia. <br />Ingrese la cantidad de su efectivo para poder continuar
-		</p>
-		<br />
-		<form id="form-corte" name="form-corte">
+		Alerts::Mensajex("Aun no se ha realizado el corte de este dia. <br />Ingrese la cantidad de efectivo para poder continuar",'danger',$boton,$boton2);
+	echo '<form id="form-corte" name="form-corte">
 		 
 		 <div class="form-group row justify-content-center align-items-center">
 		  <div class="col-xs-2">
