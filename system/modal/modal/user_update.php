@@ -41,16 +41,16 @@ if($_SESSION['tipo_cuenta'] != 4){
      ?>
     <option <? 
     if($type == 2) echo "selected"; 
-    if($_SESSION['tipo_cuenta'] == 3 or $_SESSION['tipo_cuenta'] == 4 or $_SESSION['tipo_cuenta'] == 5) echo "disabled"; ?> value="2"><?php Helpers::UserName(2) ?></option>
+    if($_SESSION['tipo_cuenta'] == 3 or $_SESSION['tipo_cuenta'] == 4 or $_SESSION['tipo_cuenta'] == 5) echo "disabled"; ?> value="2"><?php echo Helpers::UserName(2) ?></option>
     <option <? 
     if($type == 3) echo "selected";
-    if($_SESSION['tipo_cuenta'] == 3 or $_SESSION['tipo_cuenta'] == 5) echo "disabled"; ?> value="3"><?php Helpers::UserName(3) ?></option>
+    if($_SESSION['tipo_cuenta'] == 3 or $_SESSION['tipo_cuenta'] == 5) echo "disabled"; ?> value="3"><?php echo Helpers::UserName(3) ?></option>
     <option <? 
     if($type == 4) echo "selected";
-    if($_SESSION['tipo_cuenta'] == 5) echo "disabled"; ?> value="4"><?php Helpers::UserName(4) ?></option>
+    if($_SESSION['tipo_cuenta'] == 5) echo "disabled"; ?> value="4"><?php echo Helpers::UserName(4) ?></option>
     <option <? 
     if($type == 5) echo "selected";
-    if($_SESSION['tipo_cuenta'] == 5 or $_SESSION['tipo_cuenta'] != 1) echo "disabled"; ?> value="5"><?php Helpers::UserName(5) ?></option>
+    if($_SESSION['tipo_cuenta'] == 5 or $_SESSION['tipo_cuenta'] != 1) echo "disabled"; ?> value="5"><?php echo Helpers::UserName(5) ?></option>
 </select>
 <?php 
 }

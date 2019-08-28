@@ -4,24 +4,6 @@ class Usuarios{
 	public $pass1;
 	public $pass2;
 
-	function TerminarUsuario($nombre,$tipo,$user){
-	    $db = new dbConn();
-
-	$datos = array();
-    $datos["nombre"] = $nombre;
-    $datos["tipo"] = $tipo;
-    $datos["user"] = $user;
-    $datos["tkn"] = 1;
-    $datos["avatar"] = "1.png";
-    $datos["td"] = $_SESSION['td'];
-    if ($db->insert("login_userdata", $datos)) {
-        unset($_SESSION['newuser']);
-        echo '<h2>Usuario agregado con exito!</h2>';
-        echo '<a href="?user" class="btn btn-cyan">Terminar...</a>';
-   		 } 
-		$db->close();
-	}
-
 
 	function ActualizarUsuario($nombre,$tipo,$user){
 	    $db = new dbConn();
@@ -144,7 +126,7 @@ class Usuarios{
 			  <thead>
 			    <tr>
 			      <th scope="col">Nombre </th>
-			      <th scope="col">Email</th>
+			      <th scope="col" class="d-none d-md-block">Email</th>
 			      <th scope="col">Cuenta</th>
 			      <th scope="col">Eliminar</th>
 			      <th scope="col">Editar</th>
@@ -168,20 +150,20 @@ class Usuarios{
     	echo '<tr>';
 		
 		echo '<th scope="row">'.$nombre.'</th>
-		      <td>'.$b["email"].'</td>
+		      <td class="d-none d-md-block">'.$b["email"].'</td>
 		      <td>'.Helpers::UserName($tipo).'</td>';
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
 				echo '<td><a id="deluser" op="5" iden="'.$b["id"].'" username="'.$user.'" ><i class="fa fa-trash red-text fa-lg"></i></a></td>';
 			} else {
-				echo '<td><a class="btn-floating btn-sm"><i class="fa fa-trash grey-text"></i></a></td>';
+				echo '<td><a><i class="fa fa-trash grey-text  fa-lg"></i></a></td>';
 			}
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
 				echo '<td><a href="?modal=newpass&user='.$b["username"].'&op=actualizar"><i class="fa fa-unlock-alt red-text fa-lg"></i></a>
 				<a href="?modal=userupdate&user='.$b["username"].'&op=actualizar"><i class="fa fa-edit red-text fa-lg"></i></a></td>';
 			} else {
-				echo '<td><a ><i class="fa fa-edit grey-text fa-lg"></i></a>
+				echo '<td><a ><i class="fa fa-unlock-alt grey-text fa-lg"></i></a>
 				<a ><i class="fa fa-edit grey-text fa-lg"></i></a></td>';
 			}
 

@@ -74,7 +74,7 @@ class Helpers{
 
 
 
-    public function UserName($tipo){
+    static public function UserName($tipo){
         if($tipo == 1) return "Root";
         if($tipo == 2) return "Administrador";
         if($tipo == 3) return "Cajero";
@@ -90,15 +90,6 @@ class Helpers{
     if($string == "2") return '-';
     }
 
-   public static function Mesa($clientes) {
-    if($clientes == "1") return 'mesa1.jpg';
-    if($clientes == "2") return 'mesa2.jpg';
-    if($clientes == "3") return 'mesa3.jpg';
-    if($clientes == "4") return 'mesa4.jpg';
-    if($clientes == "5") return 'mesa5.jpg';
-    if($clientes == "6") return 'mesa6.jpg';
-    if($clientes > "6") return 'mesax.jpg';
-    } 
 
     public static function Color($elemento){
     if(substr($elemento, -1) == "1") $color="light-blue lighten-5";

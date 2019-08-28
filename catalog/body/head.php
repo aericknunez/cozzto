@@ -15,6 +15,4 @@
 
 <link href="assets/css/addons/datatables.min.css" rel="stylesheet">
 
-    <style>body { overflow-x: hidden; padding-left: 15px; }</style>
-
 </head>
