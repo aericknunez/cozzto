@@ -6,11 +6,13 @@ class Push{
 	}
 
 
-	public function Execute(){
+	public function Execute($corte){
 		
-		if($this->VerificarCorteHoy(date("d-m-Y")) != TRUE){
+		if($this->VerificarCorteHoy(date("d-m-Y")) != TRUE or $corte != NULL){
 			$_SESSION["now"] =  $this->Now();
-			$_SESSION["last_update"] =  $this->LastUpdate();	
+			$_SESSION["last_update"] =  $this->LastUpdate();
+
+			$this->Iniciando();	
 
 			$archivo.= $this->CreateDeleteIds($_SESSION["last_update"], $_SESSION["now"]);
 			$archivo.= $this->CreateUploads($_SESSION["last_update"], $_SESSION["now"]);
@@ -44,7 +46,7 @@ class Push{
 
 	public function LastUpdate(){
 	    $db = new dbConn();
-	    if ($r = $db->select("final", "sync_up", "WHERE creado = 1 and td = ".$_SESSION["temporal_td"]." order by final desc")) { 
+	    if ($r = $db->select("final", "sync_up", "WHERE td = ".$_SESSION["temporal_td"]." order by final desc")) { 
 	        return $r["final"];
 	    } unset($r);  
 	}
@@ -84,7 +86,7 @@ class Push{
 				        $campo = $fields[$x]['name'];
 
 			if($campo == "id") $archivo.= "\"\", ";
-			elseif($campo == "td") $archivo.= "\"" .$y["$campo"] . "\"";
+			elseif($campo == "time") $archivo.= "\"" .$y["$campo"] . "\"";
 			else $archivo.= "\"" . $y["$campo"] . "\", ";
 
 				    }
@@ -96,54 +98,97 @@ class Push{
 	    return $archivo;
 	}
 
-// Huardo los resultados
-	public function SaveSync($archivo){ // guardo el archivo a sincronizar creado
+
+
+
+
+
+// Inicio con el proceso
+	public function Iniciando(){ // guardo el archivo a sincronizar creado
 		$db = new dbConn();
 
 		   	 	$hora = date("H:i:s");
 		   	 	$fecha = date("d-m-Y");
 		   	 	$hash = $fecha."-".$hora ."-" . $_SESSION["temporal_td"];
 		   	 	$hash = md5($hash);
-		   	 	$hash = $_SESSION["temporal_td"] . "-" . $hash;
+		   	 	$_SESSION["hash_name"] = $_SESSION["now"] . "-" . $_SESSION["temporal_td"] . "-" . $hash;
 
-		   $handle = fopen($hash . ".sql",'w+');
+
 		   // antes de escribir se le agrega la linea para el registro
-		   $h = Helpers::HashId();
-		   $t = Helpers::TimeId();
-		   
-		if($archivo != NULL){
-		   $archivo.= 'INSERT INTO sync_up_cloud VALUES("", "1", "1", "1",  "'.$fecha.'", "'.$hora.'", "'.strtotime($fecha).'", "'.$hash.'", "'.$_SESSION["last_update"].'", "'.$_SESSION["now"].'", "'.$h.'", "'.$t.'", "' . $_SESSION["temporal_td"] .'");';
-		   if(fwrite($handle,$archivo)){
-		   	
-		   	 		   	 		    	
+		   $_SESSION["hashid"] = Helpers::HashId();
+		   $_SESSION["timeid"] = Helpers::TimeId();
+		     	
+		   	 	
+
 	    	    $datos = array();
-			    $datos["creado"] = "1";
+			    $datos["creado"] = "0";
 			    $datos["subido"] = "0";
 			    $datos["ejecutado"] = "0";
 			    $datos["fecha"] = $fecha;
 			    $datos["hora"] = $hora;
 			    $datos["fechaF"] = strtotime($fecha);
-			    $datos["comprobacion"] = $hash;
+			    $datos["comprobacion"] = $_SESSION["hash_name"];
 			    $datos["inicio"] = $_SESSION["last_update"];
 			    $datos["final"] = $_SESSION["now"];
-			    $datos["hash"] = $h;
-			    $datos["time"] = $t;
+			    $datos["hash"] = $_SESSION["hashid"];
+			    $datos["time"] = $_SESSION["timeid"];
 			    $datos["td"] = $_SESSION["temporal_td"];
-			    if ($db->insert("sync_up", $datos)) {
-			         return $hash;
-			    }
-	
-		   }
-		} // termina comprobacion de archivo null
-		   fclose($handle);
+			    $db->insert("sync_up", $datos);
 		 
 	}
+
+
+
+// Guardo los resultados
+	public function SaveSync($archivo){ // guardo el archivo a sincronizar creado
+		$db = new dbConn();
+
+		   	 	$hora = date("H:i:s");
+		   	 	$fecha = date("d-m-Y");
+		   		
+
+
+		if($archivo != NULL){
+
+			$handle = fopen($_SESSION["hash_name"] . ".sql",'w+');
+
+		   $archivo.= 'INSERT INTO sync_up_cloud VALUES("", "1", "1", "1",  "'.$fecha.'", "'.$hora.'", "'.strtotime($fecha).'", "'.$_SESSION["hash_name"].'", "'.$_SESSION["last_update"].'", "'.$_SESSION["now"].'", "'.$_SESSION["hashid"].'", "'.$_SESSION["timeid"].'", "' . $_SESSION["temporal_td"] .'");';
+		   
+		if(fwrite($handle,$archivo)){
+		   	
+		   	 		   	 		    	
+			        $cambio = array();
+				    $cambio["creado"] = "1";
+				    if ($db->update("sync_up", $cambio, "WHERE comprobacion = '".$_SESSION["hash_name"]."'")) {
+				        return $_SESSION["hash_name"];
+				    }
+	
+		   }
+
+		 fclose($handle);
+
+		} else {
+				  $db->delete("sync_up", "WHERE comprobacion = '".$_SESSION["hash_name"]."'");			
+		} // termina comprobacion de archivo null
+		   
+		  
+		 
+	}
+
+
+
+
+
+
 
 
 
 	public function BorroSession(){ // borro las variables de sessio
 		unset($_SESSION["last_update"]);
 		unset($_SESSION["now"]);
+		unset($_SESSION["hash_name"]);
+		unset($_SESSION["hashid"]);
+		unset($_SESSION["timeid"]);
 	}
 
 

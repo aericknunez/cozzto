@@ -1,12 +1,13 @@
 <?php
 include_once '../application/common/Helpers.php'; // [Para todo]
 include_once '../application/includes/variables_db.php';
-include_once '../application/includes/db_connect.php';
-include_once '../application/includes/functions.php';
-sec_session_start();
-include_once '../application/common/Fechas.php';
 include_once '../application/common/Mysqli.php';
+include_once '../application/includes/DataLogin.php';
 $db = new dbConn();
+$seslog = new Login();
+$seslog->sec_session_start();
+include_once '../application/common/Fechas.php';
+
 
 $fecha = date("d-m-Y");
 $hora = date("H:i:s");
@@ -28,20 +29,8 @@ if($a->num_rows == 0){
 
 	$handle = fopen($sync . ".sql",'w+');
 	$resultado.= 'INSERT INTO login_sync VALUES("", "'.$sync.'", "4", "1",  "'.$fecha.'", "'.$hora.'", "'.$_SESSION["temporal_td"].'");';
-	if(fwrite($handle,$resultado)){
-
-	$datos = array();
-	$datos["tipo"] = "4";
-	$datos["creado"] = "1";
-	$datos["subido"] = "0";
-	$datos["ejecutado"] = "0";
-	$datos["fecha"] = $fecha;
-	$datos["hora"] = $hora;
-	$datos["fechaF"] = strtotime($fecha);
-	$datos["hash"] = $sync;
-	$datos["td"] = $_SESSION["temporal_td"];
-	$db->insert("sync_status", $datos);
-	}
+	
+	fwrite($handle,$resultado);
 	unset($resultado);
 	fclose($handle);
 
@@ -49,6 +38,8 @@ if($a->num_rows == 0){
 	$dato["hash"] = $sync;
 	$dato["fecha"] = $fecha;
 	$dato["hora"] = $hora;
+	$datos["hash"] = Helpers::HashId();
+	$datos["time"] = Helpers::TimeId();
 	$db->insert("login_db_sync", $dato);
 
 // aqui ejecuto el sql que deberia estar en el directorio descargado de git
@@ -66,12 +57,7 @@ foreach($sql as $query){
 
 	if($sync != NULL){
 		if(SubirFtp($sync) == TRUE){
-			$cambio = array();
-			$cambio["subido"] = 1;
-	    	$cambio["ejecutado"] = 1;
-			if($db->update("sync_status", $cambio, "WHERE hash = '$sync' and td = ".$_SESSION["temporal_td"]."")){
-			 @unlink($sync . ".sql");	
-			}
+			@unlink($sync . ".sql");	
 		}	 
 	} 
 
@@ -88,7 +74,7 @@ function SubirFtp($sync){
 						"erick@pizto.com",
 						"caca007125-",
 						$sync . ".sql",
-						"/admin/sync/db/",
+						"/admin/sync/database/",
 						"C:/AppServ/www/pizto/sync/". $sync .".sql") == TRUE){
 						return TRUE;
 		} else {
@@ -101,7 +87,6 @@ function SubirFtp($sync){
 ///////// actualizar el root
 $data =  file_get_contents('https://pizto.com/admin/application/includes/root_json.php?x=' . $_SESSION["temporal_td"]); 
 $cambio = json_decode($data, true);
-
-$db->update("config_root", $cambio, "WHERE td=" . $_SESSION["temporal_td"]);
+Helpers::UpdateId("config_root", $cambio, "td=" . $_SESSION["temporal_td"]);
 
 unset($_SESSION["temporal_td"]);
