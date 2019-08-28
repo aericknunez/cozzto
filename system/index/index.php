@@ -21,8 +21,6 @@ $cut = new Corte();
 
 echo '<div id="ventana"></div>';
 
-
-
 if($cut->UltimaFecha() != date("d-m-Y")){ // comprobacion de corte
 	if($_SESSION["tipo_inicio"] == 2){ 	include_once 'system/ventas/venta_lenta.php'; } 
 	else { include_once 'system/ventas/venta_rapida.php'; }

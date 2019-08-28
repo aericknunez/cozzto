@@ -21,13 +21,13 @@ include_once '../common/Encrypt.php';
 // filtros para cuando no hay session abierta
 if ($seslog->login_check() != TRUE) {
 echo '<script>
-	window.location.href="../includes/logout.php"
+	window.location.href="application/includes/logout.php"
 </script>';
 } 
 
 if($_SESSION["user"] == NULL and $_SESSION["td"] == NULL){
 echo '<script>
-	window.location.href="../includes/logout.php"
+	window.location.href="application/includes/logout.php"
 </script>';
 exit();
 }
