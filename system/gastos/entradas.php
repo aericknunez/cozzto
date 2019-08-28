@@ -5,7 +5,9 @@ include_once 'application/common/Alerts.php';
 include_once 'system/gastos/Gasto.php';
 $gasto = new Gastos();
 
-
+include_once 'system/corte/Corte.php';
+$cut = new Corte();
+if($cut->UltimaFecha() != date("d-m-Y")){ // comprobacion de corte
 ?>
 
 <div class="row d-flex justify-content-center">
@@ -32,3 +34,11 @@ Descripci&oacuten
   $gasto->VerEntradas();
    ?>
 </div> 
+
+
+
+<?php 
+} else { /// termina comprobacion de corte
+	Alerts::CorteEcho("Ingresos de efectivo");
+}
+ ?>

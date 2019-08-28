@@ -19,8 +19,15 @@
       <div class="modal-body">
 <!-- ./  content -->
 
+<?php  
+include_once 'system/corte/Corte.php';
+$cut = new Corte();
+if($cut->UltimaFecha() != date("d-m-Y")){ // comprobacion de corte
+?>
+
 
 <div class="row">
+
     <div class="col-md-6" id="origen">
         <form class="text-center border border-light p-2" id="form-abono" name="form-abono"> 
 
@@ -33,6 +40,9 @@
         <button class="btn btn-info my-2" type="submit" id="btn-abono" name="btn-abono">AGREGAR ABONO</button>
         </form>
     </div>
+
+
+
     <?php 
       $creditos = $credito->ObtenerTotal($_REQUEST["factura"], $_REQUEST["tx"]);
       $abonos = $credito->TotalAbono($_REQUEST["cre"]);
@@ -55,13 +65,19 @@
 </div>
 
 
-
-
 <div id="contenido" class="mt-4">
 <?php 
 $credito->VerAbonos($_REQUEST["cre"]);
 ?>
 </div>
+
+
+<?php 
+} else { /// termina comprobacion de corte
+  Alerts::CorteEcho("Abonos");
+}
+ ?>
+
 <!-- ./  content -->
       </div>
       <div class="modal-footer">
