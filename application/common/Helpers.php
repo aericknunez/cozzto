@@ -34,13 +34,6 @@ class Helpers{
         }  
     }
 
-  public function ActivaActualizar(){ /// activa actualizar cada vez que hay un cambio en config, para que se cree el archivo de las tablas estaticas y se suban a la web
-    $db = new dbConn();
-        $cambio = array();
-        $cambio["actualizar"] = 1;
-        $db->update("alter_opciones", $cambio, "WHERE td = " . $_SESSION["td"]);
-  }
-  
 
     public function Gasto($string) {
     if($string == "1") return '<p class="text-danger font-weight-bold">Compra No Facturado</p>';

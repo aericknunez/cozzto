@@ -137,7 +137,6 @@ if($_REQUEST["op"]=="10"){ // agregar datos de configuracion
 									$_POST["venta_especial"],
 									$_POST["imprimir_antes"],
 									$_POST["cambio_tx"]);
-	Helpers::ActivaActualizar();
 }
 
 if($_REQUEST["op"]=="11"){  // agregar datos de root
@@ -154,7 +153,6 @@ include_once '../../system/config_configuraciones/Config.php';
 						Encrypt::Encrypt($_POST["ftp_password"],$_SESSION['secret_key']),
 						Encrypt::Encrypt($_POST["tipo_sistema"],$_SESSION['secret_key']),
 						Encrypt::Encrypt($_POST["plataforma"],$_SESSION['secret_key']));
-	Helpers::ActivaActualizar();
 }
 
 
@@ -899,7 +897,21 @@ if($_REQUEST["op"]=="129"){ // gastos mensual
 }
 
 
+if($_REQUEST["op"]=="130"){ // validar el sistema
+$_SESSION["caduca"] = 0;
+echo '<script>
+	window.location.href="?"
+</script>';
+}
 
+
+if($_REQUEST["op"]=="131"){ // validar codigo de sistema
+include_once '../common/Encrypt.php';
+include_once '../../system/index/Inicio.php';
+$inicio = new Inicio;
+$inicio->Validar($_POST["fecha_submit"], $_POST["codigo"]);
+	
+}
 
 
 

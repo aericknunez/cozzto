@@ -85,6 +85,10 @@ echo '
 
 } // termina modal
 
+elseif($_SESSION["caduca"] != 0) {
+echo '<script type="text/javascript" src="assets/js/query/noacceso.js?v='.$numero.'"></script>';
+} 
+
 //config
 elseif(isset($_GET["tablas"])) {
 echo '<script type="text/javascript" src="assets/js/query/conf_config.js?v='.$numero.'"></script>';

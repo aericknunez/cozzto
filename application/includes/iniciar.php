@@ -10,7 +10,7 @@ $seslog->sec_session_start();
 include_once '../common/Encrypt.php';
 include_once '../common/Alerts.php';
 include_once '../common/Fechas.php';
-
+include_once '../../system/index/Inicio.php';
 include_once '../../system/config_configuraciones/Config.php';
 
 
@@ -40,6 +40,8 @@ $user=sha1($_SESSION['username']);
         $configuracion = new Config;
         $configuracion->CrearVariables(); // creo el resto de variables del sistema
 
+        $inicia = new Inicio;
+        $inicia->Caduca(); // revisa si ha caducado
 
         header("location: ../../");
     }
