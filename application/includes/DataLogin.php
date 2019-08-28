@@ -220,7 +220,7 @@ public function VerificarEmail($email){
 	$intentos = $a->num_rows;
 
 	    if ($intentos > 5) {
-            return FLASE; // hay fuerza
+            return FALSE; // hay fuerza
         } else {
             return TRUE; // no hay fuerza
         }

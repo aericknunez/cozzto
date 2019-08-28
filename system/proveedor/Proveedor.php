@@ -125,7 +125,7 @@ class Proveedores{
                     <th class="th-sm">Nombre</th>
                     <th class="th-sm">Documento</th>
                     <th class="th-sm">Telefono</th>
-                    <th class="th-sm">Editar</th>
+                    <th class="th-sm">Ver</th>
                     <th class="th-sm">Eliminar</th>
                   </tr>
                 </thead>
@@ -137,7 +137,7 @@ class Proveedores{
                       <td>'.$b["nombre"].'</td>
                       <td>'.$b["documento"].'</td>
                       <td>'.$b["telefono"].'</td>
-                      <td><a id="xver" op="59" key="'.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                      <td><a id="xver" op="59" key="'.$b["hash"].'"><i class="fas fa-search fa-lg green-text"></i></a></td>
                       <td><a id="xdelete" hash="'.$b["hash"].'" op="62"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
@@ -148,7 +148,7 @@ class Proveedores{
                     <th>Nombre</th>
                     <th>Documento</th>
                     <th>Telefono</th>
-                    <th>Editar</th>
+                    <th>Ver</th>
                     <th>Eliminar</th>
                   </tr>
                 </tfoot>

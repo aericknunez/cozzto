@@ -43,7 +43,8 @@ class Productos{
   public function TempProducto($dato){ // revisa las propuedades del producto para mostrarlos (lento)
     $db = new dbConn();
 
-  if ($r = $db->select("*", "producto", "WHERE cod = '". $dato["cod"] ."' and td = ".$_SESSION["td"]."")) {  $cantidad = $r["cantidad"];
+  if ($r = $db->select("*", "producto", "WHERE cod = '". $dato["cod"] ."' and td = ".$_SESSION["td"]."")) {  
+    $cantidad = $r["cantidad"];
     $medida = $r["medida"];
   } unset($r); 
 
@@ -69,15 +70,22 @@ class Productos{
       <h3 class="font-weight-bold mb-1"><strong>'.$dato["descripcion"].'</strong></h3>
       <p>Cantidad disponible: <a class="font-weight-bold">'.$cantidad.'</a> '.$nombreU.'</p>
 
-      <p class="dark-grey-text">
+      <p class="dark-grey-text">';
     
-    <div class="md-form md-outline form-sm col-md-2">
-      <input id="cantidad" name="cantidad" class="form-control form-control-sm" type="number" value="1" step="any" max="'. $cantidad .'">
+    if($cantidad <= 0){
+       Alerts::Mensajex("No hay productos disponibles en inventario","danger",$boton,$boton2);
+    }
+
+    ($cantidad > 0) ? $value = 1 : $value = 0;
+
+      echo '<div class="md-form md-outline form-sm col-md-2">
+      <input id="cantidad" name="cantidad" class="form-control form-control-sm" type="number" value="'.$value.'" step="any" max="'. $cantidad .'" min="1">
       <label for="cantidad">Cant</label>
     </div>';
 
     $this->CompruebaCaracteristicas($dato["cod"]);
     $this->CompruebaUbicaciones($dato["cod"]);
+    
 
     echo '</p>
               <input id="cod" name="cod" type="hidden" value="'. $dato["cod"] .'">

@@ -39,7 +39,7 @@ if($dir == "asc") $dir2 = "desc";
             <th class="th-sm d-none d-md-block"><a id="paginador" op="114" iden="1" orden="factura" dir="'.$dir2.'">Factura</a></th>
             <th class="th-sm"><a id="paginador" op="114" iden="1" orden="fecha" dir="'.$dir2.'">Fecha</a></th>
             <th class="th-sm"><a id="paginador" op="114" iden="1" orden="edo" dir="'.$dir2.'">Estado</a></th>
-            <th class="th-sm">Editar</th>
+            <th class="th-sm">Ver</th>
           </tr>
         </thead>
         <tbody>';
@@ -359,7 +359,7 @@ if($dir == "asc") $dir2 = "desc";
             <th class="th-sm d-none d-md-block"><a id="paginador" op="104" iden="1" orden="factura" dir="'.$dir2.'">Factura</a></th>
             <th class="th-sm"><a id="paginador" op="104" iden="1" orden="fecha" dir="'.$dir2.'">Fecha</a></th>
             <th class="th-sm"><a id="paginador" op="104" iden="1" orden="edo" dir="'.$dir2.'">Estado</a></th>
-            <th class="th-sm">Editar</th>
+            <th class="th-sm">Ver</th>
           </tr>
         </thead>
         <tbody>';

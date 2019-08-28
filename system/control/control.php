@@ -87,9 +87,13 @@ $control = new Controles();
 
 </div>
 
-<canvas id="barChart"></canvas>
 
 
+
+
+
+
+<!-- division -->
 
 
 <div class="row mt-3">
@@ -167,3 +171,8 @@ $control = new Controles();
 <!-- Grid column -->
 
 </div>
+<canvas id="barChart" class="mb-4"></canvas>
+
+
+
+

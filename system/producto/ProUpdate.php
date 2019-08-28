@@ -119,7 +119,7 @@ class ProUpdate{
 
   public function VerAgrega($producto){
       $db = new dbConn();
-          $a = $db->query("SELECT * FROM producto_ingresado WHERE producto = '$producto' and td = ".$_SESSION["td"]." order by id desc limit 10");
+          $a = $db->query("SELECT * FROM producto_ingresado WHERE producto = '$producto' and td = ".$_SESSION["td"]." order by id desc limit 8");
           if($a->num_rows > 0){
         echo '<table class="table table-sm table-hover">
           <thead>
@@ -153,20 +153,25 @@ class ProUpdate{
         echo '</tbody>
         </table>';
 
-          } $a->close();  
+          } $a->close(); 
+
+      if ($r = $db->select("cantidad", "producto", "WHERE cod = '$producto' and td = ".$_SESSION["td"]."")) { 
+       Alerts::Mensajex("La cantidad actual de productos es: " . Helpers::Format($r["cantidad"]),'success',$boton,$boton2);
+      }  unset($r);
+        
   }
 
 
   public function DelProAgrega($hash, $producto){ // elimina precio
     $db = new dbConn();
     // debo actualizar el total (cantidad) de producto
-                    if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$producto." and td = ".$_SESSION["td"]."")) { 
-                        $canti = $r["cantidad"];
-                    } unset($r); 
-                    if ($r = $db->select("cant, fecha", "producto_ingresado", "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) { 
-                        $cantix = $r["cant"];
-                        $fechai = $r["fecha"];
-                    } unset($r);
+      if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$producto." and td = ".$_SESSION["td"]."")) { 
+          $canti = $r["cantidad"];
+      } unset($r); 
+      if ($r = $db->select("cant, fecha", "producto_ingresado", "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) { 
+          $cantix = $r["cant"];
+          $fechai = $r["fecha"];
+      } unset($r);
                         
                     //////////// 
       if($fechai == date("d-m-Y")){
@@ -188,25 +193,25 @@ class ProUpdate{
 
 
 
-  public function AgregaBusqueda($dato){ // Busqueda para compuestos
-    $db = new dbConn();
+public function AgregaBusqueda($dato){ // Busqueda para compuestos
+  $db = new dbConn();
 
-          $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
-           if($a->num_rows > 0){
-            echo '<table class="table table-sm table-hover">';
-    foreach ($a as $b) {
-               echo '<tr>
-                      <td scope="row"><a id="select-agrega" cod="'. $b["cod"] .'" descripcion="'. $b["descripcion"] .'">
-                      '. $b["cod"] .'  || '. $b["descripcion"] .'</a></td>
-                    </tr>'; 
-    }  $a->close();
+        $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+         if($a->num_rows > 0){
+          echo '<table class="table table-sm table-hover">';
+  foreach ($a as $b) {
+             echo '<tr>
+                    <td scope="row"><a id="select-agrega" cod="'. $b["cod"] .'" descripcion="'. $b["descripcion"] .'">
+                    '. $b["cod"] .'  || '. $b["descripcion"] .'</a></td>
+                  </tr>'; 
+  }  $a->close();
 
-        echo '
-        </table>';
-          } else {
-            echo "El criterio de busqueda no corresponde a un producto";
-          }
-  }
+      echo '
+      </table>';
+        } else {
+          echo "El criterio de busqueda no corresponde a un producto";
+        }
+}
 
 
 //////////////// averias
@@ -245,7 +250,7 @@ class ProUpdate{
 
     public function VerAveria($producto){
       $db = new dbConn();
-          $a = $db->query("SELECT * FROM producto_averias WHERE producto = '$producto' and td = ".$_SESSION["td"]." order by id desc limit 10");
+          $a = $db->query("SELECT * FROM producto_averias WHERE producto = '$producto' and td = ".$_SESSION["td"]." order by id desc limit 8");
           if($a->num_rows > 0){
         echo '<table class="table table-sm table-hover">
           <thead>
@@ -277,6 +282,10 @@ class ProUpdate{
         </table>';
 
           } $a->close();  
+     
+           if ($r = $db->select("cantidad", "producto", "WHERE cod = '$producto' and td = ".$_SESSION["td"]."")) { 
+       Alerts::Mensajex("La cantidad actual de productos es: " . Helpers::Format($r["cantidad"]),'success',$boton,$boton2);
+      }  unset($r);
   }
 
 
@@ -284,13 +293,13 @@ class ProUpdate{
   public function DelAveria($hash, $producto){ // elimina precio
     $db = new dbConn();
     // debo actualizar el total (cantidad) de producto
-                    if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$producto." and td = ".$_SESSION["td"]."")) { 
-                        $canti = $r["cantidad"];
-                    } unset($r); 
-                    if ($r = $db->select("cant, fecha", "producto_averias", "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) { 
-                        $cantix = $r["cant"];
-                        $fechai = $r["fecha"];
-                    } unset($r);
+        if ($r = $db->select("cantidad", "producto", "WHERE cod = ".$producto." and td = ".$_SESSION["td"]."")) { 
+            $canti = $r["cantidad"];
+        } unset($r); 
+        if ($r = $db->select("cant, fecha", "producto_averias", "WHERE hash = '$hash' and td = ".$_SESSION["td"]."")) { 
+            $cantix = $r["cant"];
+            $fechai = $r["fecha"];
+        } unset($r);
                         
                     //////////// 
       if($fechai == date("d-m-Y")){
@@ -311,25 +320,24 @@ class ProUpdate{
   }
 
 
-  public function AveriaBusqueda($dato){ // Busqueda para compuestos
-    $db = new dbConn();
+public function AveriaBusqueda($dato){ // Busqueda para averia
+  $db = new dbConn();
 
-          $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
-           if($a->num_rows > 0){
-            echo '<table class="table table-sm table-hover">';
-    foreach ($a as $b) {
-               echo '<tr>
-                      <td scope="row"><a id="select-averia" cod="'. $b["cod"] .'" descripcion="'. $b["descripcion"] .'">
-                      '. $b["cod"] .'  || '. $b["descripcion"] .'</a></td>
-                    </tr>'; 
-    }  $a->close();
+        $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+         if($a->num_rows > 0){
+          echo '<table class="table table-sm table-hover">';
+  foreach ($a as $b) {
+             echo '<tr>
+                    <td scope="row"><a id="select-averia" cod="'. $b["cod"] .'" descripcion="'. $b["descripcion"] .'">
+                    '. $b["cod"] .'  || '. $b["descripcion"] .'</a></td>
+                  </tr>'; 
+  }  $a->close();
 
-        echo '
-        </table>';
-          } else {
-            echo "El criterio de busqueda no corresponde a un producto";
-          }
-  }
+      echo '</table>';
+        } else {
+          echo "El criterio de busqueda no corresponde a un producto";
+        }
+}
 
 
 

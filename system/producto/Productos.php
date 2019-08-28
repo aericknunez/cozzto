@@ -913,7 +913,7 @@ if($dir == "asc") $dir2 = "desc";
             <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.cantidad" dir="'.$dir2.'">Cantidad</a></th>
             <th class="th-sm"><a id="paginador" op="54" iden="1" orden="producto.categoria" dir="'.$dir2.'">Categoria</a></th>
             <th class="th-sm d-none d-md-block"><a id="paginador" op="54" iden="1" orden="producto.existencia_minima" dir="'.$dir2.'">Minimo</a></th>
-            <th class="th-sm">Editar</th>
+            <th class="th-sm">Ver</th>
           </tr>
         </thead>
         <tbody>';
@@ -928,7 +928,7 @@ if($dir == "asc") $dir2 = "desc";
                       <td>'.$b["cantidad"].'</td>
                       <td>'.$b["categoria"].'</td>
                       <td class="d-none d-md-block">'.$b["existencia_minima"].'</td>
-                      <td><a id="xver" op="55" key="'.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                      <td><a id="xver" op="55" key="'.$b["cod"].'"><i class="fas fa-search fa-lg green-text"></i></a></td>
                     </tr>';
         }
         echo '</tbody>
@@ -1104,7 +1104,7 @@ if($dir == "asc") $dir2 = "desc";
             <th class="th-sm"><a id="paginador" op="56" iden="1" orden="producto.cantidad" dir="'.$dir2.'">Cantidad</a></th>
             <th class="th-sm"><a id="paginador" op="56" iden="1" orden="producto.categoria" dir="'.$dir2.'">Categoria</a></th>
             <th class="th-sm d-none d-md-block"><a id="paginador" op="56" iden="1" orden="producto.existencia_minima" dir="'.$dir2.'">Minimo</a></th>
-            <th class="th-sm">Editar</th>
+            <th class="th-sm">Ver</th>
           </tr>
         </thead>
         <tbody>';
@@ -1119,7 +1119,7 @@ if($dir == "asc") $dir2 = "desc";
                       <td>'.$b["cantidad"].'</td>
                       <td>'.$b["categoria"].'</td>
                       <td class="d-none d-md-block">'.$b["existencia_minima"].'</td>
-                      <td><a id="xver" op="55" key="'.$b["cod"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
+                      <td><a id="xver" op="55" key="'.$b["cod"].'"><i class="fas fa-search fa-lg green-text"></i></a></td>
                     </tr>';
         }
         echo '</tbody>

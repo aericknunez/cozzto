@@ -61,6 +61,7 @@
 </li>
 
 
+
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-money-bill-alt"></i> Creditos<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">
 <ul class="list-unstyled">
@@ -71,18 +72,6 @@
 </div>
 </li>
 
-
-
-<li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-user-alt"></i> Proveedores<i class="fa fa-angle-down rotate-icon"></i></a>
-<div class="collapsible-body">
-<ul class="list-unstyled">
-
-<li><a href="?proveedoradd" class="waves-effect"><i class="fas fa-user"></i> Agrega Proveedor</a></li>
-<li><a href="?proveedorver" class="waves-effect"><i class="fas fa-barcode"></i> Ver Proveedores</a></li>
-
-</ul>
-</div>
-</li>
 
 
 
@@ -98,6 +87,20 @@
 </div>
 </li>
 
+
+
+
+
+<li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-user-alt"></i> Proveedores<i class="fa fa-angle-down rotate-icon"></i></a>
+<div class="collapsible-body">
+<ul class="list-unstyled">
+
+<li><a href="?proveedoradd" class="waves-effect"><i class="fas fa-user"></i> Agrega Proveedor</a></li>
+<li><a href="?proveedorver" class="waves-effect"><i class="fas fa-barcode"></i> Ver Proveedores</a></li>
+
+</ul>
+</div>
+</li>
 
 
 

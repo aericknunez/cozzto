@@ -10,9 +10,8 @@ class Corte{
 
 	     	if($this->UltimaFecha() != $fecha){
 			
-			if ($r = $db->select("efectivo", "corte_diario", "where edo = 1 and td = ".$_SESSION["td"]." order by id DESC LIMIT 1")) { 
-			        $caja_chica=$r["efectivo"];
-			    } unset($r);
+				$caja_chica=$this->GetEfectivo();
+			    
 
 			    $datos = array();
 			    $datos["fecha"] = $fecha;
@@ -165,9 +164,9 @@ class Corte{
 
 
 
-	public function GetEfectivo($fecha){ // el ultimo efectivo
+	public function GetEfectivo(){ // el ultimo efectivo
 		$db = new dbConn();
-	    if ($r = $db->select("efectivo_ingresado", "corte_diario", "where edo = 1 and fecha = '$fecha' and td = ".$_SESSION["td"]." order by id DESC LIMIT 1")) {  return $r["efectivo_ingresado"];
+	    if ($r = $db->select("efectivo_ingresado", "corte_diario", "where edo = 1 and td = ".$_SESSION["td"]." order by id DESC LIMIT 1")) {  return $r["efectivo_ingresado"];
 	    } unset($r); 
 	}
 
@@ -187,7 +186,7 @@ class Corte{
 	public function EfectivoDebido($fecha){ //para reporte efectivo que debe haber
 		$db = new dbConn();
 	    
-	    $total_cc = $this->TVentasX($fecha, 1)+$this->GetEfectivo($fecha)+$this->TotalAbonos($fecha)+$this->EntradasEfectivo($fecha); //total ventas  mas caja chica de ayer
+	    $total_cc = $this->TVentasX($fecha, 1)+$this->GetEfectivo()+$this->TotalAbonos($fecha)+$this->EntradasEfectivo($fecha); //total ventas  mas caja chica de ayer
 		$total_debido = $total_cc-$this->GastoHoy($fecha); //dinero que deberia haber ()
 		return $total_debido;
 
@@ -276,7 +275,7 @@ public function CancelarCorte($ramdom,$fecha){
 			    <div class="card">
 			        <div class="card-body">
 			            <h4 class="card-title">Efectivo</h4>
-			            <p class="black-text display-4">' . Helpers::Dinero($this->GetEfectivo($fecha)) . '</p>
+			            <p class="black-text display-4">' . Helpers::Dinero($this->GetEfectivo()) . '</p>
 			        </div>
 			    </div>
 			    <!--/.Panel-->
