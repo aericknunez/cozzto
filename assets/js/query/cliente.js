@@ -29,6 +29,7 @@ $(document).ready(function(){
 	var hash = $(this).attr('hash');
 	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinocliente").html(data);
+		$('#ConfirmDelete').modal('hide');
 	   	 });
 	});
 
@@ -82,6 +83,19 @@ $(document).ready(function(){
 		$('#btn-pro').attr("href",'?modal=editcliente&key='+key);
 		
 	});
+
+
+
+///////////// llamar modal para eliminar elemento
+	$("body").on("click","#xdelete",function(){ 
+		
+		var op = $(this).attr('op');
+		var hash = $(this).attr('hash');
+		
+		$('#delcliente').attr("op",op).attr("hash",hash);
+		$('#ConfirmDelete').modal('show');
+	});
+
 
 
 

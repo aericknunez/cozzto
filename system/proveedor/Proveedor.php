@@ -82,7 +82,7 @@ class Proveedores{
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td>'.$b["contacto"].'</td>
-                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="61" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                      <td><a id="xdelete" hash="'.$b["hash"].'" op="61" ><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -138,7 +138,7 @@ class Proveedores{
                       <td>'.$b["documento"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td><a id="xver" op="59" key="'.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
-                      <td><a id="delproveedor" hash="'.$b["hash"].'" op="62"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                      <td><a id="xdelete" hash="'.$b["hash"].'" op="62"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>

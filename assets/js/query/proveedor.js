@@ -34,6 +34,7 @@ $(document).ready(function(){
 	var hash = $(this).attr('hash');
 	    $.post("application/src/routes.php", {op:op, hash:hash}, function(data){
 		$("#destinoproveedor").html(data);
+		$('#ConfirmDelete').modal('hide');
 	   	 });
 	});
 
@@ -97,6 +98,17 @@ $(document).ready(function(){
 
 
 
+
+
+///////////// llamar modal para eliminar elemento
+	$("body").on("click","#xdelete",function(){ 
+		
+		var op = $(this).attr('op');
+		var hash = $(this).attr('hash');
+		
+		$('#delproveedor').attr("op",op).attr("hash",hash);
+		$('#ConfirmDelete').modal('show');
+	});
 
 
 

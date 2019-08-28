@@ -82,7 +82,7 @@ class Clientes {
                       <td>'.$b["documento"].'</td>
                       <td>'.$b["direccion"].'</td>
                       <td>'.$b["telefono"].'</td>
-                      <td><a id="delcliente" hash="'.$b["hash"].'" op="65"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                      <td><a id="xdelete" hash="'.$b["hash"].'" op="65"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
@@ -138,7 +138,7 @@ class Clientes {
                       <td>'.$b["documento"].'</td>
                       <td>'.$b["telefono"].'</td>
                       <td><a id="xver" op="68" key="'.$b["hash"].'"><i class="fas fa-edit fa-lg green-text"></i></a></td>
-                      <td><a id="delcliente" hash="'.$b["hash"].'" op="66"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
+                      <td><a id="xdelete" hash="'.$b["hash"].'" op="66"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
               }
         echo '</tbody>
