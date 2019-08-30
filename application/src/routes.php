@@ -590,7 +590,7 @@ if($_REQUEST["op"]=="85"){ // facturar determinar si es rapido o lento
 	} else {
 	include_once '../../system/ventas/VentasL.php';
 	}
-	   	if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   	if(isset($_SESSION["cliente_c"]) or isset($_SESSION["cliente_cli"])){ // agregar el credito
 	   		include_once '../../system/ventas/Opciones.php';	
 	   	}
 
@@ -677,7 +677,31 @@ include_once '../../system/ventas/VentasR.php';
 if($_REQUEST["op"]=="99"){ 
 unset($_SESSION["cliente_credito"]);
 unset($_SESSION["cliente_c"]);
+unset($_SESSION["cliente_asig"]);
+unset($_SESSION["cliente_cli"]);
 }
+
+
+
+/// cliente
+if($_REQUEST["op"]=="87"){ 
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->ClienteBusquedaA($_POST);
+}
+
+if($_REQUEST["op"]=="88"){ 
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+	$venta->AgregaClienteA($_POST);
+}
+
+
+if($_REQUEST["op"]=="89"){ 
+unset($_SESSION["cliente_asig"]);
+unset($_SESSION["cliente_cli"]);
+}
+
 
 
 /// agrega documeton a la venta

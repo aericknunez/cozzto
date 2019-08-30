@@ -314,7 +314,10 @@ class Ventas{
 		if(isset($_SESSION["tcredito"])) unset($_SESSION["tcredito"]);
 
 			if(isset($_SESSION["cliente_c"])) unset($_SESSION["cliente_c"]);
-			if(isset($_SESSION["cliente_credito"])) unset($_SESSION["cliente_credito"]);		
+			if(isset($_SESSION["cliente_credito"])) unset($_SESSION["cliente_credito"]);
+
+			if(isset($_SESSION["cliente_asig"])) unset($_SESSION["cliente_asig"]);
+			if(isset($_SESSION["cliente_cli"])) unset($_SESSION["cliente_cli"]);		
     }
 
 
@@ -430,6 +433,10 @@ class Ventas{
 	   		$opciones = new Opciones();
 	   		$opciones->AddCredito($factura);
 	   	}
+	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
+	   		$opciones = new Opciones();
+	   		$opciones->AddCliente($factura);
+	   	}
 			if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 			if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
 			if(isset($_SESSION["tcredito"])) unset($_SESSION["tcredito"]);
@@ -501,14 +508,52 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
   public function AgregaCliente($dato){ // Busqueda para cliente
     $db = new dbConn();
 
-       	$_SESSION["cliente_c"] = $_POST["hash"];
+       	$_SESSION["cliente_c"] = $_POST["hash"]; // asigna el credito
 		$_SESSION["cliente_credito"] = $_POST["nombre"];
-  		
+
+       	$_SESSION["cliente_cli"] = $_POST["hash"]; // seguimiento a la factura
+		$_SESSION["cliente_asig"] = $_POST["nombre"];
+
   		$texto = 'Cliente asignado para credito: ' . $_SESSION['cliente_credito']. ".";
 		Alerts::Mensajex($texto,"danger",'<a id="quitar-cliente" op="99" class="btn btn-danger btn-rounded">Quitar Cliente</a>',$boton2);
 
   }
 
+
+
+
+///////////////////// agregar credito
+
+  public function ClienteBusquedaA($dato){ // Busqueda para cliente
+    $db = new dbConn();
+
+          $a = $db->query("SELECT * FROM clientes WHERE nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+           if($a->num_rows > 0){
+            echo '<table class="table table-sm table-hover">';
+    foreach ($a as $b) {
+               echo '<tr>
+                      <td scope="row"><a id="select-cli" hash="'. $b["hash"] .'" nombre="'. $b["nombre"] .'">'. $b["nombre"] .'   ||   '. $b["documento"].'</a></td>
+                    </tr>'; 
+    }  $a->close();
+
+        echo '
+        </table>';
+          } else {
+            echo "El criterio de busqueda no corresponde a un cliente";
+          }
+  }
+
+
+  public function AgregaClienteA($dato){ // Busqueda para cliente
+    $db = new dbConn();
+
+       	$_SESSION["cliente_cli"] = $_POST["hash"];
+		$_SESSION["cliente_asig"] = $_POST["nombre"];
+  		
+  		$texto = 'Cliente asignado para la Factura: ' . $_SESSION['cliente_asig']. ".";
+		Alerts::Mensajex($texto,"danger",'<a id="quitar-clienteA" op="89" class="btn btn-danger btn-rounded">Quitar Cliente</a>',$boton2);
+
+  }
 
 
 ///////////////////// agregar Documento

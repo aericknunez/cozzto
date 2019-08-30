@@ -90,6 +90,7 @@ class Laterales{
 		<a href="?modal=credito" class="btn-floating btn-primary" title="Asignar Credito"><i class="fab fa-cc-visa"></i></a>
 		<a href="?modal=dfactura" class="btn-floating btn-secondary" title="Datos Factura"><i class="fas fa-file-invoice-dollar"></i></a>
 		<a href="?modal=oventas" class="btn-floating btn-success" title="Venta Especial"><i class="fas fa-donate"></i></a>
+		<a href="?modal=cliente" class="btn-floating btn-warning" title="Asignar Cliente"><i class="fas fa-user"></i></a>
 		</div>';
 
 		if($_SESSION["descuento"] != NULL){
@@ -99,6 +100,10 @@ class Laterales{
 		if($_SESSION['cliente_credito']){
 			 $textos = 'Cliente asignado para credito: ' . $_SESSION['cliente_credito']. ".";
 			Alerts::Mensajex($textos,"success",NULL,NULL);
+		}
+		if($_SESSION['cliente_asig']){
+			 $textos = 'Cliente asignado para la Factura: ' . $_SESSION['cliente_asig']. ".";
+			Alerts::Mensajex($textos,"info",NULL,NULL);
 		}
  	}
 

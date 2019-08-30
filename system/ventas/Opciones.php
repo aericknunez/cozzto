@@ -29,6 +29,23 @@ class Opciones{
 
 
 
+ 	public function AddCliente($factura){
+ 		$db = new dbConn();
+
+ 			$datos = array();
+		    $datos["factura"] = $factura;
+		    $datos["tx"] = $_SESSION["tx"];
+		    $datos["cliente"] = $_SESSION["cliente_cli"];
+		    $datos["fecha"] = date("d-m-Y");
+		    $datos["hora"] = date("H:i:s");
+		    $datos["hash"] = Helpers::HashId();
+		    $datos["time"] = Helpers::TimeId();
+		    $datos["td"] = $_SESSION["td"];
+		    $db->insert("ticket_cliente", $datos); 
+
+			if(isset($_SESSION["cliente_cli"])) unset($_SESSION["cliente_cli"]);
+			if(isset($_SESSION["cliente_asig"])) unset($_SESSION["cliente_asig"]);
+ 	}
 
 
 

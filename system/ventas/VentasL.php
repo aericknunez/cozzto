@@ -363,6 +363,8 @@ class Ventas{
 			if(isset($_SESSION["cliente_c"])) unset($_SESSION["cliente_c"]);
 			if(isset($_SESSION["cliente_credito"])) unset($_SESSION["cliente_credito"]);
 
+			if(isset($_SESSION["cliente_asig"])) unset($_SESSION["cliente_asig"]);
+			if(isset($_SESSION["cliente_cli"])) unset($_SESSION["cliente_cli"]);	
 
     }
 
@@ -514,6 +516,10 @@ class Ventas{
 	   	if(isset($_SESSION["cliente_c"])){ // agregar el credito
 	   		$opciones = new Opciones();
 	   		$opciones->AddCredito($factura);
+	   	}
+	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
+	   		$opciones = new Opciones();
+	   		$opciones->AddCliente($factura);
 	   	}
 			if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 			if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
