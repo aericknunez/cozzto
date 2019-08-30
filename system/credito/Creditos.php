@@ -129,7 +129,7 @@ $page <= 1 ? $enable = 'disabled' : $enable = '';
   public function TotalAbono($credito){ // total abonos
     $db = new dbConn();
 
-    if ($r = $db->select("sum(abono)", "creditos_abonos", "WHERE credito = '$credito' and td = ".$_SESSION["td"]."")) { 
+    if ($r = $db->select("sum(abono)", "creditos_abonos", "WHERE credito = '$credito' and edo = 1 and td = ".$_SESSION["td"]."")) { 
             return $r["sum(abono)"];
         }  unset($r);  
     
@@ -194,11 +194,11 @@ $page <= 1 ? $enable = 'disabled' : $enable = '';
 public function VerAbonos($credito) { //leva el control del autoincremento de los clientes
     $db = new dbConn();
         
-        $a = $db->query("SELECT * FROM creditos_abonos WHERE credito = '$credito' and td = ".$_SESSION["td"]." order by id desc");
+        $a = $db->query("SELECT * FROM creditos_abonos WHERE credito = '$credito' and edo = 1 and td = ".$_SESSION["td"]." order by id desc");
 
         if($a->num_rows > 0){
 
-    if ($r = $db->select("factura, tx", "creditos", "WHERE hash = '$credito' and td = ".$_SESSION["td"]."")) { 
+    if ($r = $db->select("factura, tx", "creditos", "WHERE hash = '$credito' and edo = 1 and td = ".$_SESSION["td"]."")) { 
         $factura = $r["factura"]; $tx = $r["tx"];
     }  unset($r); 
 
@@ -253,9 +253,10 @@ public function VerAbonos($credito) { //leva el control del autoincremento de lo
                 $data["credito"] = $datos["credito"];
                 $data["nombre"] = strtoupper($datos["nombre"]);
                 $data["abono"] = $datos["abono"];
-
+                $data["user"] = $_SESSION["user"];
                 $data["fecha"] = date("d-m-Y");
                 $data["hora"] = date("H:i:s");
+                $data["edo"] = 1;
                 $data["hash"] = Helpers::HashId();
                 $data["time"] = Helpers::TimeId();
                 $data["td"] = $_SESSION["td"];
@@ -284,7 +285,12 @@ public function VerAbonos($credito) { //leva el control del autoincremento de lo
 
   public function DelAbono($hash, $credito){ // elimina abono
     $db = new dbConn();
-        if (Helpers::DeleteId("creditos_abonos", "hash='$hash'")) {
+          $cambios = array();
+          $cambios["edo"] = 2;
+          $cambios["user_del"] = $_SESSION["user"];
+          $cambios["hora_del"] = date("H:i:s");
+      if(Helpers::UpdateId("creditos_abonos", $cambios, "hash='$hash' and td = ".$_SESSION["td"]."")){
+        
            Alerts::Alerta("success","Eliminado!","Abono Eliminado correctamente!");
                     $cambio = array();
                     $cambio["edo"] = 1;

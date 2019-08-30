@@ -239,6 +239,37 @@ class Clientes {
 
         }  unset($r); 
 
+
+
+   $a = $db->query("SELECT * FROM ticket_cliente WHERE cliente = '".$data["key"]."' and td = ".$_SESSION["td"]."");
+              $cf = $a->num_rows;
+              $a->close();
+              if($cf > 0){
+                  echo '<ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary">Facturas Asignadas</li>';
+                     echo '<li class="list-group-item d-flex justify-content-between align-items-center">Facturas 
+                     <span class="badge badge-primary badge-pill">'.Helpers::Format($cf).'</span></li>';
+                  echo '</ul>';
+              } else {
+                Alerts::Mensajex("No hay facturas asignadas","warning",$boton,$boton2);
+              }
+
+
+   $a = $db->query("SELECT * FROM creditos WHERE hash_cliente = '".$data["key"]."' and td = ".$_SESSION["td"]."");
+              $cas = $a->num_rows;
+              $a->close();
+              if($cas > 0){
+                  echo '<ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary">Creditos Asignados</li>';
+                     echo '<li class="list-group-item d-flex justify-content-between align-items-center">Facturas 
+                     <span class="badge badge-secondary badge-pill">'.Helpers::Format($cas).'</span></li>';
+                  echo '</ul>';
+              } else {
+                Alerts::Mensajex("No hay creditos asignados","info",$boton,$boton2);
+              }
+
+
+
   }
 
 
