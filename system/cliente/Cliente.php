@@ -261,7 +261,7 @@ class Clientes {
               if($cas > 0){
                   echo '<ul class="list-group">
                         <li class="list-group-item list-group-item-secondary">Creditos Asignados</li>';
-                     echo '<li class="list-group-item d-flex justify-content-between align-items-center">Facturas 
+                     echo '<li class="list-group-item d-flex justify-content-between align-items-center">Creditos  
                      <span class="badge badge-secondary badge-pill">'.Helpers::Format($cas).'</span></li>';
                   echo '</ul>';
               } else {
