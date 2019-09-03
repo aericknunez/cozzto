@@ -23,10 +23,27 @@ $(document).ready(function()
         });
 
         $('#btn-pro').attr("href",'?proup&key='+key);
+       
+        VerImagenes(key);
         
     });
 
 
+function VerImagenes(key){ // extrae las imagenes del producto
+        $.ajax({
+            url: "application/src/routes.php?op=18&key="+key,
+            method: "POST",
+            success: function(data){
+                $("#contenido-img").html(data);         
+            }
+        });
+}
+
+
+
+$(function () { /// despliega el light box
+$("#mdb-lightbox-ui").load("assets/mdb-addons/mdb-lightbox-ui.html");
+});
 
 
 

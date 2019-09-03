@@ -1061,6 +1061,8 @@ $page <= 1 ? $enable = 'disabled' : $enable = '';
                 Alerts::Mensajex("No se encuentra el producto","danger",$boton,$boton2);
               } $a->close();
 
+
+
           
   }
 

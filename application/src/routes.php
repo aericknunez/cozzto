@@ -196,6 +196,48 @@ if($_REQUEST["op"]=="15"){ /// cambia de rapido a lento
 }
 
 
+/// subir imagen de producto
+if($_REQUEST["op"]=="16"){
+include("../common/Imagenes.php");
+	$imagen = new upload($_FILES['archivo']);
+include("../common/ImagenesSuccess.php");
+$imgs = new Success();
+
+	if($imagen->uploaded) {
+		if($imagen->image_src_y > 800 or $imagen->image_src_x > 800){ // si ancho o alto es mayir a 800
+			$imagen->image_resize         		= true; // default is true
+			$imagen->image_ratio        		= true; // para que se ajuste dependiendo del ancho definido
+			$imagen->image_x              		= 800; // para el ancho a cortar
+			$imagen->image_y              		= 800; // para el alto a cortar
+		}
+		$imagen->file_new_name_body   		= Helpers::TimeId(); // agregamos un nuevo nombre
+		// $imagen->image_watermark      		= 'watermark.png'; // marcado de agua
+		// $imagen->image_watermark_position 	= 'BR'; // donde se ub icara el marcado de agua. Bottom Right		
+		$imagen->process('../../assets/img/productos/');	
+
+		$imgs->SaveProducto($_POST['producto'], $imagen->file_dst_name, $_POST['descripcion'], $imagen->image_dst_x, $imagen->image_dst_y);
+
+	} // [file_dst_name] nombre de la imagen
+	else {
+	  echo 'error : ' . $imagen->error;
+	  $imgs->VerProducto($_POST['producto'], "assets/img/productos/");
+	}	
+}
+
+/// Eliminar imagen
+if($_REQUEST["op"]=="17"){ // agrega primeros datos del producto
+include("../common/ImagenesSuccess.php");
+	$imgs = new Success();
+	$imgs->BorrarImagen($_REQUEST['hash'], "../../assets/img/productos/", $_REQUEST['producto']);
+}
+
+//// ver imagen desde ajax
+if($_REQUEST["op"]=="18"){ 
+include_once '../common/ImagenesSuccess.php';
+$imgs = new Success();
+$imgs->VerImg($_REQUEST["key"], "assets/img/productos/");
+}
+
 
 
 /// productos

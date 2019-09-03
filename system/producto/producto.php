@@ -29,6 +29,15 @@ $producto = new Productos();
 
 <div id="vista"></div>
 
+
+<div class="row">
+<div class="col-md-12">
+    <div id="mdb-lightbox-ui"></div>
+    <div class="mdb-lightbox">
+      <div id="contenido-img"></div>
+</div>
+ </div>
+ </div>
 <!-- ./  content -->
       </div>
       <div class="modal-footer">

@@ -224,6 +224,38 @@ $dep = $_REQUEST["dep"];
 
     <div class="tab-pane fade" id="imagenes-classic" role="tabpanel" aria-labelledby="imagenes-tab-classic">
       <p class="note note-primary"><strong>Imagenes:</strong> Ingrese una o mas imagenes del producto, estas serviran pra identificarlo mejor</p>
+
+      <!-- formulario para imagens -->
+        <form id="form-img" name="form-img" class="md-form">
+
+    <div class="file-field">
+        <a class="btn-floating blue-gradient mt-0 float-left">
+            <i class="fas fa-paperclip" aria-hidden="true"></i>
+            <input type="file" id="archivo" name="archivo">
+        </a>
+        <div class="file-path-wrapper">
+           <input class="file-path validate" type="text" placeholder="Agregue su imagen">
+        </div>
+    </div>
+
+  <div class="md-form my-4 ">
+      <textarea type="text" id="materialContactFormMessage" class="form-control md-textarea" rows="3" id="descripcion" name="descripcion"></textarea>
+      <label for="materialContactFormMessage">Descripci&oacuten de la imagen</label>
+  </div>
+
+<input type="hidden" id="producto" name="producto" value="<?php echo $_REQUEST["key"] ?>">
+       
+<div align="center"><button class="btn btn-outline-info btn-rounded z-depth-0 my-4 waves-effect" type="submit" id="btn-img" name="btn-img">Subir Imagen</button></div>
+    
+    </form>
+<div id="contenido-img">
+ <?php 
+include_once 'application/common/ImagenesSuccess.php';
+$imgs = new Success();
+$imgs->VerProducto($_REQUEST["key"], "assets/img/productos/");
+  ?> 
+</div>
+      <!-- form -->
     </div> <!-- termina tab -->
 
 

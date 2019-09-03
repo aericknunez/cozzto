@@ -410,4 +410,56 @@ $(document).ready(function(){
 
 
 
+
+
+
+///////////subir imagen del producto
+
+    $("#btn-img").click(function (event) {
+        event.preventDefault();
+        var form = $('#form-img')[0];
+        var data = new FormData(form);
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "application/src/routes.php?op=16",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            beforeSend: function () {
+				$('#btn-img').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').addClass('disabled');
+	        },
+            success: function (data) {
+            	$('#btn-img').html('Subir Imagen').removeClass('disabled');
+                $("#contenido-img").html(data);
+                $("#form-img").trigger("reset");
+
+            },
+        });
+    });
+
+
+	$("body").on("click","#borrar-img",function(){ // borrar categoria
+	var op = $(this).attr('op');
+	var hash = $(this).attr('hash');
+	var producto = $(this).attr('producto');
+		    $.post("application/src/routes.php", {op:op, hash:hash, producto:producto}, function(data){
+			$("#contenido-img").html(data);
+	   	 });
+	});
+
+
+
+
+/// para el light box
+// $(function () {
+//  $("#mdb-lightbox-ui").load("assets/mdb-addons/mdb-lightbox-ui.html");
+// });
+
+
+
+
 }); // termina query

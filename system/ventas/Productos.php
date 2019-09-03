@@ -52,12 +52,18 @@ class Productos{
     $nombreU = $s["nombre"];
   } unset($s); 
 
+  if ($img = $db->select("imagen", "producto_imagenes", "WHERE producto = '". $dato["cod"] ."' and td = ".$_SESSION["td"]." limit 1")) { 
+    $Imagen = $img["imagen"];
+  } unset($img); 
+if($Imagen == NULL) $Imagen = "default.jpg";
+
+
          echo '<section class="my-2">
   <div class="row">
     <div class="col-lg-5 col-xl-4">
 
       <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-1">
-        <img class="img-fluid" src="assets/img/productos/default.jpg" alt="Titulo del producto">
+        <img class="img-fluid" src="assets/img/productos/'.$Imagen.'" alt="Titulo del producto">
         <a>
           <div class="mask rgba-white-slight"></div>
         </a>
