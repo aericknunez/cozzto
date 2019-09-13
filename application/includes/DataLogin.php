@@ -43,6 +43,9 @@ class Login {
 						    if ($db->insert("login_userdata", $datos)) {
 
 					        Alerts::Alerta("success","Agregado!","Agregado con Exito!");
+					        	if($data["inicio"] != NULL){
+										echo '<a href="?" class="btn btn-danger btn-rounded  z-depth-0  waves-effect">Iniciar Sesión Aqui</a>';
+									}
 							}
 
 				   	}
@@ -157,14 +160,14 @@ public function VerificarEmail($email){
 				if($this->MayusCount($pass1) > 0) {
 					if($this->NumCount($pass1) > 0) {
 						return TRUE;
-					} else { echo "Debe contener al menos un numero"; } 
+					} else { Alerts::Alerta("error","Error!","Debe contener al menos un numero"); } 
 					
-				} else { echo "Debe tener al manos una Mayuscula"; }
+				} else { Alerts::Alerta("error","Error!","Debe tener al manos una Mayuscula");  }
 				
 			}
-			else { echo "El password debe tener mas de 6 Caracteres"; }
+			else { Alerts::Alerta("error","Error!","El password debe tener mas de 6 Caracteres"); }
 			
-		} else { echo "Los password no son iguales"; }
+		} else { Alerts::Alerta("error","Error!","Los password no son iguales"); }
 
 	}
 
@@ -190,7 +193,7 @@ public function VerificarEmail($email){
 
     // Forces sessions to only use cookies.
     if (ini_set('session.use_only_cookies', 1) === FALSE) {
-        echo "No se puede iniciar";
+       Alerts::Alerta("error","Error!","No se puede Iniciar"); 
     }
 
     // Gets current cookies params.
@@ -271,7 +274,7 @@ public function VerificarEmail($email){
 		    	return FALSE;
 		    }
 		} else {
-			echo "Error en la Base de Datos!";
+			Alerts::Alerta("error","Error!","Error en la Base de datos"); 
 		}
 
     

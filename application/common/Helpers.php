@@ -235,7 +235,7 @@ class Helpers{
             }
 
 
-////////////////////////////// Nuevos Hash
+////////////////////////////// Nuevos Hash $id = base_convert(microtime(false), 10, 36);
 public static function HashId(){
   $id = $_SESSION["td"] . "-" . date("d-m-Y-H:i:s") . rand(1,999999999);
   $iden = sha1($id);

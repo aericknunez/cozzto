@@ -41,8 +41,9 @@ $producto = new Productos();
 <!-- ./  content -->
       </div>
       <div class="modal-footer">
-
+<?php if($_SESSION["tipo_cuenta"] != 4) { ?>
 <a href="" id="btn-pro" class="btn btn-secondary btn-rounded">Modificar Datos</a>
+<? } ?>
 <a id="cerrarmodal" class="btn btn-primary btn-rounded" data-dismiss="modal">Regresar</a>
 
           

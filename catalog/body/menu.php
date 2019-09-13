@@ -1,14 +1,32 @@
+<?php if($_SESSION["tipo_cuenta"] == 1 or $_SESSION["tipo_cuenta"] == 5) { ?>
 
 <li><a href="?control" class="waves-effect arrow-r"><i class="fas fa-tv"></i> Panel de Control </a></li>
 
+<?php } ?>
+
+
+
+<?php if($_SESSION["tipo_cuenta"] != 4) { 
+
+if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (Helpers::ServerDomain() == TRUE and $_SESSION["root_plataforma"] == 1)) {
+?>
+
 <li><a href="?corte" class="waves-effect arrow-r"><i class="fas fa-user"></i> Corte Diario </a></li>
 
+
+<?php } } ?>
+
+
+
+
+
+<?php if($_SESSION["tipo_cuenta"] == 1 or $_SESSION["tipo_cuenta"] == 5) { ?>
 
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Historial<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">
 <ul class="list-unstyled">
 
-<li><a href="rdiario" class="waves-effect"><i class="fas fa-cogs"></i> Resumen Diario</a></li>
+<!-- <li><a href="?rdiario" class="waves-effect"><i class="fas fa-cogs"></i> Resumen Diario</a></li> -->
 
 <li><a href="?vdiario" class="waves-effect"><i class="fas fa-cog"></i> Ventas Diarias</a></li>
 <li><a href="?vmensual" class="waves-effect"><i class="fas fa-cogs"></i> Ventas Mensuales</a></li>
@@ -27,6 +45,15 @@
 </div>
 </li>
 
+<?php } ?>
+
+
+
+
+<?php if($_SESSION["tipo_cuenta"] != 4) { 
+
+if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (Helpers::ServerDomain() == TRUE and $_SESSION["root_plataforma"] == 1)) {
+?>
 
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Movimientos de Efectivo<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">
@@ -39,6 +66,12 @@
 </div>
 </li>
 
+<?php } } ?>
+
+
+
+
+
 
 
 
@@ -47,14 +80,24 @@
 <div class="collapsible-body">
 <ul class="list-unstyled">
 
+
+<?php if($_SESSION["tipo_cuenta"] != 4) { 
+?>
 <li><a href="?proadd" class="waves-effect"><i class="fas fa-plus"></i> Nuevo Producto</a></li>
 <li><a href="?proup" class="waves-effect"><i class="fas fa-pencil-alt"></i> Actualizar Producto</a></li>
-<li><a href="?productos" class="waves-effect"><i class="fas fa-address-book"></i> Todos los productos</a></li>
 <li><a href="?proagregar" class="waves-effect"><i class="fas fa-columns"></i> Agregar Productos</a></li>
 <li><a href="?proaverias" class="waves-effect"><i class="fas fa-database"></i> Descontar Averias</a></li>
+
+<?php  if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (Helpers::ServerDomain() == TRUE and $_SESSION["root_plataforma"] == 1)) {
+?>
+<li><a href="?proopciones" class="waves-effect arrow-r"><i class="fas fa-handshake"></i> Opciones</a></li>
+<?php  } ?>
+
+<?php  } ?>
+<li><a href="?productos" class="waves-effect"><i class="fas fa-address-book"></i> Todos los productos</a></li>
 <!-- <li><a href="?" class="waves-effect"><i class="fas fa-database"></i> Cambios</a></li>
 <li><a href="?" class="waves-effect arrow-r"><i class="fas fa-database"></i> Devoluciones</a></li> -->
-<li><a href="?proopciones" class="waves-effect arrow-r"><i class="fas fa-handshake"></i> Opciones</a></li>
+
 <li><a href="?bajasexistencias" class="waves-effect"><i class="fas fa-address-book"></i> Bajas Existencias</a></li>
 </ul>
 </div>
@@ -62,6 +105,16 @@
 
 
 
+
+
+
+
+
+
+<?php if($_SESSION["tipo_cuenta"] != 4) { 
+
+if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (Helpers::ServerDomain() == TRUE and $_SESSION["root_plataforma"] == 1)) {
+?>
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-money-bill-alt"></i> Creditos<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">
 <ul class="list-unstyled">
@@ -71,6 +124,7 @@
 </ul>
 </div>
 </li>
+<?php } } ?>
 
 
 
@@ -90,6 +144,7 @@
 
 
 
+<?php if($_SESSION["tipo_cuenta"] != 4) {  ?>
 
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-user-alt"></i> Proveedores<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">
@@ -102,7 +157,7 @@
 </div>
 </li>
 
-
+<?php } ?>
 
 
 
@@ -110,32 +165,46 @@
 <div class="collapsible-body">
 <ul class="list-unstyled">
 
-<li><a href="" class="waves-effect"><i class="fas fa-cog"></i> </a></li>
-<li><a href="" class="waves-effect"><i class="fas fa-cogs"></i> </a></li>
+<li><a  class="waves-effect"><i class="fas fa-cog"></i> Opciones</a></li>
+<li><a  class="waves-effect"><i class="fas fa-cogs"></i> Imprimir Facturas</a></li>
 
 </ul>
 </div>
 </li>
 
 
+
+
+
+
+<?php  
+if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (Helpers::ServerDomain() == TRUE and $_SESSION["root_plataforma"] == 1)) {
+ ?>
 
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Configuraciones<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">
 <ul class="list-unstyled">
 
-<li><a href="?user" class="waves-effect arrow-r"><i class="fas fa-user"></i> Usuarios </a></li>
-<li><a href="?configuraciones" class="waves-effect"><i class="fas fa-cog"></i> Configuraciones</a></li>
-<li><a href="?root" class="waves-effect"><i class="fas fa-cogs"></i> Configuraciones Root</a></li>
-<li><a href="?tablas" class="waves-effect"><i class="fas fa-cogs"></i> Tablas a respaldar</a></li>
+<?php if($_SESSION["tipo_cuenta"] == 1 or $_SESSION["tipo_cuenta"] == 2 or $_SESSION["tipo_cuenta"] == 5) { ?>
 
+<li><a href="?configuraciones" class="waves-effect"><i class="fas fa-cog"></i> Configuraciones</a></li>
+<li><a href="?tablas" class="waves-effect"><i class="fas fa-cogs"></i> Tablas a respaldar</a></li>
+<?php } ?>
+
+<li><a href="?user" class="waves-effect arrow-r"><i class="fas fa-user"></i> Usuarios </a></li>
+
+<?php if($_SESSION["tipo_cuenta"] == 1) { ?>
+<li><a href="?root" class="waves-effect"><i class="fas fa-cogs"></i> Configuraciones Root</a></li>
+<?php } ?>
 </ul>
 </div>
 </li>
 
+<?php  } ?>
 
 
 
-
+<!-- 
 <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-cog"></i> Opciones<i class="fa fa-angle-down rotate-icon"></i></a>
 <div class="collapsible-body">
 <ul class="list-unstyled">
@@ -146,7 +215,7 @@
 
 </ul>
 </div>
-</li>
+</li> -->
 
 
 
