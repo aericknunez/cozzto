@@ -71,14 +71,14 @@
 
             <ul class="nav navbar-nav nav-flex-icons ml-auto">
                 
-                <li class="nav-item">
+               <!--  <li class="nav-item">
                     <a id="cambiar" op="15" class="nav-link"><i class="fab fa-first-order-alt"></i></a>
-                </li>
-            <?  if($_SESSION['root_tipo_sistema'] != 1){ ?>    
-                    <li class="nav-item">
+                </li> -->
+            <?  // if($_SESSION['root_tipo_sistema'] != 1){ ?>    
+                   <!--  <li class="nav-item">
                     <a id="cambiar" op="27" class="nav-link"><i class="<?php if( $_SESSION["tx"] == 0) echo "fas fa-battery-empty"; else { echo "fas fa-battery-full"; } ?>"></i></a>
-                </li>
-                <?php } ?>
+                </li> -->
+                <?php // } ?>
 
                 <li class="nav-item">
                     <a href="?" class="nav-link"><i class="fas fa-home"></i> <span class="clearfix d-none d-sm-inline-block">Inicio</span></a>

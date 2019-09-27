@@ -74,7 +74,7 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
      </tr>
      <tr>
        <td>Tipo Inicio Venta</td>
-       <td><? if($r["tipo_inicio"] == 1) echo "Venta Rapida"; else echo "Venta por Mesa"; ?></td>    
+       <td><? if($r["tipo_inicio"] == 1) echo "Venta por Codigos"; else echo "Venta por Busqueda"; ?></td>    
      </tr>
 
      <tr>

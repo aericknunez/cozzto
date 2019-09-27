@@ -141,7 +141,7 @@ class Corte{
 
 	public function TotalAbonos($fecha){
 		$db = new dbConn();
-	       $a = $db->query("SELECT sum(abono) FROM creditos_abonos WHERE td = ".$_SESSION["td"]." and fecha = '$fecha'");
+	       $a = $db->query("SELECT sum(abono) FROM creditos_abonos WHERE td = ".$_SESSION["td"]." and edo = 1 and fecha = '$fecha'");
 		    foreach ($a as $b) {
 		        $abono=$b["sum(abono)"];
 		    } $a->close();

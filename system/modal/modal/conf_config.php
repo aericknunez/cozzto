@@ -89,8 +89,8 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
         Tipo Inicio Venta
     </small>
     <select class="browser-default custom-select" id="tipo_inicio" name="tipo_inicio">
-  <option <? if($r["tipo_inicio"] == 1) echo "selected"; ?> value="1">Venta Rapida</option>
-  <option <? if($r["tipo_inicio"] == 2) echo "selected"; ?> value="2">Venta Por Mesa</option>
+  <option <? if($r["tipo_inicio"] == 1) echo "selected"; ?> value="1">Venta por Codigo</option>
+  <option <? if($r["tipo_inicio"] == 2) echo "selected"; ?> value="2">Venta Busquedas</option>
     </select></td>
 
        <td><small id="inicio_tx" class="form-text text-muted mb-1">
