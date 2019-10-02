@@ -986,6 +986,105 @@ $inicio->Validar($_POST["fecha_submit"], $_POST["codigo"]);
 
 
 
+/////////////////  ***  cotizaciones  *** //////////////
+
+if($_REQUEST["op"]=="146"){ // lateral
+include_once '../../system/cotizar/Laterales.php';
+	$lateral = new Laterales;
+	$lateral->VerLateral($_SESSION["cotizacion"]);
+}
+
+/// cliente
+if($_REQUEST["op"]=="147"){ 
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->ClienteBusqueda($_POST);
+}
+
+if($_REQUEST["op"]=="148"){ 
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->AgregaCliente($_POST);
+}
+
+
+if($_REQUEST["op"]=="149"){ 
+unset($_SESSION["cliente_nombre"]);
+unset($_SESSION["cliente_cot"]);
+}
+
+
+if($_REQUEST["op"]=="150"){ // recibe el formulario para agregar los productos (va a ventas)
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->SumaVenta($_POST);
+}
+
+// mod cantidad restar
+if($_REQUEST["op"]=="151"){ // recibe el formulario para agregar los productos (va a ventas)
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->RestaVenta($_POST);
+}
+
+
+if($_REQUEST["op"]=="152"){ // borrar venta  de la venta rapida
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->DelVenta($_REQUEST["hash"], NULL);
+}
+
+if($_REQUEST["op"]=="153"){ // ver producto
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->VerProducto();
+}
+
+
+/// descuento
+if($_REQUEST["op"]=="155"){ // aplicar descuento
+	$_SESSION["descuento_cot"] = $_POST["descuento"];
+include_once '../../system/cotizar/Laterales.php';
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->AplicarDescuento();
+}
+
+if($_REQUEST["op"]=="156"){ // quitar descuento
+	unset($_SESSION["descuento_cot"]);
+include_once '../../system/cotizar/Laterales.php';
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->AplicarDescuento();
+}
+
+
+if($_REQUEST["op"]=="157"){ // guardar la cotizacion
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->GuardarCotizacion();
+}
+
+
+if($_REQUEST["op"]=="158"){ // canncelar la cotizacion
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->Cancelar();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /////////
 $db->close();

@@ -105,6 +105,15 @@ if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (
 
 
 
+<li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-columns"></i> Cotizaciones <i class="fa fa-angle-down rotate-icon"></i></a>
+<div class="collapsible-body">
+<ul class="list-unstyled">
+<li><a href="?cotizar" class="waves-effect"><i class="fas fa-columns"></i> Nueva Cotizaci&oacuten </a></li>
+<li><a href="#" class="waves-effect"><i class="fas fa-address-book"></i> Ver Cotizaciones </a></li>
+</ul>
+</div>
+</li>
+
 
 
 

@@ -173,7 +173,12 @@ class Helpers{
         return $numer;
     }
 
-
+    public function DescuentoTotalCot($numero){ 
+        $num = $_SESSION['descuento_cot'] / 100;
+        $descuento = $numero * $num;
+        $numer = $numero - $descuento;
+        return $numer;
+    }
 
     public function NFactura($numero){ 
         $numero1=str_pad($numero, 8, "0", STR_PAD_LEFT);

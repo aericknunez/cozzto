@@ -6,18 +6,10 @@ include_once 'application/common/Fechas.php';
 include_once 'system/index/Inicio.php';
 include_once 'system/corte/Corte.php';
 $cut = new Corte();
-// echo Helpers::HashId();
-	
-//echo "Plataforma Root: " .  $_SESSION["root_plataforma"];
 
-// echo Helpers::TimeId();
-
-//Helpers::DeleteId("producto_ingresado", "producto='2' and td = ".$_SESSION["td"]."");
-
-
-// $dato = array();
-// $dato["cant"] = "15";
-// Helpers::UpdateId("producto_ingresado", $dato, "producto='1' and td = ".$_SESSION["td"]."");
+if($_SESSION["cotizacion"]){
+Alerts::Mensajex("ADVERTENCIA! Se detecto una cotizaci&oacuten sin concluir.", "danger", '<a href="?cotizar" class="btn btn-danger">ir a Cotizacionez</a>');
+}
 
 echo '<div id="ventana"></div>';
 

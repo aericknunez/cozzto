@@ -128,7 +128,7 @@ Existe un corte realizado este dia, ya no se puede seguir agregando '.$tipo.' a 
 
 
 
-    public function Mensaje($texto,$style,$boton,$boton2){
+    public function Mensaje($texto,$style,$boton = NULL,$boton2 = NULL){
       echo '<div class="border border-light alert alert-'.$style.' alert-dismissible">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       '.$texto.'
@@ -138,7 +138,7 @@ Existe un corte realizado este dia, ya no se puede seguir agregando '.$tipo.' a 
     }
 
 
-    public function Mensajex($texto,$style,$boton,$boton2){ // es lo mismo pero todo va centrado y sin boton cerrar
+    public function Mensajex($texto,$style,$boton = NULL,$boton2 = NULL){ // es lo mismo pero todo va centrado y sin boton cerrar
       echo '<div class="border border-light alert alert-'.$style.' alert-dismissible">
       <div align="center">
       '.$texto.'

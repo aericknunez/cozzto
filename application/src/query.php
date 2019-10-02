@@ -83,6 +83,14 @@ echo '
 	if($_GET["modal"] == "abonos"){
 	echo '<script type="text/javascript" src="assets/js/query/credito.js?v='.$numero.'"></script>';
 	}
+// cotizador
+	if($_GET["modal"] == "cantidadc"){
+	echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
+	}
+	if($_GET["modal"] == "descuentocot"){
+	echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
+	}
+
 
 
 
@@ -126,6 +134,10 @@ elseif(isset($_GET["bajasexistencias"])) {
 echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
 echo '<script type="text/javascript" src="assets/js/query/producto_vermodal.js?v='.$numero.'"></script>';
 } 
+elseif(isset($_GET["cotizar"])) {
+echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
+} 
+
 
 
 
@@ -219,6 +231,8 @@ else{
 		} else {
 			echo '<script type="text/javascript" src="assets/js/query/ventaL.js?v='.$numero.'"></script>';
 		}
+	} else { // panel de control
+			/// query del panel de conttrol a implementar  para root
 	}
 
 }
@@ -237,9 +251,9 @@ else{
 
 
 // preloader
-    // $(window).on("load", function () {
-    //     $('#mdb-preloader').fadeOut('fast');
-    // });
+    $(window).on("load", function () {
+        $('#mdb-preloader').fadeOut('fast');
+    });
 
 
 </script>
