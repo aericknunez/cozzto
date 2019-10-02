@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-08-2019 a las 10:28:30
+-- Tiempo de generación: 01-10-2019 a las 23:03:11
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -66,9 +66,9 @@ CREATE TABLE `caracteristicas_asig` (
 
 INSERT INTO `caracteristicas_asig` (`id`, `caracteristica`, `producto`, `cant`, `hash`, `time`, `td`) VALUES
 (3, '9d1cc70f3e', 1002, 12.00, 'ce533b2ef4', 1567173845, 0),
-(5, '9d1cc70f3e', 1003, 49.00, 'cc2dc4ea18', 1566444847, 0),
-(7, '574cd0fa73', 1001, 50.00, '2d74dbc61a', 1566950932, 0),
-(8, '36324879ed', 1001, 42.00, '6fb6a454e8', 1566950932, 0),
+(5, '9d1cc70f3e', 1003, 49.00, 'cc2dc4ea18', 1569951059, 0),
+(7, '574cd0fa73', 1001, 48.00, '2d74dbc61a', 1569550656, 0),
+(8, '36324879ed', 1001, 40.00, '6fb6a454e8', 1569550657, 0),
 (9, '574cd0fa73', 1101, 5.00, 'c92a9b420c', 1566889502, 0);
 
 -- --------------------------------------------------------
@@ -144,7 +144,7 @@ CREATE TABLE `config_master` (
 --
 
 INSERT INTO `config_master` (`id`, `sistema`, `cliente`, `slogan`, `propietario`, `telefono`, `giro`, `nit`, `imp`, `direccion`, `email`, `imagen`, `logo`, `skin`, `tipo_inicio`, `pais`, `moneda`, `moneda_simbolo`, `nombre_impuesto`, `nombre_documento`, `inicio_tx`, `otras_ventas`, `venta_especial`, `imprimir_antes`, `cambio_tx`, `hash`, `time`, `td`) VALUES
-(1, 'Sistema de Control', 'SISTEMA PIZTO', 'Desarrollo de Software', 'Erick Nunez', '27821595', 'Sistema de ventas', '0207-210386-102-9', 15.00, 'Urb. Las Maericas', 'aerick.nunez@gmail.com', 'default.png', 'pizto.png', 'grey-skin', 1, '1', 'Dolares', '$', 'IVA', 'NIT', 0, 1, 1, '', 'on', 'deae705e12', 1566981737, 0);
+(1, 'Sistema de Control', 'SISTEMA PIZTO', 'Desarrollo de Software', 'Erick Nunez', '27821595', 'Sistema de ventas', '0207-210386-102-9', 15.00, 'Urb. Las Maericas', 'aerick.nunez@gmail.com', 'default.jpg', 'pizto.png', 'mdb-skin', 1, '1', 'Dolares', '$', 'IVA', 'NIT', 0, 1, 1, '', 'on', 'deae705e12', 1569990427, 0);
 
 -- --------------------------------------------------------
 
@@ -211,6 +211,78 @@ CREATE TABLE `corte_diario` (
 INSERT INTO `corte_diario` (`id`, `fecha`, `fecha_format`, `hora`, `productos`, `clientes`, `efectivo_ingresado`, `tx`, `no_tx`, `total`, `t_efectivo`, `t_tarjeta`, `t_credito`, `gastos`, `diferencia`, `user`, `edo`, `hash`, `time`, `td`) VALUES
 (1, '27-08-2019', '1566885600', '23:43:25', 21, 8, 176.00, 0.00, 193.44, 193.44, 136.00, 0.00, 57.44, 50.00, 0.00, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, '0f38f4dcf5', 1566971005, 0),
 (2, '28-08-2019', '1566972000', '00:45:37', 9, 4, 238.00, 0.00, 75.50, 75.50, 62.00, 13.50, 0.00, 0.00, 0.00, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 2, '028200a518', 1566974796, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cotizaciones`
+--
+
+CREATE TABLE `cotizaciones` (
+  `id` int(6) NOT NULL,
+  `cod` int(4) NOT NULL,
+  `cant` int(4) NOT NULL,
+  `producto` varchar(100) NOT NULL,
+  `pv` float(10,2) NOT NULL,
+  `stotal` float(10,2) NOT NULL,
+  `imp` float(10,2) NOT NULL,
+  `total` float(10,2) NOT NULL,
+  `cotizacion` int(6) NOT NULL,
+  `user` varchar(100) NOT NULL,
+  `edo` int(2) NOT NULL COMMENT 'a= activo, 2= eliminada',
+  `hash` varchar(12) NOT NULL,
+  `time` int(12) NOT NULL,
+  `td` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `cotizaciones`
+--
+
+INSERT INTO `cotizaciones` (`id`, `cod`, `cant`, `producto`, `pv`, `stotal`, `imp`, `total`, `cotizacion`, `user`, `edo`, `hash`, `time`, `td`) VALUES
+(1, 1001, 1, 'CADENA P/MOTOSIERRA 16plg POULAN', 10.20, 8.87, 1.33, 10.20, 1, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, '3087343758', 1569989428, 0),
+(2, 1002, 1, 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', 10.00, 8.70, 1.30, 10.00, 1, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, '59b0a334c6', 1569989430, 0),
+(3, 1002, 1, 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', 10.00, 8.70, 1.30, 10.00, 2, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, 'd752dbd7ee', 1569989681, 0),
+(4, 1004, 1, 'CADENA P/MOTOSIERRA 14plg P/017 STIHL', 11.00, 9.57, 1.43, 11.00, 2, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, 'f4189c36f1', 1569989684, 0),
+(7, 1002, 1, 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', 10.00, 8.70, 1.30, 10.00, 3, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, 'bcf88d81b9', 1569989947, 0),
+(12, 1001, 1, 'CADENA P/MOTOSIERRA 16plg POULAN', 10.20, 8.87, 1.33, 10.20, 6, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, 'ee3cbface0', 1569991188, 0),
+(13, 1002, 1, 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', 10.00, 8.70, 1.30, 10.00, 9, '6d24a97fd35cc27c5d255026b1ee53441fc60925', 1, 'c9351424b6', 1569991569, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cotizaciones_data`
+--
+
+CREATE TABLE `cotizaciones_data` (
+  `id` int(6) NOT NULL,
+  `cliente` varchar(12) NOT NULL,
+  `correlativo` int(5) NOT NULL,
+  `fecha` varchar(20) NOT NULL,
+  `hora` varchar(20) NOT NULL,
+  `fechaF` varchar(20) NOT NULL,
+  `caduca` varchar(20) NOT NULL,
+  `caducaF` varchar(20) NOT NULL,
+  `edo` int(11) NOT NULL COMMENT '1 activ0, 2 guardada',
+  `hash` varchar(12) NOT NULL,
+  `time` int(12) NOT NULL,
+  `td` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `cotizaciones_data`
+--
+
+INSERT INTO `cotizaciones_data` (`id`, `cliente`, `correlativo`, `fecha`, `hora`, `fechaF`, `caduca`, `caducaF`, `edo`, `hash`, `time`, `td`) VALUES
+(2, '', 1, '01-10-2019', '22:10:23', '1569909600', '', '', 2, 'ebc812259d', 1569989592, 0),
+(3, '', 2, '01-10-2019', '22:14:29', '1569909600', '', '', 2, '4ba9c0df4f', 1569989686, 0),
+(5, '', 3, '01-10-2019', '22:19:02', '1569909600', '', '', 2, 'f0fbaad738', 1569989953, 0),
+(9, '', 4, '01-10-2019', '22:37:05', '1569909600', '', '', 1, '607c408aa9', 1569991025, 0),
+(10, '', 5, '01-10-2019', '22:39:20', '1569909600', '', '', 1, '935736654b', 1569991160, 0),
+(12, '', 6, '01-10-2019', '22:39:39', '1569909600', '', '', 2, '33f567a5ed', 1569991190, 0),
+(14, '', 7, '01-10-2019', '22:43:07', '1569909600', '', '', 2, '7350f4d97c', 1569991494, 0),
+(15, '', 8, '01-10-2019', '22:45:08', '1569909600', '', '', 2, '1310d462bb', 1569991518, 0),
+(18, '', 9, '01-10-2019', '22:46:03', '1569909600', '', '', 2, '9f300548a9', 1569991570, 0);
 
 -- --------------------------------------------------------
 
@@ -403,31 +475,6 @@ CREATE TABLE `gastos_images` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `login_attempts`
---
-
-CREATE TABLE `login_attempts` (
-  `user_id` int(11) NOT NULL,
-  `time` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `login_attempts`
---
-
-INSERT INTO `login_attempts` (`user_id`, `time`) VALUES
-(11, '1566673919'),
-(11, '1566676201'),
-(11, '1566676247'),
-(11, '1566676266'),
-(11, '1566676274'),
-(1, '1566677290'),
-(1, '1566677298'),
-(1, '1566677308');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `login_db_sync`
 --
 
@@ -581,15 +628,15 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id`, `cod`, `descripcion`, `categoria`, `cantidad`, `medida`, `proveedor`, `informacion`, `existencia_minima`, `caduca`, `compuesto`, `gravado`, `receta`, `dependiente`, `servicio`, `hash`, `time`, `td`) VALUES
-(1, '1001', 'CADENA P/MOTOSIERRA 16plg POULAN', 'a73d6d59b0', 90.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1566950932, 0),
-(2, '1002', 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', '3ac60c3b5d', 73.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, 'on', '0', 'on', '0', '0', '0', '29a65146a3', 1567173845, 0),
-(3, '1003', 'CADENA P/MOTOSIERRA 18plg CAMO-18 16637 TRUPER', '3ac60c3b5d', 87.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1567169353, 0),
-(4, '1004', 'CADENA P/MOTOSIERRA 14plg P/017 STIHL', '3ac60c3b5d', 71.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1567170929, 0),
+(1, '1001', 'CADENA P/MOTOSIERRA 16plg POULAN', 'a73d6d59b0', 98.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1569980062, 0),
+(2, '1002', 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', '3ac60c3b5d', 75.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, 'on', '0', 'on', '0', '0', '0', '29a65146a3', 1569964744, 0),
+(3, '1003', 'CADENA P/MOTOSIERRA 18plg CAMO-18 16637 TRUPER', '3ac60c3b5d', 88.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1569964745, 0),
+(4, '1004', 'CADENA P/MOTOSIERRA 14plg P/017 STIHL', '3ac60c3b5d', 72.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1569964745, 0),
 (5, '1005', 'CADENA P/MOTOSIERRA 30plg STIHL', '3ac60c3b5d', 0.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1566879944, 0),
 (6, '1006', 'CADENA P/MOTOSIERRA 36plg STIHL', '3ac60c3b5d', 0.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1566972074, 0),
 (7, '1007', 'SIERRA 12plg 24T BEST V.', '3ac60c3b5d', 30.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1566974687, 0),
-(8, '1008', 'SIERRA 12plg 18T SAV18 SURTEK', '3ac60c3b5d', 27.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1567173781, 0),
-(9, '1009', 'SIERRA 12plg 24T IMACASA', '3ac60c3b5d', 83.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1566699966, 0),
+(8, '1008', 'SIERRA 12plg 18T SAV18 SURTEK', '3ac60c3b5d', 27.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1569989204, 0),
+(9, '1009', 'SIERRA 12plg 24T IMACASA', '3ac60c3b5d', 93.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1569968081, 0),
 (10, '1010', 'SIERRA 12plg 24T BELLOTA', '3ac60c3b5d', 1.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
 (11, '1011', 'SIERRA 12plg 18T BELLOTA', '3ac60c3b5d', 47.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
 (12, '1012', 'SIERRA 12plg 24T LEÑOX', '3ac60c3b5d', 11.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
@@ -609,8 +656,8 @@ INSERT INTO `producto` (`id`, `cod`, `descripcion`, `categoria`, `cantidad`, `me
 (26, '1026', 'LIMA P/MOTOSIERRA 7/32 BELLOTA', '3ac60c3b5d', 11.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
 (27, '1027', 'LIMA P/MOTOSIERRA 7/32 IMACASA', '3ac60c3b5d', 7.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
 (28, '1028', 'LIMA P/MOTOSIERRA 5/32 BELLOTA', '3ac60c3b5d', 10.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
-(29, '1029', 'ACEITERA 325CC H4212107 BEST V.', '3ac60c3b5d', 3.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
-(30, '1030', 'ACEITERA 250CC H4212105 BEST V.', '3ac60c3b5d', 3.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
+(29, '1029', 'ACEITERA 325CC H4212107 BEST V.', '3ac60c3b5d', 3.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1569988062, 0),
+(30, '1030', 'ACEITERA 250CC H4212105 BEST V.', '3ac60c3b5d', 25.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1567492325, 0),
 (31, '1031', 'ACEITERA 300ML 10 OZ VIKINGO', '3ac60c3b5d', 2.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
 (32, '1032', 'PIEDRA AFILAR OVAL JT-911 NORTON', '3ac60c3b5d', 3.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
 (33, '1033', 'PIEDRA AFILAR 8plg TC 0684 TOOLCRAFT', '3ac60c3b5d', 10.00, 'cd6bb858d2', 'c9d6dce885', '', 10.00, '0', '0', 'on', '0', '0', '0', '29a65146a3', 1565944080, 0),
@@ -6799,11 +6846,24 @@ CREATE TABLE `producto_devoluciones` (
 CREATE TABLE `producto_imagenes` (
   `id` int(5) NOT NULL,
   `producto` int(25) NOT NULL,
-  `imagenes` varchar(100) NOT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `descripcion` varchar(150) NOT NULL,
+  `ancho` int(11) NOT NULL,
+  `alto` int(11) NOT NULL,
   `hash` varchar(12) NOT NULL,
   `time` int(12) NOT NULL,
   `td` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Imagenes del producto';
+
+--
+-- Volcado de datos para la tabla `producto_imagenes`
+--
+
+INSERT INTO `producto_imagenes` (`id`, `producto`, `imagen`, `descripcion`, `ancho`, `alto`, `hash`, `time`, `td`) VALUES
+(3, 1001, '1567469797.jpg', '', 800, 466, 'a315a73981', 1567469798, 0),
+(4, 1001, '1567469803.jpg', '', 800, 385, 'cf9ef84351', 1567469803, 0),
+(5, 1002, '1567469935.png', 'Imagen de muestra del producto', 581, 248, '00d5e85911', 1567469935, 0),
+(6, 1030, '1567470507.jpg', 'Aceitera Best Value', 700, 700, '198441370c', 1567470509, 0);
 
 -- --------------------------------------------------------
 
@@ -6837,7 +6897,8 @@ INSERT INTO `producto_ingresado` (`id`, `producto`, `cant`, `precio_costo`, `cad
 (4, 1002, 102.00, 8.00, '', '', '', '21-08-2019', '23:48:06', '6886c68cb8', 1566452886, 0),
 (5, 1003, 95.00, 5.00, '', '', '', '21-08-2019', '23:48:17', '83105ad9ca', 1566452897, 0),
 (6, 1004, 97.00, 4.00, '', '', '', '21-08-2019', '23:48:37', 'cf56e737ae', 1566452917, 0),
-(7, 1004, 7.00, 3.99, '', '', 'El próximo lote de productos', '28-08-2019', '01:19:58', '0e40ab7481', 1566976798, 0);
+(7, 1004, 7.00, 3.99, '', '', 'El próximo lote de productos', '28-08-2019', '01:19:58', '0e40ab7481', 1566976798, 0),
+(9, 1030, 28.00, 22.00, '', '', 'Se compraron en prmocion', '02-09-2019', '18:36:59', '71729911ae', 1567471019, 0);
 
 -- --------------------------------------------------------
 
@@ -6876,7 +6937,8 @@ INSERT INTO `producto_precio` (`id`, `producto`, `cant`, `precio`, `hash`, `time
 (15, '1101', 1, 4.95, '9b2966bd2a', 1566889455, 0),
 (16, '1101', 5, 4.90, '7fcaa9d739', 1566889462, 0),
 (17, '1105', 1, 10.00, '2936f3c946', 1566972331, 0),
-(19, '1008', 1, 23.00, 'c640f7d063', 1567167213, 0);
+(19, '1008', 1, 23.00, 'c640f7d063', 1567167213, 0),
+(20, '1030', 1, 30.00, '29efb4524d', 1567470484, 0);
 
 -- --------------------------------------------------------
 
@@ -6999,14 +7061,14 @@ CREATE TABLE `sync_tables_updates` (
 --
 
 INSERT INTO `sync_tables_updates` (`id`, `tabla`, `hash`, `time`, `action`, `td`) VALUES
-(1, 'producto', '29a65146a3', 1567173845, 2, 0),
+(1, 'producto', '29a65146a3', 1569989204, 2, 0),
 (2, 'ticket', '7532ac5a1f', 1566633832, 1, 0),
 (3, 'ticket', '12ccab77be', 1566633833, 1, 0),
 (4, 'ticket_orden', '12ec0f8fda', 1566633834, 1, 0),
 (5, 'ticket', 'a4c8e03209', 1566633860, 1, 0),
 (6, 'ticket_orden', '85a07d3a9e', 1566633860, 1, 0),
-(7, 'caracteristicas_asig', '6fb6a454e8', 1566950932, 2, 0),
-(8, 'ubicacion_asig', '9f0aaee995', 1566950932, 2, 0),
+(7, 'caracteristicas_asig', '6fb6a454e8', 1569550657, 2, 0),
+(8, 'ubicacion_asig', '9f0aaee995', 1569550657, 2, 0),
 (9, 'ticket', '493b8adc17', 1566634115, 1, 0),
 (10, 'ticket_descuenta', 'eff72e33b2', 1566634115, 1, 0),
 (11, 'ticket_orden', '2893c04b30', 1566634115, 1, 0),
@@ -7043,7 +7105,7 @@ INSERT INTO `sync_tables_updates` (`id`, `tabla`, `hash`, `time`, `action`, `td`
 (42, 'ticket', 'cc46742f65', 1566676874, 1, 0),
 (43, 'ticket', '63de9a14ad', 1566676874, 1, 0),
 (44, 'ticket_orden', 'af42de09cd', 1566676874, 1, 0),
-(45, 'config_master', 'deae705e12', 1566981737, 2, 0),
+(45, 'config_master', 'deae705e12', 1569990427, 2, 0),
 (46, 'ticket', 'fe972cc0db', 1566677444, 2, 0),
 (47, 'ticket', 'fe972cc0db', 1566677451, 1, 0),
 (48, 'ticket', '7efb20ee81', 1566677452, 1, 0),
@@ -7185,7 +7247,7 @@ INSERT INTO `sync_tables_updates` (`id`, `tabla`, `hash`, `time`, `action`, `td`
 (184, 'ticket_orden', '8b64fa6ad0', 1566950425, 1, 0),
 (185, 'ticket_orden', 'e440375fc8', 1566950891, 2, 0),
 (186, 'ticket', '3da8aa141d', 1566950891, 2, 0),
-(187, 'caracteristicas_asig', '2d74dbc61a', 1566950932, 2, 0),
+(187, 'caracteristicas_asig', '2d74dbc61a', 1569550656, 2, 0),
 (188, 'ticket_orden', '1fefe4974b', 1566950973, 2, 0),
 (189, 'ticket', '5e932ced7a', 1566950973, 2, 0),
 (190, 'ticket', '362577ca01', 1566953613, 1, 0),
@@ -7290,7 +7352,221 @@ INSERT INTO `sync_tables_updates` (`id`, `tabla`, `hash`, `time`, `action`, `td`
 (289, 'ticket_orden', '9df91ca2cd', 1567173831, 2, 0),
 (290, 'ticket', 'c8a2e7a7ca', 1567173852, 2, 0),
 (291, 'ticket_orden', '9948d1e305', 1567173852, 2, 0),
-(292, 'creditos', 'acb382fec7', 1567173883, 2, 0);
+(292, 'creditos', 'acb382fec7', 1567173883, 2, 0),
+(293, 'producto_imagenes', 'fb9589b8f2', 1567469314, 1, 0),
+(294, 'producto_imagenes', '9bdd5d5532', 1567469315, 1, 0),
+(295, 'producto_imagenes', '16d3d14236', 1567469444, 1, 0),
+(296, 'producto_imagenes', 'dc157c9746', 1567469791, 1, 0),
+(297, 'producto_imagenes', '4881c245d5', 1567469792, 1, 0),
+(298, 'ticket', '3e5ba55d47', 1567470554, 2, 0),
+(299, 'ticket_orden', '902dcf80b4', 1567470554, 2, 0),
+(300, 'ticket', 'c1ef8f6481', 1567470952, 1, 0),
+(301, 'ticket_orden', '4afb4ed29b', 1567470953, 1, 0),
+(302, 'producto_ingresado', '78ece522cd', 1567471003, 1, 0),
+(303, 'ticket', 'afd75d73b7', 1567471036, 2, 0),
+(304, 'ticket_orden', '402466e853', 1567471036, 2, 0),
+(305, 'ticket', 'ec052149c0', 1567473351, 1, 0),
+(306, 'ticket', '2a3e488dde', 1567473351, 1, 0),
+(307, 'ticket', '5a90b331b6', 1567473351, 1, 0),
+(308, 'ticket', 'd53ea3f7b0', 1567473352, 1, 0),
+(309, 'ticket_orden', '43ec2b9f9c', 1567473352, 1, 0),
+(310, 'ticket', 'a47b7cd525', 1567473490, 1, 0),
+(311, 'ticket_orden', '695af24bd8', 1567473490, 1, 0),
+(312, 'ticket', '2192e105f5', 1567473506, 1, 0),
+(313, 'ticket_orden', '6b4914c263', 1567473507, 1, 0),
+(314, 'ticket', 'ae01b481a2', 1567473688, 1, 0),
+(315, 'ticket_orden', 'c05166af3e', 1567473688, 1, 0),
+(316, 'ticket', '26339938f7', 1567473841, 1, 0),
+(317, 'ticket_orden', '884f9becda', 1567473841, 1, 0),
+(318, 'ticket', '0812c9e6e8', 1567473927, 1, 0),
+(319, 'ticket_orden', 'ab2ce65c54', 1567473927, 1, 0),
+(320, 'ticket', 'b44a95857c', 1567473961, 1, 0),
+(321, 'ticket_orden', 'a72e470c23', 1567473961, 1, 0),
+(322, 'ticket', 'c0a380e000', 1567474008, 1, 0),
+(323, 'ticket_orden', '2b070b2e9a', 1567474008, 1, 0),
+(324, 'ticket', 'c60cc88403', 1567474123, 1, 0),
+(325, 'ticket', '56e1c8d8af', 1567474123, 1, 0),
+(326, 'ticket_orden', '5024526510', 1567474123, 1, 0),
+(327, 'ticket', 'cae9a6ca34', 1567474206, 1, 0),
+(328, 'ticket', '8380f02642', 1567474206, 1, 0),
+(329, 'ticket_orden', 'ebec6994da', 1567474206, 1, 0),
+(330, 'ticket', '588040b3b6', 1567492046, 2, 0),
+(331, 'ticket_orden', '348dd4c287', 1567492171, 2, 0),
+(332, 'ticket', '37c647f86f', 1567492170, 2, 0),
+(333, 'ticket', '7b3ae4b824', 1567492220, 1, 0),
+(334, 'ticket_orden', '282147cfd4', 1567492220, 1, 0),
+(335, 'ticket', '7491866d39', 1567562038, 1, 0),
+(336, 'ticket_orden', '315e2da656', 1567562039, 1, 0),
+(337, 'ticket', '870e7ba69a', 1568032992, 1, 0),
+(338, 'ticket_orden', '8aebcfdd4a', 1568032992, 1, 0),
+(339, 'ticket', '85c87435ab', 1568302510, 2, 0),
+(340, 'ticket', '85c87435ab', 1568302572, 1, 0),
+(341, 'ticket', '17712d733b', 1568302577, 1, 0),
+(342, 'ticket_orden', 'eeb409abd3', 1568302577, 1, 0),
+(343, 'ticket', '9072229859', 1568302648, 1, 0),
+(344, 'ticket_orden', 'a28eceed35', 1568302649, 1, 0),
+(345, 'ticket', '4ff27c2cd4', 1568302770, 1, 0),
+(346, 'ticket_descuenta', '18ada9c5cf', 1568302770, 1, 0),
+(347, 'ticket_orden', '939ebdc0b9', 1568302770, 1, 0),
+(348, 'ticket_orden', 'a98e3a394c', 1569435182, 2, 0),
+(349, 'ticket', '335d1d11c8', 1569435182, 2, 0),
+(350, 'ticket', '1cf6608408', 1569534926, 2, 0),
+(351, 'ticket', '1cf6608408', 1569534943, 1, 0),
+(352, 'ticket', 'dc39cfb1d4', 1569534944, 1, 0),
+(353, 'ticket_orden', 'd78f308422', 1569534944, 1, 0),
+(354, 'ticket', '0216cf41c7', 1569547362, 1, 0),
+(355, 'ticket_orden', 'eacf1fcf2b', 1569547362, 1, 0),
+(356, 'ticket', '711b18ae2a', 1569550668, 2, 0),
+(357, 'ticket_orden', 'e8af489571', 1569550668, 2, 0),
+(358, 'caracteristicas_asig', 'cc2dc4ea18', 1569951059, 2, 0),
+(359, 'ubicacion_asig', '22ae6630f9', 1569951059, 2, 0),
+(360, 'ticket', '372f126a6c', 1569951059, 1, 0),
+(361, 'ticket_descuenta', '9ae5cda741', 1569951059, 1, 0),
+(362, 'ticket_orden', 'ad7fded53f', 1569951060, 1, 0),
+(363, 'ticket', '4c2fec97ef', 1569951100, 2, 0),
+(364, 'ticket', 'e6856447f7', 1569951107, 1, 0),
+(365, 'ticket', '6826429c44', 1569951108, 1, 0),
+(366, 'ticket', '4c2fec97ef', 1569951109, 1, 0),
+(367, 'ticket_orden', '75eea1da4c', 1569951109, 1, 0),
+(368, 'ticket', '500467ed0e', 1569951121, 1, 0),
+(369, 'ticket_orden', '675b68f1cf', 1569951121, 1, 0),
+(370, 'ticket', '0b4dbf23f2', 1569954419, 1, 0),
+(371, 'ticket', 'bf92b7bb99', 1569954419, 1, 0),
+(372, 'ticket_orden', '4bccba3f9a', 1569954419, 1, 0),
+(373, 'ticket', '41166c3158', 1569955609, 1, 0),
+(374, 'ticket_orden', 'b77b55e369', 1569955609, 1, 0),
+(375, 'ticket', '8745a89acf', 1569955618, 2, 0),
+(376, 'ticket', '8745a89acf', 1569955624, 1, 0),
+(377, 'ticket', 'e748420fee', 1569955624, 1, 0),
+(378, 'ticket_orden', '8ef15d0578', 1569955624, 1, 0),
+(379, 'ticket', 'bc6a135f29', 1569955727, 1, 0),
+(380, 'ticket', 'df9845c6a1', 1569955728, 1, 0),
+(381, 'ticket_orden', 'c13a511299', 1569955728, 1, 0),
+(382, 'ticket', '8a13414ee2', 1569964176, 1, 0),
+(383, 'ticket_orden', '2811103192', 1569964177, 1, 0),
+(384, 'ticket', '0d3ff85372', 1569964738, 2, 0),
+(385, 'ticket', '3c6c31fdb1', 1569964739, 2, 0),
+(386, 'ticket', '497e973a9b', 1569964742, 2, 0),
+(387, 'ticket', '0d3ff85372', 1569964744, 1, 0),
+(388, 'ticket', '3c6c31fdb1', 1569964744, 1, 0),
+(389, 'ticket', '497e973a9b', 1569964745, 1, 0),
+(390, 'ticket', '4a95f39b9f', 1569964745, 1, 0),
+(391, 'ticket_orden', '3d4d4d6d66', 1569964745, 1, 0),
+(392, 'ticket', '3a972a8fbf', 1569965221, 1, 0),
+(393, 'ticket_orden', '02041806c3', 1569965221, 1, 0),
+(394, 'ticket', '2fa9d9631b', 1569965395, 1, 0),
+(395, 'ticket_orden', 'e740c1bd6f', 1569965395, 1, 0),
+(396, 'ticket', 'b786b97f65', 1569965467, 1, 0),
+(397, 'ticket_orden', '4d2fd503c4', 1569965467, 1, 0),
+(398, 'ticket', '96b8583c03', 1569967988, 1, 0),
+(399, 'ticket', '98d2bd495e', 1569967990, 1, 0),
+(400, 'ticket_orden', 'b55852fb6c', 1569967990, 1, 0),
+(401, 'ticket', '3c975325b6', 1569968005, 1, 0),
+(402, 'ticket', '4ed0ddee9e', 1569968021, 1, 0),
+(403, 'ticket', '8d39106d08', 1569968081, 1, 0),
+(404, 'ticket_orden', 'b345b5d969', 1569968081, 1, 0),
+(405, 'ticket', 'a7e4d3ae95', 1569968088, 1, 0),
+(406, 'ticket', 'c17a5b54c1', 1569968225, 1, 0),
+(407, 'ticket_orden', 'eb72d2b70c', 1569968225, 1, 0),
+(408, 'ticket', '6fd706aca4', 1569968349, 1, 0),
+(409, 'ticket', '3cc9d22fbd', 1569968436, 2, 0),
+(410, 'ticket', '3cc9d22fbd', 1569968438, 1, 0),
+(411, 'ticket', '0797077e1a', 1569968446, 1, 0),
+(412, 'ticket', '6e17735c76', 1569973277, 1, 0),
+(413, 'cotizaciones', 'd2d778b17d', 1569976861, 2, 0),
+(414, 'cotizaciones', '23b2d62189', 1569976863, 2, 0),
+(415, 'cotizaciones', '23b2d62189', 1569976864, 1, 0),
+(416, 'cotizaciones', 'd2d778b17d', 1569976866, 1, 0),
+(417, 'cotizaciones', '979994746c', 1569976878, 2, 0),
+(418, 'cotizaciones', '979994746c', 1569976879, 1, 0),
+(419, 'ticket_orden', 'c3c4d676a9', 1569976879, 1, 0),
+(420, 'cotizaciones', 'd9515fe05a', 1569976974, 1, 0),
+(421, 'ticket_orden', '0a845f6bfc', 1569976974, 1, 0),
+(422, 'cotizaciones', 'e805500341', 1569977001, 1, 0),
+(423, 'cotizaciones', '1713b32b98', 1569977003, 1, 0),
+(424, 'cotizaciones', 'f28672498d', 1569977006, 1, 0),
+(425, 'ticket_orden', '98fc78439e', 1569977006, 1, 0),
+(426, 'cotizaciones', '577996a03f', 1569977053, 1, 0),
+(427, 'ticket_orden', '25d6096c51', 1569977053, 1, 0),
+(428, 'cotizaciones', '2cf18aa61f', 1569977137, 1, 0),
+(429, 'ticket_orden', '330de8d15c', 1569977137, 1, 0),
+(430, 'cotizaciones', 'a630d53399', 1569977172, 1, 0),
+(431, 'ticket_orden', '504ef55e52', 1569977173, 1, 0),
+(432, 'cotizaciones', '8edb0d0f32', 1569977269, 1, 0),
+(433, 'ticket_orden', 'bef325e289', 1569977269, 1, 0),
+(434, 'ticket', '42624d1d5b', 1569977604, 1, 0),
+(435, 'ticket_orden', 'b407225265', 1569977604, 1, 0),
+(436, 'cotizaciones', '00fa9fa09d', 1569977615, 1, 0),
+(437, 'ticket_orden', '82b711ad81', 1569977615, 1, 0),
+(438, 'cotizaciones', '3acf32d831', 1569977747, 1, 0),
+(439, 'ticket_orden', 'f5d9676d2a', 1569977747, 1, 0),
+(440, 'cotizaciones', 'e0729391e7', 1569977780, 1, 0),
+(441, 'ticket_orden', '072ef9721e', 1569977780, 1, 0),
+(442, 'cotizaciones', '5ea2a3dd4c', 1569977799, 1, 0),
+(443, 'ticket_orden', 'e36c8a24ac', 1569977799, 1, 0),
+(444, 'cotizaciones', '207980c69c', 1569978442, 2, 0),
+(445, 'ticket', '199c663262', 1569977951, 1, 0),
+(446, 'ticket_orden', 'd81f503f9b', 1569977951, 1, 0),
+(447, 'cotizaciones', 'b9bde2ddc1', 1569978510, 2, 0),
+(448, 'cotizaciones', 'b9bde2ddc1', 1569978549, 1, 0),
+(449, 'cotizaciones', '207980c69c', 1569978551, 1, 0),
+(450, 'ticket_orden', '63a3c4550e', 1569978551, 1, 0),
+(451, 'ticket', 'f9bb92dbce', 1569980062, 1, 0),
+(452, 'ticket_orden', '8af17bc862', 1569980062, 1, 0),
+(453, 'cotizaciones', '6dba2ba49b', 1569980726, 2, 0),
+(454, 'cotizaciones', '887ce4b6cf', 1569980728, 1, 0),
+(455, 'cotizaciones', '9d8ad6a73e', 1569980729, 1, 0),
+(456, 'cotizaciones', '6dba2ba49b', 1569980730, 1, 0),
+(457, 'ticket_orden', '3f1f446277', 1569980730, 1, 0),
+(458, 'cotizaciones', '7c3b743cde', 1569980869, 1, 0),
+(459, 'cotizaciones', '6ccabe1a00', 1569980870, 1, 0),
+(460, 'ticket_orden', '3f0ab5434b', 1569980870, 1, 0),
+(461, 'cotizaciones', 'ed9b3a54f9', 1569982687, 2, 0),
+(462, 'cotizaciones', '68fda53ed9', 1569982687, 2, 0),
+(463, 'cotizaciones', 'f9b0464459', 1569988175, 2, 0),
+(464, 'cotizaciones', '54e17f5d20', 1569988116, 2, 0),
+(465, 'ticket_orden', 'd1f918a4d7', 1569988061, 2, 0),
+(466, 'ticket', 'c33dc0d487', 1569988062, 1, 0),
+(467, 'ticket_orden', 'd1f918a4d7', 1569988063, 1, 0),
+(468, 'cotizaciones', '96858a71a2', 1569988092, 1, 0),
+(469, 'cotizaciones', 'f9b0464459', 1569988802, 1, 0),
+(470, 'cotizaciones', '54e17f5d20', 1569988804, 1, 0),
+(471, 'ticket_orden', 'c417720d9b', 1569988804, 1, 0),
+(472, 'ticket_orden', 'fa394015de', 1569989203, 2, 0),
+(473, 'ticket', 'ab5993b915', 1569989205, 1, 0),
+(474, 'ticket_orden', 'fa394015de', 1569989205, 1, 0),
+(475, 'cotizaciones', '461f28842a', 1569989235, 2, 0),
+(476, 'cotizaciones', 'f65565d869', 1569989241, 2, 0),
+(477, 'cotizaciones_data', 'c076dff6f9', 1569989405, 1, 0),
+(478, 'cotizaciones_data', 'ebc812259d', 1569989592, 2, 0),
+(479, 'cotizaciones_data', '4ba9c0df4f', 1569989686, 2, 0),
+(480, 'cotizaciones', '7c52520148', 1569989918, 1, 0),
+(481, 'cotizaciones', 'fc3afd1358', 1569989918, 1, 0),
+(482, 'cotizaciones_data', '9edcda56ee', 1569989919, 1, 0),
+(483, 'cotizaciones_data', 'f0fbaad738', 1569989953, 2, 0),
+(484, 'cotizaciones', '00893efa2c', 1569989991, 1, 0),
+(485, 'cotizaciones_data', '2000b49a6a', 1569989991, 1, 0),
+(486, 'cotizaciones', '2f0fd9c6dc', 1569990468, 2, 0),
+(487, 'cotizaciones', '2f0fd9c6dc', 1569990499, 1, 0),
+(488, 'cotizaciones_data', 'fc954b93c5', 1569990499, 1, 0),
+(489, 'cotizaciones', '71e3afb621', 1569991017, 1, 0),
+(490, 'cotizaciones_data', 'eb92096eaf', 1569991017, 1, 0),
+(491, 'cotizaciones', '32e3ab26e8', 1569991173, 1, 0),
+(492, 'cotizaciones_data', '8090e9f17a', 1569991174, 1, 0),
+(493, 'cotizaciones_data', '33f567a5ed', 1569991190, 2, 0),
+(494, 'cotizaciones_data', '8bff7f130a', 1569991378, 1, 0),
+(495, 'cotizaciones_data', '7350f4d97c', 1569991494, 2, 0),
+(496, 'cotizaciones_data', '1310d462bb', 1569991518, 2, 0),
+(497, 'cotizaciones_data', '2499dcb620', 1569991539, 1, 0),
+(498, 'cotizaciones_data', '2605215c7d', 1569991554, 1, 0),
+(499, 'cotizaciones_data', '9f300548a9', 1569991570, 2, 0),
+(500, 'cotizaciones', '80db03a753', 1569991756, 2, 0),
+(501, 'cotizaciones', '28e162b956', 1569991756, 2, 0),
+(502, 'cotizaciones', '8d01c5f33a', 1569991757, 2, 0),
+(503, 'cotizaciones', '80db03a753', 1569991767, 1, 0),
+(504, 'cotizaciones', '28e162b956', 1569991767, 1, 0),
+(505, 'cotizaciones', '8d01c5f33a', 1569991767, 1, 0),
+(506, 'cotizaciones_data', '7b56e7ff8f', 1569991768, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -7382,7 +7658,6 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`id`, `cod`, `cant`, `producto`, `pv`, `stotal`, `imp`, `total`, `num_fac`, `fecha`, `hora`, `orden`, `cajero`, `tipo_pago`, `user`, `tx`, `fechaF`, `edo`, `hash`, `time`, `td`) VALUES
-(14, 1003, 1, 'CADENA P/MOTOSIERRA 18plg CAMO-18 16637 TRUPER', 10.00, 8.70, 1.30, 10.00, 1, '16-08-2019', '21:48:37', 1, 'Erick Nunez', '1', '3c67697e18899300a2648199a9798dffb359cab2', 0, '1565935200', 1, '96b8583c03', 1566013731, 0),
 (18, 1001, 3, 'CADENA P/MOTOSIERRA 16plg POULAN', 10.20, 26.61, 3.99, 30.60, 2, '16-08-2019', '21:52:04', 2, 'Erick Nunez', '1', '3c67697e18899300a2648199a9798dffb359cab2', 0, '1565935200', 1, 'b2ceb90cb3', 1566013964, 0),
 (20, 1001, 2, 'CADENA P/MOTOSIERRA 16plg POULAN', 10.20, 17.74, 2.66, 20.40, 3, '16-08-2019', '21:53:48', 3, 'Neagan Nunez', '1', 'c5652d9cc6bcf28e0e20210eae5ef9e54ba35717', 0, '1565935200', 1, '3fd300dd37', 1566014054, 0),
 (21, 1002, 1, 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', 10.00, 8.70, 1.30, 10.00, 3, '16-08-2019', '21:54:09', 3, 'Erick Nunez', '1', '3c67697e18899300a2648199a9798dffb359cab2', 0, '1565935200', 1, '1e1ab8c8ad', 1566014054, 0),
@@ -7474,7 +7749,14 @@ INSERT INTO `ticket` (`id`, `cod`, `cant`, `producto`, `pv`, `stotal`, `imp`, `t
 (330, 1004, 1, 'CADENA P/MOTOSIERRA 14plg P/017 STIHL', 11.00, 9.57, 1.43, 11.00, 54, '30-08-2019', '07:14:51', 58, 'Erick Nunez', '3', '3c67697e18899300a2648199a9798dffb359cab2', 0, '1567144800', 1, 'c95647d5d6', 1567170929, 0),
 (331, 1008, 3, 'SIERRA 12plg 18T SAV18 SURTEK', 23.00, 60.00, 9.00, 69.00, 55, '30-08-2019', '07:58:43', 59, 'Jazmin Nunez', '3', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567144800', 1, '28792ed0a6', 1567173540, 0),
 (332, 1008, 2, 'SIERRA 12plg 18T SAV18 SURTEK', 23.00, 40.00, 6.00, 46.00, 56, '30-08-2019', '08:03:01', 60, 'Jazmin Nunez', '3', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567144800', 1, 'c27c09bd9d', 1567173831, 0),
-(333, 1002, 2, 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', 10.00, 17.39, 2.61, 20.00, 57, '30-08-2019', '08:04:04', 61, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567144800', 1, 'c8a2e7a7ca', 1567173852, 0);
+(333, 1002, 2, 'CADENA P/MOTOSIERRA 20plg CAMO-2U 16638 TRUPER', 10.00, 17.39, 2.61, 20.00, 57, '30-08-2019', '08:04:04', 61, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567144800', 1, 'c8a2e7a7ca', 1567173852, 0),
+(334, 1030, 1, 'ACEITERA 250CC H4212105 BEST V.', 30.00, 26.09, 3.91, 30.00, 58, '02-09-2019', '18:28:59', 62, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567404000', 1, '3e5ba55d47', 1567470554, 0),
+(336, 1030, 2, 'ACEITERA 250CC H4212105 BEST V.', 30.00, 52.17, 7.83, 60.00, 59, '02-09-2019', '18:37:12', 63, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567404000', 1, 'afd75d73b7', 1567471036, 0),
+(352, 1001, 1, 'CADENA P/MOTOSIERRA 16plg POULAN', 10.20, 8.87, 1.33, 10.20, 60, '03-09-2019', '00:27:19', 64, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567490400', 1, '37c647f86f', 1567492170, 0),
+(353, 1030, 3, 'ACEITERA 250CC H4212105 BEST V.', 30.00, 78.26, 11.74, 90.00, 60, '03-09-2019', '00:27:21', 64, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1567490400', 1, '588040b3b6', 1567492170, 0),
+(354, 1001, 2, 'CADENA P/MOTOSIERRA 16plg POULAN', 10.20, 17.74, 2.66, 20.40, 61, '25-09-2019', '12:12:35', 65, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1569391200', 1, '335d1d11c8', 1569435182, 0),
+(356, 1001, 2, 'CADENA P/MOTOSIERRA 16plg POULAN', 10.20, 17.74, 2.66, 20.40, 62, '26-09-2019', '20:17:36', 66, 'Erick Nunez', '1', '3c67697e18899300a2648199a9798dffb359cab2', 0, '1569477600', 1, '711b18ae2a', 1569550668, 0),
+(357, 1003, 1, 'CADENA P/MOTOSIERRA 18plg CAMO-18 16637 TRUPER', 10.00, 8.70, 1.30, 10.00, 0, '01-10-2019', '15:09:34', 67, 'Jazmin Nunez', '1', '6d24a97fd35cc27c5d255026b1ee53441fc60925', 0, '1569909600', 1, '5f09b69e49', 1569964174, 0);
 
 -- --------------------------------------------------------
 
@@ -7552,7 +7834,13 @@ INSERT INTO `ticket_descuenta` (`id`, `orden`, `producto`, `producto_hash`, `des
 (49, 44, '1001', '5e932ced7a', '1', '36324879ed', 2.00, '03953a27bc', 1566950932, 0, 0),
 (50, 44, '1001', '5e932ced7a', '2', '1ecbaaa355', 2.00, 'e2a098e5be', 1566950932, 0, 0),
 (51, 61, '1002', 'c8a2e7a7ca', '1', '9d1cc70f3e', 2.00, '7f8f28f193', 1567173845, 0, 0),
-(52, 61, '1002', 'c8a2e7a7ca', '2', '1ecbaaa355', 2.00, 'a356ef9580', 1567173845, 0, 0);
+(52, 61, '1002', 'c8a2e7a7ca', '2', '1ecbaaa355', 2.00, 'a356ef9580', 1567173845, 0, 0),
+(53, 65, '1001', '335d1d11c8', '1', '574cd0fa73', 1.00, '8beb6bf866', 1569435156, 0, 0),
+(54, 65, '1001', '335d1d11c8', '1', '36324879ed', 1.00, 'caade271e6', 1569435156, 0, 0),
+(55, 65, '1001', '335d1d11c8', '2', '1ecbaaa355', 2.00, '016b672354', 1569435156, 0, 0),
+(56, 66, '1001', '711b18ae2a', '1', '574cd0fa73', 1.00, 'f516eaa534', 1569550656, 0, 0),
+(57, 66, '1001', '711b18ae2a', '1', '36324879ed', 1.00, '9a5ae758b2', 1569550656, 0, 0),
+(58, 66, '1001', '711b18ae2a', '2', '1ecbaaa355', 2.00, '5f36e2f7c4', 1569550657, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -7635,7 +7923,12 @@ INSERT INTO `ticket_num` (`id`, `fecha`, `hora`, `num_fac`, `orden`, `efectivo`,
 (54, '30-08-2019', '07:15:28', 54, 58, 0.00, 1, 0, 'ec9dcda402', 1567170928, 0),
 (55, '30-08-2019', '07:59:00', 55, 59, 0.00, 1, 0, 'd53cc7c43e', 1567173540, 0),
 (56, '30-08-2019', '08:03:51', 56, 60, 0.00, 1, 0, 'ee28f15385', 1567173831, 0),
-(57, '30-08-2019', '08:04:12', 57, 61, 0.00, 1, 0, '72cef16d9a', 1567173852, 0);
+(57, '30-08-2019', '08:04:12', 57, 61, 0.00, 1, 0, '72cef16d9a', 1567173852, 0),
+(58, '02-09-2019', '18:29:14', 58, 62, 0.00, 1, 0, 'a63c40d4ce', 1567470554, 0),
+(59, '02-09-2019', '18:37:16', 59, 63, 0.00, 1, 0, '58e05620c1', 1567471036, 0),
+(60, '03-09-2019', '00:29:30', 60, 64, 0.00, 1, 0, '93c4f28148', 1567492170, 0),
+(61, '25-09-2019', '12:13:02', 61, 65, 100.00, 1, 0, 'af48fc8ead', 1569435182, 0),
+(62, '26-09-2019', '20:17:48', 62, 66, 0.00, 1, 0, '1783afb3df', 1569550668, 0);
 
 -- --------------------------------------------------------
 
@@ -7662,23 +7955,7 @@ CREATE TABLE `ticket_orden` (
 --
 
 INSERT INTO `ticket_orden` (`id`, `nombre`, `correlativo`, `empleado`, `fecha`, `hora`, `estado`, `tx`, `hash`, `time`, `td`) VALUES
-(5, '', 1, 'Erick Nunez', '16-08-2019', '21:47:31', 2, 0, 'b55852fb6c', 1566013731, 0),
-(8, '', 2, 'Erick Nunez', '16-08-2019', '21:52:04', 2, 0, 'c3c4d676a9', 1566013964, 0),
-(10, '', 3, 'Neagan Nunez', '16-08-2019', '21:53:48', 2, 0, '0a845f6bfc', 1566014054, 0),
-(13, '', 4, 'Erick Nunez', '16-08-2019', '22:03:26', 2, 0, '98fc78439e', 1566014614, 0),
-(24, '', 5, 'Erick Nunez', '18-08-2019', '06:00:41', 1, 0, '25d6096c51', 1566129641, 0),
-(39, '', 6, 'Erick Nunez', '18-08-2019', '08:18:32', 2, 0, '330de8d15c', 1566138007, 0),
-(49, '', 7, 'Erick Nunez', '21-08-2019', '19:42:39', 2, 0, '504ef55e52', 1566438212, 0),
-(51, '', 8, 'Erick Nunez', '21-08-2019', '19:45:06', 2, 0, 'bef325e289', 1566438326, 0),
-(65, '', 9, 'Erick Nunez', '21-08-2019', '20:07:28', 1, 0, '82b711ad81', 1566439648, 0),
-(92, '', 10, 'Erick Nunez', '21-08-2019', '20:24:56', 2, 0, 'f5d9676d2a', 1566440719, 0),
-(93, '', 11, 'Erick Nunez', '21-08-2019', '20:25:04', 2, 0, '072ef9721e', 1566440727, 0),
-(94, '', 12, 'Erick Nunez', '21-08-2019', '20:26:54', 1, 0, 'e36c8a24ac', 1566440814, 0),
-(108, '', 13, 'Erick Nunez', '21-08-2019', '21:15:09', 1, 0, '63a3c4550e', 1566443709, 0),
-(117, '', 14, 'Erick Nunez', '21-08-2019', '21:33:25', 1, 0, '3f1f446277', 1566444805, 0),
-(119, '', 15, 'Erick Nunez', '21-08-2019', '21:36:11', 2, 0, '3f0ab5434b', 1566444978, 0),
 (126, '', 16, 'Erick Nunez', '21-08-2019', '22:30:20', 2, 0, 'dc9246462a', 1566448227, 0),
-(129, '', 17, 'Erick Nunez', '21-08-2019', '22:32:50', 2, 0, 'c417720d9b', 1566448377, 0),
 (130, '', 18, 'Erick Nunez', '21-08-2019', '22:33:11', 2, 0, '23d48a5081', 1566448407, 0),
 (131, '', 19, 'Erick Nunez', '21-08-2019', '22:35:14', 2, 0, '607fba184f', 1566448520, 0),
 (132, '', 20, 'Erick Nunez', '21-08-2019', '22:35:31', 2, 0, 'f4e4432a34', 1566448555, 0),
@@ -7722,7 +7999,13 @@ INSERT INTO `ticket_orden` (`id`, `nombre`, `correlativo`, `empleado`, `fecha`, 
 (207, '', 58, 'Erick Nunez', '30-08-2019', '07:14:51', 2, 0, 'abce7f2ab0', 1567170929, 0),
 (208, '', 59, 'Jazmin Nunez', '30-08-2019', '07:58:43', 2, 0, '59cfb3a5e7', 1567173540, 0),
 (209, '', 60, 'Jazmin Nunez', '30-08-2019', '08:03:00', 2, 0, '9df91ca2cd', 1567173831, 0),
-(210, '', 61, 'Jazmin Nunez', '30-08-2019', '08:04:04', 2, 0, '9948d1e305', 1567173852, 0);
+(210, '', 61, 'Jazmin Nunez', '30-08-2019', '08:04:04', 2, 0, '9948d1e305', 1567173852, 0),
+(211, '', 62, 'Jazmin Nunez', '02-09-2019', '18:28:59', 2, 0, '902dcf80b4', 1567470554, 0),
+(213, '', 63, 'Jazmin Nunez', '02-09-2019', '18:37:11', 2, 0, '402466e853', 1567471036, 0),
+(224, '', 64, 'Jazmin Nunez', '03-09-2019', '00:27:19', 2, 0, '348dd4c287', 1567492171, 0),
+(225, '', 65, 'Jazmin Nunez', '25-09-2019', '12:12:35', 2, 0, 'a98e3a394c', 1569435182, 0),
+(227, '', 66, 'Erick Nunez', '26-09-2019', '20:17:36', 2, 0, 'e8af489571', 1569550668, 0),
+(228, '', 67, 'Jazmin Nunez', '01-10-2019', '15:09:33', 1, 0, '611661b8f3', 1569964173, 0);
 
 -- --------------------------------------------------------
 
@@ -7770,9 +8053,9 @@ INSERT INTO `ubicacion_asig` (`id`, `ubicacion`, `producto`, `cant`, `hash`, `ti
 (3, '893d4bf4c0', 1002, 80.00000, 'd4ab57f25f', 1566012516, 0),
 (4, '1ecbaaa355', 1002, 10.00000, '297302ca4a', 1567173845, 0),
 (5, '1ecbaaa355', 1003, 80.00000, '7b1208e682', 1566444847, 0),
-(6, '893d4bf4c0', 1003, 19.00000, '22ae6630f9', 1566444788, 0),
+(6, '893d4bf4c0', 1003, 19.00000, '22ae6630f9', 1569951059, 0),
 (7, '893d4bf4c0', 1001, 50.00000, '893b4b67be', 1566444787, 0),
-(8, '1ecbaaa355', 1001, 41.00000, '9f0aaee995', 1566950932, 0),
+(8, '1ecbaaa355', 1001, 37.00000, '9f0aaee995', 1569550657, 0),
 (9, '893d4bf4c0', 1101, 5.00000, 'f59df392ba', 1566889478, 0);
 
 --
@@ -7813,6 +8096,18 @@ ALTER TABLE `config_root`
 -- Indices de la tabla `corte_diario`
 --
 ALTER TABLE `corte_diario`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `cotizaciones`
+--
+ALTER TABLE `cotizaciones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `cotizaciones_data`
+--
+ALTER TABLE `cotizaciones_data`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -8087,6 +8382,16 @@ ALTER TABLE `config_root`
 ALTER TABLE `corte_diario`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT de la tabla `cotizaciones`
+--
+ALTER TABLE `cotizaciones`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT de la tabla `cotizaciones_data`
+--
+ALTER TABLE `cotizaciones_data`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
 -- AUTO_INCREMENT de la tabla `creditos`
 --
 ALTER TABLE `creditos`
@@ -8195,17 +8500,17 @@ ALTER TABLE `producto_devoluciones`
 -- AUTO_INCREMENT de la tabla `producto_imagenes`
 --
 ALTER TABLE `producto_imagenes`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `producto_ingresado`
 --
 ALTER TABLE `producto_ingresado`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `producto_precio`
 --
 ALTER TABLE `producto_precio`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `producto_tags`
 --
@@ -8230,7 +8535,7 @@ ALTER TABLE `sync_tabla`
 -- AUTO_INCREMENT de la tabla `sync_tables_updates`
 --
 ALTER TABLE `sync_tables_updates`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=507;
 --
 -- AUTO_INCREMENT de la tabla `sync_up`
 --
@@ -8245,7 +8550,7 @@ ALTER TABLE `sync_up_cloud`
 -- AUTO_INCREMENT de la tabla `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=360;
 --
 -- AUTO_INCREMENT de la tabla `ticket_cliente`
 --
@@ -8255,17 +8560,17 @@ ALTER TABLE `ticket_cliente`
 -- AUTO_INCREMENT de la tabla `ticket_descuenta`
 --
 ALTER TABLE `ticket_descuenta`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT de la tabla `ticket_num`
 --
 ALTER TABLE `ticket_num`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 --
 -- AUTO_INCREMENT de la tabla `ticket_orden`
 --
 ALTER TABLE `ticket_orden`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 --
 -- AUTO_INCREMENT de la tabla `ubicacion`
 --
