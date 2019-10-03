@@ -213,11 +213,13 @@ class Cotizar{
 
 	    	if($ultimoorden == NULL){ $ultimoorden = 0; }
 			$datos = array();
-		    $datos["cliente"] = $_SESSION["cliente_c"];
+		    $datos["cliente"] = $_SESSION["cliente_cot"];
 		    $datos["correlativo"] = $ultimoorden + 1;
 		    $datos["fecha"] = date("d-m-Y");
 		    $datos["hora"] = date("H:i:s");
 		    $datos["fechaF"] = Fechas::Format(date("d-m-Y"));
+		    $datos["caduca"] = Fechas::DiaSuma(date("d-m-Y"),15);
+		    $datos["caducaF"] = Fechas::Format(Fechas::DiaSuma(date("d-m-Y"),15));
 		    $datos["edo"] = 1;
 		    $datos["hash"] = Helpers::HashId();
 		    $datos["time"] = Helpers::TimeId();
@@ -442,6 +444,118 @@ class Cotizar{
 
 
 
+
+
+ public function TodasCotizaciones($npagina, $orden, $dir){
+      $db = new dbConn();
+
+  $limit = 12;
+  $adjacents = 2;
+  $op = 159;
+
+  if($npagina == NULL) $npagina = 1;
+  $a = $db->query("SELECT * FROM cotizaciones_data WHERE edo = 2 and td = ". $_SESSION['td'] ."");
+  $total_rows = $a->num_rows;
+  $a->close();
+
+  $total_pages = ceil($total_rows / $limit);
+  
+  if(isset($npagina) && $npagina != NULL) {
+    $page = $npagina;
+    $offset = $limit * ($page-1);
+  } else {
+    $page = 1;
+    $offset = 0;
+  }
+
+if($dir == "desc") $dir2 = "asc";
+if($dir == "asc") $dir2 = "desc";
+
+
+ $a = $db->query("SELECT * FROM cotizaciones_data WHERE edo = 2 and td = ". $_SESSION['td'] ." order by ".$orden." ".$dir." limit $offset, $limit");
+      
+      if($a->num_rows > 0){
+          echo '<table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th class="th-sm"><a id="paginador" op="'.$op.'" iden="1" orden="cliente" dir="'.$dir2.'">Cliente</a></th>
+            <th class="th-sm"><a id="paginador" op="'.$op.'" iden="1" orden="correlativo" dir="'.$dir2.'">Cotizaci&oacuten</a></th>
+            <th class="th-sm"><a id="paginador" op="'.$op.'" iden="1" orden="fecha" dir="'.$dir2.'">Fecha</a></th>
+            <th class="th-sm"><a id="paginador" op="'.$op.'" iden="1" orden="caduca" dir="'.$dir2.'">Caduca</a></th>
+            <th class="th-sm">Ver</th>
+          </tr>
+        </thead>
+        <tbody>';
+        foreach ($a as $b) {
+        // obtener el nombre y detalles del producto
+    if ($r = $db->select("nombre", "clientes", "WHERE hash = '".$b["cliente"]."' and td = ". $_SESSION["td"] ."")) { 
+        $cliente = $r["nombre"]; } unset($r); 
+
+          echo '<tr>
+                      <td>'.$cliente.'</td>
+                      <td>'.$b["correlativo"].'</td>
+                      <td>'.$b["fecha"].'</td>
+                      <td>'.$b["caduca"].'</td>
+                      <td><a id="xver" op="160" key="'.$b["id"].'"><i class="fas fa-search fa-lg green-text"></i></a></td>
+                    </tr>';
+        }
+        echo '</tbody>
+        </table>';
+      }
+        $a->close();
+
+  if($total_pages <= (1+($adjacents * 2))) {
+    $start = 1;
+    $end   = $total_pages;
+  } else {
+    if(($page - $adjacents) > 1) {  
+      if(($page + $adjacents) < $total_pages) {  
+        $start = ($page - $adjacents); 
+        $end   = ($page + $adjacents); 
+      } else {              
+        $start = ($total_pages - (1+($adjacents*2))); 
+        $end   = $total_pages; 
+      }
+    } else {
+      $start = 1; 
+      $end   = (1+($adjacents * 2));
+    }
+  }
+echo $total_rows . " Registros encontrados";
+   if($total_pages > 1) { 
+
+$page <= 1 ? $enable = 'disabled' : $enable = '';
+    echo '<ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="'.$op.'" iden="1" orden="'.$orden.'" dir="'.$dir.'">&lt;&lt;</a>
+      </li>';
+    
+    $page>1 ? $pagina = $page-1 : $pagina = 1;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="'.$op.'" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&lt;</a>
+      </li>';
+
+    for($i=$start; $i<=$end; $i++) {
+      $i == $page ? $pagina =  'active' : $pagina = '';
+      echo '<li class="page-item '.$pagina.'">
+        <a class="page-link" id="paginador" op="'.$op.'" iden="'.$i.'" orden="'.$orden.'" dir="'.$dir.'">'.$i.'</a>
+      </li>';
+    }
+
+    $page >= $total_pages ? $enable = 'disabled' : $enable = '';
+    $page < $total_pages ? $pagina = ($page+1) : $pagina = $total_pages;
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="'.$op.'" iden="'.$pagina.'" orden="'.$orden.'" dir="'.$dir.'">&gt;</a>
+      </li>';
+
+    echo '<li class="page-item '.$enable.'">
+        <a class="page-link" id="paginador" op="'.$op.'" iden="'.$total_pages.'" orden="'.$orden.'" dir="'.$dir.'">&gt;&gt;</a>
+      </li>
+
+      </ul>';
+     }  // end pagination 
+
+  } // termina productos
 
 
 

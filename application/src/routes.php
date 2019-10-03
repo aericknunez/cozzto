@@ -1073,7 +1073,16 @@ include_once '../../system/cotizar/CotizarR.php';
 }
 
 
+if($_REQUEST["op"]=="159"){ 
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->TodasCotizaciones($_POST["iden"], $_POST["orden"], $_POST["dir"]);
+}
 
+
+if($_REQUEST["op"]=="160"){ 
+print_r($_POST);
+}
 
 
 

@@ -303,11 +303,43 @@ $('#ModalBusqueda').on('shown.bs.modal', function() { // para autofocus en el mo
 
 
 
+/// llamar modal ver
+    $("body").on("click","#xver",function(){ 
+        
+        $('#ModalVer').modal('show');
+        
+        var key = $(this).attr('key');
+        var op = $(this).attr('op');
+        var dataString = 'op='+op+'&key='+key;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#vista").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                $("#vista").html(data); // lo que regresa de la busquea         
+            }
+        });
+
+    });
 
 
 
 
 
+
+    $('#imprimir').on("click", function () {
+      $('#vista').printThis({
+        importCSS: true,
+        importStyle: true,
+        loadCSS: ["assets/css/font-awesome-582.css","http://localhost/cozto/assets/css/bootstrap.min.css", 
+        "http://localhost/cozto/assets/css/mdb.min.css"],
+         base: false
+      });
+    });
 
 
 

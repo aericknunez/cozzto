@@ -95,7 +95,7 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
        <td><? echo $r["nombre_documento"]; ?></td>    
      </tr>
     <tr>
-       <td>Inocio Tx Factura</td>
+       <td>Inicio Tx Factura</td>
        <td><? if($r["inicio_tx"] == 1) echo "Facturando"; else echo "Sin Facturar"; ?></td>    
      </tr>
      <tr>
@@ -115,7 +115,7 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
        <td><? if($r["imprimir_antes"] == "on") echo "Activado"; else echo "Inactivo"; ?></td>    
      </tr>
      <tr>
-       <td>Permimitri cambiar Tx</td>
+       <td>Permimitir cambiar Tx</td>
        <td><? if($r["cambio_tx"] == "on") echo "Activado"; else echo "Inactivo"; ?></td>    
      </tr>
 
