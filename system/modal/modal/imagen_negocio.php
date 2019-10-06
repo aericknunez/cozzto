@@ -29,13 +29,12 @@
     </form>
 <!--div para visualizar mensajes-->
     
-    <div  id="result">
+    <div id="result" class="text-center">
       
       <?php 
-      include_once 'system/upimages/Upimages.php';
-      $Up = new Upimages;
-      $img = $Up->VerImgNegocio();
-      echo '<img src="assets/img/logo/'.$img.'" alt="">';
+      include_once 'application/common/ImagenesSuccess.php';
+      $Up = new Success;
+      $Up->VerImgNegocio("assets/img/logo/");
        ?>
     </div>
 <!-- ./  content -->

@@ -13,7 +13,7 @@
       </div>
       <div class="modal-footer">
 
-          <a href="?iconos" class="btn btn-primary btn-rounded">Regresar</a>
+          <a href="?" class="btn btn-primary btn-rounded">Regresar</a>
     
       </div>
     </div>

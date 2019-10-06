@@ -5,7 +5,7 @@ class Config{
      } 
 
 
-	public function Configuraciones($sistema,$cliente,$slogan,$propietario,$telefono,$direccion,$email,$pais,$giro,$nit,$imp,$nombre_impuesto,$nombre_documento,$moneda,$moneda_simbolo,$tipo_inicio,$skin,$inicio_tx,$otras_ventas,$venta_especial,$imprimir_antes,$cambio_tx){
+	public function Configuraciones($sistema,$cliente,$slogan,$propietario,$telefono,$direccion,$email,$pais,$giro,$nit,$imp,$nombre_impuesto,$nombre_documento,$moneda,$moneda_simbolo,$tipo_inicio,$skin,$inicio_tx,$otras_ventas,$cambio_tx){
 		$db = new dbConn();
 
 		$cambio = array();
@@ -28,8 +28,6 @@ class Config{
 	    $cambio["skin"] = $skin;
 	    $cambio["inicio_tx"] = $inicio_tx;
 	    $cambio["otras_ventas"] = $otras_ventas;
-	    $cambio["venta_especial"] = $venta_especial;
-	    $cambio["imprimir_antes"] = $imprimir_antes;
 	    $cambio["cambio_tx"] = $cambio_tx;
 	    $cambio["time"] = Helpers::TimeId();
 	    if (Helpers::UpdateId("config_master", $cambio, "td = ".$_SESSION["td"]."")) {
@@ -90,8 +88,8 @@ class Config{
 			$_SESSION['config_imp'] = $r["imp"];
 			$_SESSION['config_direccion'] = $r["direccion"];
 			$_SESSION['config_email'] = $r["email"];
-			$_SESSION['config_imagen'] = $r["imagen"];
-			$_SESSION['config_logo'] = $r["logo"];
+			$_SESSION['config_imagen'] = $r["imagen"]; // de la empresa
+			$_SESSION['config_logo'] = $r["logo"]; // el de pizto
 			$_SESSION['config_skin'] = $r["skin"];
 			$_SESSION['tipo_inicio'] = $r["tipo_inicio"];
 
@@ -102,9 +100,6 @@ class Config{
 			$_SESSION['config_nombre_documento'] = $r["nombre_documento"];
 			$_SESSION['tx'] = $r["inicio_tx"];
 			$_SESSION['config_otras_ventas'] = $r["otras_ventas"];
-			$_SESSION['config_venta_especial'] = $r["venta_especial"];
-			
-			$_SESSION['config_imprimir_antes'] = $r["imprimir_antes"];
 			$_SESSION['config_cambio_tx'] = $r["cambio_tx"];
 
 			if($_SESSION['config_skin'] == NULL) $_SESSION['config_skin'] = "mdb-skin";

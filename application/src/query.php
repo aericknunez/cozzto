@@ -46,6 +46,10 @@ echo '
 	if($_GET["modal"] == "proadd"){
 	echo '<script type="text/javascript" src="assets/js/query/modal.producto.js?v='.$numero.'"></script>';
 	}
+	if($_GET["modal"] == "productoBusqueda"){
+	echo '<script type="text/javascript" src="assets/js/query/productoBusqueda.js?v='.$numero.'"></script>';
+	}
+
 
 	/// proveedor
 	if($_GET["modal"] == "editproveedor"){
@@ -138,8 +142,8 @@ elseif(isset($_GET["cotizar"])) {
 echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["cotizaciones"])) {
-echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
 echo '<script type="text/javascript" src="assets/js/printThis.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
 } 
 
 

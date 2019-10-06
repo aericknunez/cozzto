@@ -32,6 +32,8 @@ if($_REQUEST["modal"]=="facturar") include_once 'system/modal/modal/facturar.php
 // producto
 if($_REQUEST["modal"]=="proadd") include_once 'system/modal/modal/proadd.php';
 
+if($_REQUEST["modal"]=="productoBusqueda") include_once 'system/modal/modal/productoBusqueda.php';
+
 
 
 // venta

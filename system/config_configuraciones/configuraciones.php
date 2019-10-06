@@ -106,14 +106,7 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
        <td>Otras Ventas</td>
        <td><? if($r["otras_ventas"] == 1) echo "Activado"; else echo "Inactivo"; ?></td>    
      </tr>
-     <tr>
-       <td>Venta Especial</td>
-       <td><? if($r["venta_especial"] == 1) echo "Activado"; else echo "Inactivo"; ?></td>    
-     </tr>
-     <tr>
-       <td>Imprimir Antes</td>
-       <td><? if($r["imprimir_antes"] == "on") echo "Activado"; else echo "Inactivo"; ?></td>    
-     </tr>
+
      <tr>
        <td>Permimitir cambiar Tx</td>
        <td><? if($r["cambio_tx"] == "on") echo "Activado"; else echo "Inactivo"; ?></td>    

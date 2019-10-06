@@ -18,6 +18,11 @@ $(document).ready(function(){
 		});
 	});
 
+$("#p-busqueda").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
+if (e.which == 13) {
+return false;
+}
+});
 
 	// $("body").on("click","#select-p",function(){
 	// 	var cod = $(this).attr('cod');

@@ -7,6 +7,11 @@ $key =  $_REQUEST["key"];
 $cad = $_REQUEST["cad"];
 $com = $_REQUEST["com"];
 $dep = $_REQUEST["dep"];
+
+    if ($r = $db->select("descripcion", "producto", "WHERE cod = '$key' and td = ".$_SESSION["td"]."")) { 
+        $prod = $r["descripcion"];
+    } unset($r);  
+
  ?>
 
 <div class="modal" id="<? echo $_GET["modal"]; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="false">
@@ -14,7 +19,7 @@ $dep = $_REQUEST["dep"];
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          GUARDANDO PRODUCTO</h5>
+          <?php echo $prod; ?></h5>
       </div>
       <div class="modal-body">
 <!-- ./  content -->

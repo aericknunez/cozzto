@@ -82,6 +82,14 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
     <td><small id="imp" class="form-text text-muted mb-1">
         Impuestos
     </small><input type="text" id="imp" name="imp" class="form-control mb-1" placeholder="Impuestos" value="<? echo $r["imp"]; ?>"></td>
+          <td><small id="otras_ventas" class="form-text text-muted mb-1">
+        Otras Ventas
+    </small>
+    <select class="browser-default custom-select" id="otras_ventas" name="otras_ventas">
+  <option <? if($r["otras_ventas"] == 0) echo "selected"; ?> value="0">Inactivo</option>
+  <option <? if($r["otras_ventas"] == 1) echo "selected"; ?> value="1">Activo</option>
+    </select></td>
+
   </tr>
 
   <tr>
@@ -89,8 +97,8 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
         Tipo Inicio Venta
     </small>
     <select class="browser-default custom-select" id="tipo_inicio" name="tipo_inicio">
-  <option <? if($r["tipo_inicio"] == 1) echo "selected"; ?> value="1">Venta por Codigo</option>
-  <option <? if($r["tipo_inicio"] == 2) echo "selected"; ?> value="2">Venta Busquedas</option>
+  <option <? if($r["tipo_inicio"] == 1) echo "selected"; if($_SESSION["tipo_cuenta"] != 1) echo "disabled";?> value="1">Venta por Codigo</option>
+  <option <? if($r["tipo_inicio"] == 2) echo "selected"; if($_SESSION["tipo_cuenta"] != 1) echo "disabled";?> value="2">Venta Busquedas</option>
     </select></td>
 
        <td><small id="inicio_tx" class="form-text text-muted mb-1">
@@ -102,24 +110,6 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
     </select></td>
   </tr>
 
-
-  <tr>
-       <td><small id="otras_ventas" class="form-text text-muted mb-1">
-        Otras Ventas
-    </small>
-    <select class="browser-default custom-select" id="otras_ventas" name="otras_ventas">
-  <option <? if($r["otras_ventas"] == 0) echo "selected"; ?> value="0">Inactivo</option>
-  <option <? if($r["otras_ventas"] == 1) echo "selected"; ?> value="1">Activo</option>
-    </select></td>
-
-       <td><small id="venta_especial" class="form-text text-muted mb-1">
-        Venta Especial
-    </small>
-    <select class="browser-default custom-select" id="inicio_tx" name="venta_especial">
-  <option <? if($r["venta_especial"] == 0) echo "selected"; ?> value="0">Inactivo</option>
-  <option <? if($r["venta_especial"] == 1) echo "selected"; ?> value="1">Activo</option>
-    </select></td>
-  </tr>
 
 
      <tr>
@@ -138,20 +128,19 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
      </tr>
 
   <tr>
-    <td><div class="switch">
-            <label>
-             Imprimir Antes ||  Off
-              <input type="checkbox" <?php if($r["imprimir_antes"] == "on") echo "checked"; ?> id="imprimir_antes" name="imprimir_antes" >
-              <span class="lever"></span> On 
-            </label>
-          </div></td>
-    <td><div class="switch">
+    <td>
+      <div class="switch">
             <label>
              Permitir TX ||  Off
               <input type="checkbox" <?php if($r["cambio_tx"] == "on") echo "checked"; ?> id="cambio_tx" name="cambio_tx" >
               <span class="lever"></span> On 
             </label>
-          </div></td>
+          </div>
+    </td>
+    <td>
+    <button class="btn btn-info my-4" type="submit" id="btn-config" name="btn-config">Realizar Cambios</button>
+  
+    </td>
   </tr>
 
 <?
@@ -160,7 +149,6 @@ $r = $db->select("*", "config_master", "where td = ".$_SESSION['td']."")
    ?>
    </tbody>
 </table>
-<button class="btn btn-info my-4" type="submit" id="btn-config" name="btn-config">Realizar Cambios</button>
 
 </form>
 <!-- ./  content -->
