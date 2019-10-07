@@ -166,6 +166,26 @@ $(document).ready(function()
 	}
 
 
+////////////consolidado
+	$('#btn-cdiario').click(function(e){ /// para el formulario
+		$("#form-cdiario").hide();
+		MuestraLoader();
+		e.preventDefault();
+		$.ajax({
+			url: "application/src/routes.php?op=124",
+			method: "POST",
+			data: $("#form-cdiario").serialize(),
+			success: function(data){
+				$("#contenido").html(data);
+				$("#form-cdiario").trigger("reset");
+				$("#form-cdiario").show();
+			}
+		})
+	})
+
+
+
+
 
 
 

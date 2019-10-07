@@ -49,7 +49,7 @@ elseif(isset($_GET["corte"])) include_once 'system/corte/cortes.php';
 
 
 // Historia;
-elseif(isset($_GET["rdiario"])) include_once 'system/historial/rdiario.php';
+elseif(isset($_GET["consolidado"])) include_once 'system/historial/consolidado_diario.php';
 elseif(isset($_GET["vdiario"])) include_once 'system/historial/vdiario.php'; 
 elseif(isset($_GET["vmensual"])) include_once 'system/historial/vmensual.php'; 
 elseif(isset($_GET["hcortes"])) include_once 'system/historial/hcortes.php'; 

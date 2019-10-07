@@ -194,6 +194,9 @@ echo '<script type="text/javascript" src="assets/js/query/corte.js?v='.$numero.'
 } 
 
 //// Historial
+elseif(isset($_GET["consolidado"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
 elseif(isset($_GET["rdiario"])) {
 echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
 } 

@@ -26,7 +26,7 @@ if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (
 <div class="collapsible-body">
 <ul class="list-unstyled">
 
-<!-- <li><a href="?rdiario" class="waves-effect"><i class="fas fa-cogs"></i> Resumen Diario</a></li> -->
+<li><a href="?consolidado" class="waves-effect"><i class="fas fa-cogs"></i> Consolidado Diario</a></li>
 
 <li><a href="?vdiario" class="waves-effect"><i class="fas fa-cog"></i> Ventas Diarias</a></li>
 <li><a href="?vmensual" class="waves-effect"><i class="fas fa-cogs"></i> Ventas Mensuales</a></li>

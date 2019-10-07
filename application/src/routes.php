@@ -923,6 +923,18 @@ if($_REQUEST["op"]=="118"){ // cancelar corte
 
 
 //// historial ///////////////////////////////////////////////
+
+
+if($_REQUEST["op"]=="124"){ // consolidad diario
+	include_once '../../system/historial/Historial.php';
+	$historial = new Historial;
+	
+	if($_POST["fecha_submit"] == NULL){ $fecha = date("d-m-Y"); 
+	} else { $fecha = $_POST["fecha_submit"]; }
+	
+	$historial->ConsolidadoDiario($fecha);
+}
+
 if($_REQUEST["op"]=="125"){ // historial diario
 	include_once '../../system/historial/Historial.php';
 	$historial = new Historial;

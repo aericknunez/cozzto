@@ -185,11 +185,13 @@ class Corte{
 
 	public function EfectivoDebido($fecha){ //para reporte efectivo que debe haber
 		$db = new dbConn();
-	    
+	    if($this->UltimaFecha() != $fecha){ // si no se ha echo corte hoy
 	    $total_cc = $this->TVentasX($fecha, 1)+$this->GetEfectivo()+$this->TotalAbonos($fecha)+$this->EntradasEfectivo($fecha); //total ventas  mas caja chica de ayer
 		$total_debido = $total_cc-$this->GastoHoy($fecha); //dinero que deberia haber ()
 		return $total_debido;
-
+		} else { // si se realizo corte solo ver cuanto es el ultimo corte
+		return $total_debido = $this->GetEfectivo();
+		}
 	}
 
 
