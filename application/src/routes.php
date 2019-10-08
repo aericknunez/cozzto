@@ -176,8 +176,8 @@ $imgs = new Success();
 		$_SESSION['config_imagen'] = $imagen->file_dst_name; // cambio el logo de la variable
 	} // [file_dst_name] nombre de la imagen
 	else {
-	  echo 'error : ' . $imagen->error;
-	  $imgs->VerProducto("assets/img/logo/");
+	  Alerts::Alerta("error","Error!","Error: " . $imagen->error);
+	  $imgs->VerImgNegocio("assets/img/logo/");
 	}
 
 }
