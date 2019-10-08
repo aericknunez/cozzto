@@ -97,6 +97,27 @@ echo '
 
 
 
+	if($_GET["modal"] == "respaldar"){
+			$url = "sync/push.php?corte=1";
+			echo '<script>
+				$(document).ready(function(){
+
+				function Respaldar(){
+		                      $.ajax({
+		                          type: "POST",
+		                          url: "<?php echo $url; ?>",
+		                          success: function(data) {
+		                            $("#respaldo").html(data);
+		                          }
+		                      });
+		                  }
+
+		        Respaldar();
+		});
+		</script>';
+	}
+
+
 
 } // termina modal
 

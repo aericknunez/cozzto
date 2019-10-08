@@ -63,6 +63,7 @@ $r = $db->select("*", "config_root", "where td = ".$_SESSION['td']."")
         Tipo de Sistema
     </small>
     <select class="browser-default custom-select" id="tipo_sistema" name="tipo_sistema">
+  <option <? if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 0) echo "selected"; ?> value="0">Demo</option>
   <option <? if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 1) echo "selected"; ?> value="1">Basico</option>
   <option <? if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 2) echo "selected"; ?> value="2">Profesional</option>
   <option <? if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 3) echo "selected"; ?> value="3">Corporativo</option>

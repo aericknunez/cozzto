@@ -18,7 +18,7 @@ $hora = date("H:i:s");
 
 
 
-$data =  file_get_contents('https://pizto.com/admin/application/includes/db_sync_json.php?x=' . $_SESSION["temporal_td"]); 
+$data =  file_get_contents('https://pizto.com/login/application/includes/db_sync_json.php?x=' . $_SESSION["temporal_td"]); 
 $datos = json_decode($data, true);
 
 foreach ($datos as $valores) { // vamos hacer un archivo por cada hash
@@ -74,8 +74,8 @@ function SubirFtp($sync){
 						"erick@pizto.com",
 						"caca007125-",
 						$sync . ".sql",
-						"/admin/sync/database/",
-						"C:/AppServ/www/pizto/sync/". $sync .".sql") == TRUE){
+						"/login/sync/database/",
+						"C:/AppServ/www/cozto/sync/". $sync .".sql") == TRUE){
 						return TRUE;
 		} else {
 			return FALSE;
@@ -85,7 +85,7 @@ function SubirFtp($sync){
 
 
 ///////// actualizar el root
-$data =  file_get_contents('https://pizto.com/admin/application/includes/root_json.php?x=' . $_SESSION["temporal_td"]); 
+$data =  file_get_contents('https://pizto.com/login/application/includes/root_json.php?x=' . $_SESSION["temporal_td"]); 
 $cambio = json_decode($data, true);
 Helpers::UpdateId("config_root", $cambio, "td=" . $_SESSION["temporal_td"]);
 

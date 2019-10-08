@@ -59,3 +59,5 @@ if($_REQUEST["modal"]=="cre_prodcuto") include_once 'system/modal/modal/creditos
 if($_REQUEST["modal"]=="cantidadc") include_once 'system/modal/modal/cantidad_cotizador.php';
 
 if($_REQUEST["modal"]=="descuentocot") include_once 'system/modal/modal/descuento_cot.php';
+
+if($_REQUEST["modal"]=="respaldar") include_once 'system/modal/modal/respaldar.php';

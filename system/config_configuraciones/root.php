@@ -52,7 +52,8 @@ $r = $db->select("*", "config_root", "where td = ".$_SESSION['td']."");
      </tr>
      <tr>
        <td>Tipo Sistema</td>
-       <td><? if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 1) echo "Basico";
+       <td><? if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 0) echo "Demo";
+              if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 1) echo "Basico";
               if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 2) echo "Profesional";
               if(Encrypt::Decrypt($r["tipo_sistema"],$_SESSION['secret_key']) == 3) echo "Corporativo"; ?></td>
        

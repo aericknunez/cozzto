@@ -35,6 +35,13 @@ class Corte{
 			    $datos["td"] = $_SESSION["td"];
 			    if ($db->insert("corte_diario", $datos)) {
 			        
+
+			        	if(Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0 and $_SESSION["root_tipo_sistema"] != 0){
+				   		echo '<script>
+							window.location.href="?modal=respaldar"
+						</script>';
+				   		}
+
 			    } 
 
 	     	} else { // se detecto corte

@@ -1,6 +1,7 @@
 <?php
 include_once '../common/Helpers.php';
 include_once '../common/Mysqli.php';
+include_once '../common/Alerts.php';
 include_once 'variables_db.php';
 include_once 'DataLogin.php';
 $seslog = new Login();
@@ -19,7 +20,7 @@ if (isset($_POST['email'], $_POST['password'])) {
         exit();
     } else {
         // Login failed 
-        echo "Error al iniciar";
+        Alerts::Alerta("error","Error!","Error al iniciar");
         exit();
     }
 } else {

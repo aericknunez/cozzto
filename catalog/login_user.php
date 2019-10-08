@@ -68,7 +68,6 @@ if (isset($_GET['error'])) {
 <!-- </div> -->
 
 
-
 </main>
 <a href="?change">Cambiar inicio</a>
     <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
