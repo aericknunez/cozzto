@@ -847,33 +847,6 @@ include_once '../../system/credito/Creditos.php';
 }
 
 
-///////////////gastos
-if($_REQUEST["op"]=="110"){ 
-include_once '../../system/gastos/Gasto.php';
-	$gastos = new Gastos;
-	$gastos->AddGasto($_POST);
-}
-
-if($_REQUEST["op"]=="111"){ 
-include_once '../../system/gastos/Gasto.php';
-	$gastos = new Gastos;
-	$gastos->BorrarGasto($_POST["iden"]);
-
-}
-
-if($_REQUEST["op"]=="112"){  // entrada de efectivo
-include_once '../../system/gastos/Gasto.php';
-	$gastos = new Gastos;
-	$gastos->AddEfectivo($_POST);
-}
-
-
-if($_REQUEST["op"]=="113"){ 
-include_once '../../system/gastos/Gasto.php';
-	$gastos = new Gastos;
-	$gastos->BorrarEfectivo($_POST["iden"]);
-
-}
 
 
 
@@ -1117,6 +1090,98 @@ include_once '../../system/cotizar/CotizarR.php';
 	$cot = new Cotizar();
 	$cot->VerCotizacion($_POST["key"]);
 }
+
+
+
+
+
+///////////////gastos
+if($_REQUEST["op"]=="170"){ 
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->AddGasto($_POST);
+}
+
+if($_REQUEST["op"]=="171"){ 
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->BorrarGasto($_POST["iden"]);
+
+}
+
+if($_REQUEST["op"]=="172"){  // entrada de efectivo
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->AddEfectivo($_POST);
+}
+
+
+if($_REQUEST["op"]=="173"){ 
+include_once '../../system/gastos/Gasto.php';
+	$gastos = new Gastos;
+	$gastos->BorrarEfectivo($_POST["iden"]);
+
+}
+
+/// subir imagen de producto
+if($_REQUEST["op"]=="174"){
+include("../common/Imagenes.php");
+	$imagen = new upload($_FILES['archivo']);
+include("../common/ImagenesSuccess.php");
+$imgs = new Success();
+
+	if($imagen->uploaded) {
+		if($imagen->image_src_y > 800 or $imagen->image_src_x > 800){ // si ancho o alto es mayir a 800
+			$imagen->image_resize         		= true; // default is true
+			$imagen->image_ratio        		= true; // para que se ajuste dependiendo del ancho definido
+			$imagen->image_x              		= 800; // para el ancho a cortar
+			$imagen->image_y              		= 800; // para el alto a cortar
+		}
+		$imagen->file_new_name_body   		= Helpers::TimeId() . "-" . $_SESSION["td"]; // agregamos un nuevo nombre
+		// $imagen->image_watermark      		= 'watermark.png'; // marcado de agua
+		// $imagen->image_watermark_position 	= 'BR'; // donde se ub icara el marcado de agua. Bottom Right		
+		$imagen->process('../../assets/img/gastosimg/');	
+
+		$imgs->SaveGasto($_POST['codigo'], $imagen->file_dst_name, $_POST['descripcion']);
+
+	} // [file_dst_name] nombre de la imagen
+	else {
+	  echo 'error : ' . $imagen->error;
+	  $imgs->VerImagenGasto($_POST['codigo']);
+	}	
+}
+
+
+if($_REQUEST["op"]=="175"){ 
+include("../common/ImagenesSuccess.php");
+	$imgs = new Success();
+	$imgs->VerImagenGasto($_REQUEST['gasto'], $_REQUEST['iden']);
+	$imgs->ImagenesGasto($_REQUEST['gasto']);
+}
+
+
+if($_REQUEST["op"]=="176"){ 
+include("../common/ImagenesSuccess.php");
+	$imgs = new Success();
+	$imgs->VerImagenGasto($_REQUEST['gasto'], $_REQUEST['iden']);
+	$imgs->ImagenesGasto($_REQUEST['gasto']);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

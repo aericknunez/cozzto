@@ -1,5 +1,5 @@
 <?php 
-class Gastos{
+class Gastos {
 
 	public function __construct(){
 
@@ -76,11 +76,11 @@ class Gastos{
 			      <td>';
 			      if($b["edo"] == 1){
 
-			      	echo '<a href="?modal=imageup&gasto='. $b["id"] .'">
+			      	echo '<a id="xver" iden="'. $b["id"] .'">
 				      <span class="badge green"><i class="fas fa-image" aria-hidden="true"></i></span>
 				      </a>
 
-			      <a id="borrar-gasto" op="111" iden="'. $b["id"] .'">
+			      <a id="xdelete" op="171" iden="'. $b["id"] .'">
 				      <span class="badge red"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>
 				      </a>';
 			      }
@@ -115,6 +115,7 @@ class Gastos{
 			    $cambio["edo"] = 0;
 			    
 			    if (Helpers::UpdateId("gastos", $cambio, "id='$iden' and td = ".$_SESSION["td"]."")) {
+						$this->BorrarImagenesGasto($iden);
 			        Alerts::Alerta("success","Eliminado","Se ha eliminado el registo correctamente!");
 			    } else {
 			        Alerts::Alerta("error","Error","No se pudo eliminar!"); 
@@ -125,7 +126,23 @@ class Gastos{
 
    		}
 
+	public function BorrarImagenesGasto($gasto) {
+		$db = new dbConn();
 
+	$a = $db->query("SELECT id, imagen FROM gastos_images WHERE gasto='$gasto' and td = ".$_SESSION["td"]."");
+	    foreach ($a as $b) {
+	       
+	   if(Helpers::DeleteId("gastos_images", "id = '".$b["id"]."' and td = ".$_SESSION["td"]."")){
+			   if (file_exists("../../assets/img/gastosimg/" . $b["imagen"])) {
+                unlink("../../assets/img/gastosimg/" . $b["imagen"]);
+            	}
+		}
+
+	}
+	    $a->close();
+
+
+	}
 
 
 
@@ -167,7 +184,7 @@ class Gastos{
 			      <td>'. Helpers::Dinero($b["cantidad"]) .'</td>
 			      <td>';
 			      if($b["edo"] == 1 and $b["fecha"] == date("d-m-Y")){
-			      	echo '<a id="borrar-efectivo" op="113" iden="'. $b["id"] .'">
+			      	echo '<a id="xdelete" op="173" iden="'. $b["id"] .'">
 				      <span class="badge red"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>
 				      </a>';
 			      } else {
@@ -248,4 +265,4 @@ class Gastos{
 
 
 
-}
+} // termina la clase
