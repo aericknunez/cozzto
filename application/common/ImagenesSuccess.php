@@ -109,7 +109,7 @@ class Success {
 
 
 
-////////////////// imagen gasto
+////////////////// imagen gasto ////////////////////////////
    public function SaveGasto($gasto, $img, $descripcion){ // guarda imagen del producto
    $db = new dbConn();
       
@@ -139,8 +139,12 @@ class Success {
               $r = $db->select("imagen, descripcion", "gastos_images", "WHERE gasto = '$gasto' and id = '$iden' and td = ".$_SESSION["td"]."");
             }
              
-
-            echo '<div id="mostrarimagen"><img src="assets/img/gastosimg/'.$r["imagen"].'" class="img-fluid" alt="Imagen de gasto"> <br>' .$r["descripcion"] . '</div>';
+            if($r["imagen"] != NULL){
+              $img = 'assets/img/gastosimg/'.$r["imagen"];
+            } else {
+              $img = 'assets/img/gastosimg/default.jpg';
+            }
+            echo '<div id="mostrarimagen"><img src="'.$img.'" class="img-fluid" alt="Imagen de gasto"> <br>' .$r["descripcion"] . '</div>';
             unset($r);  
     }
 
@@ -161,7 +165,7 @@ class Success {
 
 
 
-
+///////////////////////////////////////////////////////////
 
 
 
