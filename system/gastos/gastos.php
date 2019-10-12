@@ -80,7 +80,7 @@ Descripci&oacuten
 
 
 
-<!-- Ver proveedores -->
+<!-- Ver imagenes -->
 <div class="modal" id="ModalAddImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -125,7 +125,7 @@ Descripci&oacuten
       </div>
       <div class="modal-footer">
     <a id="showform" class="btn btn-danger btn-rounded">Agregar</a>
-   <a id="cerrarmodal" class="btn btn-primary btn-rounded" data-dismiss="modal">Regresar</a>
+   <a id="cerrarmodal" class="btn btn-primary btn-rounded" data-dismiss="modal">Cerrar</a>
    
       </div>
     </div>

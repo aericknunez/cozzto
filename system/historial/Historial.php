@@ -280,11 +280,11 @@ class Historial{
 
 			    $aw = $db->query("SELECT imagen FROM gastos_images WHERE gasto = ". $b["id"] ." and td = ".$_SESSION["td"]."");
 				if($aw->num_rows > 0){
-				echo '<a href="?modal=img_gasto&gasto='. $b["id"] .'">
+				echo '<a id="xver" iden="'. $b["id"] .'">
 					<span class="badge green"><i class="fas fa-image" aria-hidden="true"></i></span>
 					</a>';	
 				} else {
-				echo '<a href="?modal=imageup&gasto='. $b["id"] .'">
+				echo '<a>
 					<span class="badge red"><i class="fas fa-ban" aria-hidden="true"></i></span>
 					</a>';	
 				}
@@ -365,11 +365,11 @@ class Historial{
 
 			    $aw = $db->query("SELECT imagen FROM gastos_images WHERE gasto = ". $b["id"] ." and td = ".$_SESSION["td"]."");
 				if($aw->num_rows > 0){
-				echo '<a href="?modal=img_gasto&gasto='. $b["id"] .'">
+				echo '<a id="xver" iden="'. $b["id"] .'">
 					<span class="badge green"><i class="fas fa-image" aria-hidden="true"></i></span>
 					</a>';	
 				} else {
-				echo '<a href="?modal=imageup&gasto='. $b["id"] .'">
+				echo '<a>
 					<span class="badge red"><i class="fas fa-ban" aria-hidden="true"></i></span>
 					</a>';	
 				}

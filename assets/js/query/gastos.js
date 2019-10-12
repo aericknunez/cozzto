@@ -139,12 +139,6 @@ return false;
     });
 
     
-    $("body").on("click","#showform",function(){ 
-        $('#formulario').toggle();
-    });
-
-
-
     function CargaImagen(iden){ // Extrae los datos del perfil cuando es invocada la funcion
             $.ajax({
                 url: "application/src/routes.php?op=175&gasto="+iden,
@@ -155,6 +149,13 @@ return false;
             });
     }
 
+
+    $("body").on("click","#showform",function(){ 
+        $('#formulario').toggle();
+    });
+
+
+    
     $("body").on("click","#verimagen",function(){ 
          var iden = $(this).attr('iden');
           var gasto = $(this).attr('gasto');

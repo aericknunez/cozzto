@@ -217,6 +217,7 @@ echo '<script type="text/javascript" src="assets/js/query/corte.js?v='.$numero.'
 //// Historial
 elseif(isset($_GET["consolidado"])) {
 echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/historial_modal_gastos.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["rdiario"])) {
 echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
@@ -232,9 +233,11 @@ echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$nume
 } 
 elseif(isset($_GET["gdiario"])) {
 echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/historial_modal_gastos.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["gmensual"])) {
 echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/historial_modal_gastos.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["gra_semanal"])) include_once 'assets/js/query/gra_semanal.php';
 elseif(isset($_GET["gra_mensual"])) include_once 'assets/js/query/gra_mensual.php';
