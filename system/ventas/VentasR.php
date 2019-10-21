@@ -390,18 +390,58 @@ class Ventas{
 	public function DescontarProducto($factura) { // Descuenta los productods del inventario segun factura
 		$db = new dbConn();
 
-	    $a = $db->query("SELECT * FROM ticket WHERE num_fac = '$factura' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
-	    foreach ($a as $b) {
+	    $ax = $db->query("SELECT * FROM ticket WHERE num_fac = '$factura' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
+	    foreach ($ax as $bx) {
 
-	    	if ($r = $db->select("*", "producto", "WHERE cod = '".$b["cod"]."' and td = ".$_SESSION["td"]."")) { 
-				$cant_p = $r["cantidad"];
-				}  unset($r);  
-		   	// regreso los valores a los productos
-		   $cambio = array();
-		   $cambio["cantidad"] = $cant_p - $b["cant"];
-		   Helpers::UpdateId("producto", $cambio, "cod = '".$b["cod"]."' and td = ".$_SESSION["td"]."");
+		// primero verifico si el producto es un compuesto. si es compuesto o dependiente actualizo todos los productos que este conlleva . si es un servicio no se hace nada
+		// 
+		    if ($r = $db->select("compuesto, dependiente, servicio", "producto", "WHERE cod = '".$bx["cod"]."' and td = ".$_SESSION["td"]."")) { 
+		        $compuesto = $r["nombre"]; $dependiente = $r["dependiente"]; $servicio = $r["servicio"];
+		    }  unset($r);  
 
-	    } $a->close();	
+			if($compuesto == "on"){ // aqui veo que productos lleva el producto comp
+				
+				$a = $db->query("SELECT agregado, cant FROM producto_compuestos WHERE producto = '".$bx["cod"]."' and td = ".$_SESSION["td"]."");
+				    foreach ($a as $b) {
+				    	// comienza actualizar producto
+				    	$cantidades = $bx["cant"] * $b["cant"];
+						$cantidad = $this->ObtenerCantidad($b["agregado"]) - $cantidades; 
+			
+				    $cambio = array();
+				    $cambio["cantidad"] = $cantidad;
+				    Helpers::UpdateId("producto", $cambio, "cod='".$b["agregado"]."' and td = ".$_SESSION["td"]."");
+				    // termina la parte de actualizar producto
+				} $a->close();
+
+			} elseif($dependiente == "on"){
+
+				$a = $db->query("SELECT dependiente, cant FROM producto_dependiente WHERE producto = '".$bx["cod"]."' and td = ".$_SESSION["td"]."");
+				    foreach ($a as $b) {
+				    	// comienza actualizar producto
+				    	$cantidades = $bx["cant"] * $b["cant"];
+						$cantidad = $this->ObtenerCantidad($b["dependiente"]) - $cantidades; 
+
+				    $cambio = array();
+				    $cambio["cantidad"] = $cantidad;
+				    Helpers::UpdateId("producto", $cambio, "cod='".$b["dependiente"]."' and td = ".$_SESSION["td"]."");
+				    // termina la parte de actualizar producto
+				} $a->close();
+
+			} elseif($servicio == "on"){
+				// si es servicio no se hace nada// solo valido la opcion para hacer el else
+			} else {
+
+					$cantidad = $this->ObtenerCantidad($bx["cod"]) - $bx["cant"]; 
+			    $cambio = array();
+			    $cambio["cantidad"] = $cantidad;
+			    Helpers::UpdateId("producto", $cambio, "cod='".$bx["cod"]."' and td = ".$_SESSION["td"]."");
+			    // termina la parte de actualizar producto
+			}	////////////////
+
+
+
+
+	    } $ax->close();	
 
 	}
 

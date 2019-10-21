@@ -37,7 +37,7 @@ class Fechas{
         return date("d-m-Y", strtotime($fecha."+ 1 days")); 
     }
 
-    public function DiaAnterior($fecha){ // dia anterior  
+    public function DiaAnterior($fecha){ // dia anterior  (month para mes)
         return date("d-m-Y", strtotime($fecha."- 1 days"));
     }
 

@@ -155,9 +155,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-  <div class="form-row">
-  	<div class="col-md-12 my-6 md-form text-center">
-  	 <button class="btn btn-info my-4" type="submit" id="btn-proadd"><i class="fa fa-floppy-o mr-1"></i> Guardar y continuar</button>
+  <div class="form-row mt-5">
+  	<div class="col-md-12 md-form text-center">
+  	 <button class="btn btn-info" type="submit" id="btn-proadd"><i class="fas fa-save mr-1"></i> Guardar y continuar</button>
 
   	</div>
   </div>

@@ -42,7 +42,6 @@ class ProUpdate{
         echo '<script>
         window.location.href="?modal=proadd&key='. $datos["cod"] .'&step=2&cad='. $datos["caduca"] .'&com='. $datos["compuesto"] .'&dep='. $datos["dependiente"] .'";
         </script>';
-
   }
 
 

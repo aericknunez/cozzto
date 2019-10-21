@@ -42,7 +42,7 @@ class Productos{
   }
 
   public function Redirect($datos){
-      if($datos["servicio"] == "on"){
+      if($datos["servicio"] === "on"){
         echo '<script>
         window.location.href="?modal=proadd&key='. $datos["cod"] .'&step=1&cad=0&com=0&dep=0";
         </script>';

@@ -178,14 +178,61 @@ class Ventas{
 
 	public function ActualizaProducto($cod,$cant,$funt) { // descuenta o regresa los productos
 		$db = new dbConn();
-			if($funt == NULL){ // $func null es resta
-				$cantidad = $this->ObtenerCantidad($cod) - $cant; 
+		// primero verifico si el producto es un compuesto. si es compuesto o dependiente actualizo todos los productos que este conlleva . si es un servicio no se hace nada
+		// 
+		    if ($r = $db->select("compuesto, dependiente, servicio", "producto", "WHERE cod = '$cod' and td = ".$_SESSION["td"]."")) { 
+		        $compuesto = $r["nombre"]; $dependiente = $r["dependiente"]; $servicio = $r["servicio"];
+		    }  unset($r);  
+
+			if($compuesto == "on"){ // aqui veo que productos lleva el producto comp
+				
+				$a = $db->query("SELECT agregado, cant FROM producto_compuestos WHERE producto = '$cod' and td = ".$_SESSION["td"]."");
+				    foreach ($a as $b) {
+				    	// comienza actualizar producto
+				    	$cantidades = $cant * $b["cant"];
+					if($funt == NULL){ // $func null es resta
+						$cantidad = $this->ObtenerCantidad($b["agregado"]) - $cantidades; 
+					} else {
+						$cantidad = $this->ObtenerCantidad($b["agregado"]) + $cantidades; 
+					}
+				    $cambio = array();
+				    $cambio["cantidad"] = $cantidad;
+				    Helpers::UpdateId("producto", $cambio, "cod='".$b["agregado"]."' and td = ".$_SESSION["td"]."");
+				    // termina la parte de actualizar producto
+				} $a->close();
+
+			} elseif($dependiente == "on"){
+
+				$a = $db->query("SELECT dependiente, cant FROM producto_dependiente WHERE producto = '$cod' and td = ".$_SESSION["td"]."");
+				    foreach ($a as $b) {
+				    	// comienza actualizar producto
+				    	$cantidades = $cant * $b["cant"];
+					if($funt == NULL){ // $func null es resta
+						$cantidad = $this->ObtenerCantidad($b["dependiente"]) - $cantidades; 
+					} else {
+						$cantidad = $this->ObtenerCantidad($b["dependiente"]) + $cantidades; 
+					}
+				    $cambio = array();
+				    $cambio["cantidad"] = $cantidad;
+				    Helpers::UpdateId("producto", $cambio, "cod='".$b["dependiente"]."' and td = ".$_SESSION["td"]."");
+				    // termina la parte de actualizar producto
+				} $a->close();
+
+			} elseif($servicio == "on"){
+				// si es servicio no se hace nada// solo valido la opcion para hacer el else
 			} else {
-				$cantidad = $this->ObtenerCantidad($cod) + $cant; 
-			}
-		    $cambio = array();
-		    $cambio["cantidad"] = $cantidad;
-		    Helpers::UpdateId("producto", $cambio, "cod='$cod' and td = ".$_SESSION["td"]."");
+				// comienza actualizar producto
+				if($funt == NULL){ // $func null es resta
+					$cantidad = $this->ObtenerCantidad($cod) - $cant; 
+				} else {
+					$cantidad = $this->ObtenerCantidad($cod) + $cant; 
+				}
+			    $cambio = array();
+			    $cambio["cantidad"] = $cantidad;
+			    Helpers::UpdateId("producto", $cambio, "cod='$cod' and td = ".$_SESSION["td"]."");
+			    // termina la parte de actualizar producto
+			}		    
+		    
     }
 
 

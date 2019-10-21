@@ -65,22 +65,21 @@ foreach($sql as $query){
 } // foreach
 
 
-
-
 function SubirFtp($sync){
 	include_once '../system/sync/Ftp.php';
 		$subir =  new Ftp;
 		if($subir->Servidor("ftp.pizto.com",
 						"erick@pizto.com",
 						"caca007125-",
-						$sync . ".sql",
-						"/login/sync/database/",
-						"C:/AppServ/www/cozto/sync/". $sync .".sql") == TRUE){
+						$sync,
+						"/admin/sync/database/",
+						"C:/AppServ/www/pizto/sync/". $sync .".sql") == TRUE){
 						return TRUE;
 		} else {
 			return FALSE;
 		}
 }
+
 
 
 

@@ -138,7 +138,7 @@ class Corte{
 
 	public function EntradasEfectivo($fecha){
 		$db = new dbConn();
-	        $a = $db->query("SELECT sum(cantidad) FROM entradas_efectivo WHERE td = ".$_SESSION["td"]." and fecha = '$fecha'");
+	        $a = $db->query("SELECT sum(cantidad) FROM entradas_efectivo WHERE  edo = 1 and td = ".$_SESSION["td"]." and fecha = '$fecha'");
 		    foreach ($a as $b) {
 		        $efectivo=$b["sum(cantidad)"];
 		    } $a->close();
