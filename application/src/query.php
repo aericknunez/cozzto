@@ -96,6 +96,11 @@ echo '
 	}
 
 
+	/// Planilla
+	if($_GET["modal"] == "editempleado"){
+	echo '<script type="text/javascript" src="assets/js/query/planilla.js?v='.$numero.'"></script>';
+	}
+
 
 	if($_GET["modal"] == "respaldar"){
 			$url = "sync/push.php?corte=1";
@@ -251,8 +256,18 @@ include_once 'assets/js/query/gra_control.php';
 } 
 
 
-
-
+//////////////// Planilla
+elseif(isset($_GET["addempleado"])) {
+echo '<script type="text/javascript" src="assets/js/query/planilla.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["verempleado"])) {
+echo '<script type="text/javascript" src="assets/js/printThis.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/planilla.js?v='.$numero.'"></script>';
+} 
+elseif(isset($_GET["descuentos"])) {
+echo '<script type="text/javascript" src="assets/js/query/planilla.js?v='.$numero.'"></script>';
+} 
 
 
 else{

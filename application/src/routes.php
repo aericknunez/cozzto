@@ -1170,7 +1170,93 @@ include("../common/ImagenesSuccess.php");
 
 
 
+///////////////////// planilla
 
+if($_REQUEST["op"]=="300"){ // agregar empleado
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->AddEmpleado($_POST);
+
+}
+if($_REQUEST["op"]=="301"){ // eliminar empleado
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->DelEmpleado($_REQUEST["hash"], $_REQUEST["dir"]);
+
+}
+
+if($_REQUEST["op"]=="302"){ // paginar empleado
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->VerTodosEmpleados($_POST["iden"], $_POST["orden"], $_POST["dir"]);
+}
+
+if($_REQUEST["op"]=="303"){ //  carga de modal con detalles empleado
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->VerDetalles($_POST["key"]);
+}
+
+if($_REQUEST["op"]=="304"){ //  actualizar empleado
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->UpEmpleado($_POST);
+}
+
+
+if($_REQUEST["op"]=="305"){ // agrega extra
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->AddExtra($_POST);
+}
+
+
+if($_REQUEST["op"]=="306"){ // agrega extra
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->VerTodasExtras($_POST["key"],NULL,1);
+}
+
+if($_REQUEST["op"]=="307"){ // eliminar extra
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->DelExtra($_POST);
+}
+
+if($_REQUEST["op"]=="308"){ // eliminar extra
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->AddPlanilla($_POST);
+}
+if($_REQUEST["op"]=="309"){ // descuento
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->AddDescuento($_POST);
+}
+
+if($_REQUEST["op"]=="310"){ // descuento
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->DelDescuento($_POST["hash"]);
+}
+
+if($_REQUEST["op"]=="311"){ // select descuento
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->SelectDescuento($_POST["hash"]);
+}
+
+if($_REQUEST["op"]=="312"){ // descuento
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->AddDescuentoAsig($_POST);
+}
+if($_REQUEST["op"]=="313"){ // descuento
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->DelDescuentoAsig($_POST["hash"]);
+}
+/// planilla ///////////////
 
 
 

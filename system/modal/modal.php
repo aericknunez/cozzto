@@ -61,3 +61,7 @@ if($_REQUEST["modal"]=="cantidadc") include_once 'system/modal/modal/cantidad_co
 if($_REQUEST["modal"]=="descuentocot") include_once 'system/modal/modal/descuento_cot.php';
 
 if($_REQUEST["modal"]=="respaldar") include_once 'system/modal/modal/respaldar.php';
+
+
+/// planilla
+if($_REQUEST["modal"]=="editempleado") include_once 'system/modal/modal/editar-empleado.php';

@@ -21,7 +21,9 @@ if($cut->UltimaFecha() != date("d-m-Y")){ // comprobacion de corte
   <option value="1" selected>GASTOS NO FACTURADOS</option>
   <option value="2">COMPRAS CON FACTURAS</option>
   <option value="3">REMESAS</option>
+  <?php if($_SESSION["root_tipo_sistema"] != 3) { // para los que no tienen planilla aqui esta la opcion?>
   <option value="4">ADELANTO A PERSONAL</option>
+  <?php } ?>
   <option value="5">CHEQUES</option>
 </select>
 Descripci&oacuten
@@ -32,8 +34,6 @@ Descripci&oacuten
  </form>
 
   </div>
-
-
 </div>
 
 <hr>

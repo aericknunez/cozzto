@@ -334,7 +334,7 @@ $('#ModalBusqueda').on('shown.bs.modal', function() { // para autofocus en el mo
     $('#imprimir').on("click", function () {
       $('#vista').printThis({
         importCSS: false,
-        loadCSS: ["assets/css/font-awesome-582.css","http://localhost/cozto/assets/css/bootstrap.min.css", 
+        loadCSS: ["http://localhost/cozto/assets/css/font-awesome-582.css","http://localhost/cozto/assets/css/bootstrap.min.css", 
         "http://localhost/cozto/assets/css/mdb.min.css"],
         removeScripts: true,
          base: false
