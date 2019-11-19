@@ -745,7 +745,7 @@ public function VerDescuentosAsig(){
               foreach ($a as $b) { ;
                 echo '<tr>
                       <th scope="row">'. $n ++ .'</th>
-                      <td>'.$this->NombreDescuento($b["descuento"]).'</td>
+                      <td>' .$this->NombreDescuento($b["descuento"]).'</td>
                       <td>'. $this->NombreEmpleado($b["empleado"]).'</td>
                       <td><a id="xdeletea" hash="'.$b["hash"].'" op="313"><i class="fa fa-minus-circle fa-lg red-text"></i></a></td>
                     </tr>';          
