@@ -268,6 +268,11 @@ echo '<script type="text/javascript" src="assets/js/query/planilla.js?v='.$numer
 elseif(isset($_GET["descuentos"])) {
 echo '<script type="text/javascript" src="assets/js/query/planilla.js?v='.$numero.'"></script>';
 } 
+elseif(isset($_GET["planillasver"])) {
+echo '<script type="text/javascript" src="assets/js/printThis.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/planilla.js?v='.$numero.'"></script>';
+} 
 
 
 else{

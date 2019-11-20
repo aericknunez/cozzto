@@ -1256,6 +1256,14 @@ include_once '../../system/planilla/Planilla.php';
 	$plan = new planilla;
 	$plan->DelDescuentoAsig($_POST["hash"]);
 }
+
+if($_REQUEST["op"]=="314"){ // paginar planillas
+include_once '../../system/planilla/Planilla.php';
+	$plan = new planilla;
+	$plan->VerTodosPlanillas($_POST["iden"], $_POST["orden"], $_POST["dir"]);
+}
+
+
 /// planilla ///////////////
 
 

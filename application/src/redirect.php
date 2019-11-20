@@ -69,9 +69,9 @@ elseif(isset($_GET["control"])) include_once 'system/control/control.php';
 
 // planilla
 elseif(isset($_GET["addempleado"])) include_once 'system/planilla/empleados.php'; // agregar planilla
-elseif(isset($_GET["verempleado"])) include_once 'system/planilla/empleadover.php'; // ver planilla
+elseif(isset($_GET["verempleado"])) include_once 'system/planilla/empleadover.php'; // ver empleados
 elseif(isset($_GET["descuentos"])) include_once 'system/planilla/descuentos.php'; // ver descuentos
-
+elseif(isset($_GET["planillasver"])) include_once 'system/planilla/planillasver.php'; // ver planilla
 
 
 else{
