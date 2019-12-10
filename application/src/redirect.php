@@ -60,6 +60,7 @@ elseif(isset($_GET["gmensual"])) include_once 'system/historial/gmensual.php';
 elseif(isset($_GET["gra_semanal"])) include_once 'system/historial/gra_semanal.php';
 elseif(isset($_GET["gra_mensual"])) include_once 'system/historial/gra_mensual.php';
 elseif(isset($_GET["gra_clientes"])) include_once 'system/historial/gra_clientes.php';
+elseif(isset($_GET["gra_semestre"])) include_once 'system/historial/gra_semestre.php';
 
 
 

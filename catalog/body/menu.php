@@ -39,6 +39,7 @@ if((Helpers::ServerDomain() == FALSE and $_SESSION["root_plataforma"] == 0) or (
 
 <li><a href="?gra_semanal" class="waves-effect"><i class="fas fa-cog"></i> Grafico Semanal</a></li>
 <li><a href="?gra_mensual" class="waves-effect"><i class="fas fa-cogs"></i> Grafico Mensual</a></li>
+<li><a href="?gra_semestre" class="waves-effect"><i class="fas fa-cogs"></i> Grafico Semestral</a></li>
 <li><a href="?gra_clientes" class="waves-effect"><i class="fas fa-cogs"></i> Grafico de Clientes</a></li>
 
 </ul>

@@ -49,6 +49,13 @@ class Fechas{
             return date("d-m-Y", strtotime($fecha."+ ".$dias." days")); 
     }    
 
+    public function MesResta($fecha,$meses){ // mes anterior (lleva fecha entera de entrada)
+            return date("m-Y", strtotime($fecha."- ".$meses." month")); 
+    }
+    public function MesSuma($fecha,$meses){ // mes anterior (lleva fecha entera de entrada)
+            return date("m-Y", strtotime($fecha."+ ".$meses." month")); 
+    }
+
 
     public function NombreDia($fecha){ // nombre del dia segun fecha 
             $fecha = strtotime($fecha); //a timestamp 

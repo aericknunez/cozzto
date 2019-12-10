@@ -68,6 +68,15 @@ class Corte{
 		     return $b["sum(total)"];
 		    } $a->close();
 	}
+ /// para ver las ventas de un mes especifico // eje feha 05-2019
+ 	public function VentaMes($fecha){
+		$db = new dbConn();
+	    $a = $db->query("SELECT sum(total) FROM ticket WHERE edo = 1 and td = ".$_SESSION["td"]." and fecha like '%-$fecha'");
+		    foreach ($a as $b) {
+		     return $b["sum(total)"];
+		    } $a->close();
+	}
+
 
 	public function ProductosHoy($fecha){
 		$db = new dbConn();
@@ -85,6 +94,18 @@ class Corte{
 		    } $a->close();
 		    return $total;
 	}
+
+
+
+	public function GastoMes($fecha){ /// para ver los gastos de un mes especifico // eje feha 05-2019
+		$db = new dbConn();
+	    $a = $db->query("SELECT sum(cantidad) FROM gastos WHERE edo = 1 and tipo != 5 and td = ".$_SESSION["td"]." and fecha like '%-$fecha'");
+		    foreach ($a as $b) {
+		     $total=$b["sum(cantidad)"];
+		    } $a->close();
+		    return $total;
+	}
+
 
 	public function ClientesHoy($fecha){
 		$db = new dbConn();

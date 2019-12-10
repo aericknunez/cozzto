@@ -17,12 +17,24 @@ class Push{
 			$archivo.= $this->CreateDeleteIds($_SESSION["last_update"], $_SESSION["now"]);
 			$archivo.= $this->CreateUploads($_SESSION["last_update"], $_SESSION["now"]);
 
+			$this->BorarViejos($_SESSION["last_update"]);
+			
 			return $this->SaveSync($archivo);
 			$this->BorroSession();
 		}
 
 
 	}
+
+
+// borrar registros viejos de sync_tabla despues de crear lo qu e hay  que crear
+	public function BorarViejos($inicio){ 
+		$db = new dbConn();
+
+		$iniciar = $inicio - 864000; // - 10 dias
+		$db->delete("sync_tables_updates", "WHERE time < '".$iniciar."' and td = ".$_SESSION["temporal_td"]."");
+	}
+
 
 /// verificar corte
 	public function VerificarCorteHoy($fecha){
