@@ -621,6 +621,7 @@ include_once '../../system/ventas/VentasL.php';
 
 if($_REQUEST["op"]=="81"){ // borrar venta  de la venta lenta
 include_once '../../system/ventas/VentasL.php';
+include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
 	$venta->DelVenta($_REQUEST["hash"], NULL);
 }
@@ -628,12 +629,14 @@ include_once '../../system/ventas/VentasL.php';
 
 if($_REQUEST["op"]=="82"){ // guardar la venta
 include_once '../../system/ventas/VentasL.php';
+include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
 	$venta->GuardarOrden();
 }
 
 if($_REQUEST["op"]=="83"){ // select orden
 include_once '../../system/ventas/VentasL.php';
+include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
 	$venta->SelectOrden($_POST["orden"]);
 }
@@ -668,9 +671,9 @@ if($_REQUEST["op"]=="86"){ // cancelar toda la orden
 	} else {
 	include_once '../../system/ventas/VentasL.php';
 	}
+include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
 	$venta->Cancelar();
-
 }
 
 
@@ -692,6 +695,7 @@ include_once '../../system/ventas/VentasR.php';
 
 if($_REQUEST["op"]=="92"){ // borrar venta  de la venta rapida
 include_once '../../system/ventas/VentasR.php';
+include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
 	$venta->DelVenta($_REQUEST["hash"], NULL);
 }
@@ -703,6 +707,9 @@ include_once '../../system/ventas/VentasR.php';
 }
 
 
+
+
+///////////////////////////
 
 /// descuento
 if($_REQUEST["op"]=="95"){ // aplicar descuento
@@ -729,18 +736,18 @@ include_once '../../system/ventas/VentasR.php';
 	$venta->ClienteBusqueda($_POST);
 }
 
-if($_REQUEST["op"]=="98"){ 
+if($_REQUEST["op"]=="98"){ // add
 include_once '../../system/ventas/VentasR.php';
+include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
 	$venta->AgregaCliente($_POST);
 }
 
 
-if($_REQUEST["op"]=="99"){ 
-unset($_SESSION["cliente_credito"]);
-unset($_SESSION["cliente_c"]);
-unset($_SESSION["cliente_asig"]);
-unset($_SESSION["cliente_cli"]);
+if($_REQUEST["op"]=="99"){  // del
+include_once '../../system/ventas/Opciones.php';
+$opciones = new Opciones();
+$opciones->DelCredito();
 }
 
 
@@ -752,21 +759,23 @@ include_once '../../system/ventas/VentasR.php';
 	$venta->ClienteBusquedaA($_POST);
 }
 
-if($_REQUEST["op"]=="88"){ 
+if($_REQUEST["op"]=="88"){ // add
 include_once '../../system/ventas/VentasR.php';
+include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
-	$venta->AgregaClienteA($_POST);
+    $venta->AgregaClienteA($_POST);
 }
 
 
-if($_REQUEST["op"]=="89"){ 
-unset($_SESSION["cliente_asig"]);
-unset($_SESSION["cliente_cli"]);
+if($_REQUEST["op"]=="89"){ // del
+include_once '../../system/ventas/Opciones.php';
+$opciones = new Opciones();
+$opciones->DelCliente();
 }
 
 
 
-/// agrega documeton a la venta
+/// agrega documento a la venta
 if($_REQUEST["op"]=="100"){ 
 include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
@@ -785,7 +794,7 @@ unset($_SESSION["factura_documento"]);
 }
 
 
-if($_REQUEST["op"]=="103"){ // nuevo ducumento
+if($_REQUEST["op"]=="103"){ // nuevo registro de documento
 include_once '../../system/cliente/Cliente.php';
 	$cliente = new Clientes;
 	$cliente->NuevoDocumento($_POST);

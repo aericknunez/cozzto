@@ -401,17 +401,22 @@ class Ventas{
 		$db = new dbConn();
 
 		Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
-		$_SESSION["orden"] = NULL;
+
+	   if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   		$opciones = new Opciones();
+	   		$opciones->DelCredito();
+	   	}
+	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
+	   		$opciones = new Opciones();
+	   		$opciones->DelCliente();
+	   	}
+
+	   	$_SESSION["orden"] = NULL;
 		
 		if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 		if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
 		if(isset($_SESSION["tcredito"])) unset($_SESSION["tcredito"]);
 
-			if(isset($_SESSION["cliente_c"])) unset($_SESSION["cliente_c"]);
-			if(isset($_SESSION["cliente_credito"])) unset($_SESSION["cliente_credito"]);
-
-			if(isset($_SESSION["cliente_asig"])) unset($_SESSION["cliente_asig"]);
-			if(isset($_SESSION["cliente_cli"])) unset($_SESSION["cliente_cli"]);	
 
     }
 
@@ -479,6 +484,15 @@ class Ventas{
    	public function Cancelar() { //cancela toda la orden
 		$db = new dbConn();
 
+	   	if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   		$opciones = new Opciones();
+	   		$opciones->DelCredito();
+	   	}
+	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
+	   		$opciones = new Opciones();
+	   		$opciones->DelCliente();
+	   	}
+
 			$can = $db->query("SELECT * FROM ticket WHERE orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
 		    
 		    foreach ($can as $cancel) {
@@ -488,9 +502,19 @@ class Ventas{
 	}
 
 
-///////////////////////////////// ordenes
+///////////////////////////////// ordenes ///////////////
+///
 	public function GuardarOrden() { //guarda la orden para poder facturar
 		$db = new dbConn();
+
+	   if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   		$opciones = new Opciones();
+	   		$opciones->UnsetCredito();
+	   	}
+	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
+	   		$opciones = new Opciones();
+	   		$opciones->UnsetCliente();
+	   	}	
 
 		$cambios = array();
 	   	$cambios["estado"] = 3;
@@ -507,8 +531,13 @@ class Ventas{
 	   	Helpers::UpdateId("ticket_orden", $cambios, "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"].""); 
 
 		$_SESSION["orden"] = $orden;
-	}
 
+
+	   		$opciones = new Opciones();
+	   		$opciones->VarCredito();
+
+	}
+////////////////////////////////////////////
 
 
 
@@ -562,11 +591,13 @@ class Ventas{
 
 	   	if(isset($_SESSION["cliente_c"])){ // agregar el credito
 	   		$opciones = new Opciones();
-	   		$opciones->AddCredito($factura);
+	   		$opciones->ConfirmCredito($factura, $_SESSION["cliente_c"]);
+	   		$opciones->UnsetCredito();
 	   	}
 	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
 	   		$opciones = new Opciones();
-	   		$opciones->AddCliente($factura);
+	   		$opciones->ConfirmCliente($factura, $_SESSION["cliente_cli"]);
+	   		$opciones->UnsetCliente();
 	   	}
 			if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 			if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);

@@ -308,16 +308,21 @@ class Ventas{
 		$db = new dbConn();
 
 		Helpers::DeleteId("ticket_orden", "correlativo = '$orden' and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
-		
+
+	   if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   		$opciones = new Opciones();
+	   		$opciones->DelCredito();
+	   	}
+	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
+	   		$opciones = new Opciones();
+	   		$opciones->DelCliente();
+	   	}	
+
+
 		if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 		if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
 		if(isset($_SESSION["tcredito"])) unset($_SESSION["tcredito"]);
 
-			if(isset($_SESSION["cliente_c"])) unset($_SESSION["cliente_c"]);
-			if(isset($_SESSION["cliente_credito"])) unset($_SESSION["cliente_credito"]);
-
-			if(isset($_SESSION["cliente_asig"])) unset($_SESSION["cliente_asig"]);
-			if(isset($_SESSION["cliente_cli"])) unset($_SESSION["cliente_cli"]);		
     }
 
 
@@ -345,13 +350,23 @@ class Ventas{
    	public function Cancelar() { //cancela toda la orden
 		$db = new dbConn();
 
+
+	   if(isset($_SESSION["cliente_c"])){ // agregar el credito
+	   		$opciones = new Opciones();
+	   		$opciones->DelCredito();
+	   	}
+	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
+	   		$opciones = new Opciones();
+	   		$opciones->DelCliente();
+	   	}
 			$can = $db->query("SELECT * FROM ticket WHERE orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
 		    
 		    foreach ($can as $cancel) {
 		    	$hash = $cancel["hash"];	    
 		    	$this->DelVenta($hash, 1);
-		    } $can->close();
-	}
+		    } $can->close();   
+
+}
 
 
 
@@ -471,11 +486,13 @@ class Ventas{
 
 	   	if(isset($_SESSION["cliente_c"])){ // agregar el credito
 	   		$opciones = new Opciones();
-	   		$opciones->AddCredito($factura);
+	   		$opciones->ConfirmCredito($factura, $_SESSION["cliente_c"]);
+	   		$opciones->UnsetCredito();
 	   	}
 	   	if(isset($_SESSION["cliente_cli"])){ // guardar el registro del cliente
 	   		$opciones = new Opciones();
-	   		$opciones->AddCliente($factura);
+	   		$opciones->ConfirmCliente($factura, $_SESSION["cliente_cli"]);
+	   		$opciones->UnsetCliente();
 	   	}
 			if(isset($_SESSION["orden"])) unset($_SESSION["orden"]);
 			if(isset($_SESSION["descuento"])) unset($_SESSION["descuento"]);
@@ -545,7 +562,7 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
   }
 
 
-  public function AgregaCliente($dato){ // Busqueda para cliente
+  public function AgregaCliente($dato){ // Busqueda para cliente 
     $db = new dbConn();
 
        	$_SESSION["cliente_c"] = $_POST["hash"]; // asigna el credito
@@ -553,6 +570,10 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
 
        	$_SESSION["cliente_cli"] = $_POST["hash"]; // seguimiento a la factura
 		$_SESSION["cliente_asig"] = $_POST["nombre"];
+
+		$opciones = new Opciones(); // guarda registro
+	   	$opciones->AddCredito();
+	   	$opciones->AddCliente();
 
   		$texto = 'Cliente asignado para credito: ' . $_SESSION['cliente_credito']. ".";
 		Alerts::Mensajex($texto,"danger",'<a id="quitar-cliente" op="99" class="btn btn-danger btn-rounded">Quitar Cliente</a>',$boton2);
@@ -584,12 +605,15 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
   }
 
 
-  public function AgregaClienteA($dato){ // Busqueda para cliente
+  public function AgregaClienteA($dato){ // agrega  cliente
     $db = new dbConn();
 
        	$_SESSION["cliente_cli"] = $_POST["hash"];
 		$_SESSION["cliente_asig"] = $_POST["nombre"];
-  		
+		
+		$opciones = new Opciones(); // guarda registro
+	   	$opciones->AddCliente(); 
+
   		$texto = 'Cliente asignado para la Factura: ' . $_SESSION['cliente_asig']. ".";
 		Alerts::Mensajex($texto,"danger",'<a id="quitar-clienteA" op="89" class="btn btn-danger btn-rounded">Quitar Cliente</a>',$boton2);
 
