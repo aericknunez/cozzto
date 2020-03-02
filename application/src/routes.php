@@ -855,6 +855,18 @@ include_once '../../system/credito/Creditos.php';
 	$credito->LlamarVista($_REQUEST["credito"], $_REQUEST["factura"], $_REQUEST["tx"]);
 }
 
+// busqueda de persona credito
+if($_REQUEST["op"]=="110"){ 
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$credito->BusquedaCreditos($_REQUEST);
+}
+
+if($_REQUEST["op"]=="111"){ // muestra byusqueda
+include_once '../../system/credito/Creditos.php';
+	$credito = new Creditos;
+	$credito->MuestraBusquedaCreditos($_REQUEST);
+}
 
 
 

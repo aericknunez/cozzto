@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       	<div class="switch">
             <label>
             * Gravado
-              <input type="checkbox" id="gravado" name="gravado">
+              <input type="checkbox" id="gravado" name="gravado" checked="checked">
               <span class="lever"></span>
             </label>
           </div>
