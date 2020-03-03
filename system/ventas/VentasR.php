@@ -8,13 +8,17 @@ class Ventas{
 
    public function SumaVenta($datos){ // Rapida
 
+   	if($datos["codigox"]){
+   		$datos["cod"] = $datos["codigox"];
+   	}
+
   		if($this->ObtenerCantidad($datos["cod"]) > 0){
   			if($_SESSION["orden"] == NULL){ $this->AddOrden(); }
   			
   			/// aqui determino si agrego o actualizo
   			if($datos["cantidad"] == NULL or $datos["cantidad"] == 0) $datos["cantidad"] = 1;
   			$product = $this->ObtenerCantidadTicket($datos["cod"]);
-  			if($datos["cantidad"] == 1){
+  			if($datos["cantidad"] == 1 and $datos["codigox"] == NULL){
 	  			$datos["cantidad"] = $product + 1;
   			}
 
@@ -138,10 +142,13 @@ class Ventas{
 
 	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
 	$sumas = $pv * $datos["cantidad"];
+	$descuento = NULL;
 
 	if($_SESSION['descuento'] != NULL){
+		$sumasx = $sumas;
 		$sumas = Helpers::DescuentoTotal($sumas);
 		$pv = Helpers::DescuentoTotal($pv);
+		$descuento = $sumasx - $sumas;
 	}
 
     $stot=Helpers::STotal($sumas, $_SESSION['config_imp']);
@@ -153,9 +160,12 @@ class Ventas{
 	    $cambio["stotal"] = $stot;
 	    $cambio["imp"] = $im;
 	    $cambio["total"] = $stot + $im;
+	    $cambio["descuento"] = $descuento;
 	    Helpers::UpdateId("ticket", $cambio, "cod='".$datos["cod"]."' and orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."");
 
 	}
+
+
 
 
 	public function ObtenerNombre($cod){
@@ -268,13 +278,18 @@ class Ventas{
 					  </thead>
 					  <tbody>';
 		    		foreach ($a as $b) {
+		    		$porcentaje = (($b["descuento"] * 100) / ($b["total"] + $b["descuento"]));
 		    		   echo '<tr>
-						      <th scope="row"><a href="?modal=cantidad&cant='.$b["cant"].'&cod='.$b["cod"].'">'.$b["cant"].'</a></th>
+						      <th scope="row">
+						      <a id="xcantidad" codigox="'.$b["cod"].'" cantidad="'.$b["cant"].'">'.$b["cant"].'</a>
+						      </th>
 						      <td>'.$b["producto"].'</td>
 						      <td>'.$b["pv"].'</td>
 						      <td>'.$b["stotal"].'</td>
 						      <td>'.$b["imp"].'</td>
-						      <td>'.$b["total"].'</td>
+						      <td>
+						      <a id="xdescuento" dcodigo="'.$b["cod"].'" dcantidad="'.$b["cant"].'" ddescuento="'.$b["descuento"].'" dporcentaje="'.$porcentaje.'">'.$b["total"].'</a>
+						      </td>
 			    			<td><a id="modcant" op="91" cod="'.$b["cod"].'"><i class="fas fa-minus-circle red-text fa-lg"></i></a>  <a id="modcant" op="90" cod="'.$b["cod"].'"><i class="fas fa-plus-circle green-text fa-lg"></i></a></td>
 			    			<td><a id="borrar-ticket" op="92" hash="'.$b["hash"].'"><i class="fas fa-times-circle red-text fa-lg"></i></a></td>
 					</tr>';

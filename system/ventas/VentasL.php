@@ -108,6 +108,14 @@ class Ventas{
 
 	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
 	$sumas = $pv * $datos["cantidad"];
+	$descuento = NULL;
+
+	if($_SESSION['descuento'] != NULL){
+		$sumasx = $sumas;
+		$sumas = Helpers::DescuentoTotal($sumas);
+		$pv = Helpers::DescuentoTotal($pv);
+		$descuento = $sumasx - $sumas;
+	}
 
     $stot=Helpers::STotal($sumas, $_SESSION['config_imp']);
     $im=Helpers::Impuesto($stot, $_SESSION['config_imp']);
@@ -118,11 +126,57 @@ class Ventas{
 	    $cambio["stotal"] = $stot;
 	    $cambio["imp"] = $im;
 	    $cambio["total"] = $stot + $im;
+	    $cambio["descuento"] = $descuento;
 	    if (Helpers::UpdateId("ticket", $cambio, "cod='".$datos["cod"]."' and orden = ".$_SESSION["orden"]." and tx = ".$_SESSION["tx"]." and td = ".$_SESSION["td"]."")) {
 	       $this->ActualizaProducto($datos["cod"], 1, $func);
 	    }
 
 	}
+
+
+
+	public function AgregarProductoEspecial($datos) { // agrega el producto Especial
+		$db = new dbConn();
+
+if($datos["precio"] != NULL and $datos["producto"] != NULL){
+
+    $stot=Helpers::STotal($datos["precio"], $_SESSION['config_imp']);
+    $im=Helpers::Impuesto($stot, $_SESSION['config_imp']);
+
+		$datox = array();
+	    $datox["cod"] = 9999999;
+	    $datox["cant"] = 1;
+	    $datox["producto"] = strtoupper($datos["producto"]);
+	    $datox["pv"] = $datos["precio"];  				   
+	    $datox["stotal"] = $stot;	    				   
+	    $datox["imp"] = $im;
+	    $datox["total"] = $stot + $im;
+	    $datox["num_fac"] = 0;
+	    $datox["fecha"] = date("d-m-Y");
+	    $datox["hora"] = date("H:i:s");
+	    $datox["orden"] = $_SESSION["orden"];
+	    $datox["cajero"] = $_SESSION['nombre'];
+	    $datox["tipo_pago"] = 1;
+	    $datox["user"] = $_SESSION['user'];
+	    $datox["tx"] = $_SESSION['tx'];
+	    $datox["fechaF"] = Fechas::Format(date("d-m-Y"));
+	    $datox["edo"] = 1;
+	    $hash = Helpers::HashId();
+	    $datox["hash"] = $hash;
+		$datox["time"] = Helpers::TimeId();
+	    $datox["td"] = $_SESSION["td"];
+	    if($db->insert("ticket", $datox)){
+	    	echo '<script>
+				window.location.href="?"
+			</script>';
+	    }
+	} else {
+		Alerts::Alerta("error","Error!","Los campos no pueden estar vacios!");
+	}   	
+	
+	}
+
+
 
 
 	public function ObtenerNombre($cod){
@@ -364,13 +418,16 @@ class Ventas{
 					  </thead>
 					  <tbody>';
 		    		foreach ($a as $b) {
+		    			$porcentaje = (($b["descuento"] * 100) / ($b["total"] + $b["descuento"]));
 		    		   echo '<tr>
 						      <th scope="row">'.$b["cant"].'</th>
 						      <td>'.$b["producto"].'</td>
 						      <td>'.$b["pv"].'</td>
 						      <td>'.$b["stotal"].'</td>
 						      <td>'.$b["imp"].'</td>
-						      <td>'.$b["total"].'</td>
+						      <td>
+						      <a id="xdescuento" dcodigo="'.$b["cod"].'" dcantidad="'.$b["cant"].'" ddescuento="'.$b["descuento"].'" dporcentaje="'.$porcentaje.'">'.$b["total"].'</a>
+						      </td>
 						      <td><a id="borrar-ticket" op="81" hash="'.$b["hash"].'"><i class="fas fa-times-circle red-text fa-lg"></i></a></td>
 					</tr>';
 				    }

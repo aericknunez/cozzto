@@ -14,6 +14,7 @@ class Productos{
                 if($datos["compuesto"] == NULL) $datos["compuesto"] = 0;
                 if($datos["caduca"] == NULL) $datos["caduca"] = 0;
                 if($datos["dependiente"] == NULL) $datos["dependiente"] = 0;
+                $datos["descripcion"] = strtoupper($datos["descripcion"]);
                 $datos["hash"] = Helpers::HashId();
                 $datos["time"] = Helpers::TimeId();
               $datos["td"] = $_SESSION["td"];

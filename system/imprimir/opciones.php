@@ -1,25 +1,20 @@
 <?php 
-  if($_SERVER['HTTP_REFERER'] == NULL) $dir = "http://". $_SERVER['HTTP_HOST'] . "/adescolac"; else $dir = $_SERVER['HTTP_REFERER'];
+  if($_SERVER['HTTP_REFERER'] == NULL) $dir = "http://". $_SERVER['HTTP_HOST'] . "/cozto"; else $dir = $_SERVER['HTTP_REFERER'];
 
 
-if ($_GET["op"] == 1) { /// imprimir listado de cuotas pendientes
-	include_once '../../system/asociado/Asociado.php';
+if ($_GET["op"] == 10) { /// imprimir listado de cuotas pendientes
     include_once 'Imprime.php';
     $print = new Imprime(); 
-    $print->CrearCuotas(); 
+    $print->TodosProductos(); 
+}
+
+if ($_GET["op"] == 11) { /// imprimir listado de cuotas pendientes
+    include_once 'Imprime.php';
+    $print = new Imprime(); 
+    $print->BajasExistencias(); 
 }
 
 
 
 
-
-
-if($_GET["op"] == 2){
-	include_once '../../system/asociado/Asociado.php';
-    include_once 'Imprime.php';
-    $print = new Imprime(); 
-    $print->CrearFactura($_GET["contador"], $_GET["fecha"]); 
-
-    // $dir = "http://". $_SERVER['HTTP_HOST'] . "/acamsal/?asociadover";
-}
 ?>

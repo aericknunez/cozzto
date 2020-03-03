@@ -12,7 +12,7 @@ $cot = new Cotizar();
 
 
 <div id="contenido">
-   <?php $cot->TodasCotizaciones(1, "correlativo", "asc"); ?>
+   <?php $cot->TodasCotizaciones(1, "correlativo", "desc"); ?>
 </div>
 
 

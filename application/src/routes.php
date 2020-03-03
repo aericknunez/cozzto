@@ -612,6 +612,12 @@ include_once '../../system/ventas/Productos.php';
 }
 
 
+if($_REQUEST["op"]=="79"){ // otras Ventas
+include_once '../../system/ventas/VentasL.php';
+	$venta = new Ventas();
+	$venta->AgregarProductoEspecial($_POST);
+}
+
 
 if($_REQUEST["op"]=="80"){ // recibe el formulario para agregar los productos (va a ventas)
 include_once '../../system/ventas/VentasL.php';
@@ -677,6 +683,7 @@ include_once '../../system/ventas/Opciones.php';
 }
 
 
+
 ////////////////// para venta rapida
 
 if($_REQUEST["op"]=="90"){ // recibe el formulario para agregar los productos (va a ventas)
@@ -710,14 +717,51 @@ include_once '../../system/ventas/VentasR.php';
 
 
 ///////////////////////////
+/// descuento por producto
+if($_REQUEST["op"]=="94"){ // aplicar descuento
+include_once '../../system/ventas/Laterales.php';
+include_once '../../system/ventas/VentasR.php';
+	$venta = new Ventas();
+
+
+
+if($_POST["descuento"] != NULL and is_numeric($_POST["descuento"])){
+
+		if($_SESSION["descuento"] != NULL){// se ya se ha aplicado descuento a toda la factura
+			$_SESSION["descuentox"] = $_SESSION["descuento"];
+			unset($_SESSION["descuento"]);
+		}
+
+	$_SESSION["descuento"] = $_POST["descuento"];
+	$data["cantidad"] = $_POST["dcantidad"];
+	$data["cod"] = $_POST["dcodigo"];
+	$venta->Actualiza($data, 1);
+
+	unset($_SESSION["descuento"]);
+
+		if($_SESSION["descuentox"] != NULL){// se ya se ha aplicado descuento a toda la factura
+			$_SESSION["descuento"] = $_SESSION["descuentox"];
+			unset($_SESSION["descuentox"]);
+		}
+
+	} else {
+		Alerts::Alerta("error","Error!","Revise sus datos!");
+	}	
+}
+
+
 
 /// descuento
-if($_REQUEST["op"]=="95"){ // aplicar descuento
+if($_REQUEST["op"]=="95"){ // aplicar descuento a factura
+if($_POST["descuento"] != NULL and is_numeric($_POST["descuento"])){
 	$_SESSION["descuento"] = $_POST["descuento"];
 include_once '../../system/ventas/Laterales.php';
 include_once '../../system/ventas/VentasR.php';
 	$venta = new Ventas();
-	$venta->AplicarDescuento();
+	$venta->AplicarDescuento();	
+	} else {
+		Alerts::Alerta("error","Error!","Revise sus datos!");
+	}	
 }
 
 if($_REQUEST["op"]=="96"){ // quitar descuento

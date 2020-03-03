@@ -68,9 +68,6 @@ echo '
 
 
 	/// ventas
-	if($_GET["modal"] == "cantidad"){
-	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
-	}
 	if($_GET["modal"] == "descuento"){
 	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
 	}
@@ -81,6 +78,9 @@ echo '
 	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
 	}
 	if($_GET["modal"] == "cliente"){
+	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
+	}
+	if($_GET["modal"] == "oventas"){
 	echo '<script type="text/javascript" src="assets/js/query/ventaPop.js?v='.$numero.'"></script>';
 	}
 // abono
@@ -170,6 +170,7 @@ echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero
 elseif(isset($_GET["cotizaciones"])) {
 echo '<script type="text/javascript" src="assets/js/printThis.js?v='.$numero.'"></script>';
 echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
+echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$numero.'"></script>';
 } 
 
 

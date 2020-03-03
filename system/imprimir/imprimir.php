@@ -12,7 +12,6 @@ if ($seslog->login_check() == TRUE) {
 
 include_once '../../application/common/Fechas.php';
 include_once '../../application/common/Alerts.php';
-include_once '../../application/common/Dinero.php';
 
 ?>
 

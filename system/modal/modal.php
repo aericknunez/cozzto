@@ -37,8 +37,6 @@ if($_REQUEST["modal"]=="productoBusqueda") include_once 'system/modal/modal/prod
 
 
 // venta
-if($_REQUEST["modal"]=="cantidad") include_once 'system/modal/modal/cantidad.php';
-
 if($_REQUEST["modal"]=="descuento") include_once 'system/modal/modal/descuento.php';
 
 if($_REQUEST["modal"]=="credito") include_once 'system/modal/modal/credito.php';

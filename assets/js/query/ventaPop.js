@@ -1,24 +1,6 @@
 $(document).ready(function(){
 
 
-    $('#btn-Ccantidad').click(function(e){ /// cambia la cantidad de los productos
-        e.preventDefault();
-        $.ajax({
-            url: "application/src/routes.php?op=90",
-            method: "POST",
-            data: $("#form-Ccantidad").serialize(),
-            beforeSend: function () {
-               $("#ver").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
-            },
-            success: function(data){
-                $("#form-Ccantidad").trigger("reset");
-                window.location.href="?"
-            }
-        })
-    })
-
-
-
 
 
     $('#btn-descuento').click(function(e){ /// Aplicar descuento
@@ -244,6 +226,29 @@ $(document).ready(function(){
             }
         });
     });                 
+
+
+
+////////////// otras ventas ////////
+    $('#btn-oventas').click(function(e){ /// para el formulario
+    e.preventDefault();
+    $.ajax({
+            url: "application/src/routes.php?op=79",
+            method: "POST",
+            data: $("#form-oventas").serialize(),
+            beforeSend: function () {
+                $('#btn-oventas').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').addClass('disabled');
+            },
+            success: function(data){
+                $('#btn-oventas').html('Agregar Producto').removeClass('disabled');
+                $("#form-oventas").trigger("reset");
+                $("#msj").html(data);           
+            }
+        })
+    })
+    
+
+
 
 
 

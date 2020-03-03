@@ -7,8 +7,20 @@
       </div>
       <div class="modal-body">
 <!-- ./  content -->
+<div class="row d-flex justify-content-center">
+  <div class="col-md-12">
+<form class="text-center border border-light p-3" id="form-oventas" name="form-oventas">
 
+<input type="text" name="producto" id="producto" class="form-control mb-3" placeholder="Producto">
 
+<input type="number" step="any" id="precio" name="precio" class="form-control mb-3" placeholder="Precio">
+<button class="btn btn-info my-4" type="submit" id="btn-oventas" name="btn-oventas">Agregar Producto</button>
+ </form>
+
+  </div>
+</div>
+
+<div id="msj"></div>
 <!-- ./  content -->
       </div>
       <div class="modal-footer">
