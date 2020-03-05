@@ -12,10 +12,42 @@ class Usuarios{
 			    $cambio["nombre"] = $nombre;
 			    $cambio["tipo"] = $tipo;
 			    if ($db->update("login_userdata", $cambio, "WHERE user='$user'")) {
+			    	if($_SESSION["nombre"] != $cambio["nombre"]) { $_SESSION["nombre"] = $cambio["nombre"]; }
 			    Alerts::Alerta("success","Actualizado","Usuario Actualizado");
 			    } else {
 			    Alerts::Alerta("error","Error!","Error al actualizar!");
 			    }
+
+	}
+
+
+
+
+
+	function AvatarSelect($user){
+	    $db = new dbConn();
+
+	    $usuario = sha1($user);
+
+	if ($r = $db->select("avatar", "login_userdata", "WHERE user = '$usuario'")) { 
+        $avat = $r["avatar"];
+    } unset($r);
+
+echo '<div id="avatar-select">
+<img src="assets/img/avatar/'.$avat.'" class="img-fluid rounded-circle hoverable mx-auto d-block" alt="alt="avatar mx-auto white">
+</div>
+<br>';
+
+	$images = glob("../../assets/img/avatar/*.*");  
+      foreach($images as $image){ 
+    $image = str_replace("../../assets/img/avatar/", "", $image);
+    $opciones='id="cambiar-avatar" op="3" iden="'.$image.'" user="'.$usuario.'"';
+
+    $output .= '<a ' . $opciones .'><img src="assets/img/avatar/' . $image .'" alt="thumbnail" class="img-thumbnail"
+  style="width: 75px"></a>';
+    
+      }  
+      echo $output;
 
 	}
 
@@ -37,6 +69,72 @@ class Usuarios{
 
 	}
 
+
+
+	public function ModalPass($user) {
+	$usuario = sha1($user);
+
+		if($_SESSION["user"]==$usuario){
+
+		echo 'Cambiar Password
+
+		      <input type="password" class="my-1 form-control" id="pass1" name="pass1" placeholder="Nuevo Password" required autocomplete="off">
+		      <input type="password" class="my-1 form-control" id="pass2" name="pass2" placeholder="Repetir Password" required autocomplete="off">'; 
+		} else {
+		  echo "No tiene permitido cambiar este password";
+		}
+	}
+
+
+
+	public function ModalUpdate($user) {
+		$db = new dbConn();
+
+	$usuario = sha1($user);
+
+    if ($r = $db->select("nombre, tipo", "login_userdata", "WHERE user = '$usuario'")) { 
+        $name = $r["nombre"]; $type = $r["tipo"];
+    }  unset($r); 
+
+	    if($_SESSION['tipo_cuenta'] == 1 or $_SESSION['tipo_cuenta'] == 2 or $_SESSION["user"]==$usuario){
+
+
+		echo '<label for="nombre" class="grey-text">Nombre</label>
+				<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" value="'.$name.'" required="yes">
+		 
+		    <input type="hidden" id="user" name="user" value="'.$user.'">';
+
+
+		    if($_SESSION['tipo_cuenta'] != 4){
+
+echo '<label>Tipo de Cuenta</label>
+<select id="tipo" name="tipo" class="browser-default form-control" required="yes">
+    
+    <option ';
+    if($type == 2) echo "selected "; 
+    if($_SESSION['tipo_cuenta'] == 3 or $_SESSION['tipo_cuenta'] == 4 or $_SESSION['tipo_cuenta'] == 5) echo "disabled "; echo 'value="2">'; echo Helpers::UserName(2) . '</option>
+    
+    <option '; 
+    if($type == 3) echo "selected";
+    if($_SESSION['tipo_cuenta'] == 3 or $_SESSION['tipo_cuenta'] == 5) echo 'disabled '; echo 'value="3">'; echo Helpers::UserName(3) . '</option>
+   
+    <option ';
+    if($type == 4) echo "selected";
+    if($_SESSION['tipo_cuenta'] == 4) echo 'disabled '; echo 'value="4">';echo Helpers::UserName(4) . '</option>
+    
+    <option '; 
+    if($type == 5) echo "selected";
+    if($_SESSION['tipo_cuenta'] == 5 or $_SESSION['tipo_cuenta'] != 1) echo 'disabled '; echo 'value="5">';echo Helpers::UserName(5) . '</option>
+
+</select>';
+}
+
+
+
+
+	    }
+
+	}
 
 
 	public function CambiarPass($password) {
@@ -75,17 +173,17 @@ class Usuarios{
 					} else { echo "Debe contener al menos un numero"; } 
 					
 				} else {
-					echo "Debe tener al manos una Mayuscula";
+					Alerts::Alerta("error","Error!","Debe tener al manos una Mayuscula");
 				}
 
 				
 			}
 			else { 
-				echo "El password debe tener mas de 6 Caracteres";
+				Alerts::Alerta("error","Error!","El password debe tener mas de 6 Caracteres");
 			}
 			
 		} else {
-			echo "Los password no son iguales";
+			Alerts::Alerta("error","Error!","Los password no son iguales");
 		}
 
 	}
@@ -109,8 +207,6 @@ class Usuarios{
 			if ( $db->delete("login_members", "WHERE id='$iden'")) {
         	
         		if ( $db->delete("login_userdata", "WHERE user='$username'")) {
-	        	
-	        	$this->VerUsuarios();
 	     		Alerts::Alerta("success","Usuario Eliminado","Usuario eliminado correctamente! Inicie nuevamente");
 	    		} 
     		} 
@@ -154,21 +250,21 @@ class Usuarios{
 		      <td>'.Helpers::UserName($tipo).'</td>';
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a id="deluser" op="5" iden="'.$b["id"].'" username="'.$user.'" ><i class="fa fa-trash red-text fa-lg"></i></a></td>';
+				echo '<td><a id="xdelete" op="7" iden="'.$b["id"].'" username="'.$user.'" ><i class="fa fa-trash red-text fa-lg"></i></a></td>';
 			} else {
 				echo '<td><a><i class="fa fa-trash grey-text  fa-lg"></i></a></td>';
 			}
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a href="?modal=newpass&user='.$b["username"].'&op=actualizar"><i class="fa fa-unlock-alt red-text fa-lg"></i></a>
-				<a href="?modal=userupdate&user='.$b["username"].'&op=actualizar"><i class="fa fa-edit red-text fa-lg"></i></a></td>';
+				echo '<td><a id="u_pass" username="'.$b["username"].'" op="9"><i class="fa fa-unlock-alt red-text fa-lg"></i></a>
+					<a id="u_update" username="'.$b["username"].'" op="10"><i class="fa fa-edit red-text fa-lg"></i></a></td>';
 			} else {
 				echo '<td><a ><i class="fa fa-unlock-alt grey-text fa-lg"></i></a>
 				<a ><i class="fa fa-edit grey-text fa-lg"></i></a></td>';
 			}
 
 			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a href="?modal=avatar&user='.$b["username"].'" ><i class="fa fa-user red-text fa-lg"></i></a></td>';
+				echo '<td><a id="ver_avatar" op="6" username = "'.$b["username"].'"><i class="fa fa-user red-text fa-lg"></i></a></td>';
 			} else {
 				echo '<td><a ><i class="fa fa-user grey-text fa-lg"></i></a></td>';
 			}

@@ -200,7 +200,7 @@ body { overflow-x: hidden; padding-left: 5px; padding-right: 5px; }</style>
 
        </script>
 
-<script type="text/javascript" src="assets/js/query/login.js"></script>
+<script type="text/javascript" src="system/user/login.js"></script>
 
 </body>
 

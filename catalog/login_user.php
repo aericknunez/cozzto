@@ -45,7 +45,7 @@
   <div class="row d-flex justify-content-center">
 
 <?php 
-    $a = $db->query("SELECT * FROM login_members WHERE username != 'Erick'");
+    $a = $db->query("SELECT * FROM login_members WHERE id != '1' and id != '2'");
     foreach ($a as $b) {
     	$user=sha1($b['username']);
     if ($r = $db->select("nombre, avatar", "login_userdata", "WHERE user = '$user'")) { 
@@ -195,7 +195,7 @@ $(document).ready(function(){
     });
 </script>
 
-<script type="text/javascript" src="assets/js/query/login.js"></script>
+<script type="text/javascript" src="system/user/login.js"></script>
 
 </body>
 </html>

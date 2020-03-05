@@ -327,6 +327,16 @@ public function VerificarEmail($email){
 
 
 
+ public function DataCheckUp(){ // verifica si es sitema es nuevo
+     $db = new dbConn();
+     $a = $db->query("SELECT * FROM config_master");
+		if($a->num_rows > 0){
+			return TRUE; // existen registros
+		} else {
+			return FALSE; // No hay Registros
+		}
+		$a->close();
+}
 
 
 
