@@ -90,18 +90,6 @@ return false;
 	});
 
 
-// function Mostrar(){
-// 	$("#btn-addform").show();
-// 	$("#cancel-x").show();
-// 	$("#temp-productos").show();
-// }
-
-// function Esconder(){
-// 	$("#btn-addform").hide();
-// 	$("#cancel-x").hide();
-// 	$("#temp-productos").hide();
-// }
-
 function Mostrar(){
  $("#btn-addform").removeClass("invisible");
  $("#btn-addform").addClass("visible");

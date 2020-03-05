@@ -36,6 +36,7 @@ $user=sha1($_SESSION['username']);
 
             } unset($r);
 
+            BuscaDatosSistema();
 
         $configuracion = new Config;
         $configuracion->CrearVariables(); // creo el resto de variables del sistema
@@ -45,6 +46,20 @@ $user=sha1($_SESSION['username']);
 
         header("location: ../../");
     }
+
+
+    function BuscaDatosSistema(){
+        $db = new dbConn();
+
+            if ($r = $db->select("*", "config_master", "WHERE td = " . $_SESSION['td'])) { 
+                if($r["cliente"] == NULL or $r["moneda"] == NULL){
+                        $_SESSION['nodatainicial'] = md5($_SESSION['td']); // es para los que no llena datos 
+                      header("location: ../../?modal=conf_config&inicio");
+                       exit();
+                }  
+            } unset($r); 
+    }
+
 
 UserInicio($user);
 

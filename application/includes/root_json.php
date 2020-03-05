@@ -14,7 +14,7 @@ $seslog->sec_session_start();
 
     $a = $db->query("SELECT expira, expiracion, ftp_servidor, 
     	ftp_path, ftp_ruta, ftp_user, ftp_password, tipo_sistema, 
-    	plataforma, td
+    	plataforma
     	FROM config_root WHERE td = ". $_REQUEST["x"]."");
     foreach ($a as $b) {
        $data = $b;

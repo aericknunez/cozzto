@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="assets/css/font-awesome-582.css">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/mdb.min.css" rel="stylesheet">
+        <style>
+    	a:active {
+		     position: relative;
+		     top: 5px;
+		}
+    </style>
     <link href="assets/css/galeria.css" rel="stylesheet">
 
 <link href="assets/css/addons/datatables.min.css" rel="stylesheet">
