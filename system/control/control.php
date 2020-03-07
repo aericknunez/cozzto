@@ -14,7 +14,7 @@ $control = new Controles();
 <div class="row mb-3">
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4 col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-3 col-3 text-left pl-1">
@@ -34,7 +34,7 @@ $control = new Controles();
 
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4  col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-3 col-3 text-left pl-1">
@@ -52,7 +52,7 @@ $control = new Controles();
 
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4  col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-3 col-3 text-left pl-1">
@@ -69,7 +69,7 @@ $control = new Controles();
 <!-- Grid column -->
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4 col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-3 col-3 text-left pl-1">
@@ -99,7 +99,7 @@ $control = new Controles();
 <div class="row mt-3">
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4 col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-3 col-3 text-left pl-1">
@@ -119,7 +119,7 @@ $control = new Controles();
 
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4 col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-5 col-5 text-left pl-1">
@@ -137,7 +137,7 @@ $control = new Controles();
 
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4 col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-5 col-5 text-left pl-1">
@@ -154,7 +154,7 @@ $control = new Controles();
 <!-- Grid column -->
 
 <!-- Grid column -->
-<div class="col-xl-3 col-md-6 mb-4">
+<div class="col-xl-3 col-md-6 mb-4 col-sm-6 col-6">
   <div class="card">
     <div class="row mt-3">
       <div class="col-md-5 col-5 text-left pl-1">

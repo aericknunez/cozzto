@@ -26,7 +26,7 @@ echo '<a id="u_registrar" class="btn-floating btn-sm blue-gradient"><i class="fa
 
 <!-- Ver AGREGAR -->
 <div class="modal" id="ModalAgregar" tabindex="-1" role="dialog" aria-labelledby="ModalAgregar" aria-hidden="true"  data-backdrop="false">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
