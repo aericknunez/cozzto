@@ -1,3 +1,9 @@
+<?php 
+include_once ("system/setup/class.php");
+include_once 'application/common/Encrypt.php';
+include_once 'application/common/Fechas.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +47,15 @@
 
 <!-- Section: Team v.1 -->
 <section class="team-section text-center">
-
+<?php 
+// $reg = new Register();
+// $clavex = "R001-SV-546551";
+// $clave = $reg->SanarClave($clavex);
+// $codigo = $reg->ObtenerCodigo($clave);
+// echo $clavex . "<br>";
+// echo $codigo;
+// echo "<br>Codigos";
+ ?>
 <h1>ACTIVACIÓN DEL SISTEMA</h1>
 
 
@@ -49,8 +63,8 @@
   <form class="text-center border border-light p-3" id="form-setup" name="form-setup">
     
 <input type="text"  id="nombre" name="nombre" class="form-control mb-3" placeholder="Nombre">
-<input type="text"  id="clave" name="clave" class="form-control mb-3" placeholder="Clave">
-<input type="text"  id="codigo" name="codigo" class="form-control mb-3" placeholder="Codigo">
+<input type="text"  id="clave" name="clave" class="form-control mb-3" placeholder="Clave" >
+<input type="text"  id="codigo" name="codigo" class="form-control mb-3" placeholder="Codigo" >
 
 <button class="btn btn-info my-4" type="submit" id="btn-setup" name="btn-setup">Agregar Registro</button>
  <div id="contenido"></div>

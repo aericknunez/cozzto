@@ -37,6 +37,7 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 }
 
 		     if($reg->ValidarCodigo($_POST["clave"], $_POST["codigo"]) == TRUE){
+			 
 			 $_SESSION['secret_key'] = md5($td);
 
 		     	// inserta datos en root
@@ -53,7 +54,7 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 		     	// inserta datos en config
 		     	$datom = array();
 			    $datom["sistema"] = "Sistema de control " . $_POST["nombre"];
-			    $datom["propietario"] = $_POST["nombre"];
+			    $datom["cliente"] = $_POST["nombre"];
 			    $datom["imp"] = 0;
 			    $datom["propina"] = 0;
 			    $datom["imagen"] = "default.png";
@@ -79,8 +80,8 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 				$dat2 = array();
 			    $dat2["username"] = "52ce5b";
 			    $dat2["email"] = "admin@pizto.com";
-			    $dat2["password"] = "1124dd1dc6d5f8b78d603ced68c5ef359f65e9f3f998685671667c8e863ba1247809574bc50327245c2383f62ca61e407b77eef57cc2c6ff6577531194a8417f";
-			    $dat2["salt"] = "dd6cce5e11cfb646616341521e972f6afc2d0ec3166fe9af09459bb8649ccf51629c460036b55186cde66b33bec1ee4bfb9d29fe1afc4531dbc24de367180888";
+			    $dat2["password"] = "98f0639d567c832700db09874cdd3880fb27f7b4ddadd060b121f5787a3623c61c3661995c20c776d057699a0dd958d24a093f912d35f38417c0ad5703d5bf88";
+			    $dat2["salt"] = "c2114b413899e2b1227171de6194d45083ecf9b7b16553b4fecf96df6212901975c814fa564ec8510de0a39112591404415457e786f5fe39b334ab5ae992cbf3";
 				$db->insert("login_members", $dat2);
 
 
@@ -108,7 +109,7 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 				    if ($db->update("login_userdata", $cambio, "WHERE td != '$td'")) {
 				    	unset($_SESSION["tiposistemanew"]); // elimino la variable tipo sistema
 				        echo '<script>
-							window.location.href="/"
+							window.location.href="index.php"
 						</script>';
 				    } else {
 						$alert->Alerta("warning","Error!","Ocurrio un error desconocido!");

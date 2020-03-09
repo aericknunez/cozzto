@@ -9,7 +9,7 @@ class Register {
 	}
 
 	function CuentaClave($clave){
-		if(strlen($clave) == 14){
+		if(strlen($clave) == 13 or strlen($clave) == 14 or strlen($clave) == 15){
 			return TRUE;
 		} else {
 			return FALSE;
@@ -21,8 +21,8 @@ class Register {
 
 	}
 
-	function ObtenerCodigo($clave){
-		$cod = Encrypt::Encrypt($clave,"6d1a7c5b57cf56553ae79e3ae826ff0a");
+	function ObtenerCodigo($clave){ // (clave sananda)
+		$cod = Encrypt::Encrypt($clave,"6d1a7c5b57cf56553ae79e3ae826ff0a" . Fechas::Format(date("d-m-Y")));
 		$codigo = substr($cod,0,4);
 		return strtoupper($codigo);
 	}
