@@ -21,16 +21,16 @@ class Register {
 
 	}
 
-	function ObtenerCodigo($clave){ // (clave sananda)
-		$cod = Encrypt::Encrypt($clave,"6d1a7c5b57cf56553ae79e3ae826ff0a" . Fechas::Format(date("d-m-Y")));
+	function ObtenerCodigo($clave, $td){ // (clave sananda)
+		$cod = Encrypt::Encrypt($clave, $td . Fechas::Format(date("d-m-Y")));
 		$codigo = substr($cod,0,4);
 		return strtoupper($codigo);
 	}
 
 
-	function ValidarCodigo($clave, $codigo){
+	function ValidarCodigo($clave, $codigo, $td){
 		$clavex = $this->SanarClave($clave);
-		$clavey = $this->ObtenerCodigo($clavex);
+		$clavey = $this->ObtenerCodigo($clavex, $td);
 
 		if($clavey == $codigo){
 			return TRUE;

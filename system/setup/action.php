@@ -36,7 +36,7 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 	$tsis = $_SESSION["tiposistemanew"];
 }
 
-		     if($reg->ValidarCodigo($_POST["clave"], $_POST["codigo"]) == TRUE){
+		     if($reg->ValidarCodigo($_POST["clave"], $_POST["codigo"], md5($td)) == TRUE){
 			 
 			 $_SESSION['secret_key'] = md5($td);
 
