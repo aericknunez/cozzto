@@ -48,13 +48,13 @@ include_once 'application/common/Fechas.php';
 <!-- Section: Team v.1 -->
 <section class="team-section text-center">
 <?php 
-$reg = new Register();
-$clavex = "R001-SV-546551";
-$clave = $reg->SanarClave($clavex);
-$codigo = $reg->ObtenerCodigo($clave, md5($clave));
-echo $clavex . "<br>";
-echo $codigo;
-echo "<br>Codigos";
+// $reg = new Register();
+// $clavex = "R001-SV-546551";
+// $clave = $reg->SanarClave($clavex);
+// $codigo = $reg->ObtenerCodigo($clave, md5($clave));
+// echo $clavex . "<br>";
+// echo $codigo;
+// echo "<br>Codigos";
  ?>
 <h1>ACTIVACIÓN DEL SISTEMA</h1>
 
