@@ -516,13 +516,15 @@ echo '<div class="row">
         <thead>
           <tr>
             <th>Concepto</th>
+            <th>Rem. Dia</th>
             <th>Total</th>
           </tr>
         </thead>
         <tbody>';
 // sueldo ganado
         echo '<tr>
-              <th>Sueldo dias laborales</th>
+              <th>('.$dias.' dias ) Sueldo dias laborales</th>
+              <th>'.number_format($sueldo/30,4,'.',',').'</th>
               <td>'.Helpers::Dinero($sueldoq).'</td>
             </tr>';
 // adelantos otorgados
@@ -536,20 +538,20 @@ echo $this-> ExtraFactura($empleado, 3);
 
 // Total
         echo '<tr>
-              <th>Total a pagar: </th>
+              <th colspan="2">Total a pagar: </th>
               <th>'.Helpers::Dinero($liquido).'</th>
             </tr>';
 ///////////////////////
         echo '</tbody>
           </table>';
 
- 
+echo '<p>Son: ' .Dinero::DineroEscrito($liquido) .'</p>';
 
 echo '<p>Planilla realizada desde el: '.$finicio.' hasta el '.$ffin.'</p>
 <div class="row mt-4">
       <div class="col-12">
               <div>
-              <h3> Total de dias laborados: '.$dias.'</h3>
+              <h4> Total de dias laborados: '.$dias.'</h4>
               </div>
       </div>
 </div>';
@@ -654,7 +656,7 @@ $finextra = $fechahoy;
               </a></td>'; else $bor = "  ";
 
       $data.= '<tr>
-              <td>'.$b["extra"].'</td>
+              <td colspan="2">'.$b["extra"].'</td>
               <td>'. $sig . Helpers::Dinero($b["cantidad"]).'</td>
               '.$bor.'
             </tr>';          

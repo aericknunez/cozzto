@@ -16,6 +16,7 @@ $alert = new Alerts;
 $helps = new Helpers;
 include_once '../common/Fechas.php';
 include_once '../common/Encrypt.php';
+include_once '../common/Dinero.php';
 
 
 // filtros para cuando no hay session abierta
