@@ -275,6 +275,9 @@ else{
 		} else {
 			echo '<script type="text/javascript" src="assets/js/query/ventaL.js?v='.$numero.'"></script>';
 		}
+
+		//echo '<script type="text/javascript" src="assets/js/query/venta_getlateral.js?v='.$numero.'"></script>';
+
 	} else { // panel de control
 			/// query del panel de conttrol a implementar  para root
 	}

@@ -49,12 +49,11 @@ include_once 'application/common/Fechas.php';
 <section class="team-section text-center">
 <?php 
 // $reg = new Register();
-// $clavex = "R001-SV-546551";
+// $clavex = "P001-SV-54051";
 // $clave = $reg->SanarClave($clavex);
 // $codigo = $reg->ObtenerCodigo($clave, md5($clave));
 // echo $clavex . "<br>";
 // echo $codigo;
-// echo "<br>Codigos";
  ?>
 <h1>ACTIVACIÓN DEL SISTEMA</h1>
 

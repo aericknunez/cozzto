@@ -46,7 +46,6 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 			    $datosr["expiracion"] = Encrypt::Encrypt(Fechas::Format($expira),$_SESSION['secret_key']);
 			    $datosr["tipo_sistema"] = Encrypt::Encrypt($tsis,$_SESSION['secret_key']);
 			    $datosr["plataforma"] = Encrypt::Encrypt(0,$_SESSION['secret_key']);
-			    $datosr["pantallas"] = Encrypt::Encrypt(0,$_SESSION['secret_key']);
 			    $datosr["td"] = $td;
 			    $datosr["hash"] = Helpers::HashId();
 			    $datosr["time"] = Helpers::TimeId();
@@ -56,14 +55,12 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 			    $datom["sistema"] = "Sistema de control " . $_POST["nombre"];
 			    $datom["cliente"] = $_POST["nombre"];
 			    $datom["imp"] = 0;
-			    $datom["propina"] = 0;
 			    $datom["imagen"] = "default.png";
 			    $datom["logo"] = "pizto.png";
 			    $datom["skin"] = "grey-skin";
 			    $datom["tipo_inicio"] = 1;
 			    $datom["inicio_tx"] = 1;
-			    $datom["otras_ventas"] = 1;
-			    $datom["venta_especial"] =1;		    
+			    $datom["otras_ventas"] = 1;	    
 			    $datom["td"] = $td;
 			    $datom["hash"] = Helpers::HashId();
 			    $datom["time"] = Helpers::TimeId();
