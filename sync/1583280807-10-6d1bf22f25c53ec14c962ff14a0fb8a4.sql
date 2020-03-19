@@ -1,0 +1,2 @@
+DELETE FROM corte_diario WHERE hash = "4b13f0bbb9" and td = "10";
+INSERT INTO sync_up_cloud VALUES("", "1", "1", "1",  "03-03-2020", "18:13:27", "1583215200", "1583280807-10-6d1bf22f25c53ec14c962ff14a0fb8a4", "1583280077", "1583280807", "4d05271a9b", "1583280807", "10");

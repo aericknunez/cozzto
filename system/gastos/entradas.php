@@ -28,10 +28,16 @@ Descripci&oacuten
 
 </div>
 
+<?php 
+} else { /// termina comprobacion de corte
+  Alerts::CorteEcho("Ingresos de efectivo");
+  $tipo = 1;
+}
+ ?>
 <hr>
 <div  class="col-sm-12" id="contenido">
  <?php 
-  $gasto->VerEntradas();
+  $gasto->VerEntradas($tipo);
    ?>
 </div> 
 
@@ -73,8 +79,3 @@ Descripci&oacuten
 
 
 
-<?php 
-} else { /// termina comprobacion de corte
-	Alerts::CorteEcho("Ingresos de efectivo");
-}
- ?>

@@ -196,7 +196,7 @@ class ProUpdate{
 public function AgregaBusqueda($dato){ // Busqueda para compuestos
   $db = new dbConn();
 
-        $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+        $a = $db->query("SELECT * FROM producto WHERE (cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%') and td = ".$_SESSION["td"]." limit 10");
          if($a->num_rows > 0){
           echo '<table class="table table-sm table-hover">';
   foreach ($a as $b) {
@@ -323,7 +323,7 @@ public function AgregaBusqueda($dato){ // Busqueda para compuestos
 public function AveriaBusqueda($dato){ // Busqueda para averia
   $db = new dbConn();
 
-        $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+        $a = $db->query("SELECT * FROM producto WHERE (cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%') and td = ".$_SESSION["td"]." limit 10");
          if($a->num_rows > 0){
           echo '<table class="table table-sm table-hover">';
   foreach ($a as $b) {

@@ -34,6 +34,15 @@ class Helpers{
         }  
     }
 
+    static public function ServerPractica(){
+      $direccion = dirname(__FILE__);
+        if (strpos($direccion, 'practica') !== false) {
+           return TRUE;
+        } else { 
+          return FALSE; 
+        }  
+    }
+
 
     public function Gasto($string) {
     if($string == "1") return '<p class="text-danger font-weight-bold">Compra No Facturado</p>';

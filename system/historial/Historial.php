@@ -21,7 +21,8 @@ class Historial{
 					echo '<h3 class="h3-responsive">PRODUCTOS VENDIDOS</h3>';
 				}
 				    
-				echo '<table class="table table-striped table-sm">
+				echo '<div class="table-responsive">
+				<table class="table table-striped table-sm">
 						<thead>
 					     <tr>
 					       <th>Cant</th>
@@ -46,7 +47,7 @@ class Historial{
 			    $a->close();
 
 			echo '</tbody>
-				</table>';
+				</table></div>';
 			
 
 			$ar = $db->query("SELECT sum(cant) FROM ticket where edo = 1 and fecha = '$fecha' and td = ".$_SESSION['td']."");
@@ -80,6 +81,7 @@ class Historial{
 					                  where cod != 8888 and edo = 1 and fecha like '%$fechax' and td = ".$_SESSION['td']." GROUP BY cod order by sum(cant) desc");
 		if($a->num_rows > 0){
 						echo '<h3 class="h3-responsive">PRODUCTOS VENDIDOS</h3>
+						<div class="table-responsive">
 				    <table class="table table-striped">
 
 						<thead>
@@ -105,7 +107,7 @@ class Historial{
 
 
 			    echo '</tbody>
-				</table>';
+				</table></div>';
 
 			$ar = $db->query("SELECT sum(cant) FROM ticket where edo = 1 and fecha like '%$fechax' and td = ".$_SESSION['td']."");
 		    foreach ($ar as $br) {
@@ -145,7 +147,8 @@ class Historial{
 					}
 
 
-				  echo '<table class="table table-striped">
+				  echo '<div class="table-responsive">
+				  <table class="table table-striped">
 
 						<thead>
 					     <tr>
@@ -153,7 +156,9 @@ class Historial{
 					       <th>Productos</th>					       
 					       <th class="d-none d-md-block">Clientes</th>
 					       <th>Efectivo</th>
-					        <th>Total</th>
+					       <th>Tarjeta</th>
+					       <th>Credito</th>
+					        <th>Venta Total</th>
 					        <th>Gastos</th>
 					        <th>Diferencia</th>
 					     </tr>
@@ -164,6 +169,8 @@ class Historial{
 				$xclientes = 0;
 				$xpropina = 0;
 				$xefectivo = 0;
+				$xtarjeta = 0;
+				$xcredito = 0;
 				$xtotal = 0;
 				$xgastos = 0; 
 				$xdiferecia = 0;
@@ -174,6 +181,8 @@ class Historial{
 				$xproductos=$xproductos+$b["productos"];
 				$xclientes=$xclientes+$b["clientes"];
 				$xefectivo=$xefectivo+$b["efectivo_ingresado"];
+				$xt_tarjeta=$xt_tarjeta+$b["t_tarjeta"];
+				$xt_credito=$xt_credito+$b["t_credito"];
 				$xtotal=$xtotal+$b["total"];
 				$xgastos=$xgastos+$b["gastos"];
 				$xdiferecia=$xdiferecia+$b["diferencia"];
@@ -185,7 +194,9 @@ class Historial{
 				       <th scope="row">'. $b["fecha"] . '</th>
 				       <td>'. $b["productos"] . '</td>
 				       <td class="d-none d-md-block">'. $b["clientes"] . '</td>
-				       <td>'. Helpers::Dinero($b["efectivo"]) . '</td>
+				       <td>'. Helpers::Dinero($b["efectivo_ingresado"]) . '</td>
+				       <td>'. Helpers::Dinero($b["t_tarjeta"]) . '</td>
+				       <td>'. Helpers::Dinero($b["t_credito"]) . '</td>
 				       <td>'. Helpers::Dinero($b["total"]) . '</td>
 				       <td>'. Helpers::Dinero($b["gastos"]) . '</td>
 				       <td>'. Helpers::Dinero($b["diferencia"]) . '</td>
@@ -200,6 +211,8 @@ class Historial{
 			       <td>'. $xproductos . '</td>
 			       <td class="d-none d-md-block">'. $xclientes . '</td>
 			       <td>'. Helpers::Dinero($xefectivo) . '</td>
+			       <td>'. Helpers::Dinero($xt_tarjeta) . '</td>
+			       <td>'. Helpers::Dinero($xcredito) . '</td>
 			       <td>'. Helpers::Dinero($xtotal) . '</td>
 			       <td>'. Helpers::Dinero($xgastos) . '</td>
 			       <td>'. Helpers::Dinero($xdiferecia) . '</td>
@@ -207,7 +220,7 @@ class Historial{
 			 	}
 
 			echo '</tbody>
-				</table>';
+				</table></div>';
 			if($type == NULL){
 			echo "Fechas afectadas desde el: ". $inicio ." hasta el ". $fin ." <br>";
 			}
@@ -252,7 +265,8 @@ class Historial{
 	        echo ' <h3 class="h3-responsive">GASTOS DEL DIA</h3>';
 	        }
 
-			echo '<table class="table table-sm table-striped">
+			echo '<div class="table-responsive">
+			<table class="table table-sm table-striped">
 			  <thead>
 			    <tr>
 			      <th scope="col">Tipo</th>
@@ -301,7 +315,7 @@ class Historial{
 			      <td></td>
 			    </tr>
 			    </tbody>
-		    </table>';
+		    </table></div>';
 			echo "El numero de registros es: ". $a->num_rows . "<br>";
 
 			$ag = $db->query("SELECT sum(cantidad) FROM gastos where tipo != 5 and edo = 1 and  fecha = '$fecha' and td = ".$_SESSION['td']."");
@@ -334,7 +348,7 @@ class Historial{
 	        	$total=0;
 	        	if($a->num_rows > 0){
 	        echo ' <h3 class="h3-responsive">HISTORIAL DE GASTOS</h3>
-
+				<div class="table-responsive">
 				<table class="table table-sm table-striped">
 			  <thead>
 			    <tr>
@@ -386,7 +400,7 @@ class Historial{
 			      <td>'. Helpers::Dinero($total) .'</td>
 			    </tr>
 			    </tbody>
-		    </table>';
+		    </table></div>';
 			echo "El numero de registros es: ". $a->num_rows . "<br>";
 			
 			$ag = $db->query("SELECT sum(cantidad) FROM gastos where tipo != 5 and edo = 1 and  fecha like '%$fechax' and td = ".$_SESSION['td']."");
@@ -421,7 +435,8 @@ public function VerAbonos($fecha) { //leva el control del autoincremento de los 
         if($a->num_rows > 0){
         	echo ' <h3 class="h3-responsive">ABONOS REALIZADOS</h3>'; 
 
-            echo '<table class="table table-striped table-sm">
+            echo '<div class="table-responsive">
+            <table class="table table-striped table-sm">
             <thead>
               <tr>
                 <th scope="col">Nombre</th>
@@ -459,7 +474,7 @@ public function VerAbonos($fecha) { //leva el control del autoincremento de los 
         		}
             }
               echo '</tbody>
-              </table>';
+              </table></div>';
 
 			echo "El numero de registros es: ". $a->num_rows . "<br>";
 			$a->close();

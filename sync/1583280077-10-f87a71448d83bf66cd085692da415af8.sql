@@ -1,0 +1,15 @@
+DELETE FROM producto WHERE hash = "c07a933eed" and td = "10";
+DELETE FROM producto WHERE hash = "1c32d0e43d" and td = "10";
+DELETE FROM producto WHERE hash = "e20e1f23c8" and td = "10";
+DELETE FROM producto WHERE hash = "2c1d1d95bd" and td = "10";
+DELETE FROM producto WHERE hash = "3dd1002f6b" and td = "10";
+DELETE FROM ticket WHERE hash = "44682dc6b3" and td = "10";
+DELETE FROM ticket_orden WHERE hash = "d690320ae9" and td = "10";
+DELETE FROM producto WHERE hash = "7ddff06de5" and td = "10";
+DELETE FROM ticket WHERE hash = "473c0fa9e2" and td = "10";
+DELETE FROM ticket_orden WHERE hash = "65b517dfc4" and td = "10";
+DELETE FROM ticket WHERE hash = "48a87d4561" and td = "10";
+DELETE FROM ticket_orden WHERE hash = "adc7f77de7" and td = "10";
+DELETE FROM creditos WHERE hash = "4d227b1b61" and td = "10";
+DELETE FROM ticket_cliente WHERE hash = "6903eeee0b" and td = "10";
+INSERT INTO sync_up_cloud VALUES("", "1", "1", "1",  "03-03-2020", "18:01:18", "1583215200", "1583280077-10-f87a71448d83bf66cd085692da415af8", "1583191581", "1583280077", "67248e69e3", "1583280077", "10");

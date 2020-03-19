@@ -7,18 +7,18 @@ $(document).ready(function(){
 			url: "application/src/routes.php?op=60",
 			method: "POST",
 			data: $("#form-addproveedor").serialize(),
+			beforeSend: function () {
+				$('#btn-addproveedor').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').addClass('disabled');
+	         },
 			success: function(data){
+				$('#btn-addproveedor').html('Guardar').removeClass('disabled');
 				$("#form-addproveedor").trigger("reset");
 				$("#destinoproveedor").html(data);			
-				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
 			}
 		})
 	})
     
 
-    function BotonEnable(){
-        $('#btn-addproveedor').removeClass("disabled");
-    }
 
 
 	$("#form-addproveedor").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"
@@ -47,7 +47,11 @@ $(document).ready(function(){
 			url: "application/src/routes.php?op=63",
 			method: "POST",
 			data: $("#form-editproveedor").serialize(),
+			beforeSend: function () {
+				$('#btn-editproveedor').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').addClass('disabled');
+	         },
 			success: function(data){
+				$('#btn-editproveedor').html('Guardar').removeClass('disabled');
 				$("#form-editproveedor").trigger("reset");
 				$("#destinoproveedor").html(data);			
 				setTimeout(BotonEnable, 1000); // para desactivar elboton por un rato
@@ -55,10 +59,6 @@ $(document).ready(function(){
 		})
 	})
     
-
-    function BotonEnable(){
-        $('#btn-editproveedor').removeClass("disabled");
-    }
 
 
 	$("#form-editproveedor").keypress(function(e) {//Para deshabilitar el uso de la tecla "Enter"

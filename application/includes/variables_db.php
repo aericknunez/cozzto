@@ -8,6 +8,8 @@ define("USER", "superpol_erick"); 			// The database username.
 define("PASSWORD", "caca007125-"); 	// The database password.
 	if(Helpers::ServerDemo() == TRUE){
 		define("DATABASE", "superpol_demo_cozto");
+	} elseif(Helpers::ServerPractica() == TRUE){
+		define("DATABASE", "superpol_practica_cozto");
 	} else {
 		define("DATABASE", "superpol_cozto");
 	}

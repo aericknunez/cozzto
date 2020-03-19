@@ -36,10 +36,17 @@ Descripci&oacuten
   </div>
 </div>
 
+<?php 
+} else { /// termina comprobacion de corte
+  Alerts::CorteEcho("Gastos");
+  $tipo = 1;
+}
+ ?>
+
 <hr>
 <div  class="col-sm-12" id="contenido">
  <?php 
-  $gasto->VerGastos();
+  $gasto->VerGastos($tipo);
    ?>
 </div> 
 
@@ -136,8 +143,3 @@ Descripci&oacuten
 
 
 
-<?php 
-} else { /// termina comprobacion de corte
-	Alerts::CorteEcho("Gastos");
-}
- ?>

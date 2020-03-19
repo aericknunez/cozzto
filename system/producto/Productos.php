@@ -109,6 +109,7 @@ class Productos{
           $this->VerPrecios($datox["producto"]);
   }
 
+
   public function VerPrecios($producto){
       $db = new dbConn();
           $a = $db->query("SELECT * FROM producto_precio WHERE producto = '$producto' and td = ".$_SESSION["td"]."");
@@ -157,7 +158,7 @@ class Productos{
 // <a href="index.php?key="><li onClick="selectProducto(\'descripcion\');">Descripcion</li></a>
 // </ul>';
 
-          $a = $db->query("SELECT * FROM producto WHERE cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+          $a = $db->query("SELECT * FROM producto WHERE (cod like '%".$dato["keyword"]."%' or descripcion like '%".$dato["keyword"]."%') and td = ".$_SESSION["td"]." limit 10");
            if($a->num_rows > 0){
             echo '<table class="table table-sm table-hover">';
     foreach ($a as $b) {

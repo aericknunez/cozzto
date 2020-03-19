@@ -37,7 +37,7 @@ class Gastos {
 
 
 
-	public function VerGastos(){
+	public function VerGastos($g = NULL){
 	    $db = new dbConn();
 	    $fecha = date("d-m-Y");
 	        $a = $db->query("SELECT * FROM gastos WHERE fecha = '$fecha' and td = ". $_SESSION["td"] ." order by id desc");
@@ -52,9 +52,12 @@ class Gastos {
 			      <th scope="col">Tipo</th>
 			      <th scope="col">Gasto</th>
 			      <th scope="col">Descripci&oacuten</th>
-			      <th scope="col">Cantidad</th>
-			      <th>Modificar</th>
-			    </tr>
+			      <th scope="col">Cantidad</th>';
+			      if($g == NULL){
+			      	echo '<th>Modificar</th>';
+			      }
+			      
+			    echo '</tr>
 			  </thead>
 			  <tbody>';
 			  $n = 0;
@@ -74,7 +77,7 @@ class Gastos {
 			      <td>'. $b["descripcion"] .'</td>
 			      <td>'. Helpers::Dinero($b["cantidad"]) .'</td>
 			      <td>';
-			      if($b["edo"] == 1){
+			      if($b["edo"] == 1 and $g == NULL){
 
 			      	echo '<a id="xver" iden="'. $b["id"] .'">
 				      <span class="badge green"><i class="fas fa-image" aria-hidden="true"></i></span>
@@ -149,7 +152,7 @@ class Gastos {
 
 //////// entradas
 
-	public function VerEntradas() {
+	public function VerEntradas($g = NULL) {
 		$db = new dbConn();
 	        $a = $db->query("SELECT * FROM entradas_efectivo WHERE td = ". $_SESSION["td"] ." order by id desc limit 10");
 	        	$total=0;
@@ -162,8 +165,12 @@ class Gastos {
 			      <th scope="col">#</th>
 			      <th scope="col">Descripci&oacuten</th>
 			      <th scope="col">Fecha</th>
-			      <th scope="col">Cantidad</th>
-			      <th>Eliminar</th>
+			      <th scope="col">Cantidad</th>';
+			      if($g == NULL){
+			      	echo '<th>Eliminar</th>';
+			      }
+			      
+			    echo '			      
 			    </tr>
 			  </thead>
 			  <tbody>';
@@ -183,7 +190,7 @@ class Gastos {
 			      <td>'. $b["fecha"] .' | '. $b["hora"] .'</td>
 			      <td>'. Helpers::Dinero($b["cantidad"]) .'</td>
 			      <td>';
-			      if($b["edo"] == 1 and $b["fecha"] == date("d-m-Y")){
+			      if(($b["edo"] == 1 and $b["fecha"] == date("d-m-Y")) and $g == NULL){
 			      	echo '<a id="xdelete" op="173" iden="'. $b["id"] .'">
 				      <span class="badge red"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>
 				      </a>';

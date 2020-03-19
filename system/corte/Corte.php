@@ -267,7 +267,7 @@ public function CancelarCorte($ramdom,$fecha){
 				$cambio = array();
 			    $cambio["edo"] = "2";
 			    
-			    if (Helpers::UpdateId("corte_diario", $cambio, "fecha_format=" . Fechas::Format($fecha))) {
+			    if (Helpers::UpdateId("corte_diario", $cambio, "fecha_format=" . Fechas::Format($fecha) . " and td = " . $_SESSION["td"])) {
 
 					Alerts::Alerta("success","Exito!","Corte Anulado Correctamente");
 			    } else {

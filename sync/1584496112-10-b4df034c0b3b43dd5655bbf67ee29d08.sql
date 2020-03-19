@@ -1,0 +1,11 @@
+DELETE FROM config_master WHERE hash = "0215951ce2" and td = "10";
+DELETE FROM ticket WHERE hash = "fca0aa9c23" and td = "10";
+DELETE FROM ticket WHERE hash = "fca0aa9c23" and td = "10";
+DELETE FROM ticket_orden WHERE hash = "ccaeec3b8d" and td = "10";
+DELETE FROM producto WHERE hash = "23f40f7a4c" and td = "10";
+DELETE FROM ticket WHERE hash = "b38b5ac098" and td = "10";
+DELETE FROM ticket_orden WHERE hash = "5a117a74b3" and td = "10";
+DELETE FROM ticket WHERE hash = "b38b5ac098" and td = "10";
+DELETE FROM ticket WHERE hash = "f93d08150d" and td = "10";
+DELETE FROM ticket_orden WHERE hash = "5a117a74b3" and td = "10";
+INSERT INTO sync_up_cloud VALUES("", "1", "1", "1",  "17-03-2020", "19:48:33", "1584424800", "1584496112-10-b4df034c0b3b43dd5655bbf67ee29d08", "1583455523", "1584496112", "7ac114a40e", "1584496112", "10");

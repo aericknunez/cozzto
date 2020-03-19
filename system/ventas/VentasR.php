@@ -560,7 +560,7 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
   public function ClienteBusqueda($dato){ // Busqueda para cliente
     $db = new dbConn();
 
-          $a = $db->query("SELECT * FROM clientes WHERE nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+          $a = $db->query("SELECT * FROM clientes WHERE (nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%') and td = ".$_SESSION["td"]." limit 10");
            if($a->num_rows > 0){
             echo '<table class="table table-sm table-hover">';
     foreach ($a as $b) {
@@ -603,7 +603,7 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
   public function ClienteBusquedaA($dato){ // Busqueda para cliente
     $db = new dbConn();
 
-          $a = $db->query("SELECT * FROM clientes WHERE nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+          $a = $db->query("SELECT * FROM clientes WHERE (nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%') and td = ".$_SESSION["td"]." limit 10");
            if($a->num_rows > 0){
             echo '<table class="table table-sm table-hover">';
     foreach ($a as $b) {
@@ -640,7 +640,7 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
   public function DocumentoBusqueda($dato){ // Busqueda para documento
     $db = new dbConn();
 
-          $a = $db->query("SELECT * FROM facturar_documento WHERE cliente like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+          $a = $db->query("SELECT * FROM facturar_documento WHERE (cliente like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%') and td = ".$_SESSION["td"]." limit 10");
            if($a->num_rows > 0){
             echo '<table class="table table-sm table-hover">';
     foreach ($a as $b) {
