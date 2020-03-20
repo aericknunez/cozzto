@@ -47,7 +47,7 @@
 <?php 
     $a = $db->query("SELECT * FROM login_members WHERE id != '1' and id != '2'");
     foreach ($a as $b) {
-    	$user=sha1($b['username']);
+    	$user=$b['username'];
     if ($r = $db->select("nombre, avatar", "login_userdata", "WHERE user = '$user'")) { 
         $nombre=$r["nombre"]; $avatar= $r["avatar"];
     	} unset($r); 

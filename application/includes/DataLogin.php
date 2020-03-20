@@ -32,7 +32,7 @@ class Login {
 				    $dato["salt"] = $sal;
 				    if ($db->insert("login_members", $dato)) {
 
-				    		$usuario = sha1($user);
+				    		$usuario = $user;
 				    		$datos = array();
 						    $datos["nombre"] = $data["nombre"];
 						    $datos["tipo"] = $data["tipo"];

@@ -85,7 +85,7 @@ if($tsis == NULL){ // selecciono vatiable tipo sistema
 				$log = array();
 			    $log["nombre"] = "Erick Nunez";
 			    $log["tipo"] = 1;
-			    $log["user"] = "3c67697e18899300a2648199a9798dffb359cab2";
+			    $log["user"] = "Erick";
 			    $log["tkn"] = "1";
 			    $log["avatar"] = "11.png";
 			    $log["td"] = 0;
@@ -94,7 +94,7 @@ if($tsis == NULL){ // selecciono vatiable tipo sistema
 				$log2 = array();
 			    $log2["nombre"] = "Administrador del Sistema";
 			    $log2["tipo"] = 2;
-			    $log2["user"] = "9fb3af94760f32c7186c516a3b361b170ccddefb";
+			    $log2["user"] = "52ce5b";
 			    $log2["tkn"] = "1";
 			    $log2["avatar"] = "11.png";
 			    $log2["td"] = 0;

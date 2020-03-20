@@ -27,7 +27,7 @@ class Usuarios{
 	function AvatarSelect($user){
 	    $db = new dbConn();
 
-	    $usuario = sha1($user);
+	    $usuario = $user;
 
 	if ($r = $db->select("avatar", "login_userdata", "WHERE user = '$usuario'")) { 
         $avat = $r["avatar"];
@@ -72,7 +72,7 @@ echo '<div id="avatar-select">
 
 
 	public function ModalPass($user) {
-	$usuario = sha1($user);
+	$usuario = $user;
 
 		if($_SESSION["user"]==$usuario){
 
@@ -90,7 +90,7 @@ echo '<div id="avatar-select">
 	public function ModalUpdate($user) {
 		$db = new dbConn();
 
-	$usuario = sha1($user);
+	$usuario = $user;
 
     if ($r = $db->select("nombre, tipo", "login_userdata", "WHERE user = '$usuario'")) { 
         $name = $r["nombre"]; $type = $r["tipo"];
@@ -213,10 +213,17 @@ echo '<label>Tipo de Cuenta</label>
 	}
 
 
-	public function VerUsuarios(){
+
+
+	public function VerUsuarios($avatar = NULL){
 	$db = new dbConn();
 
-	$a = $db->query("SELECT * FROM login_members WHERE id != 1");
+	if($_SESSION["tipo_cuenta"] != 1){
+		$a = $db->query("SELECT * FROM login_members INNER JOIN login_userdata ON login_members.username = login_userdata.user WHERE login_userdata.id != 1 and login_userdata.td = ". $_SESSION["td"]. "");
+	} else {
+		$a = $db->query("SELECT * FROM login_members INNER JOIN login_userdata ON login_members.username = login_userdata.user WHERE login_userdata.id != 1");
+	}
+
 	if($a->num_rows > 0){
 		echo '<table class="table table-sm">
 			  <thead>
@@ -225,37 +232,32 @@ echo '<label>Tipo de Cuenta</label>
 			      <th scope="col" class="d-none d-md-block">Email</th>
 			      <th scope="col">Cuenta</th>
 			      <th scope="col">Eliminar</th>
-			      <th scope="col">Editar</th>
-			      <th scope="col">Avatar</th>
-			    </tr>
+			      <th scope="col">Editar</th>';
+			      if($avatar == NULL){
+			 echo '<th scope="col">Avatar</th>';     	
+			      }
+			      
+			 echo '</tr>
 			  </thead>
 			  <tbody>';
 	}
     foreach ($a as $b) {
-    	$user=sha1($b["username"]);
-    	
-    	if ($r = $db->select("*", "login_userdata", "WHERE user = '$user'")) { 
-       	$nombre = $r["nombre"]; $tipo = $r["tipo"];
-    	} unset($r); 
-
-
-
 
     	if(($_SESSION["user"] == $user) or ($_SESSION["tipo_cuenta"]!= 5)){
 
     	echo '<tr>';
 		
-		echo '<th scope="row">'.$nombre.'</th>
+		echo '<th scope="row">'.$b["nombre"].'</th>
 		      <td class="d-none d-md-block">'.$b["email"].'</td>
-		      <td>'.Helpers::UserName($tipo).'</td>';
+		      <td>'.Helpers::UserName($b["tipo"]).'</td>';
 
-			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
-				echo '<td><a id="xdelete" op="7" iden="'.$b["id"].'" username="'.$user.'" ><i class="fa fa-trash red-text fa-lg"></i></a></td>';
+			if($_SESSION["user"] == $b["username"] or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
+				echo '<td><a id="xdelete" op="7" iden="'.$b["id"].'" username="'.$b["username"].'" ><i class="fa fa-trash red-text fa-lg"></i></a></td>';
 			} else {
 				echo '<td><a><i class="fa fa-trash grey-text  fa-lg"></i></a></td>';
 			}
 
-			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
+			if($_SESSION["user"] == $b["username"] or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
 				echo '<td><a id="u_pass" username="'.$b["username"].'" op="9"><i class="fa fa-unlock-alt red-text fa-lg"></i></a>
 					<a id="u_update" username="'.$b["username"].'" op="10"><i class="fa fa-edit red-text fa-lg"></i></a></td>';
 			} else {
@@ -263,12 +265,14 @@ echo '<label>Tipo de Cuenta</label>
 				<a ><i class="fa fa-edit grey-text fa-lg"></i></a></td>';
 			}
 
-			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
+		if($avatar == NULL){
+			
+			if($_SESSION["user"] == $b["username"] or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
 				echo '<td><a id="ver_avatar" op="6" username = "'.$b["username"].'"><i class="fa fa-user red-text fa-lg"></i></a></td>';
 			} else {
 				echo '<td><a ><i class="fa fa-user grey-text fa-lg"></i></a></td>';
 			}
-
+		}
 		echo '</tr>';  
 	}
 

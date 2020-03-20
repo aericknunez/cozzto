@@ -43,7 +43,7 @@ if($_REQUEST["op"]=="2"){ // terminar actualizar
 	if($_POST["nombre"] != NULL && $_POST["tipo"] != NULL){
 	include_once 'Usuarios.php';
 	$usuarios = new Usuarios;
-	$usuarios->ActualizarUsuario(Helpers::Mayusculas($_POST["nombre"]),$_POST["tipo"],sha1($_POST["user"]));	
+	$usuarios->ActualizarUsuario(Helpers::Mayusculas($_POST["nombre"]),$_POST["tipo"],$_POST["user"]);	
 	} else {
 	Alerts::Alerta("error","Error!","Faltan Datos!");	
 	}
