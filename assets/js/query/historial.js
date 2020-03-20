@@ -187,6 +187,23 @@ $(document).ready(function()
 
 
 
+	$('#btn-descuentos').click(function(e){ /// para el formulario
+		$("#form-descuentos").hide();
+		MuestraLoader();
+		e.preventDefault();
+		$.ajax({
+			url: "application/src/routes.php?op=123",
+			method: "POST",
+			data: $("#form-descuentos").serialize(),
+			success: function(data){
+				$("#contenido").html(data);
+				$("#form-descuentos").trigger("reset");
+				$("#form-descuentos").show();
+				EscondeLoader();
+			}
+		})
+	})
+	
 
 
 

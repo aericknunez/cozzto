@@ -897,6 +897,15 @@ if($_REQUEST["op"]=="118"){ // cancelar corte
 
 
 //// historial ///////////////////////////////////////////////
+if($_REQUEST["op"]=="123"){ // historial descuentos
+	include_once '../../system/historial/Historial.php';
+	$historial = new Historial;
+	
+	if($_POST["fecha_submit"] == NULL){ $fecha = date("d-m-Y"); 
+	} else { $fecha = $_POST["fecha_submit"]; }
+	
+	$historial->Descuentos($fecha);
+}
 
 
 if($_REQUEST["op"]=="124"){ // consolidad diario

@@ -233,6 +233,9 @@ elseif(isset($_GET["gmensual"])) {
 echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
 echo '<script type="text/javascript" src="assets/js/query/historial_modal_gastos.js?v='.$numero.'"></script>';
 } 
+elseif(isset($_GET["descuentos"])) {
+echo '<script type="text/javascript" src="assets/js/query/historial.js?v='.$numero.'"></script>';
+} 
 elseif(isset($_GET["gra_semanal"])) include_once 'assets/js/query/gra_semanal.php';
 elseif(isset($_GET["gra_mensual"])) include_once 'assets/js/query/gra_mensual.php';
 elseif(isset($_GET["gra_clientes"])) include_once 'assets/js/query/gra_clientes.php';

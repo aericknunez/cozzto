@@ -496,6 +496,93 @@ public function VerAbonos($fecha) { //leva el control del autoincremento de los 
 
 
 
+////////////////////// descuentos //////////////////////
+
+	public function Descuentos($fecha, $type = NULL) {
+		$db = new dbConn();
+
+			$a = $db->query("select cod, cajero, num_fac, cant, total, descuento, producto, pv 
+          from ticket 
+          where cod != 8888 and edo = 1 and fecha = '$fecha' and descuento != 0 and td = ".$_SESSION['td']."  order by id desc");
+
+			if($a->num_rows > 0){
+				
+				if($type == NULL){
+					echo '<h3 class="h3-responsive">DESCUENTOS OTORGADOS DEL DIA :: '.$fecha.'</h3>';
+				} else {
+					echo '<h3 class="h3-responsive">DESCUENTOS OTORGADOS</h3>';
+				}
+				    
+				echo '<div class="table-responsive">
+				<table class="table table-striped table-sm">
+						<thead>
+					     <tr>
+					       <th>Cant</th>
+					       <th>Producto</th>
+					       <th>Usuario</th>
+					       <th>Factura</th>
+					       <th>Precio</th>
+					       <th>Descuento</th>
+					       <th>%</th>
+					       <th>Total</th>
+					     </tr>
+					   </thead>
+
+						<tbody>';
+
+			    foreach ($a as $b) {
+		    
+		    	$porcentaje = (($b["descuento"] * 100) / ($b["total"] + $b["descuento"]));
+			   
+			   echo '<tr>
+			       <th scope="row">'. $b["cant"] . '</th>
+			       <td>'. $b["producto"] . '</td>
+			       <td>'. $b["cajero"] . '</td>
+			       <td>'. $b["num_fac"] . '</td>
+			       <td>'. Helpers::Dinero($b["pv"]) . '</td>
+			       <td>'. Helpers::Dinero($b["descuento"]) . '</td>
+			       <td>'. Helpers::Format($porcentaje) . '</td>
+			       <td>'. Helpers::Dinero($b["total"]) . '</td>
+			     </tr>';
+			    } 
+
+			    $a->close();
+
+			echo '</tbody>
+				</table></div>';
+			
+
+			$ar = $db->query("SELECT sum(cant) FROM ticket where edo = 1 and fecha = '$fecha' and descuento != 0 and td = ".$_SESSION['td']."");
+		    foreach ($ar as $br) {
+		    $cantidades = $br["sum(cant)"];
+		     echo "Cantidad de Productos: ". $cantidades . "<br>";
+		    } $ar->close();
+
+		    $ag = $db->query("SELECT sum(descuento) FROM ticket where edo = 1 and fecha = '$fecha' and descuento != 0 and td = ".$_SESSION['td']."");
+		    foreach ($ag as $bg) { $descuentos = $bg["sum(descuento)"];
+		        echo "Total Descuento: ". Helpers::Dinero($descuentos) . "<br>";
+		    } $ag->close();
+
+		    $ag = $db->query("SELECT sum(total) FROM ticket where edo = 1 and fecha = '$fecha' and descuento != 0 and td = ".$_SESSION['td']."");
+		    foreach ($ag as $bg) { $totales = $bg["sum(total)"];
+		    } $ag->close();
+
+		    echo "Total Producto con descuento: ". Helpers::Dinero($totales) . "<br>";
+
+		    $porcentajes = (($descuentos * 100) / ($totales + $descuentos));
+
+		     echo "Total descuento Aproximado: ". Helpers::Format($porcentajes) . " %<br>";
+		     echo "NOTA: Estos productos es nada mas un detalle de los productos que tienen descuento, estos productos ya van incluidos en el reporte de productos vendidos<br>";
+			} else {
+				Alerts::Mensajex("No se encontraron productos para este dia","danger",$boton,$boton2);
+			}
+					    
+					
+
+	}
+
+
+
 
 
 
@@ -505,13 +592,15 @@ public function VerAbonos($fecha) { //leva el control del autoincremento de los 
 		$db = new dbConn();
 
 		$this->HistorialCortes($fecha, $fecha, 1);
-		echo "<br>";
+		echo "<hr>";
 		$this->VerAbonos($fecha);
-		echo "<br>";
+		echo "<hr>";
 		$this->HistorialGDiario($fecha, 1);
-		echo "<br>";
+		echo "<hr>";
 		$this->HistorialDiario($fecha, 1);
-		echo "<br>";
+		echo "<hr>";
+		$this->Descuentos($fecha, 1);
+		echo "<hr>";
 	}
 
 

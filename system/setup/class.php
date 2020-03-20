@@ -40,6 +40,11 @@ class Register {
 	}
 
 
+	function ObtenerTipoCuenta($clave){
+		return $tipo = substr($clave,3,1);
+	}
+
+
 // $hash = "3-1-6d1a7c5b57cf56553ae79e3ae826ff0a";
 
 // obtener el td y type del archivo

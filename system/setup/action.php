@@ -30,10 +30,10 @@ $expira = Fechas::DiaSuma(date("d-m-Y"),30);
 $td = $reg->SanarClave($_POST["clave"]);
 
 
-if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
+
+$tsis = $reg->ObtenerTipoCuenta($_POST["clave"]);
+if($tsis == NULL){ // selecciono vatiable tipo sistema
 	$tsis = 1;
-} else {
-	$tsis = $_SESSION["tiposistemanew"];
 }
 
 		     if($reg->ValidarCodigo($_POST["clave"], $_POST["codigo"], md5($td)) == TRUE){
@@ -104,7 +104,6 @@ if($_SESSION["tiposistemanew"] == NULL){ // selecciono vatiable tipo sistema
 			        $cambio = array();
 				    $cambio["td"] = $td;
 				    if ($db->update("login_userdata", $cambio, "WHERE td != '$td'")) {
-				    	unset($_SESSION["tiposistemanew"]); // elimino la variable tipo sistema
 				        echo '<script>
 							window.location.href="index.php"
 						</script>';

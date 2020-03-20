@@ -266,7 +266,7 @@ public static function TimeId(){
 
 public static function DeleteId($tabla, $condicion){
   $db = new dbConn();
-      if($_SESSION["root_plataforma"] == 0){
+      if($_SESSION["root_plataforma"] == 0 and $_SESSION['root_tipo_sistema'] != 0){
         $a = $db->query("SELECT hash FROM {$tabla} WHERE {$condicion}"); 
         foreach ($a as $b) {
               $datos = array();
@@ -295,7 +295,7 @@ public static function DeleteId($tabla, $condicion){
 
 public static function UpdateId($tabla, $dato, $condicion){
   $db = new dbConn(); // dato actualzar y datos insertar
-      if($_SESSION["root_plataforma"] == 0){
+      if($_SESSION["root_plataforma"] == 0 and $_SESSION['root_tipo_sistema'] != 0){
         $a = $db->query("SELECT hash FROM {$tabla} WHERE {$condicion}"); 
         foreach ($a as $b) {
               $datos = array();

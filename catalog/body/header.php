@@ -25,7 +25,7 @@
 <header>
 <!-- Sidebar navigation -->
 <div id="slide-out" class="side-nav sn-bg-4 custom-scrollbar">
-<ul class="custom-scrollbar">
+<ul class="custom-scrollbar" id="menuconscroll">
     <!-- Logo -->
     <li>
         <div class="logo-wrapper waves-light">
