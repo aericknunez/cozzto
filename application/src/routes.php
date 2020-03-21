@@ -616,7 +616,23 @@ if($_REQUEST["op"]=="86"){ // cancelar toda la orden
 include_once '../../system/ventas/Opciones.php';
 	$venta = new Ventas();
 	$venta->Cancelar();
+
+	unset($_SESSION["orden"]);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1001,7 +1017,7 @@ $inicio->Validar($_POST["fecha_submit"], $_POST["codigo"]);
 
 
 
-/////////////////  ***  cotizaciones  *** //////////////
+
 
 if($_REQUEST["op"]=="146"){ // lateral
 include_once '../../system/cotizar/Laterales.php';
@@ -1100,6 +1116,42 @@ include_once '../../system/cotizar/CotizarR.php';
 	$cot = new Cotizar();
 	$cot->VerCotizacion($_POST["key"]);
 }
+
+if($_REQUEST["op"]=="161"){ // Activar cotizacion
+
+	$_SESSION["cotizacion"] = $_POST["cotizacion"];
+}
+
+if($_REQUEST["op"]=="162"){ /// para pasar afacturar una cotizacion
+	include_once '../../system/ventas/Opciones.php';
+// //// guardar la orden activa si hay
+	if($_SESSION["orden"] != NULL){
+	include_once '../../system/ventas/VentasL.php';
+		$ventax = new Ventas();
+		$ventax->GuardarOrden();
+		unset($ventax);
+	}
+/////////// 
+	if($_SESSION["tipo_inicio"] == 1){
+	include_once '../../system/ventas/VentasR.php';
+		$venta = new Ventas();
+	} else {
+	include_once '../../system/ventas/VentasL.php';
+		$venta = new Ventas();
+	}
+// 
+
+if($_SESSION["orden"] == NULL){ $venta->AddOrden(); }
+
+include_once '../../system/cotizar/CotizarR.php';
+	$cot = new Cotizar();
+	$cot->Facturar($_POST["cotizacion"]);
+}
+
+
+
+
+
 
 
 

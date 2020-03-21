@@ -95,7 +95,7 @@ $usuarios->EliminarUsuario($_REQUEST["iden"], $_REQUEST["username"]);
 if($_REQUEST["op"]=="8"){
 include_once 'Usuarios.php';
 $usuarios = new Usuarios;
-$usuarios->VerUsuarios();
+$usuarios->VerUsuarios($_SESSION["ver_avatar"]);
 }
 
 

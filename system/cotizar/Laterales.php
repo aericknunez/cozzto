@@ -41,17 +41,18 @@ class Laterales{
 
 
 
- 	public function MostrarBotones($ocotizacionrden){ // botones de funcion para la venta
- 		echo '<div align="center" cotizacion="justify-content-center">';
+ 	public function MostrarBotones($cotizacion){ // botones de funcion para la venta
+ 		echo '<div align="center" class="justify-content-center">';
  		echo '<button id="guardar" cotizacion="'.$cotizacion.'" op="157" class="btn btn-outline-primary btn-rounded waves-effect"><i class="fas fa-save mr-1"></i> Guardar</button>';
  		//echo '<button class="btn btn-outline-danger btn-rounded waves-effect"><i class="fas fa-ban mr-1"></i> Cancelar</button>';
- 		echo '<a id="cancelar" op="158" class="btn btn-outline-red btn-rounded waves-effect"><i class="fas fa-ban mr-1"></i> Cancelar</a>';
+ 		echo '<a id="cancelar" op="158" class="btn btn-outline-red btn-rounded waves-effect"><i class="fas fa-ban mr-1"></i> Eliminar</a>';
 
  		echo '</div>';
 
  		echo '<div class="text-center">
  		<a data-toggle="modal" data-target="#ModalBusqueda" class="btn-floating btn-info" title="Buscar Producto"><i class="fas fa-search"></i></a>
 		<a href="?modal=descuentocot" class="btn-floating btn-default" title="Descuento"><i class="fas fa-money-bill"></i></a>
+		<a id="xver" op="160" key="'. $this->IdCot($cotizacion) .'" cotizacion="'.$cotizacion.'" esto="1" class="btn-floating btn-success" title="Imprimir"><i class="fas fa-print"></i></a>
 		</div>';
 
 		if($_SESSION["descuento_cot"] != NULL){
@@ -75,7 +76,14 @@ class Laterales{
  		
  	}
 
+ 	public function IdCot($cotizacion){ // listado de ordenes pendientes
+ 		$db = new dbConn();
 
+		if ($r = $db->select("id", "cotizaciones_data", "WHERE correlativo = '$cotizacion' and td = ".$_SESSION["td"]."")) { 
+	        return $r["id"];
+	    }  unset($r);  
+ 		
+ 	}
 
 
 

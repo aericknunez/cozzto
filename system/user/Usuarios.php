@@ -96,7 +96,6 @@ echo '<div id="avatar-select">
         $name = $r["nombre"]; $type = $r["tipo"];
     }  unset($r); 
 
-	    if($_SESSION['tipo_cuenta'] == 1 or $_SESSION['tipo_cuenta'] == 2 or $_SESSION["user"]==$usuario){
 
 
 		echo '<label for="nombre" class="grey-text">Nombre</label>
@@ -127,14 +126,16 @@ echo '<label>Tipo de Cuenta</label>
     if($_SESSION['tipo_cuenta'] == 5 or $_SESSION['tipo_cuenta'] != 1) echo 'disabled '; echo 'value="5">';echo Helpers::UserName(5) . '</option>
 
 </select>';
+}else {
+	echo '<input type="hidden" id="tipo" name="tipo" value="'.$type.'">';
 }
 
 
 
-
-	    }
-
 	}
+
+
+
 
 
 	public function CambiarPass($password) {
@@ -283,6 +284,91 @@ echo '<label>Tipo de Cuenta</label>
 
 
 	}
+
+
+
+
+
+	public function VerUser($avatar = NULL){ // ver solo mi usuario
+	$db = new dbConn();
+
+	$a = $db->query("SELECT * FROM login_members WHERE id != 1 and username = '".$_SESSION["username"]."'");
+	if($a->num_rows > 0){
+		echo '<table class="table table-sm">
+			  <thead>
+			    <tr>
+			      <th scope="col">Nombre </th>
+			      <th scope="col" class="d-none d-md-block">Email</th>
+			      <th scope="col">Cuenta</th>
+			      <th scope="col">Eliminar</th>
+			      <th scope="col">Editar</th>';
+			      if($avatar == NULL){
+			 echo '<th scope="col">Avatar</th>';     	
+			      }
+			      
+			 echo '</tr>
+			  </thead>
+			  <tbody>';
+	}
+    foreach ($a as $b) {
+    	$user=$b["username"];
+    	
+    	if ($r = $db->select("*", "login_userdata", "WHERE user = '$user'")) { 
+       	$nombre = $r["nombre"]; $tipo = $r["tipo"];
+    	} unset($r); 
+
+
+
+
+    	if(($_SESSION["user"] == $user) or ($_SESSION["tipo_cuenta"]!= 5)){
+
+    	echo '<tr>';
+		
+		echo '<th scope="row">'.$nombre.'</th>
+		      <td class="d-none d-md-block">'.$b["email"].'</td>
+		      <td>'.Helpers::UserName($tipo).'</td>';
+
+			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
+				echo '<td><a id="xdelete" op="7" iden="'.$b["id"].'" username="'.$user.'" ><i class="fa fa-trash red-text fa-lg"></i></a></td>';
+			} else {
+				echo '<td><a><i class="fa fa-trash grey-text  fa-lg"></i></a></td>';
+			}
+
+			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
+				echo '<td><a id="u_pass" username="'.$b["username"].'" op="9"><i class="fa fa-unlock-alt red-text fa-lg"></i></a>
+					<a id="u_update" username="'.$b["username"].'" op="10"><i class="fa fa-edit red-text fa-lg"></i></a></td>';
+			} else {
+				echo '<td><a ><i class="fa fa-unlock-alt grey-text fa-lg"></i></a>
+				<a ><i class="fa fa-edit grey-text fa-lg"></i></a></td>';
+			}
+
+		if($avatar == NULL){
+			
+			if($_SESSION["user"] == $user or $_SESSION["tipo_cuenta"] == 1  or $_SESSION["tipo_cuenta"] == 2){
+				echo '<td><a id="ver_avatar" op="6" username = "'.$b["username"].'"><i class="fa fa-user red-text fa-lg"></i></a></td>';
+			} else {
+				echo '<td><a ><i class="fa fa-user grey-text fa-lg"></i></a></td>';
+			}
+		}
+		echo '</tr>';  
+	}
+
+
+    } $a->close();
+    echo '</tbody>
+		</table>';
+
+
+	}
+
+
+
+
+
+
+
+
+
 
 
 

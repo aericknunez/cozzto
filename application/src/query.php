@@ -153,6 +153,7 @@ echo '<script type="text/javascript" src="assets/js/query/paginador.js?v='.$nume
 echo '<script type="text/javascript" src="assets/js/query/producto_vermodal.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["cotizar"])) {
+echo '<script type="text/javascript" src="assets/js/printThis.js?v='.$numero.'"></script>';
 echo '<script type="text/javascript" src="assets/js/query/cotizaR.js?v='.$numero.'"></script>';
 } 
 elseif(isset($_GET["cotizaciones"])) {

@@ -131,10 +131,13 @@ class Cotizar{
 
 	$pv = $this->ObtenerPrecio($datos["cod"], $datos["cantidad"]);
 	$sumas = $pv * $datos["cantidad"];
+	$descuento = NULL;
 
-	if($_SESSION['descuento_cot'] != NULL){
+		if($_SESSION['descuento_cot'] != NULL){
+		$sumasx = $sumas;
 		$sumas = Helpers::DescuentoTotalCot($sumas);
 		$pv = Helpers::DescuentoTotalCot($pv);
+		$descuento = $sumasx - $sumas;
 	}
 
     $stot=Helpers::STotal($sumas, $_SESSION['config_imp']);
@@ -146,6 +149,7 @@ class Cotizar{
 	    $cambio["stotal"] = $stot;
 	    $cambio["imp"] = $im;
 	    $cambio["total"] = $stot + $im;
+	    $cambio["descuento"] = $descuento;
 	    Helpers::UpdateId("cotizaciones", $cambio, "cod='".$datos["cod"]."' and cotizacion = ".$_SESSION["cotizacion"]." and td = ".$_SESSION["td"]."");
 
 	}
@@ -346,7 +350,8 @@ class Cotizar{
 		 
 		 $can->close();
 
-		
+		unset($_SESSION["cliente_nombre"]);
+
 		echo '<script>
 			window.location.href="?cotizar"
 		</script>';	
@@ -372,7 +377,7 @@ class Cotizar{
   public function ClienteBusqueda($dato){ // Busqueda para cliente
     $db = new dbConn();
 
-          $a = $db->query("SELECT * FROM clientes WHERE nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%' and td = ".$_SESSION["td"]." limit 10");
+          $a = $db->query("SELECT * FROM clientes WHERE (nombre like '%".$dato["keyword"]."%' or documento like '%".$dato["keyword"]."%') and td = ".$_SESSION["td"]." limit 10");
            if($a->num_rows > 0){
             echo '<table class="table table-sm table-hover">';
     foreach ($a as $b) {
@@ -419,6 +424,7 @@ class Cotizar{
 					   	Helpers::UpdateId("cotizaciones_data", $cambios, "correlativo = ".$_SESSION["cotizacion"]." and td = ".$_SESSION["td"].""); 
 
 						unset($_SESSION["cotizacion"]);
+						unset($_SESSION["cliente_nombre"]);
 
 		    } else {
 		    	$this->DelOrden($_SESSION["cotizacion"]);
@@ -496,7 +502,7 @@ if($dir == "asc") $dir2 = "desc";
                       <td>'.$b["correlativo"].'</td>
                       <td>'.$b["fecha"].'</td>
                       <td>'.$b["caduca"].'</td>
-                      <td><a id="xver" op="160" key="'.$b["id"].'"><i class="fas fa-search fa-lg green-text"></i></a></td>
+                      <td><a id="xver" op="160" key="'.$b["id"].'" cotizacion="'.$b["correlativo"].'"><i class="fas fa-search fa-lg green-text"></i></a></td>
                     </tr>';
         }
         echo '</tbody>
@@ -679,6 +685,28 @@ echo '<div class="row mt-4">
 
 
   }
+
+
+
+
+
+  public function Facturar($cotizacion){
+       $db = new dbConn();
+       $venta = new Ventas();
+       // obtener todo los datos de la cotizacion para pasarla a factura
+	    $a = $db->query("SELECT * FROM cotizaciones WHERE cotizacion = '$cotizacion' and td = ".$_SESSION["td"]."");
+	    foreach ($a as $b) {
+	    	$b["cantidad"] = $b["cant"];
+	        
+	        $venta->AgregarDesdeCotizacion($b);
+	    } $a->close();
+
+   }
+
+
+
+
+
 
 
 

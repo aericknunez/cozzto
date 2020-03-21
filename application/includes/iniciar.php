@@ -22,6 +22,7 @@ exit();
 if ($seslog->login_check() == TRUE) {
 
 $user=$_SESSION['username'];
+$_SESSION["ver_avatar"] = NULL;
 
 	function UserInicio($user){
         $db = new dbConn();

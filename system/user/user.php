@@ -10,7 +10,7 @@ include_once 'system/user/Usuarios.php';
 <!-- informacion de eliminado -->
 <div id="lista_usuarios">
   <?php 
-   Usuarios::VerUsuarios();
+   Usuarios::VerUsuarios($_SESSION["ver_avatar"]);
    ?>
 </div> 
 

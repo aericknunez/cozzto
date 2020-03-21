@@ -39,6 +39,9 @@ $cot = new Cotizar();
       </div>
       <div class="modal-footer">
 
+<a id="facturar" op="162" class="btn btn-secondary btn-rounded">Facturar</a>
+
+<a id="activar_cotizacion" op="161" class="btn-floating btn-sm red"><i class="fas fa-edit"></i></a>
 
 <a id="imprimir" class="btn-floating btn-sm blue-gradient"><i class="fa fa-print"></i></a>
 

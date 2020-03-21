@@ -310,6 +310,7 @@ $('#ModalBusqueda').on('shown.bs.modal', function() { // para autofocus en el mo
         
         var key = $(this).attr('key');
         var op = $(this).attr('op');
+        var cotizacion = $(this).attr('cotizacion');
         var dataString = 'op='+op+'&key='+key;
 
         $.ajax({
@@ -320,11 +321,64 @@ $('#ModalBusqueda').on('shown.bs.modal', function() { // para autofocus en el mo
                $("#vista").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
             },
             success: function(data) {            
-                $("#vista").html(data); // lo que regresa de la busquea         
+                $("#vista").html(data); // lo que regresa de la busquea
+                $('#activar_cotizacion').attr("cotizacion", cotizacion);
+                $('#facturar').attr("cotizacion", cotizacion);            
             }
         });
 
+        if($(this).attr('esto') != null){
+            $('#activar_cotizacion').hide();
+             $('#facturar').hide();
+        }
+
     });
+
+
+
+
+///// mactivar/ mostrar cotizacion
+    $("body").on("click","#activar_cotizacion",function(){ // quita descuento
+        var op = $(this).attr('op');
+        var cotizacion = $(this).attr('cotizacion');
+        var dataString = 'op='+op+'&cotizacion='+cotizacion;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#vista").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                 window.location.href="?cotizar";
+            }
+        });
+    });      
+
+
+
+
+
+/////  pasar cotizacion a facturar
+    $("body").on("click","#facturar",function(){ // quita descuento
+        var op = $(this).attr('op');
+        var cotizacion = $(this).attr('cotizacion');
+        var dataString = 'op='+op+'&cotizacion='+cotizacion;
+
+        $.ajax({
+            type: "POST",
+            url: "application/src/routes.php",
+            data: dataString,
+            beforeSend: function () {
+               $("#vista").html('<div class="row justify-content-md-center" ><img src="assets/img/load.gif" alt=""></div>');
+            },
+            success: function(data) {            
+                 window.location.href="?";
+            }
+        });
+    });      
+
 
 
 
