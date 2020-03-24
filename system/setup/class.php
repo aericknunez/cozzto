@@ -21,8 +21,8 @@ class Register {
 
 	}
 
-	function ObtenerCodigo($clave, $td){ // (clave sananda)
-		$cod = Encrypt::Encrypt($clave, $td . Fechas::Format(date("d-m-Y")));
+	function ObtenerCodigo($css, $clave, $td){ // (clave sananda) css clave sin sanar
+		$cod = Encrypt::Encrypt($clave . $this->ObtenerRand($css), $td . Fechas::Format(date("d-m-Y")));
 		$codigo = substr($cod,0,4);
 		return strtoupper($codigo);
 	}
@@ -30,7 +30,7 @@ class Register {
 
 	function ValidarCodigo($clave, $codigo, $td){
 		$clavex = $this->SanarClave($clave);
-		$clavey = $this->ObtenerCodigo($clavex, $td);
+		$clavey = $this->ObtenerCodigo($clave, $clavex, $td);
 
 		if($clavey == $codigo){
 			return TRUE;
@@ -40,9 +40,18 @@ class Register {
 	}
 
 
+
+
 	function ObtenerTipoCuenta($clave){
 		return $tipo = substr($clave,3,1);
 	}
+
+
+	function ObtenerRand($clave){
+		return $tipo = substr($clave,0,3);
+	}
+
+
 
 
 // $hash = "3-1-6d1a7c5b57cf56553ae79e3ae826ff0a";

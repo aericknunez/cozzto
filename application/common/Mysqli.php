@@ -167,3 +167,4 @@ if (!class_exists('dbConn')):
 	}
     
 endif;
+?>

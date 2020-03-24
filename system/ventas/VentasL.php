@@ -738,3 +738,4 @@ echo '<div class="display-4 text-center font-weight-bold">'. Helpers::Dinero($ca
 
 
 } // Termina la lcase
+?>

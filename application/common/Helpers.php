@@ -345,3 +345,4 @@ public static function UpdateId($tabla, $dato, $condicion){
 
 
 } // class
+?>

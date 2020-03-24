@@ -28,3 +28,4 @@ $archivo = "cozto_ventas.sql";
 				@$db->query($query);
 			}  @unlink($archivo);
 	} 
+?>

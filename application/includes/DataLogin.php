@@ -352,3 +352,4 @@ public function VerificarEmail($email){
 
 
 } // termina la clase
+?>

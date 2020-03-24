@@ -55,3 +55,6 @@ if($_REQUEST["modal"]=="respaldar") include_once 'system/modal/modal/respaldar.p
 
 /// planilla
 if($_REQUEST["modal"]=="editempleado") include_once 'system/modal/modal/editar-empleado.php';
+
+
+?>

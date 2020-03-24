@@ -76,3 +76,4 @@ if($_REQUEST["corte"] != NULL){
 	</script>';
 }
 
+?>

@@ -120,3 +120,4 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 
 
 
+?>

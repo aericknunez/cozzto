@@ -212,3 +212,4 @@ class Proveedores{
 
 
 } // Termina la lcase
+?>

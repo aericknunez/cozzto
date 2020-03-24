@@ -349,3 +349,5 @@ public function AveriaBusqueda($dato){ // Busqueda para averia
 
 
 } // Termina la lcase
+
+?>

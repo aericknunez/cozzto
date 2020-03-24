@@ -376,3 +376,4 @@ echo '<label>Tipo de Cuenta</label>
 
 
 }
+?>

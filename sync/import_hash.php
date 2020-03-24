@@ -30,3 +30,5 @@ $archivos = glob("/home/superpol/public_html/pizto.com/login/sync/database/*.sql
 
 
 } // termina busqueda de archivos en la carpeta
+
+?>

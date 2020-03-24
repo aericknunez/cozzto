@@ -164,3 +164,4 @@ if($Imagen == NULL) $Imagen = "default.jpg";
 
 
 } // Termina la lcase
+?>
