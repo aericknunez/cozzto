@@ -98,8 +98,8 @@ class Push{
 				        $campo = $fields[$x]['name'];
 
 			if($campo == "id") $archivo.= "\"\", ";
-			elseif($campo == "time") $archivo.= "\"" .$y["$campo"] . "\"";
-			else $archivo.= "\"" . $y["$campo"] . "\", ";
+			elseif($arrlength != $x+1) $archivo.= "\"" .$y["$campo"] . "\",";
+  			else $archivo.= "\"" . $y["$campo"] . "\"";
 
 				    }
 				$archivo.= "); \n";
